@@ -1,0 +1,41 @@
+
+			
+          
+
+			<table class="profile" summary="Profile information">
+				<tr>
+					<td></td>
+					<td align="left"
+						<%= will_paginate %>
+					</td>
+				</tr>
+				
+				    <td></td>
+					<td align="left"
+				        <h1>All users</hi>
+						
+			         </td>
+				</tr>
+				
+	
+				
+				
+				<% @users.each do |user| %>			
+				<tr>				 
+						<%= render user %>				 	
+				</tr>
+				<% end %>
+				
+				
+				<tr>
+					<td></td>
+				</tr>
+				<tr>						
+					<td></td>
+					<td align="left"
+						<%= will_paginate %>
+					</td>
+	
+				</tr>
+			</table>
+

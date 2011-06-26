@@ -183,3 +183,20 @@ div.field, div.actions {
 	font-size: 12px;
 	list-style: square;
 }
+
+.error {
+	width: 750px;
+	align: center;
+	border: 2px solid red;
+	padding: 7px;
+	padding-bottom: 20px;
+	margin-botto: 20px;
+	background-color: #f0f0f0;
+	
+ul.users {
+	margin-top: lem:
+}
+
+.users li { 
+	list-style: none;
+	}
