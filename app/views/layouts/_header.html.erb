@@ -18,6 +18,11 @@
 			
 			<% if signed_in? %>
 				<li><%= link_to "Sign out", signout_path, :method => :delete %></li>
+				
+				<br> <li> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
+						  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
+						
+				<font color="yellow">	Welcome -> <%= get_current_user.name %> </font> </li>
 			<% else %>
 				
 				<li><%= link_to "Sign in", signin_path %></li>				
