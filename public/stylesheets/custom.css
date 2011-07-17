@@ -7,14 +7,17 @@
 }
 
 body{
-	background:#444;
+	background:#8B8682;
 
 	
 	
 }
 
+ 
+
 header {
 	padding-top: 20px;
+	
 }
 
 header img {
@@ -31,7 +34,8 @@ section {
 }
 
 section h1 {
-	font-size: 110%;
+	font-size: 120%;
+	font-weight: bold;
 }
 
 /* Links */
@@ -74,11 +78,12 @@ nav ul li {
 
 nav ul li a {
 	padding: 0 4px;
+	color: #27408B;
 	
 }
 
 nav ul li a:visited {
-	color: #09c;
+	color: #3A5FCD;
 }
 
 nav ul li a:hover {
@@ -141,6 +146,7 @@ td.main {
 	width: 80%;
 	padding: lem;
 	font-size: 85%;
+	vertical-align: top;
 }
 
 td.sidebar {
@@ -279,3 +285,4 @@ form.new_micropost textarea {
 	height: 2em;
 	margin-bottom: 0;
 }
+

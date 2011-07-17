@@ -1,0 +1,182 @@
+#globalNavDiv  
+{
+    border: 1px solid #a3a3a3;
+	background-color: #FFF5EE;
+	 
+}
+#globalNavDiv li
+{
+    display: inline;
+    padding: 0px 10px;
+    font-size: 12px;
+	color: black;
+	
+}
+#globalNavDiv li a
+{
+	color: black;
+    text-transform: none;
+    text-decoration: none;
+}
+ 
+#globalNavDiv li a:hover
+{
+    color: blue;
+}
+
+#menu1, #menu2, #menu3, #menu4
+{
+    position: absolute;
+    top: 0px;
+    
+
+}
+#menu1 a:hover, #menu2 a:hover, #menu3 a:hover, #menu4 a:hover
+{
+     color: white;
+}
+#submenu1, #submenu2, #submenu3, #submenu4
+{
+    background-color: #1E1E1E;
+    border: 1px solid #a3a3a3;
+	font-size: 12px;
+    z-index: 1000;
+}
+ 
+#submenu1 a, #submenu2 a, #submenu3 a, #submenu4 a
+{
+    border-top: 1px solid #fdd3df;
+    display: block;
+    color: #fdd3df;
+    text-decoration: none;
+    padding: 5px 15px 5px 5px;
+}
+ 
+#submenu1 a:hover, #submenu2 a:hover, #submenu3 a:hover, #submenu4 a:hover
+{
+    color: #ffffff;
+}
+
+#submenu1.1, #submenu1.2 
+{
+    background-color: #1E1E1E;
+    border: 1px solid #a3a3a3;
+	font-size: 12px;
+    z-index: 1000;
+}
+ 
+#submenu1.1 a, #submenu1.2 a 
+{
+    border-top: 1px solid #fdd3df;
+    display: block;
+    color: #fdd3df;
+    text-decoration: none;
+    padding: 5px 15px 5px 5px;
+}
+ 
+#submenu1.1 a:hover, #submenu1.2 a:hover 
+{
+    color: #ffffff;
+}
+
+#wrapperDiv
+{
+    position: relative;
+}
+
+#menu1
+{
+     left: 0px;
+}
+#menu2
+{
+    left: 0px;
+}
+#menu3
+{
+     left: 0px;
+}
+#menu4
+{
+    left: 0px;
+}
+#submenu1, #submenu2, #submenu3, #submenu4 
+{
+    position: absolute;
+    top: 0px;
+}
+#submenu1
+{
+     left: 0px;
+}
+#submenu2
+{
+    left: 0px;
+}
+#submenu3
+{
+     left: 0px;
+}
+#submenu4
+{
+    left: 0px;
+}
+
+ 
+
+#menu1, #menu2, #menu3, #menu4
+{
+    top: 104px;
+}
+
+#submenu1, #submenu2, #submenu3, #submenu4
+{
+    top: 122px;
+}
+
+ 
+
+#menu1
+{
+    left: 20px;
+}
+#menu2
+	{
+	left: 140px;
+}
+#menu3
+{
+    left: 260px;
+}
+#menu4
+	{
+	left: 380px;
+}
+#submenu1
+{
+    left: 20px;
+}
+#submenu2
+{
+    left: 140px;
+}
+#submenu3
+{
+    left: 260px;
+}
+#submenu4
+{
+    left: 380px;
+}
+
+ 
+#menu1, #menu2, #menu3, #menu4
+{
+    visibility: visible;
+}
+#submenu1, #submenu2, #submenu3, #submenu4
+{
+    visibility: hidden;
+}
+
+ 

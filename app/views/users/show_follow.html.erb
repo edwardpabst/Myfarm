@@ -1,0 +1,49 @@
+
+<table  summary="Information about following/followers">
+	<tr>
+		<td class="main" >
+			
+			<h1>
+	        <%=  @title %>		   
+          </h1>
+
+		<% unless @users.empty? %>
+		<table class="profile" summary="Profile information">
+			<tr>
+				<td>
+					<%= will_paginate @users %>
+				</td>
+			</tr>
+			
+			<% @users.each do |user| %>			
+				<tr>				 
+				<%= render user %>				 	
+				</tr>
+			<% end %>
+
+			<tr>
+				<td>
+					<%= will_paginate @users %>
+				</td>
+			</tr>
+		</table>
+		<% end %>
+		
+
+
+		</td>
+	<td class="sidebar round">
+			<strong>Name</strong> <%= @user.name %> <br />
+			<strong>URL</strong> <%= link_to user_path(@user), @user %><br />
+			<strong>Microposts:</strong> <%= @user.microposts.count %>
+			<%= render 'shared/stats' %>
+		<!--<% unless @users.empty? %>
+				<%= @users.each do |user| %>
+					<%= gravatar_for(user, :size => 30) %>
+					<%= link_to user.name, user %>
+				<% end %>
+			<% end %> -->
+		</td> 
+	</tr>
+</table>
+			

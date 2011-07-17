@@ -6,34 +6,124 @@
   
 
 <%= javascript_include_tag :all %> 
+
+<script>
+	  jQuery.noConflict();
+	
+	function alertMe(){
+       	var country = "Fiji";
+			var city = "Suva";
+			alert('The city of ' + city + ' is located in ' + country + '.');
+        }
+
+<!--  Script for hover mega menus -->
+		var menuArray = new Array();
+		menuArray[0] = 'submenu1';
+		menuArray[1] = 'submenu2';
+		menuArray[2] = 'submenu3';
+		menuArray[3] = 'submenu4';
+		
+
+		
+		var globalObject = '';
+		var isActive = false;
+		var ourTimer;
+		
+		function showhide(obj, onlink)
+		{
+		    targetObject = document.getElementById(obj).style;
+		    globalObject = targetObject;
+
+		    if(onlink)
+		    {
+		        clearTimeout(ourTimer);
+
+		        for (i=0; i < menuArray.length; i++)
+		        {
+		            var tempObject = document.getElementById(menuArray[i]).style;
+		            tempObject.visibility = "hidden";
+		        }
+
+		        targetObject.visibility = 'visible';
+		        isActive = true;
+		    }
+		    else
+		    {
+		        isActive = false;
+		        layerTimer();
+		    }
+		}
+
+		function layerTimer()
+		{
+		    ourTimer = setTimeout("hideMenu()",0450);
+		}
+
+		function hideMenu()
+		{
+		    if( !isActive )
+		    {
+		        globalObject.visibility = 'hidden';
+		    }
+		}
+
+		function layerCheck(flag)
+		{
+		    if(flag)
+		    {
+		        isActive = true;
+		        clearTimeout(ourTimer);
+		    }
+		    else
+		    {
+		        isActive = false;
+		        layerTimer();
+		    }
+		}
+		
+		window.onload = function()
+		{
+		    for(var i=0;i<menuArray.length;i++)
+		    {
+		        var id = menuArray[i];
+		        var e = document.getElementById(id);
+		        e.onmouseover = function(e)
+		        {
+		            layerCheck(true);
+		        }
+		        e.onmouseout = function(e)
+		        {
+		            layerCheck(false);
+		        }
+		    }
+		}
+</script>
+
+
+
+ 
+
 <%= csrf_meta_tag %>  
+<%= render 'layouts/stylesheets' %>
 
-<!--  list of javascript files that are includee
-
-<%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", "jquery.rails.js", "application.js" %>
-<script src="/javascripts/effects.js?1268677667" type="text/javascript"></script>
-<script src="/javascripts/dragdrop.js?1268677667" type="text/javascript"></script>
-<script src="/javascripts/controls.js?1268677667" type="text/javascript"></script>
-<script src="/javascripts/application.js?1268677667" type="text/javascript"></script>
-<script src="/javascripts/rails.js?1268677667" type="text/javascript"></script>
-<script src="/javascripts/prototype.js?1268677667" type="text/javascript"></script>
-<script src="/public/javascripts/jquery_ujs.js" type="text/javascript"></script>  ?1309367404 
-
---> 
-
-
-	<%= render 'layouts/stylesheets' %>
 
 
 
 </head>
 <body>
 	<%=render 'layouts/header'%>
+
+	<!--- <input type="button" value="Alert me" onclick="alertMe()" /> -->
+
+	
 	<div class="container">
 	<section class="round">
 		<% flash.each do |key, value| %>
 			<div class="flash <%= key %> "> <font color="blue"> <%= value %> </font> </div>
 		<% end %>
+		
+
+	
 		<%= yield %>
 	</section>
 	

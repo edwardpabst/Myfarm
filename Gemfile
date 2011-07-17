@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem 'gravatar_image_tag', '0.1.0'
 gem 'will_paginate', '3.0.pre2'
 gem 'jquery-rails', '>= 1.0.3'
+gem 'simple-navigation', '~> 3.3.3'
 
 gem 'rake' , '~> 0.8.7'
 
