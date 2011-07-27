@@ -40,6 +40,7 @@
     background-color: #1E1E1E;
     border: 1px solid #a3a3a3;
 	font-size: 12px;
+	opacity: .7;
     z-index: 1000;
 }
  
@@ -47,14 +48,14 @@
 {
     border-top: 1px solid #fdd3df;
     display: block;
-    color: #fdd3df;
+    color: white;
     text-decoration: none;
     padding: 5px 15px 5px 5px;
 }
  
 #submenu1 a:hover, #submenu2 a:hover, #submenu3 a:hover, #submenu4 a:hover
 {
-    color: #ffffff;
+    color: orange;
 }
 
 #submenu1.1, #submenu1.2 
@@ -126,12 +127,12 @@
 
 #menu1, #menu2, #menu3, #menu4
 {
-    top: 104px;
+    top: 94px;
 }
 
 #submenu1, #submenu2, #submenu3, #submenu4
 {
-    top: 122px;
+    top: 112px;
 }
 
  

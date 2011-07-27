@@ -4,7 +4,7 @@
 	<table class="front summary="For signed in users">
 		<tr>
 			<td class="main">
-				<h1 class="micropost"> What it is? </h1> 
+				<h1 class="micropost"> What's on your mind? </h1> 
 				<%= render 'shared/micropost_form' %>
 				<%= render 'shared/feed' %>
 			</td>
@@ -17,10 +17,40 @@
 	
 	
 <% else %>
-<h1>Farms Twitter app</h1>
+<div id="farmlogo">MyFarm - Farm managment service</div>
+</br>
+<p> Services to help the small and medium size farmers manage their crops and their business in a cost effective way.</p>
 
-	<p>This is the home page for the 
-	<a href="http://railstutorial.org/"> Farms twitter application </a>	 
+
+</br>
+	 
+	<image  src="/images/farming1.jpg", class="iround" alt="", name="farming1", width="120", height="140"  
+		onmouseover="farming1.width='240';farming1.height='280';"
+		onmouseout="farming1.width='120';farming1.height='140';" />		
+	<image  src="/images/farming2.jpg", class="iround" alt="", name="farming2", width="120", height="140" 
+		onmouseover="farming2.width='240';farming2.height='280';"
+		onmouseout="farming2.width='120';farming2.height='140';" />		
+	<image  src="/images/farming3.jpg", class="iround" alt="", name="farming3", width="120", height="140" 
+		onmouseover="farming3.width='240';farming3.height='280';"
+		onmouseout="farming3.width='120';farming3.height='140';" />
+	<image  src="/images/farming4.jpg", class="iround" alt="", name="farming4", width="120", height="140" 
+		onmouseover="farming4.width='240';farming4.height='280';"
+		onmouseout="farming4.width='120';farming4.height='140';" />
+	
+</br>	
+	<image  src="/images/farming5.jpg", class="iround" alt="", name="farming5", width="120", height="140" 
+		onmouseover="farming5.width='240';farming5.height='280';"
+		onmouseout="farming5.width='120';farming5.height='140';" />
+	<image  src="/images/farming6.jpg", class="iround" alt="", name="farming6", width="120", height="140" 
+		onmouseover="farming6.width='240';farming6.height='280';"
+		onmouseout="farming6.width='120';farming6.height='140';" />
+	<image  src="/images/farming7.jpg", class="iround" alt="", name="farming7", width="120", height="140" 
+		onmouseover="farming7.width='240';farming7.height='280';"
+		onmouseout="farming7.width='120';farming7.height='140';" />
+	<image  src="/images/farming8.jpg", class="iround" alt="", name="farming8", width="120", height="140" 
+		onmouseover="farming8.width='240';farming8.height='280';"
+		onmouseout="farming8.width='120';farming8.height='140';" />
+
 	</p>
 	
 	<%= link_to "Sign up now!", signup_path, :class => "signup_button round " %>

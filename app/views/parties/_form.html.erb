@@ -1,0 +1,69 @@
+<%= form_for(@party) do |f| %>
+  <% if @party.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@party.errors.count, "error") %> prohibited this party from being saved:</h2>
+
+      <ul>
+      <% @party.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :userid %><br />
+    <%= f.text_field :userid %>
+  </div>
+  <div class="field">
+    <%= f.label :partyname %><br />
+    <%= f.text_field :partyname %>
+  </div>
+  <div class="field">
+    <%= f.label :partylastname %><br />
+    <%= f.text_field :partylastname %>
+  </div>
+  <div class="field">
+    <%= f.label :partyfirstname %><br />
+    <%= f.text_field :partyfirstname %>
+  </div>
+  <div class="field">
+    <%= f.label :partyaddress1 %><br />
+    <%= f.text_field :partyaddress1 %>
+  </div>
+  <div class="field">
+    <%= f.label :partyaddress2 %><br />
+    <%= f.text_field :partyaddress2 %>
+  </div>
+  <div class="field">
+    <%= f.label :partycity %><br />
+    <%= f.text_field :partycity %>
+  </div>
+  <div class="field">
+    <%= f.label :partystate %><br />
+    <%= f.text_field :partystate %>
+  </div>
+  <div class="field">
+    <%= f.label :partypostalcode %><br />
+    <%= f.text_field :partypostalcode %>
+  </div>
+  <div class="field">
+    <%= f.label :partycountry %><br />
+    <%= f.text_field :partycountry %>
+  </div>
+  <div class="field">
+    <%= f.label :partyphone %><br />
+    <%= f.text_field :partyphone %>
+  </div>
+  <div class="field">
+    <%= f.label :partyemail %><br />
+    <%= f.text_field :partyemail %>
+  </div>
+  <div class="field">
+    <%= f.label :partyjobtitle %><br />
+    <%= f.text_field :partyjobtitle %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

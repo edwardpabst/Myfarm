@@ -1,0 +1,47 @@
+<h1>Listing parties</h1>
+
+<table>
+  <tr>
+    <th>Userid</th>
+    <th>Partyname</th>
+    <th>Partylastname</th>
+    <th>Partyfirstname</th>
+    <th>Partyaddress1</th>
+    <th>Partyaddress2</th>
+    <th>Partycity</th>
+    <th>Partystate</th>
+    <th>Partypostalcode</th>
+    <th>Partycountry</th>
+    <th>Partyphone</th>
+    <th>Partyemail</th>
+    <th>Partyjobtitle</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @parties.each do |party| %>
+  <tr>
+    <td><%= party.userid %></td>
+    <td><%= party.partyname %></td>
+    <td><%= party.partylastname %></td>
+    <td><%= party.partyfirstname %></td>
+    <td><%= party.partyaddress1 %></td>
+    <td><%= party.partyaddress2 %></td>
+    <td><%= party.partycity %></td>
+    <td><%= party.partystate %></td>
+    <td><%= party.partypostalcode %></td>
+    <td><%= party.partycountry %></td>
+    <td><%= party.partyphone %></td>
+    <td><%= party.partyemail %></td>
+    <td><%= party.partyjobtitle %></td>
+    <td><%= link_to 'Show', party %></td>
+    <td><%= link_to 'Edit', edit_party_path(party) %></td>
+    <td><%= link_to 'Destroy', party, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Party', new_party_path %>

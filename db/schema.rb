@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110701231725) do
+ActiveRecord::Schema.define(:version => 20110727182715) do
 
   create_table "microposts", :force => true do |t|
     t.string   "content"
@@ -20,6 +20,38 @@ ActiveRecord::Schema.define(:version => 20110701231725) do
   end
 
   add_index "microposts", ["user_id"], :name => "index_microposts_on_user_id"
+
+  create_table "parties", :force => true do |t|
+    t.integer  "userid"
+    t.string   "partyname"
+    t.string   "partylastname"
+    t.string   "partyfirstname"
+    t.string   "partyaddress1"
+    t.string   "partyaddress2"
+    t.string   "partycity"
+    t.string   "partystate"
+    t.string   "partypostalcode"
+    t.string   "partycountry"
+    t.string   "partyphone"
+    t.string   "partyemail"
+    t.string   "partyjobtitle"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "partyroles", :force => true do |t|
+    t.integer  "party_id"
+    t.integer  "partytype_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "partytypes", :force => true do |t|
+    t.string   "typedescription"
+    t.string   "typecode"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "relationships", :force => true do |t|
     t.integer  "follower_id"

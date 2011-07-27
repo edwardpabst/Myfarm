@@ -38,6 +38,15 @@ section h1 {
 	font-weight: bold;
 }
 
+
+
+#farmlogo {
+	padding-left:10px;
+	vertical-align: top;
+	font-size: 32px;
+	color: orange;
+}
+
 /* Links */
 a {
 	color #09c;
@@ -114,6 +123,15 @@ a.signup_button {
 	border-radius: 10pz;
 }
 
+img.iround{
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10pz;
+	border: 1px;
+	position: relative;
+}
+
+
 footer {
 	text-align: center;
 	margin-top: 10px;
@@ -155,7 +173,12 @@ td.sidebar {
 	vertical-align: top;
 	background: #ffc;
 	font-size: 85%;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10pz;
 }
+
+
 
 .profile img.gravatar {
 	border: 1px solid #999;

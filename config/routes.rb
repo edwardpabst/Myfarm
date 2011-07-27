@@ -2,6 +2,12 @@ SampleApp::Application.routes.draw do
   
 
 
+  resources :partytypes
+
+  resources :partyroles
+
+  resources :parties
+
   #get "pages/home"
 
   resources :users do

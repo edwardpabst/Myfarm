@@ -1,0 +1,25 @@
+<%= form_for(@partytype) do |f| %>
+  <% if @partytype.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@partytype.errors.count, "error") %> prohibited this partytype from being saved:</h2>
+
+      <ul>
+      <% @partytype.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :typedescription %><br />
+    <%= f.text_field :typedescription %>
+  </div>
+  <div class="field">
+    <%= f.label :typecode %><br />
+    <%= f.text_field :typecode %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

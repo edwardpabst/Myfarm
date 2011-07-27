@@ -1,45 +1,60 @@
 
 <header>
+ 
+	<table width="100%">
+		<tr>
+			<td align="left" valign="top">
+				<div id="farmlogo">
+					<span>MyFarm</span>
+  				</div>
+			</td>
+			<td align="right" valign="top">
+				<nav class="round">
+					<ul>
+						<li><font color="yellow">
+						<% if signed_in?  %>
+								Welcome - <%= get_current_user.name %> 
+						<% end %>	
+							</font> </li>
+						<li> <%= link_to "Home", root_path %></li>
+						<li> <div id="wx_module_1759">
+						   <a href="#" onclick="weatherpopup()">Weather</a>
+						</div></li>
 
-	<%= link_to logo, root_path %>
-	<nav class="round">
-		<ul>
-			<li> <%= link_to "Home", root_path %></li>
-			
-	 		<% if signed_in? %>
-			
-			<li><%= link_to "Users", users_path %></li>
-			<li><%= link_to "Profile", get_current_user %></li>
-			<li><%= link_to "Settings", edit_user_path(get_current_user) %></li>
-			
-			<% end %>
-						
-			<li><%= link_to "Help", help_path %></li>
-			
-			<% if signed_in? %>
-				<li><%= link_to "Sign out", signout_path, :method => :delete %></li>
-				
-				<br> <li> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
-						  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
-						
-				<font color="yellow">	Welcome -> <%= get_current_user.name %> </font> </li>
-			<% else %>
-				
-				<li><%= link_to "Sign in", signin_path %></li>				
-			<% end %>
-			
-			<br>
-		 
+				 		<% if signed_in? %>
 
-			
-	
+						<li><%= link_to "Farmers", users_path %></li>
+						<li><%= link_to "Profile", get_current_user %></li>
+						<li><%= link_to "Settings", edit_user_path(get_current_user) %></li>
 
-		</ul>
-	</nav>
+						<% end %>
+
+						<li><%= link_to "Help", help_path %></li>
+
+						<% if signed_in? %>
+							<li><%= link_to "Sign out", signout_path, :method => :delete %></li>
+
+
+
+						<% else %>
+
+							<li><%= link_to "Sign in", signin_path %></li>				
+						<% end %>
+
+
+					</ul>
+				</nav>
+			 
+			 
+			
+			</td>
+		</tr>
+	</table>
  
 <!---  Hover menu definition                             -->
-
-	<div id="globalNavDiv">
+<% if signed_in? %>
+ 
+	<div id="globalNavDiv" class="round">
 	    <ul>
 			<span id="menu1">
 			<li><a href="#"
@@ -68,31 +83,32 @@
 	    </ul>
 	</div>
 	
-	<div id="submenu1">
-	    <a href="#">Menu Item 1</a>
+	<div id="submenu1" class="round">
+	    <a href="#">Menu Item 1 has much info. </br> So I'm going to break the line</a>
 	    <a href="#">Menu Item 2</a>
 	    <a href="#">Menu Item 3</a>
 		<a href="#">Menu Item 4</a>
 	</div>
-	<div id="submenu2">
+	<div id="submenu2" class="round">
 	    <a href="#">Menu Item 1</a>
 		<a href="#">Menu Item 2</a>
 		<a href="#">Menu Item 3</a>
 		<a href="#">Menu Item 4</a>
 	</div>
-	<div id="submenu3">
+	<div id="submenu3" class="round">
 	    <a href="#">Really really long long Menu Item 1</a>
 		<a href="#">Really really long long Menu Item 2</a>
 		<a href="#">Really really long long Menu Item 3</a>
 		<a href="#">Really really long long Menu Item 4</a>
 	</div>
-	<div id="submenu4">
+	<div id="submenu4" class="round">
 	    <a href="#">Menu Item 1</a>
 		<a href="#">Menu Item 2</a>
 		<a href="#">Menu Item 3</a>
 		<a href="#">Menu Item 4</a>
 	</div>
  
+ <% end %>
 </header>
 
 

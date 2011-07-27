@@ -16,6 +16,13 @@
 			alert('The city of ' + city + ' is located in ' + country + '.');
         }
 
+function weatherpopup()
+		{
+		    window.open ("http://www.weather.com/weather/local/95476","weatherwindow","status=1, resizable=1,width=680, height=820");
+		}
+		
+
+
 <!--  Script for hover mega menus -->
 		var menuArray = new Array();
 		menuArray[0] = 'submenu1';
@@ -99,6 +106,27 @@
 		}
 </script>
 
+
+<script type="text/javascript">
+
+   /* Locations can be edited manually by updating 'wx_locID' below.  Please also update */
+   /* the location name and link in the above div (wx_module) to reflect any changes made. */
+   var wx_locID = '95476';
+
+   /* If you are editing locations manually and are adding multiple modules to one page, each */
+   /* module must have a unique div id.  Please append a unique # to the div above, as well */
+   /* as the one referenced just below.  If you use the builder to create individual modules  */
+   /* you will not need to edit these parameters. */
+   var wx_targetDiv = 'wx_module_1759';
+
+   /* Please do not change the configuration value [wx_config] manually - your module */
+   /* will no longer function if you do.  If at any time you wish to modify this */
+   /* configuration please use the graphical configuration tool found at */
+   /* https://registration.weather.com/ursa/wow/step2 */
+   var wx_config='SZ=180x150*WX=FHW*LNK=SSNL*UNT=F*BGI=boat*MAP=null|null*DN=myfarm.com*TIER=0*PID=1268599066*MD5=7214d27b4c44f94976f1468029988d2b';
+
+   document.write('<scr'+'ipt src="'+document.location.protocol+'//wow.weather.com/weather/wow/module/'+wx_locID+'?config='+wx_config+'&proto='+document.location.protocol+'&target='+wx_targetDiv+'"></scr'+'ipt>');  
+</script>
 
 
  

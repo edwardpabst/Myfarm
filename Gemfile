@@ -12,6 +12,7 @@ gem 'jquery-rails', '>= 1.0.3'
 gem 'simple-navigation', '~> 3.3.3'
 
 gem 'rake' , '~> 0.8.7'
+gem 'formtastic', '2.0.0.rc1'
 
 # Use unicorn as the web server
 # gem 'unicorn'
