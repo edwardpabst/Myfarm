@@ -12,9 +12,11 @@
 
 class User < ActiveRecord::Base
   #virtual attributes
-  attr_accessor :password
+   #acts_as_reportable
   
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessor :password, :password_confirmation
+  
+  attr_accessible :name, :email, :password, :password_confirmation, :security_question, :security_answer,:party_id
   
   has_many :microposts, :dependent => :destroy
   
@@ -29,6 +31,11 @@ class User < ActiveRecord::Base
                                    :dependent => :destroy
   has_many :followers, :through => :reverse_relationships, :source => :follower
   
+  has_one :party
+  has_many :Farms
+
+  
+ 
   
                            
   
@@ -39,20 +46,33 @@ class User < ActiveRecord::Base
   validates(:email, :presence => true)
   validates(:email, :format => { :with => email_regex } )
   validates(:email, :uniqueness => { :case_sensitive => false })
-  validates(:password, :presence   => true,
-                       :confirmation => true,
-                       :length   => { :within => 6..40 })
+ # validates(:password, :presence   => true,
+ #                      :confirmation => true,
+#                      :length   => { :within => 6..40 })
+  validates(:security_question, :presence => true)
+  validates(:security_answer, :presence => true)
                        
   before_save :encrypt_password
   
+
+  
   def has_password?(submitted_password)
-    encrypted_password = encrypt(submitted_password)
+    if encrypted_password == encrypt(submitted_password)
+      return true
+    else
+      return false
+    end             
   end
   
   def self.authenticate(email, submitted_password)
     user = find_by_email(email)
+
     return nil if user.nil?
-    return user if user.has_password?(submitted_password)
+    if user.has_password?(submitted_password)
+      return user 
+    else
+      return nil
+    end
         
   end
   
@@ -91,6 +111,7 @@ class User < ActiveRecord::Base
     
     def encrypt(string)
       secure_hash("#{salt}--#{string}")
+
     end
     
     def make_salt

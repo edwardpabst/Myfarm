@@ -1,0 +1,42 @@
+<h1>Supplies</h1>
+
+<table class="index">
+  <tr>
+     
+    <th>Supply name</th>
+    <th>Supply type</th>
+	<th>Item id</th>
+    <th>Supply UOM</th>
+    <th>Supply cost</th>
+ 
+    <th>Manufacturer</th>
+ 
+    <th>Problem target</th>
+  
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @supplies.each do |supply| %>
+  <tr>
+     
+    <td><%= supply.supplyname %></td>
+    <td><%= supply.supply_type %></td>
+	<td><%= supply.item_number %></td>
+    <td><%= supply.supply_uom %></td>
+    <td><%= supply.supply_cost_uom %></td>
+ 
+    <td><%= supply.manufacturer %></td>
+ 
+    <td><%= supply.problem_target %></td>
+  
+    <td><%= link_to 'Edit', edit_supply_path(supply) %></td>
+    <td><%= link_to 'Destroy', supply, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Supply', new_supply_path %>
+<br />

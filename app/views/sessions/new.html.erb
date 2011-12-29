@@ -1,19 +1,33 @@
+
+	<br>
+	<div id="signin">
+	<br>
 <h1>Sign in</h1>
+ 
+<div id="signinpage">
+	<span>iFarmService</span>
+</div>
 
 <%= form_for(:session, :url => sessions_path) do |f| %>
-	<div class="field">
+<br>
+	<div class="field_user">
 		<%= f.label :email %> <br />
 		<%= f.text_field :email %>
 	</div>
-	<div class="field">
+	<div class="field_user">
 		<%= f.label :password %> <br />
 		<%= f.password_field :password %>
 	</div>
+	<br>
 	<div class="actions">
-		<%= f.submit "Sign in" %> <br />
+		<%= f.submit " Sign in ", :class => "button"  %> <br />
 	</div>
+	<br>
 <% end %>
 
 
 
 <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+<p>Forgot your password? <%= link_to "Click here!", admin_path %></p>
+</div>
+	<br>

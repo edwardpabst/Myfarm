@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @farmjobsupply.user_id %>
+</p>
+
+<p>
+  <b>Farmjob:</b>
+  <%= @farmjobsupply.farmjob_id %>
+</p>
+
+<p>
+  <b>Supply:</b>
+  <%= @farmjobsupply.supply_id %>
+</p>
+
+<p>
+  <b>Actual qty:</b>
+  <%= @farmjobsupply.actual_qty %>
+</p>
+
+
+<%= link_to 'Edit', edit_farmjobsupply_path(@farmjobsupply) %> |
+<%= link_to 'Back', farmjobsupplies_path %>

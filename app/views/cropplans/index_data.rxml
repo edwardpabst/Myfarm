@@ -1,0 +1,10 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@cropplans.each do |cropplan|
+		xml.tag!("row",{ "id" => cropplan.id }) do
+			xml.tag!("cell", cropplan.cropplanfull)
+			xml.tag!("cell", cropplan.plan_status)
+ 
+		end
+	end
+end

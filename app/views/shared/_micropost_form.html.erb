@@ -2,14 +2,14 @@
 <%= form_for  @micropost do |f| %> 
 	<%= render 'shared/error_messages', :object => f.object %>
 	
-	<div class="field">	
+	<div class="postarea">	
 		<%= f.text_area :content,
 		                :rows => "4",
 		                :cols => "60" ,
 		                :maxlength => "140" %>
 	</div>
 	<div class="actions">
-		<%= f.submit "Submit post" %>
+			<%= f.submit " Submit post ", :class => "button"  %>
 	</div>
 	
 <% end %>

@@ -1,0 +1,17 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@fields.each do |field|
+		xml.tag!("row",{ "id" => field.id }) do
+			xml.tag!("cell", field.fieldname)
+			xml.tag!("cell", field.farmname)
+			xml.tag!("cell", field.number_acres)
+			xml.tag!("cell", field.location)
+			xml.tag!("cell", field.holding_status)
+			xml.tag!("cell", field.current_state)
+			xml.tag!("cell", field.area_mapped)
+			xml.tag!("cell", field.area_legal)
+			xml.tag!("cell", field.area_tillable)
+ 
+		end
+	end
+end

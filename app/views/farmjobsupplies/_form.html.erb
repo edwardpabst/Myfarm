@@ -1,0 +1,23 @@
+<%= semantic_form_for @farmjobsupply do |f| %>
+  <%= f.inputs do %>
+<br>
+   <% get_supplies_by_type() %>
+<li class="string input optional stringish">
+	<label class=" label" for="farmjobsupply">Supply*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>
+   
+	<% if !@supplies.nil? %>
+			
+<%= collection_select("farmjobsupply", "supply_id", @supplies, "id", "supplyname", options = {:prompt => " "}) %></li>
+     <% end %>
+    <%= f.input :actual_qty , :label => "Qty",  :required => false, :hint => "If blank, will be developed from job acre definition."%>
+
+	<%= f.input :usage_uom , :label => "Usage UOM",  :required => false,  :input_html => {  :disabled => true } , :hint => "Will be taken from Supplies distribution UOM"%>
+ 
+<br>
+<br>
+  <%= f.buttons do %>
+    <%= f.commit_button  :label => "Update supply", :button_html => { :class => "button" } %>
+  <% end %>
+<br>
+<% end %>
+<% end %>

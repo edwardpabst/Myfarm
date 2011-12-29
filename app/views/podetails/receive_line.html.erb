@@ -1,0 +1,39 @@
+
+<br>
+<h1>Receive PO line</h1>
+ 
+<%= link_to 'Back', :controller => "pos", :action => "edit", :id => session[:s_po_id] %>
+<br>
+
+
+<%= semantic_form_for @podetail, :html => { :name => "pd"} do |f| %>
+
+  <%= f.inputs do %>
+<%= render "shared/error_messages", :object => f.object%>
+<br>
+
+	<%= f.input :supplyname,   :label => "Supply",  :required => false,  :input_html => {  :disabled => true }  %>
+	<%= f.input :supply_uom,   :label => "Purchase UOM",  :required => false,  :input_html => {  :disabled => true }  %>
+	<%= f.input :qty_ordered,   :label => "Qty ordered",  :required => false,  :input_html => {  :disabled => true }  %>
+
+	    <% get_storage %>
+	 <li class="string input optional stringish">
+		<label class=" label" for="podetail">Received at *<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+		<%= collection_select("podetails", "storage_id", @storages, "id", "name", options = {:prompt => " "}) %>
+	 </li>	
+	
+	
+    <%= f.input :receipt_amount,   :label => "Receipt amount *",  :required => true %>
+
+
+  <% end %>
+
+  <%= f.buttons do %>
+    <%= f.commit_button :label => "Receive supply", :button_html => { :class => "button" }  %>
+  <% end %>
+<br>
+<% end %>
+
+<%= link_to 'Back', :controller => "pos", :action => "edit", :id => session[:s_po_id] %>
+<br>
+

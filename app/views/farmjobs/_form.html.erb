@@ -1,0 +1,266 @@
+<script type="text/javascript"> 
+function loadStop() {
+ 
+document.fj.farmjob_stop_date.value = document.fj.farmjob_start_date.value ;
+};
+
+function loadApplied() {
+ 
+ document.fj.farmjob_applied_area.value = document.fj.farmjob_area_size.value;
+};
+
+function checkStatus() {
+ 
+	if (document.fj.farmjob_job_status.value == 'Job complete')	{  
+	  if (document.fj.farmjob_applied_area.value == '')
+		{
+		 alert('To complete the job you must set actual area worked - acres');
+		document.fj.farmjob_job_status.value = 'In process'	
+		}
+	  else {
+	    	  alert('When you change the job status to "Job complete" and update the job, \n - the supplies inventory will be decremented for the supplies  \n - A final job cost will be developed. \n - You will not be able to make further changes to the job.');
+		}
+
+	}
+}	
+ 
+</script>
+<%= form_for @farmjob, :html => { :name => "fj"} do |f| %>
+ 
+<%= render "shared/error_messages", :object => f.object%>
+ 
+
+ <table class="twocolumn">
+ 
+	<tr>
+		<td colspan="4">
+			<div id="form_header">			 	 
+	 FARM JOBS track all labor, supplies and equipment activity for fields and crops and develop job costs. 		 
+			</div>
+		</td>
+	</tr>
+  		<tr>
+			<td>
+		    <% get_fieldtasks_by_type %>
+			<label class=" label" for="fieldtasks">Job task*<abbr title="required"> </abbr> 	&nbsp;  &nbsp; &nbsp;  </label>
+			</td>
+			<td>
+			<%= collection_select("farmjob", "fieldtask_id", @fieldtasks, "id", "taskdescription", options = {:prompt => " "}) %>
+
+			
+			</td>
+			<td>
+		    <% get_fields_by_farm %>
+			<label class=" label" for="fields">Field*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+			</td>
+			<td>
+			<%= collection_select("farmjob", "field_id", @fields, "id", "fieldname", options = {:prompt => " "}) %>	
+
+			</td>
+		</tr>	
+		<tr>
+ 			<td>
+		    <% get_cropplans_by_year %>
+			<label class=" label" for="cropplans">Crop plan*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+			</td>
+			<td>
+			<%= collection_select("farmjob", "cropplan_id", @cropplans, "id", "cropplanfull", options = {:prompt => " "}) %>	
+ 
+		   	</td>
+		    <td>
+			<%= f.label :eventname, "Event Name" %>  
+		 	</td>
+			<td>
+			<%= f.text_field :eventname %> 
+
+		  </td>
+
+		</tr> 
+		<tr>
+			<td>
+			<% get_types_by_name("job_status") %>
+			<label class=" label" for="job_status">Job status*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+			</td>
+			<td>
+			<%= collection_select("farmjob", "job_status", @types, "type_value_string", "type_value_string", options = {:prompt => " "}, {:onchange => "checkStatus()"}) %>	
+		   	</td>
+		
+			<td>
+			<%= f.label :area_size, "Job area size*" %>  
+			</td>
+			<td>
+			<%= f.text_field :area_size, :onchange => "loadApplied()" %>
+		 	</td>
+
+		 </tr>
+		 <tr>
+			<td>
+			<%= f.label :start_date, "Start date*" %>  
+			</td>
+			<td>
+			<%= f.text_field :start_date, :onchange => "loadStop()"  %>
+
+		 	</td>
+
+			<td>
+		   	<%= f.label :stop_date, "Stop date" %>  
+			</td>
+			<td>
+			<%= f.text_field :stop_date %>
+		    </td>
+
+
+		</tr>
+<!--   	
+		<tr>
+			<td>
+			<label class=" label" for="farmjobs">Start time-<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>
+			</td>
+			<td>
+			<%= time_select "farmjob", "start_time", { :default => Time.now.change(:hour => 06), :simple_time_select => true, :minute_interval => 15, :time_separator => "", :start_hour => 05, :end_hour => 20 } %>
+ 		 	</td>
+	
+			<td>
+			<label class=" label" for="farmjobs">Stop time-<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>
+			</td>
+			<td>
+			<%= time_select "farmjob", "stop_time", { :default => Time.now.change(:hour => 06), :simple_time_select => true, :minute_interval => 15, :time_separator => "", :start_hour => 05, :end_hour => 20 } %>
+		 	</td>
+	
+-->	
+	 	 </tr>
+		<tr>
+			<td>
+		    <%= f.label :total_hours, "Hours" %>  
+			</td>
+			<td>
+			<%= f.text_field :total_hours %>
+			</td>
+			<td>
+				<%= f.label :applied_area, "Actual area size worked" %>  
+			</td>
+			<td>
+				<%= f.text_field :applied_area %>
+	   		</td>
+
+			
+	 	 </tr>
+ 		 <tr>
+				<td>
+					<%= f.label :growth_stage, "Growth stage" %>  
+				</td>
+				<td>
+					<%= f.text_field :growth_stage %>
+		   		</td>
+		
+			    <td>
+				<%= f.label :soil_condition, "Soil condition" %>  
+				</td>
+				<td>
+				<%= f.text_field :soil_condition %>
+				</td>
+
+		  </tr>
+ 		
+		 <tr>
+
+			<td>
+				<%= f.label :soil_type, "Soil type" %>  
+			</td>
+			<td>
+				<%= f.text_field :soil_type %>
+	   		</td>
+	
+		    <td>
+				<% get_types_by_name("weather_segment") %>
+				<label class=" label" for="weather_segment">Day segment<abbr title="required"> </abbr> &nbsp;  &nbsp;</label> 
+			</td>
+			<td>	
+				<%= collection_select("farmjob", "weather_segment", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
+	   		</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2">
+
+				<%= f.label :isreplicate, "Replicate?" %> 
+				<%= f.check_box :isreplicate%> 
+				<div class="hintbase">
+					Replication will create duplicate jobs based on task defined frequency. (Only for a new job.)
+				</div>
+			</td>
+			<td>
+				<%= f.label :notes, "Notes" %>  
+			</td>
+			<td>
+				<%= f.text_area :notes %> 
+			</td>
+
+		</tr>
+		
+		<tr>
+			<td colspan="2">
+				<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 	<%= f.submit " Update ", :class => "button", :id => "fjsubmit" %><br><br>
+			</td>
+
+
+		</tr>
+		<tr>
+			<td colspan="4">
+				<table>
+					<tr>
+						<td>
+							<%= f.label :total_cost, "Total Job cost" %> 
+						</td>
+						<td>
+							<%= f.label :supply_cost, "Supply cost" %> 
+						</td>
+						<td>
+							<%= f.label :labor_cost, "Labor cost" %> 
+						</td>
+						<td>
+							<%= f.label :equipment_cost, "Equipment cost" %> 
+						</td>
+					</tr>
+					<tr>	 
+						<td>
+						  <div class="costdisplay">
+							<%= number_to_currency(@farmjob.total_cost, :precision => 2)  %>
+						  </div>
+						</td>
+						<td>
+						  <div class="costdisplay">
+							<%= number_to_currency(@farmjob.supply_cost, :precision => 2)  %>
+						  </div>
+						</td>
+						<td>
+						  <div class="costdisplay">
+							<%= number_to_currency(@farmjob.labor_cost, :precision => 2)  %>
+						  </div>
+						</td>
+						<td>
+						  <div class="costdisplay">
+							<%= number_to_currency(@farmjob.equipment_cost, :precision => 2)  %>
+						  </div>
+						</td>
+					</tr>
+				</table>
+			</td>
+
+		</tr>
+		<tr>
+			<td colspan="4">
+				<div class="hintbase">
+					&nbsp;&nbsp;
+					You can add and manage supply, labor and equipment costs associated with this job here. 
+				</div>
+			</td>
+		</tr>
+
+			 
+ </table>
+<% end %>
+
+<!--	    <% get_ztimes %>
+		<label class=" label" for="farmjobs">Start time<abbr title="required"> </abbr> &nbsp;  &nbsp;</label> -->

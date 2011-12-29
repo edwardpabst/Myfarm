@@ -1,0 +1,15 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@types.each do |type|
+		xml.tag!("row",{ "id" => type.id }) do
+			xml.tag!("cell", type.typename)
+			xml.tag!("cell", type.type_value_string)
+			xml.tag!("cell", type.type_value_integer)
+			xml.tag!("cell", type.type_boolean)
+			xml.tag!("cell", type.type_isprotected)
+
+
+		end
+	end
+end
+

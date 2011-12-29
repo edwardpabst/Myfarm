@@ -1,0 +1,31 @@
+ 
+<%= semantic_form_for @fieldtask do |f| %>
+<div id="form_header">			 	 
+		Field tasks are used in farm jobs. They define the work for a farm job. You can define supplies for the task also.			 
+</div>
+<%= render "shared/error_messages", :object => f.object%>
+  <%= f.inputs do %>
+<br>
+   <% get_types_by_name("task_stage") %>
+<li class="string input optional stringish">
+	<label class=" label" for="task_type">Task stage<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("fieldtask", "task_stage", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	</li>
+	<div class="hintbase"> Stage will categorize work on profit statements</div>
+
+    <% get_types_by_name("task_type") %>
+ <li class="string input optional stringish">
+	<label class=" label" for="task_type">Task type<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("fieldtask", "task_type", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	</li>
+	 
+    <%= f.input :taskdescription,   :label => "Task description" ,  :required => true %>
+    <%= f.input :task_notes,  :as => :text,  :label => "Task notes" ,  :required => false, :hint => "These are carried forward into the job notes." %>
+    
+    <%= f.input :task_frequency_days,   :label => "Frequency days" ,  :required => false, :hint => "Used for job scheduling. This will produce a duplicate task in this many days forward." %>
+	<%= f.input :task_duration_days,   :label => "Duration days" ,  :required => false, :hint => "This will replicate tasks from frequency days for the full duration period. This should be divisible by the frequency days." %>
+  <% end %>
+
+  <%= f.buttons do %>
+    <%= f.commit_button  :label => "  Update Task ", :button_html => { :class => "button" }%>
+  <% end %>
+<br>
+<% end %>

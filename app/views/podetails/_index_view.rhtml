@@ -1,0 +1,139 @@
+<br>
+<h1> Purchase Order Details</h1>
+ 
+
+<button type="button" value="New", onclick="newpodetail()">Add PO line</button>
+<button type="button" value="New", onclick="editpodetail()">Edit line</button>
+<button type="button" value="New", onclick="receivepodetail()">Receive line</button>
+
+<br><br>
+<!-- Div for capture of grid output -->
+ <div id="podetail_grid" style="width:800px; height:200px;">
+
+ </div>
+
+<!-- script for dhtmlxgrid -->
+ <script type="text/javascript" charset="utf-8">
+
+	// data grid definition
+     var grid = new dhtmlXGridObject("podetail_grid");
+     grid.setImagePath("/images/");
+     grid.setHeader("Supply name, Qty ordered, UOM ,  Price , ext amount ,  Status , Qty received, Storage");  
+     grid.setInitWidths("150,90,90,90,90,90,100,100");
+     grid.setSkin("dhx_web");
+     grid.init();
+	 grid.load("/podetaildata");  	
+	 
+	 grid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro");// ed-editable, ro-read only price-money , ch-checkbox, 
+													  // txt-text editor ra-radio button, coro-select box, img, dhxcalendar 
+													  //  subrow (ajax)	 
+	// data processor definition
+	dp = new dataProcessor("/podetailgridaction/");
+	//dp.setTransactionMode("POST", true);
+	//set mode as send-all-by-post;
+	//dp.setUpdateMode("on");
+	dp.init(grid);
+		// in grid validations
+	//	dp.setVerificator(0, not_empty);
+	//	dp.setVerificator(1, not_empty);
+	//	dp.setVerificator(2, not_empty);
+
+
+	// handle XML errors	
+	function myErrorHandler(type,name,p){
+		alert('Error. The record was not updated. Click OK to view the error.')
+		//	window.location = "/cropview"
+	}
+
+	// add row in the grid and database (in conflict with validation)
+	function addRow(){
+        var newId = (new Date()).valueOf()
+        grid.addRow(newId,"",grid.getRowsNum())
+        grid.selectRow(grid.getRowIndex(newId),false,false,true);
+    }
+
+	// remove row from grid and database
+    function removeRow(){
+	
+		var selId = grid.getSelectedId()
+	
+		if (selId < 1)
+			{
+			 alert("No record was selected for deletion");	
+			}
+		else
+			{
+		var r=confirm("Are you sure you want to delete this record?");
+		if (r==true)
+		  {
+			
+	        grid.deleteRow(selId);
+		  	alert("Record deleted");
+		  }
+		else
+		  {
+		  alert("Delete cancelled");
+		  }
+		}
+	  }
+
+	// in grid validation for required string
+	function not_empty(value) {
+	    return value != "";
+	}
+	// in grid validation for required integer
+	function greater_0(value) {
+	    return value > 0;
+	}
+
+
+	
+	// branch to rails for record addition
+	function newpodetail() {
+	// branch to add new supply
+	    window.location = "/podetails/new";
+	}
+	// branch to rails for edit record
+	function editpodetail() {
+	// edit selected supply
+	var selId = grid.getSelectedId()
+	if (selId < 1)
+		{
+		 alert("No record was selected for full edit");	
+		}
+	else {
+	    window.location = "/podetails/"+selId+"/edit";
+		}
+	}
+	
+	// branch to rails for receipt
+	function receivepodetail() {
+	// edit selected supply
+	var selId = grid.getSelectedId()
+	if (selId < 1)
+		{
+		 alert("No record was selected for full edit");	
+		}
+	else {
+	    window.location = "/podetails/"+selId+"/receive_line";
+		}
+	}
+
+
+
+ </script>
+
+<br>
+
+<button type="button" value="New", onclick="newpodetail()">Add PO line</button>
+<button type="button" value="New", onclick="editpodetail()">Edit line</button>
+<button type="button" value="New", onclick="receivepodetail()">Receive line</button>
+
+<br><br>
+
+
+ <!--  button controls for in grid addition and bulk update
+<input type="button" value="Add" onclick="grid.addRow(grid.uid(),'new user')">
+<input type="button" name="Submit changes" value="Submit changes" onclick="dp.sendData();"> -->
+
+

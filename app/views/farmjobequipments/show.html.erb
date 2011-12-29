@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @farmjobequipment.user_id %>
+</p>
+
+<p>
+  <b>Farmjob:</b>
+  <%= @farmjobequipment.farmjob_id %>
+</p>
+
+<p>
+  <b>Equipment:</b>
+  <%= @farmjobequipment.equipment_id %>
+</p>
+
+<p>
+  <b>Qty required:</b>
+  <%= @farmjobequipment.qty_required %>
+</p>
+
+<p>
+  <b>Qty actaul:</b>
+  <%= @farmjobequipment.qty_actaul %>
+</p>
+
+<p>
+  <b>Additional cost:</b>
+  <%= @farmjobequipment.additional_cost %>
+</p>
+
+
+<%= link_to 'Edit', edit_farmjobequipment_path(@farmjobequipment) %> |
+<%= link_to 'Back', farmjobequipments_path %>

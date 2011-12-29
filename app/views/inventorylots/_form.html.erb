@@ -1,0 +1,205 @@
+
+<%= form_for @inventorylot, :html => { :name => "inv"} do |f| %>
+<%= render "shared/error_messages", :object => f.object %>
+
+
+
+<% @inventorylot_list.each do |list| %>
+ <table class="twocolumn">
+	<tr>
+		<td colspan="4">
+			<div id="form_header">			 	 
+		 You can transfer inventory to another location or to another grade. 			 
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td ><br>
+			<label><b>Crop plan</b> </label>
+		</td>
+		<td><br>
+		<li id='datadisplay'>	<%= list.cropname %>-<%= list.cropspecific %>-<%= list.plan_year %></li>
+		</td>
+		<td  >
+		 
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			<label><b>Ticket ID</b></label> 
+		</td>
+		<td>
+			<li id='datadisplay'><%= list.ticket_id %></li>
+		</td>
+		<td  >
+		 
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			 <label><b>Created </b></label>
+		</td>
+		<td>
+			<li id='datadisplay'><%= list.created_at %></li>
+		</td>
+		<td  >
+		 
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			 <label><b>UOM </b></label>
+		</td>
+		<td>
+			<li id='datadisplay'><%= list.inventory_uom %></li>
+		</td>
+		<td  >
+		 
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+
+
+	<tr>
+		<td >
+			<%= f.label :qty_in, "Qty in" %>
+		</td>
+		<td>
+			<li id='datadisplay'><%= @inventorylot.qty_in %></li>
+		</td>
+		<td  >
+		 
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			<%= f.label :qty_out_ship, "Ship out" %>
+		</td>
+		<td>
+			<li id='datadisplay'><%= @inventorylot.qty_out_ship %></li>
+		</td>
+		<td  colspan="2">
+		   
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			<%= f.label :qty_out_transfer, "Transfer out" %>
+		</td>
+		<td>
+			<li id='datadisplay'><%= @inventorylot.qty_out_transfer %></li>
+		</td>
+		<td  colspan="2" id="warning">
+		    <u>Transfer a qty to another location or another grade.</u>
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			<%= f.label :qty_onhand, "Qty onhand" %>
+		</td>
+		<td>
+			<li id='datadisplay'><%= @inventorylot.qty_onhand %></li>
+		</td>
+		<td >
+			<%= f.label :qty_onhand, "Transfer qty" %>
+		</td>
+		<td>
+			<%= f.text_field :qty_onhand %>
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			<%= f.label :storage_id, "Storage" %>
+		</td>
+		<td>
+		<li id='datadisplay'>	<%= list.storagename %></li>
+		</td>
+		<td>
+		    <% get_storage %>
+			<label class=" label" for="scaleticket">Transfer storage<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+
+		</td>
+		<td>
+			<%= collection_select("inventorylot", "storage_id", @storages, "id", "name", options = {:prompt => " "}) %>
+
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			<%= f.label :grade, "Grade" %>
+		</td>
+		<td>
+			<li id='datadisplay'><%= @inventorylot.grade %></li>
+		</td>
+		<td  >
+		 	<% get_types_by_name("crop_grade") %>
+			<label class=" label" for="owner_id">Transfer grade<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+
+		</td>
+		<td>
+			<%= collection_select("inventorylot", "grade", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			<%= f.label :lab_report, "Lab report (file.type)" %>
+		</td>
+		<td>
+			<%= f.text_field :lab_report %>
+		</td>
+		<td  >
+		 
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+	<tr>
+		<td colspan="2">
+			<br>
+		  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<%= f.submit "Update Inv", :class => "button" %><br><br>
+		</td>
+		<td>
+		</td>
+	</tr>
+ 	
+ </table>
+ 
+
+<br>
+ 
+ <% end %>
+<% end %>

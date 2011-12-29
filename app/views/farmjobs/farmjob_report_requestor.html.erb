@@ -1,0 +1,126 @@
+
+<br>
+<h1>Farm job Report Requestor</h1>
+ 
+<%= link_to 'Back', session[:return_to] %>
+<br>
+
+<%= form_tag '/farmjobreport.pdf', :method=>'post' , :html => { :name => "fj"} do %>
+ 
+
+ 
+
+ <table class="twocolumn">
+ 
+		<tr>
+			<td colspan="3">
+				<div id="form_header">			 	 
+	 You may select a report for a specific task, a specific field, a specific crop and/or a specific job status. If the entry if left blank then all will be selected. 		 
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td width="25%"></td>
+			<td>
+		    <% get_fieldtasks_by_type %>
+			<label>Job task</label>
+			</td>
+			<td>
+			<%= collection_select("", "fieldtask_id", @fieldtasks, "id", "taskdescription", options = {:prompt => " "}) %>
+
+		
+			</td>
+		</tr>
+  		<tr>
+			<td width="25%"></td>
+			<td>
+		    <% get_fields_by_farm %>
+			<label class=" label" for="fields">Field*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+			</td>
+			<td>
+			<%= collection_select("", "field_id", @fields, "id", "fieldname", options = {:prompt => " ", :include_blank => ' '}
+			) %>	
+
+			</td>,  
+		</tr>	
+		<tr>
+			<td width="25%"></td>
+ 			<td>
+		    <% get_cropplans_by_year %>
+			<label class=" label" for="cropplans">Crop plan*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+			</td>
+			<td>
+			<%= collection_select("", "cropplan_id", @cropplans, "id", "cropplanfull", options = {:prompt => " ", :include_blank => ' '}) %>	
+ 
+		   	</td>
+
+
+		</tr> 
+		<tr>
+			<td width="25%"></td>
+			<td>
+			<% get_types_by_name("job_status") %>
+			<label class=" label" for="job_status">Job status*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+			</td>
+			<td>
+			<%= collection_select("", "job_status", @types, "type_value_string", "type_value_string", options = {:prompt => " ", :include_blank => ' '}) %>	
+		   	</td>
+		
+
+
+		 </tr>
+		 <tr>
+			<td width="25%"></td>
+			<td>
+			<label> Begin date* </label>   
+			</td>
+			<td>
+			<%= text_field_tag 'start_date' %>
+
+		 	</td>
+		 </tr>
+		
+		<tr>
+			<td width="25%"></td>
+			<td>
+		   	<label> End date* </label> 
+			</td>
+			<td>
+				<%= text_field_tag 'stop_date'  %>
+		    </td>
+
+
+		</tr>
+		<tr>
+			<td width="25%"></td>
+			<td>	 
+			<% get_types_by_name("farmjob_sort_sequence") %>
+			<label>Sort sequence</label>
+		</td>
+		<td>		
+			<%= collection_select("", "sort_sequence", @types, "type_value_string", "type_value_string", options = {:prompt => " ", :include_blank => ' '}) %>	
+		
+		    </td>
+
+
+		</tr>
+		
+		<tr>
+			<td></td><td></td>
+			<td>
+				<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 	<%= submit_tag " Submit ", :class => "button", :id => "fjsubmit" %><br><br>
+			</td>
+
+
+		</tr>
+			</table>
+			</td>
+
+		</tr>
+
+			 
+ </table>
+<% end %>
+
+ 

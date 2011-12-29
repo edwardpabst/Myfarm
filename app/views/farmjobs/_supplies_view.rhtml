@@ -1,0 +1,115 @@
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<b>Supplies</b> 
+
+<!-- Div for capture of grid output -->
+ <div id="supply_grid" style="width:250px; height:200px;">
+
+ </div>
+
+<!-- script for dhtmlxgrid -->
+ <script type="text/javascript" charset="utf-8">
+
+	// data grid definition
+     var supplygrid = new dhtmlXGridObject("supply_grid");
+     supplygrid.setImagePath("/images/");
+     supplygrid.setHeader("Supply Name, Qty, UOM ");  
+     supplygrid.setInitWidths("120,60, 70");
+     supplygrid.setSkin("dhx_web");
+     supplygrid.init();
+	 supplygrid.load("/farmjobsupplydata");  	
+	 // grid.attachHeader("#text_filter");  
+	 supplygrid.setColSorting("str");	 
+	 supplygrid.setColTypes("ro,ed,ro"); // ed-editable, ro-read only price-money , ch-checkbox, 
+											// txt-text editor ra-radio button, coro-select box, img, dhxcalendar 
+											//  subrow (ajax)	 
+	// data processor definition
+	dp = new dataProcessor("/farmjobsupplygridaction");
+	//dp.setTransactionMode("POST", true);
+	//set mode as send-all-by-post;
+	//dp.setUpdateMode("on");
+	dp.init(supplygrid);
+		// in grid validations
+	//	dp.setVerificator(0, not_empty);
+	//	dp.setVerificator(1, not_empty);
+	//	dp.setVerificator(2, not_empty);
+
+	
+	// handle XML errors	
+	function myErrorHandler(type,name,p){
+		alert('Error. The record was not updated. Click OK to view the error.')
+		//	window.location = "/parties_view"
+	}
+	
+	// add row in the grid and database (in conflict with validation)
+	function addRow(){
+        var newId = (new Date()).valueOf()
+        supplygrid.addRow(newId,"",supplygrid.getRowsNum())
+        supplygrid.selectRow(supplygrid.getRowIndex(newId),false,false,true);
+    }
+
+	// remove row from grid and database
+    function removesupplyRow(){
+	
+		var selId = supplygrid.getSelectedId()
+	
+		if (selId < 1)
+			{
+			 alert("No record was selected for deletion");	
+			}
+		else
+			{
+		var r=confirm("Are you sure you want to delete this record?");
+		if (r==true)
+		  {
+			
+	        supplygrid.deleteRow(selId);
+		  	alert("Record deleted");
+		  }
+		else
+		  {
+		  alert("Delete cancelled");
+		  }
+		}
+	  }
+
+	// in grid validation for required string
+	function not_empty(value) {
+	    return value != "";
+	}
+	// in grid validation for required integer
+	function greater_0(value) {
+	    return value > 0;
+	}
+	
+	// branch to rails for record addition
+	function newFarmjobsupply() {
+	// branch to add new crop
+	    window.location = "/farmjobsupplies/new";
+	}
+	// branch to rails for edit record
+	function editFarmjobsupply() {
+	// edit selected crop
+	var selId = supplygrid.getSelectedId()
+	if (selId < 1)
+		{
+		 alert("No record was selected for full edit");	
+		}
+	else {
+	    window.location = "farmjobsupplies/"+selId+"/edit";
+		}
+	}
+	
+
+ 	
+ </script>
+
+<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 
+<button type="button" value="New", onclick="newFarmjobsupply()">Add</button>
+<input type="button" value="Delete"  class="button" onclick="removesupplyRow()">
+<br><br> 
+

@@ -1,0 +1,39 @@
+<h1>Equipment</h1>
+
+<table class="index">
+  <tr>
+    <th>Description</th>
+    <th>Category</th>
+    <th>Make</th>
+    <th>Model</th>
+    <th>Year</th>
+    <th>Unit cost</th>
+    <th>Cost per hour</th>
+    <th>Rate per hour</th>
+
+
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @equipment.each do |equipment| %>
+  <tr>
+    <td><%= equipment.description %></td>
+    <td><%= equipment.category %></td>
+    <td><%= equipment.make %></td>
+    <td><%= equipment.model %></td>
+    <td><%= equipment.year %></td>
+    <td><%= equipment.cost_unit %></td>
+    <td><%= equipment.cost_unit_hour %></td>
+	<td><%= equipment.rate_per_hour %></td>
+
+    <td><%= link_to 'Edit', edit_equipment_path(equipment) %></td>
+    <td><%= link_to 'Destroy', equipment, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Equipment', new_equipment_path %>
+<br />

@@ -1,0 +1,11 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@farmjobequipments.each do |equipment|
+		xml.tag!("row",{ "id" => equipment.id }) do
+			xml.tag!("cell", equipment.description)
+			xml.tag!("cell", equipment.qty_actual)
+			xml.tag!("cell", equipment.cost_unit_hour)
+			xml.tag!("cell", equipment.rate_hour)
+		end
+	end
+end 

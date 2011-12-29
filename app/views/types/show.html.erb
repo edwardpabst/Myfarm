@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Typename:</b>
+  <%= @type.typename %>
+</p>
+
+<p>
+  <b>Type value string:</b>
+  <%= @type.type_value_string %>
+</p>
+
+<p>
+  <b>Type value integer:</b>
+  <%= @type.type_value_integer %>
+</p>
+
+<p>
+  <b>Type boolean:</b>
+  <%= @type.type_boolean %>
+</p>
+
+
+<%= link_to 'Edit', edit_type_path(@type) %> |
+<%= link_to 'Back', types_path %>

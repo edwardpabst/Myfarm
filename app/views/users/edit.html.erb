@@ -1,13 +1,13 @@
-<table  width="800px" align="center">
-	<tr>
-		<td align="center">
-
-			<h1>Edit users</h1>
-
-			
+<div id="form_header">			 	 
+ 	Change any of your settings. Email and password are used to sign in. Security questions help you if you forget your password. Always confirm your password.  			 
+</div>
+			<br>
+			<h1>Change your settings</h1>
+			<br>
+			<%= render 'shared/error_messages', :object => @user %>
 
 			<%= form_for(@user) do |f| %>
-                <%= render 'shared/error_messages', :object => f.object %>
+                
 
 				<div class="field">
 					<%= f.label :name, "Name" %> <br />
@@ -25,17 +25,29 @@
 					<%= f.label :password_confirmation, "Confirmation" %> <br />
 					<%= f.password_field :password_confirmation %>
 				</div>
+				 
+				<div class="field">
+					<% get_types_by_name("security_question") %>
+					<label class=" label" for="security_question">my Question<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>	<br>	
+					<%= collection_select("user", "security_question", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	
+				   	<br>
+				 
+				</div>
+				<div class="field">
+					<%= f.label :security_answer, "my Answer" %> <br />
+					<%= f.text_field :security_answer %>
+				</div>
 				<div class="actions">
-					<%= f.submit "Update" %>
+					<%= f.submit " Update ", :class => "button"  %>
 				</div>
 
 
 			<% end %>
-			
+			<br> 
 			<div>
 				<%= gravatar_for @user %>
-				<a href="http://gravatar.com/emails" target="_blank"> change </a>
+				<a href="http://gravatar.com/emails" target="_blank"> change your photo</a>
+			
 			</div>
-		</td>
-	</tr>
-</table>
+			<br><br>
+ 

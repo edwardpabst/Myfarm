@@ -1,0 +1,26 @@
+<h1>Crop plans</h1>
+
+<table  class="index_small">
+  <tr>
+    <th>Crop plan</th>
+    <th>Plan status</th>
+
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @cropplans.each do |cropplan| %>
+  <tr>
+    <td><%= cropplan.cropplanfull %></td>
+    <td><%= cropplan.plan_status %></td>
+
+    <td><%= link_to 'Edit',  :controller => "cropplans" ,  :id => cropplan.id,  :action => :edit %></td>
+    <td><%= link_to 'Destroy', cropplan, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Cropplan', new_cropplan_path %>
+<br />

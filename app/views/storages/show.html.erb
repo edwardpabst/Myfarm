@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @storage.name %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @storage.type %>
+</p>
+
+<p>
+  <b>Size:</b>
+  <%= @storage.size %>
+</p>
+
+<p>
+  <b>Size uom:</b>
+  <%= @storage.size_uom %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @storage.location %>
+</p>
+
+<p>
+  <b>Capacity:</b>
+  <%= @storage.capacity %>
+</p>
+
+<p>
+  <b>Capacity uom:</b>
+  <%= @storage.capacity_uom %>
+</p>
+
+
+<%= link_to 'Edit', edit_storage_path(@storage) %> |
+<%= link_to 'Back', storages_path %>

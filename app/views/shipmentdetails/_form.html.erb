@@ -1,0 +1,15 @@
+<%= semantic_form_for @shipmentdetail do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :inventorylot_id %>
+    <%= f.input :price %>
+    <%= f.input :qty %>
+    <%= f.input :qty_uom %>
+    <%= f.input :detail_status %>
+    <%= f.input :cropplan_id %>
+    <%= f.input :notes %>
+  <% end %>
+
+  <%= f.buttons do %>
+    <%= f.commit_button %>
+  <% end %>
+<% end %>

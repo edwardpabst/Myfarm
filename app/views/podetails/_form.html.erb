@@ -1,0 +1,41 @@
+<script type="text/javascript"> 
+function updateExt() {
+
+document.pd.podetail_ext_amount.value = (document.pd.podetail_qty_ordered.value -0) * (document.pd.podetail_order_price.value -0);
+}
+
+</script>
+
+<%= semantic_form_for @podetail, :html => { :name => "pd"} do |f| %>
+  <%= f.inputs do %>
+<%= render "shared/error_messages", :object => f.object%>
+<br>
+    <% get_supplies_by_type %>
+ <li class="string input optional stringish">
+	<label class=" label" for="supplies">Supply<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("podetail", "supply_id", @supplies, "id", "supplyfull", options = {:prompt => " "}) %>	
+  </li>  
+
+    <%= f.input :qty_ordered,   :label => "Qty ordered" ,  :required => true, :input_html => { :onchange => "updateExt()"} %>
+ 
+ <%= f.input :supply_uom,   :label => "Purchase UOM",  :required => false,  :input_html => {  :disabled => true }  %>
+ 	
+   <%= f.input :order_price,   :label => "Order price",  :required => false, :hint => "If not entered will be taken from the supply profile." , :input_html => { :onchange => "updateExt()"}%>
+
+    <%= f.input :ext_amount,   :label => "Extended amount",  :required => false,  :input_html => {  :disabled => true } %> 
+
+
+    <% get_types_by_name("po_detail_status") %>
+ <li class="string input optional stringish">
+	<label class=" label" for="task_type">Line status<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("podetail", "detail_status", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	</li>
+
+
+  <%= f.buttons do %>
+    <%= f.commit_button :label => "Update Supply", :button_html => { :class => "button" }  %>
+  <% end %>
+<br>
+<% end %>
+
+<% end %>
+

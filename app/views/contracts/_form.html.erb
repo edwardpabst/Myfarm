@@ -1,0 +1,128 @@
+<script type="text/javascript"> 
+function moveQty() {
+ 
+document.cn.contract_max_qty.value = (document.cn.contract_min_qty.value -0);
+}
+</script>
+
+<%= form_for @contract, :html => { :name => "cn"} do |f| %>
+ 
+  <table class="contract">
+	<tr>
+		<td colspan="4">
+			<div id="form_header">			 	 
+		 Contracts define an agreement by a customer to purchase a crop plan for a specific price. 			 
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="label">
+			<% get_parties_by_type("Customer") %>
+			<label class=" label" for="contract">Customer*<abbr title="required"> </abbr> &nbsp; &nbsp;</label> 
+		</td>
+		<td>
+			<% if !@party_types.nil? %>			
+				<%= collection_select("contract", "party_id", @party_types, "id", "partyname", options = {:prompt => " "}) %>
+			<% end %>
+	 	</td>
+	</tr>
+	<tr>
+		<td class="label">
+    		<% get_cropplans_by_year %>
+			<label class=" label" for="contract">Crop plan*<abbr title="required"> </abbr> &nbsp; &nbsp; </label> 		
+		</td>
+		<td>
+			<%= collection_select("contract", "cropplan_id", @cropplans, "id", "cropplanfull", options = {:prompt => " "}) %>
+    	</td>
+	</tr>
+	<tr>
+        <td class="label">
+			<%= f.label :contract_date, "Contract date*" %> &nbsp; &nbsp;
+		</td>
+		<td>
+			<%= f.text_field :contract_date %> 
+		</td>
+	</tr>
+	<tr>
+        <td class="label">
+			<%= f.label :contract_number, "Contract ID" %>&nbsp; &nbsp; 
+		</td>
+		<td>
+			<%= f.text_field :contract_number %> 
+		</td>
+	</tr>	
+	<tr>
+		<td class="label">
+			<% get_types_by_name("contract_uom") %>
+			<label class=" label" for="contract">Contract UOM<abbr title="required"> </abbr> &nbsp; &nbsp; </label>		
+		</td>
+		<td>
+			<%= collection_select("contract", "contract_uom", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	
+    	</td>
+	 </tr>
+	 <tr>
+        <td class="label">
+			<%= f.label :contract_price, "Contract price*" %> &nbsp; &nbsp;
+		</td>
+		<td>
+			<%= f.text_field :contract_price %> 
+		</td>
+	</tr>	
+	<tr>
+        <td class="label">
+			<%= f.label :min_qty, "Min Qty*" %> &nbsp; &nbsp;
+		</td>
+		<td>
+			<%= f.text_field :min_qty, :onchange => "moveQty()" %><br>
+		</td>
+	</tr>	
+	<tr>
+        <td class="label">
+			<%= f.label :max_qty, "Max Qty*" %> &nbsp; &nbsp;
+		</td>
+		<td>
+			<%= f.text_field :max_qty %><br>
+		</td>
+	 
+	</tr>	
+	<tr>
+		<td class="label">
+			<% get_types_by_name("payment_type") %>
+			<label class=" label" for="contract">Payment type<abbr title="required"> </abbr> &nbsp; &nbsp; </label>		
+		</td>
+		<td>
+			<%= collection_select("contract", "payment_type", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	
+     	</td>
+	</tr>
+	<tr>
+		<td class="label">
+			<% get_types_by_name("payment_terms") %>
+			
+			<label class=" label" for="contract">Payment terms<abbr title="required"> </abbr> &nbsp; &nbsp; </label>		
+		</td>
+		<td>
+			<%= collection_select("contract", "payment_terms", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	
+   	 	</td>
+	</tr>	 
+	<tr>
+	   <td class="label" >
+	
+			<%= f.label :notes, "Notes*" %> &nbsp; &nbsp;
+		
+		</td>
+		<td>
+			<%= f.text_area :notes %> 
+		</td>
+ 
+	 </tr>
+	 <tr>
+		<td class="label">
+  			<%= f.submit "  Update  ", :class => "button"%><br> <br>
+		</td>
+		<td>
+			&nbsp;
+		</td>
+	 </tr>
+
+</table>
+<% end %>

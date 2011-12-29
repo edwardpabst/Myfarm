@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Equipment:</b>
+  <%= @equipmentactivity.equipment_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @equipmentactivity.user_id %>
+</p>
+
+<p>
+  <b>Activity:</b>
+  <%= @equipmentactivity.activity %>
+</p>
+
+<p>
+  <b>Activity date:</b>
+  <%= @equipmentactivity.activity_date %>
+</p>
+
+<p>
+  <b>Service cost:</b>
+  <%= @equipmentactivity.service_cost %>
+</p>
+
+<p>
+  <b>Service notes:</b>
+  <%= @equipmentactivity.service_notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_equipmentactivity_path(@equipmentactivity) %> |
+<%= link_to 'Back', equipmentactivities_path %>

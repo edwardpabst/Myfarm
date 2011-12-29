@@ -1,0 +1,39 @@
+<h1>Listing fields</h1>
+
+<table>
+  <tr>
+   
+    <th>Farm name</th>
+	<th>Field name</th> 
+    <th>Location</th>
+    <th>Number acres</th>
+    <th>Holding status</th>
+    <th>Area tillable</th>
+     
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+ 
+	<% @fields.each do |field| %>
+	  <tr>
+
+	    <td><%= field.farmname %></td>
+		<td><%= field.fieldname %></td>
+	    <td><%= field.location %></td>
+	    <td><%= field.number_acres %></td>
+	    <td><%= field.holding_status %></td>
+	    <td><%= field.area_tillable %></td>
+	    
+	    <td><%= link_to 'Show', field %></td>
+	    <td><%= link_to 'Edit', edit_field_path(field) %></td>
+	    <td><%= link_to 'Destroy', field, :confirm => 'Are you sure?', :method => :delete %></td>
+	  </tr>
+	<% end %>
+ 
+
+</table>
+
+<br />
+
+<%= link_to 'New Field', new_field_path %>

@@ -1,0 +1,2 @@
+module SupplyinventoriesHelper
+end

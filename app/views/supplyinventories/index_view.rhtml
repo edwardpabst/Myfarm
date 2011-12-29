@@ -1,0 +1,97 @@
+<br> 
+<h1><p>Supplies Inventory</p></h1>
+
+
+<button type="button" value="New", class="button", onclick="editSupplyinventory()">Update/Transfer</button>
+
+<br><br>
+<!-- Div for capture of grid output -->
+ <div id="supplyinventory_grid" style="width:800px; height:500px;">
+
+ </div>
+
+<!-- script for dhtmlxgrid -->
+ <script type="text/javascript" charset="utf-8">
+
+	// data grid definition
+     var grid = new dhtmlXGridObject("supplyinventory_grid");
+     grid.setImagePath("/images/");
+     grid.setHeader("Supply name, Storage,  Inv UOM  ,  Qty in , Qty out,  On hand , Inv value, Avg cost ");  
+     grid.setInitWidths("140,120,90,90,90,90,90,90");
+     grid.setSkin("dhx_web");
+     grid.init();
+	 grid.load("/supplyinventorydata");  	
+	 grid.attachHeader("#text_filter,#text_filter");  
+	 grid.setColSorting("str,str,str");	 
+	 grid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro");// ed-editable, ro-read only price-money , ch-checkbox, 
+													  // txt-text editor ra-radio button, coro-select box, img, dhxcalendar 
+													  //  subrow (ajax)	 
+	// data processor definition
+	// grid.setNumberFormat(,,,,,,,"0,000.00");
+	 //grid.setNumberFormat("0,000.00",7,".",",");
+	 //grid.setNumberFormat("0,000.00",8,".",",");
+	dp = new dataProcessor("/supplyinventorygridaction/");
+	//dp.setTransactionMode("POST", true);
+	//set mode as send-all-by-post;
+	//dp.setUpdateMode("on");
+	dp.init(grid);
+		// in grid validations
+	//	dp.setVerificator(0, not_empty);
+	//	dp.setVerificator(1, not_empty);
+	//	dp.setVerificator(2, not_empty);
+
+
+	// handle XML errors	
+	function myErrorHandler(type,name,p){
+		alert('Error. The record was not updated. Click OK to view the error.')
+		//	window.location = "/cropview"
+	}
+
+	// add row in the grid and database (in conflict with validation)
+	function addRow(){
+        var newId = (new Date()).valueOf()
+        grid.addRow(newId,"",grid.getRowsNum())
+        grid.selectRow(grid.getRowIndex(newId),false,false,true);
+    }
+
+
+
+	// in grid validation for required string
+	function not_empty(value) {
+	    return value != "";
+	}
+	// in grid validation for required integer
+	function greater_0(value) {
+	    return value > 0;
+	}
+
+
+	// branch to rails for edit record
+	function editSupplyinventory() {
+	// edit selected crop
+	var selId = grid.getSelectedId()
+	if (selId < 1)
+		{
+		 alert("No record was selected for full edit");	
+		}
+	else {
+	    window.location = "supplyinventories/"+selId+"/edit";
+		}
+	}
+
+
+
+ </script>
+
+<br>
+
+
+<button type="button" value="New",  class="button", onclick="editSupplyinventory()">Update/Transfer</button>
+
+<br><br>
+
+ <!--  button controls for in grid addition and bulk update
+<input type="button" value="Add" onclick="grid.addRow(grid.uid(),'new user')">
+<input type="button" name="Submit changes" value="Submit changes" onclick="dp.sendData();"> -->
+
+

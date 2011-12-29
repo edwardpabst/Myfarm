@@ -1,6 +1,9 @@
 class PartyrolesController < ApplicationController
   # GET /partyroles
   # GET /partyroles.xml
+  
+  before_filter :authenticate
+  
   def index
     @partyroles = Partyrole.all
 
@@ -80,4 +83,6 @@ class PartyrolesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+
 end

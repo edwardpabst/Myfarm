@@ -1,0 +1,155 @@
+
+
+<%= form_for @supplyinventory, :html => { :name => "inv"} do |f| %>
+<%= render "shared/error_messages", :object => f.object %>
+
+
+
+<% @supplyinventory_list.each do |list| %>
+ <table class="twocolumn">
+	<tr>
+		<td colspan="4">
+			<div id="form_header">			 	 
+		 You can transfer inventory to another location or adjust it accordingly. 			 
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td ><br>
+			<label><b>Supply name</b></label> 
+		</td>
+		<td><br>
+			<li id='datadisplay'><%= list.supplyname %></li> 
+		</td>
+		<td  >
+		 
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+ 
+	<tr>
+		<td >
+			<label> <b>Created </b></label>
+		</td>
+		<td>
+			<li id='datadisplay'><%= list.created_at %></li>
+		</td>
+		<td  >
+		 
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			 <label><b>Supply UOM </b></label>
+		</td>
+		<td>
+			<li id='datadisplay'><%= list.supply_uom %></li>
+		</td>
+		<td  >
+		 
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			 &nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td >
+			<%= f.label :qty_in, "Qty in" %>
+		</td>
+		<td>
+			<li id='datadisplay'><%= @supplyinventory.qty_in %></li>
+		</td>
+		<td  >
+		 
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			<%= f.label :qty_out, "Qty out" %>
+		</td>
+		<td>
+			<li id='datadisplay'><%= @supplyinventory.qty_out %></li>
+		</td>
+		<td  colspan="2">
+		   <div class="hintbase">
+				If you select a new storage location the qty will be transferred. <br>
+				If the storage location is the same the qty will be treated as <br> 
+				an adjustment to the inventory.
+		   </div>
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+
+	<tr>
+		<td >
+			<%= f.label :qty_onhand, "Qty onhand" %>
+		</td>
+		<td>
+			<li id='datadisplay'><%= @supplyinventory.qty_onhand %></li>
+		</td>
+		<td >
+			<%= f.label :qty_onhand, "Transfer/Adjust qty" %>
+		</td>
+		<td>
+			<%= f.text_field :qty_onhand %>
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			<%= f.label :storage_id, "Storage" %>
+		</td>
+		<td>
+			<li id='datadisplay'><%= list.storagename %></li>
+		</td>
+		<td>
+		    <% get_storage %>
+			<label class=" label" for="supplyinventory">Transfer storage<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+
+		</td>
+		<td>
+			<%= collection_select("supplyinventory", "storage_id", @storages, "id", "name", options = {:prompt => " "}) %>
+
+		</td>
+
+	</tr>
+ 
+	<tr>
+		<td colspan="2">
+			<br>
+		  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<%= f.submit "Update Inv", :class => "button" %><br><br>
+		</td>
+		<td>
+		</td>
+	</tr>
+ 	
+ </table>
+ 
+
+<br>
+ 
+ <% end %>
+<% end %>
+

@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Weather date:</b>
+  <%= @weather.weather_date %>
+</p>
+
+<p>
+  <b>Postal code:</b>
+  <%= @weather.postal_code %>
+</p>
+
+<p>
+  <b>Segment:</b>
+  <%= @weather.segment %>
+</p>
+
+<p>
+  <b>Temperature:</b>
+  <%= @weather.temperature %>
+</p>
+
+<p>
+  <b>Sky condition:</b>
+  <%= @weather.sky_condition %>
+</p>
+
+<p>
+  <b>Wind direction:</b>
+  <%= @weather.wind_direction %>
+</p>
+
+<p>
+  <b>Wind speed:</b>
+  <%= @weather.wind_speed %>
+</p>
+
+<p>
+  <b>Gusting to:</b>
+  <%= @weather.gusting_to %>
+</p>
+
+<p>
+  <b>Relative humidity:</b>
+  <%= @weather.relative_humidity %>
+</p>
+
+
+<%= link_to 'Edit', edit_weather_path(@weather) %> |
+<%= link_to 'Back', weathers_path %>

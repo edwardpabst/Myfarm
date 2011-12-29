@@ -1,0 +1,16 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@supplies.each do |supply|
+		xml.tag!("row",{ "id" => supply.id }) do
+			xml.tag!("cell", supply.supplyname)
+			xml.tag!("cell", supply.supply_type)
+			xml.tag!("cell", supply.item_number)
+			xml.tag!("cell", supply.manufacturer)
+			xml.tag!("cell", supply.supply_uom)
+			xml.tag!("cell", supply.supply_cost_uom)
+			xml.tag!("cell", supply.distribution_uom)
+			xml.tag!("cell", supply.conversion_factor)
+
+		end
+	end
+end

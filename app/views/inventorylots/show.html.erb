@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Scaleticket:</b>
+  <%= @inventorylot.scaleticket_id %>
+</p>
+
+<p>
+  <b>Cropplan:</b>
+  <%= @inventorylot.cropplan_id %>
+</p>
+
+<p>
+  <b>Inventory uom:</b>
+  <%= @inventorylot.inventory_uom %>
+</p>
+
+<p>
+  <b>Qty:</b>
+  <%= @inventorylot.qty %>
+</p>
+
+<p>
+  <b>Grade:</b>
+  <%= @inventorylot.grade %>
+</p>
+
+<p>
+  <b>Lab report:</b>
+  <%= @inventorylot.lab_report %>
+</p>
+
+<p>
+  <b>Storage:</b>
+  <%= @inventorylot.storage_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_inventorylot_path(@inventorylot) %> |
+<%= link_to 'Back', inventorylots_path %>

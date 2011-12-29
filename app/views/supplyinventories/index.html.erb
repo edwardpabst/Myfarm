@@ -1,0 +1,39 @@
+<h1>Listing supplyinventories</h1>
+
+<table>
+  <tr>
+    <th>Supply</th>
+    <th>Supply uom</th>
+    <th>User</th>
+    <th>Storage</th>
+    <th>Qty in</th>
+    <th>Qty onhand</th>
+    <th>Qty out</th>
+    <th>Onhand value</th>
+    <th>Avg cost</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @supplyinventories.each do |supplyinventory| %>
+  <tr>
+    <td><%= supplyinventory.supply_id %></td>
+    <td><%= supplyinventory.supply_uom %></td>
+    <td><%= supplyinventory.user_id %></td>
+    <td><%= supplyinventory.storage_id %></td>
+    <td><%= supplyinventory.qty_in %></td>
+    <td><%= supplyinventory.qty_onhand %></td>
+    <td><%= supplyinventory.qty_out %></td>
+    <td><%= supplyinventory.onhand_value %></td>
+    <td><%= supplyinventory.avg_cost %></td>
+    <td><%= link_to 'Show', supplyinventory %></td>
+    <td><%= link_to 'Edit', edit_supplyinventory_path(supplyinventory) %></td>
+    <td><%= link_to 'Destroy', supplyinventory, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Supplyinventory', new_supplyinventory_path %>

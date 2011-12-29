@@ -1,12 +1,78 @@
-SampleApp::Application.routes.draw do
+Myfarm::Application.routes.draw do
   
 
+
+
+
+  resources :farmexpenses
+
+  resources :supplyinventory_trans
+
+  resources :equipmentactivities
+
+  resources :supplyinventories
+
+  resources :podetails
+
+  resources :pos
+
+  resources :fieldmappings
+
+  resources :shipmentdetails
+
+  resources :shipments
+
+  resources :inventorylots
+
+  resources :contracts
+
+  resources :harvestsources
+
+  resources :scaletickets
+
+  resources :storages
+
+  resources :farms
+
+  resources :ztimes
+
+  match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
+
+  resources :farmjobequipments
+
+  resources :types
+
+  resources :weathers
+
+  resources :farmjobsupplies
+
+  resources :farmjobs
+
+  resources :farmjoblabors
+
+  resources :fieldtasksupplies
+
+  resources :supplies
+
+  resources :fieldtasks
+
+  resources :equipment
+
+  resources :fields
+  
+  resources :cropplans
+
+  resources :crops
+
+  resources :countries
 
   resources :partytypes
 
   resources :partyroles
 
   resources :parties
+  
+  resources :events
 
   #get "pages/home"
 
@@ -22,26 +88,153 @@ SampleApp::Application.routes.draw do
   
   get "sessions/new"
   get "users/new"
+  get "users/show"
   get "users/edit"
   get "users/signup"
   get "pages/contact"
   get "pages/route"
   get "pages/about"
+  get "pages/home"
+  get "pages/tutorial"
   get "pages/help"
   get "users/show"
   get "microposts/new"
   get "microposts/delete"
+ 
   
   match '/', :to => 'pages#home'
+  match '/mapcanvas', :to => 'pages#mapcanvas'
   match '/contact', :to => 'pages#contact'
   match '/about', :to => 'pages#about'
+  match '/tutorial', :to => 'pages#tutorial'
   match '/help', :to => 'pages#help'
   match '/signup', :to => 'users#new'
   match '/edit', :to => 'users#edit'
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
   match '/delete', :to => 'microposts#destroy'
+  match '/fieldtasks/fieldtask_supplies', :to => 'fieldtasks#fieldtask_supplies'
+  match '/fieldtasksupplies', :to => 'fieldtasks#fieldtask_supplies'
   
+  #routes for dthmlxgrid processing
+  #Parties
+  match '/partyview', :to => 'parties#index_view'
+  match '/partydata', :to => 'parties#index_data'
+  match '/partygridaction', :to => 'parties#index_dbaction'
+  #Crops
+  match '/cropview', :to => 'crops#index_view'
+  match '/cropdata', :to => 'crops#index_data'
+  match '/cropgridaction', :to => 'crops#dbaction'
+  #Crop plans
+  match '/cropplanview', :to => 'cropplans#index_view'
+  match '/cropplandata', :to => 'cropplans#index_data'
+  match '/cropplangridaction', :to => 'cropplans#dbaction'
+  #Farms
+  match '/farmview', :to => 'farms#index_view'
+  match '/farmdata', :to => 'farms#index_data'
+  match '/farmgridaction', :to => 'farms#index_dbaction'
+  #Fields
+  match '/fieldview', :to => 'fields#index_view'
+  match '/fielddata', :to => 'fields#index_data'
+  match '/fieldgridaction', :to => 'fields#dbaction'
+  #Field mapping
+  match '/fieldmapping', :to => 'fieldmappings#fieldmapping'
+  #Fieldtasks
+  match '/fieldtaskview', :to => 'fieldtasks#index_view'
+  match '/fieldtaskdata', :to => 'fieldtasks#index_data'
+  match '/fieldtaskgridaction', :to => 'fieldtasks#dbaction'
+  #Fieldtasksupplies
+  match '/fieldtasksupplyview', :to => 'fieldtasksupplies#index_view'
+  match '/fieldtasksupplydata', :to => 'fieldtasksupplies#index_data'
+  match '/fieldtasksupplygridaction', :to => 'fieldtasksupplies#index_dbaction'
+  #Farm jobs
+  match '/farmjobview', :to => 'farmjobs#index_view'
+  match '/farmjobdata', :to => 'farmjobs#index_data'
+  match '/farmjobgridaction', :to => 'farmjobs#index_dbaction'
+  #Supplies
+  match '/supplyview', :to => 'supplies#index_view'
+  match '/supplydata', :to => 'supplies#index_data'
+  match '/supplygridaction', :to => 'supplies#index_dbaction'
+  #Equipment
+  match '/equipmentview', :to => 'equipment#index_view'
+  match '/equipmentdata', :to => 'equipment#index_data'
+  match '/equipmentgridaction', :to => 'equipment#index_dbaction'
+  #Scale tickets
+  match '/scaleticketview', :to => 'scaletickets#index_view'
+  match '/scaleticketdata', :to => 'scaletickets#index_data'
+  match '/scaleticketgridaction', :to => 'scaletickets#index_dbaction'
+  #Inventory lots
+  match '/inventorylotview', :to => 'inventorylots#index_view'
+  match '/inventorylotdata', :to => 'inventorylots#index_data'
+  match '/inventorylotgridaction', :to => 'inventorylots#index_dbaction'
+  #Supplies inventory
+  match '/supplyinventoryview', :to => 'supplyinventories#index_view'
+  match '/supplyinventorydata', :to => 'supplyinventories#index_data'
+  match '/supplyinventorygridaction', :to => 'supplyinventories#index_dbaction'
+  #Storage units
+  match '/storageview', :to => 'storages#index_view'
+  match '/storagedata', :to => 'storages#index_data'
+  match '/storagegridaction', :to => 'storages#index_dbaction'
+  #Purchase orders
+  match '/poview', :to => 'pos#index_view'
+  match '/podata', :to => 'pos#index_data'
+  match '/pogridaction', :to => 'pos#index_dbaction'
+  #Purchase order detail
+  match '/podetailview', :to => 'podetails#index_view'
+  match '/podetaildata', :to => 'podetails#index_data'
+  match '/podetailgridaction', :to => 'podetails#index_dbaction'
+  match '/podetails/:id/receive_line', :to => 'podetails#receive_line'
+  #Sales contracts
+  match '/contractview', :to => 'contracts#index_view'
+  match '/contractdata', :to => 'contracts#index_data'
+  match '/contractgridaction', :to => 'contracts#index_dbaction'
+  #Shipments
+  match '/shipmentview', :to => 'shipments#index_view'
+  match '/shipmentdata', :to => 'shipments#index_data'
+  match '/shipmentgridaction', :to => 'shipments#index_dbaction'
+  #Shipment Detailss
+  match '/shipmentdetailview', :to => 'shipmentdetails#index_view'
+  match '/shipmentdetaildata', :to => 'shipmentdetails#index_data'
+  match '/shipmentdetailgridaction', :to => 'shipmentdetails#index_dbaction'
+  match 'shipmentdetails/:id/add_detail', :to => 'shipmentdetails#add_detail'
+  #Inventory search
+  match '/inventoryview', :to => 'shipments#inventory_view'
+  match '/inventorydata', :to => 'shipments#inventory_data'
+  match '/inventorygridaction', :to => 'shipments#inventory_dbaction'
+  #Polyline map page
+  match '/fieldmap_utility', :to => 'fields#fieldmap_utility'
+  #Event calendar
+  match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
+  #user admin
+  match '/admin', :to =>'users#admin'
+  match '/adminedit', :to =>'users#adminedit'
+  match '/calendar', :to => 'calendar#index'
+  #Farmjoblabor
+  match '/farmjoblaborview', :to => 'farmjobs#parties_view'
+  match '/farmjoblabordata', :to => 'farmjobs#parties_data'
+  match '/farmjoblaborgridaction', :to => 'farmjobs#labor_dbaction'
+  #Farmjobsupply
+  match '/farmjobsupplyview', :to => 'farmjobs#supplies_view'
+  match '/farmjobsupplydata', :to => 'farmjobs#supplies_data'
+  match '/farmjobsupplygridaction', :to => 'farmjobs#supplies_dbaction'
+  #Farmjobequipment
+  match '/farmjobequipmentview', :to => 'farmjobs#equipment_view'
+  match '/farmjobequipmentdata', :to => 'farmjobs#equipment_data'
+  match '/farmjobequipmentgridaction', :to => 'farmjobs#equipment_dbaction'
+  #Data types
+  match '/typeview', :to => 'types#index_view'
+  match '/typedata', :to => 'types#index_data'
+  match '/typegridaction', :to => 'types#index_dbaction'
+  #Farm expenses
+  match '/farmexpenseview', :to => 'farmexpenses#index_view'
+  match '/farmexpensedata', :to => 'farmexpenses#index_data'
+  match '/farmexpensegridaction', :to => 'farmexpenses#index_dbaction'
+  
+  #Reports
+   match '/farmjobreportrequestor', :to => 'farmjobs#farmjob_report_requestor'
+   match '/farmjobreport', :to => 'farmjobs#farmjobreport'
+   match '/profitabilityreportrequestor', :to => 'farmjobs#profitability_report_requestor'
+   match '/profitabilityjobreport', :to => 'farmjobs#profitabilityjobreport'
   root :to => 'pages#home'
   #root_path => 'pages#home'
   #root_url => 'http://localhost:3000/'

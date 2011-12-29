@@ -1,0 +1,61 @@
+ 
+
+<p>
+  <b>Description:</b>
+  <%= @equipment.description %>
+</p>
+
+ 
+<p>
+  <b>Category:</b>
+  <%= @equipment.category %>
+</p>
+
+<p>
+  <b>Make:</b>
+  <%= @equipment.make %>
+</p>
+
+<p>
+  <b>Model:</b>
+  <%= @equipment.model %>
+</p>
+
+<p>
+  <b>Year:</b>
+  <%= @equipment.year %>
+</p>
+
+<p>
+  <b>Serial number:</b>
+  <%= @equipment.serial_number %>
+</p>
+
+<p>
+  <b>Cost unit:</b>
+  <%= @equipment.cost_unit %>
+</p>
+
+<p>
+  <b>Cost rate hour:</b>
+  <%= @equipment.rate_per_hour %>
+</p>
+
+<p>
+  <b>Width:</b>
+  <%= @equipment.width %>
+</p>
+
+<p>
+  <b>Photo path:</b>
+  <%= @equipment.photo_path %>
+</p>
+
+<p>
+  <b>Maintenance Frequency hours:</b>
+  <%= @equipment.frequency_hours %>
+</p>
+
+
+<%= link_to 'Edit', edit_equipment_path(@equipment) %> |
+<%= link_to 'Back', equipment_index_path %>

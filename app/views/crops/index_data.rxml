@@ -1,0 +1,16 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@crops.each do |crop|
+		xml.tag!("row",{ "id" => crop.id }) do
+			xml.tag!("cell", crop.cropname)
+			xml.tag!("cell", crop.croptype)
+			xml.tag!("cell", crop.cropspecific)
+			xml.tag!("cell", crop.crop_uom)
+			xml.tag!("cell", crop.price_per_uom)
+			xml.tag!("cell", crop.crop_inventory_uom)
+			xml.tag!("cell", crop.avg_yield_acre)
+			xml.tag!("cell", crop.avg_moisture_percent)
+			xml.tag!("cell", crop.avg_weight_uom)
+		end
+	end
+end

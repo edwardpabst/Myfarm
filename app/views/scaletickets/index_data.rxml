@@ -1,0 +1,20 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@scaletickets.each do |scaletick|
+		xml.tag!("row",{ "id" => scaletick.id }) do
+			xml.tag!("cell", scaletick.tran_date)
+			xml.tag!("cell", scaletick.cropplanfull)
+			xml.tag!("cell", scaletick.ticket_id)
+			xml.tag!("cell", scaletick.pack_qty)
+			xml.tag!("cell", scaletick.weight_uom)
+			xml.tag!("cell", scaletick.gross_weight)
+			xml.tag!("cell", scaletick.tare_weight)
+			xml.tag!("cell", scaletick.net_weight)
+			xml.tag!("cell", scaletick.storagename)
+			
+
+			
+
+		end
+	end
+end

@@ -1,0 +1,28 @@
+<script type="text/javascript"> 
+function checkFarmjob() {
+   
+   document.fj.farmjob_isreplicate.disabled=true; 
+
+
+	if (document.fj.farmjob_job_status.value == 'Job complete')
+	{
+	   document.fj.farmjob_job_status.disabled=true;
+	   document.fj.fjsubmit.disabled=true;
+	} 
+}
+
+</script>
+
+<br>
+<h1>Editing Farm job</h1>
+ 
+<%= link_to 'Back', session[:return_to] %>
+<br>
+<%= render 'form' %>
+
+<%= render 'dependant_form' %>
+
+
+<%= link_to 'Back', session[:return_to] %>
+<br>
+

@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Party:</b>
+  <%= @contract.party_id %>
+</p>
+
+<p>
+  <b>Cropplan:</b>
+  <%= @contract.cropplan_id %>
+</p>
+
+<p>
+  <b>Contract uom:</b>
+  <%= @contract.contract_uom %>
+</p>
+
+<p>
+  <b>Contract price:</b>
+  <%= @contract.contract_price %>
+</p>
+
+<p>
+  <b>Contract date:</b>
+  <%= @contract.contract_date %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%= @contract.notes %>
+</p>
+
+<p>
+  <b>Min qty:</b>
+  <%= @contract.min_qty %>
+</p>
+
+<p>
+  <b>Max qty:</b>
+  <%= @contract.max_qty %>
+</p>
+
+<p>
+  <b>Payment type:</b>
+  <%= @contract.payment_type %>
+</p>
+
+<p>
+  <b>Payment terms:</b>
+  <%= @contract.payment_terms %>
+</p>
+
+
+<%= link_to 'Edit', edit_contract_path(@contract) %> |
+<%= link_to 'Back', contracts_path %>

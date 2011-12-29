@@ -1,10 +1,18 @@
 
 
 <% if signed_in? %>
-	<table class="front summary="For signed in users">
+	<% set_current_user_data %>
+	<table class="front_summary" ="For signed in users">
+		<tr>
+			
+		<td colspan="2">
+			 <div id="form_header">
+				What Farmers are talking about. Go to Community to view and select other farmers, to follow their ideas.
+			 </div>
+		</td>
 		<tr>
 			<td class="main">
-				<h1 class="micropost"> What's on your mind? </h1> 
+				<h1 class="micropost"> What's on your mind <%= @current_user.name %>  ? </h1> 
 				<%= render 'shared/micropost_form' %>
 				<%= render 'shared/feed' %>
 			</td>
@@ -17,43 +25,43 @@
 	
 	
 <% else %>
-<div id="farmlogo">MyFarm - Farm managment service</div>
-</br>
-<p> Services to help the small and medium size farmers manage their crops and their business in a cost effective way.</p>
+
+<div id="homepageh1">Farm management services</div>
+<div id="homepageh2">
+Services to help the small and medium size farmers manage their crops and their business in a cost effective way.
+<br><br>   
 
 
-</br>
-	 
-	<image  src="/images/farming1.jpg", class="iround" alt="", name="farming1", width="120", height="140"  
-		onmouseover="farming1.width='240';farming1.height='280';"
-		onmouseout="farming1.width='120';farming1.height='140';" />		
-	<image  src="/images/farming2.jpg", class="iround" alt="", name="farming2", width="120", height="140" 
-		onmouseover="farming2.width='240';farming2.height='280';"
-		onmouseout="farming2.width='120';farming2.height='140';" />		
-	<image  src="/images/farming3.jpg", class="iround" alt="", name="farming3", width="120", height="140" 
-		onmouseover="farming3.width='240';farming3.height='280';"
-		onmouseout="farming3.width='120';farming3.height='140';" />
-	<image  src="/images/farming4.jpg", class="iround" alt="", name="farming4", width="120", height="140" 
-		onmouseover="farming4.width='240';farming4.height='280';"
-		onmouseout="farming4.width='120';farming4.height='140';" />
-	
-</br>	
-	<image  src="/images/farming5.jpg", class="iround" alt="", name="farming5", width="120", height="140" 
-		onmouseover="farming5.width='240';farming5.height='280';"
-		onmouseout="farming5.width='120';farming5.height='140';" />
-	<image  src="/images/farming6.jpg", class="iround" alt="", name="farming6", width="120", height="140" 
-		onmouseover="farming6.width='240';farming6.height='280';"
-		onmouseout="farming6.width='120';farming6.height='140';" />
-	<image  src="/images/farming7.jpg", class="iround" alt="", name="farming7", width="120", height="140" 
-		onmouseover="farming7.width='240';farming7.height='280';"
-		onmouseout="farming7.width='120';farming7.height='140';" />
-	<image  src="/images/farming8.jpg", class="iround" alt="", name="farming8", width="120", height="140" 
-		onmouseover="farming8.width='240';farming8.height='280';"
-		onmouseout="farming8.width='120';farming8.height='140';" />
+<div id="homepage">
+<table>
 
-	</p>
-	
-	<%= link_to "Sign up now!", signup_path, :class => "signup_button round " %>
+	<tr>
+		<td class="homepageimage"> 	<br> 
+	<img src="/images/barn-on-the-farm.jpg" width="380" height="360"></img>
+			<br>
+			<div id="homepageh3"> 
+				 
+				<%= link_to "Sign up now!", signup_path, :class => "signup_button round " %>
+			 </div>
+		</td>
+		<td>	<br> 
+					 
+			<p id="frontpage">  Our objective is to keep it simple, elegant and cheap. Start with entering field records for crop plans, field preparation, scouting, farm jobs, scale tickets, equipment maintenance, shipments, invoices, restricted use chemicals and fertilizer applications.  Generate simple enterprise statements to track profitability on a field-by-field and crop-by-crop basis. 
+<br> <br> 
+			   Services have been designed to accommodate the individual farmer, the community based farmer and farm management companies.
+<br> <br>		 
+   
+				 
+			 An easy-to-use internet based interface allows you to add your own clients, farms, fields, supplies, machines, employees, customers, tank mixes, and various other farm inputs.  All functionality is available wherever you have an internet connection. Built on the latest web technologies, the Cloud based software provides a great starting point for anyone looking to improve their field records, crop yield and financial performance and gain a detailed understanding of their business. It's easy and powerful. Sign up today for a no commitment tour of the system.</p>
+			 
+			<h3> $199 a year for the latest web based technology.</h3> 
+			 
+		</td>
+	</tr>
+
+</table>
+</div>
+</div>
 
 
 

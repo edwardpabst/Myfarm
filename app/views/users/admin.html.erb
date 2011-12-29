@@ -1,0 +1,37 @@
+<br>
+<h1> Change settings / Security review </h1>
+			<br><br>
+			<p id="warning">Enter the email address for your account.</p>
+			<p id="warning">For Security purposes please select your question and answer it exactly.</p>
+		 
+		 
+
+			
+
+			<%= form_for :user   do |f| %>
+                
+				<div class="field">
+					<%= f.label :email %> <br />
+					<%= f.text_field :email %>
+				</div>
+				<div class="field">
+					<% get_types_by_name("security_question") %>
+					<label class=" label" for="security_question">my Question<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>	<br>	
+					<%= collection_select("user", "security_question", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	
+				   	<br>
+					<br>
+				</div>
+				<div class="field">
+					<%= f.label :security_answer, "my Answer" %> <br />
+					<%= f.text_field :security_answer %>
+				</div>
+ 
+				<div class="actions">
+					<%= f.submit "Submit" %>
+				</div>
+<br>
+
+			<% end %>
+			
+ 
+ 

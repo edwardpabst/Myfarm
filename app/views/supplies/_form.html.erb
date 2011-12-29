@@ -1,0 +1,56 @@
+<%= semantic_form_for @supply do |f| %>
+<%= render "shared/error_messages", :object => f.object%>
+<div id="form_header">			 	 
+		Supplies are all the products that are used in performing Farm jobs. 			 
+</div>
+  <%= f.inputs do %>
+	<br>
+    <%= f.input :supplyname , :label => "Supply name",  :required => true %>
+    <li class="string input optional stringish">  
+	<% get_types_by_name("supply_type") %>
+	<label class=" label" for="supply_type">Supply type<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("supply", "supply_type", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	</li>
+   	 
+
+	
+	<%= f.input :item_number , :label => "Item id",  :required => true %>
+  <li class="string input optional stringish"> 
+	<% get_types_by_name("supply_uom") %>
+	<label class=" label" for="supply_uom">Purch/Inventory UOM<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("supply", "supply_uom", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	</li>
+    
+ 
+	
+    <%= f.input :supply_cost_uom , :label => "Purchase cost",  :required => true %>
+    <%= f.input :supply_charge_uom , :label => "Supply charge",  :required => false %>
+ <li class="string input optional stringish"> 
+	<% get_types_by_name("distribution_uom") %>
+	<label class=" label" for="distribution_uom">Distribution UOM<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("supply", "distribution_uom", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %></li>
+	
+	<li class="string input optional stringish">
+	<div class="hintbase"> UOM assigned to farm jobs. </div>
+	</li>	
+   
+ 
+	<%= f.input :conversion_factor , :label => "Conversion factor",  :required => true, :hint => "used to develop supply cost in farm jobs.(Purchase cost / conversion factor)" %>
+    <%= f.input :rate_acre , :label => "Rate per acre",  :required => false %>
+    <%= f.input :epa_id , :label => "E.P.A. id",  :required => false %>
+    <%= f.input :manufacturer , :label => "Manufacturer",  :required => false %>
+    <%= f.input :formulation , :label => "Formulation",  :required => false %>
+    
+ <li class="string input optional stringish"> 
+	<% get_types_by_name("supply_carrier") %>
+	<label class=" label" for="carrier">Carrier<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("supply", "carrier", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %></li>	
+    
+
+    <%= f.input :carrier_rate_acre , :label => "Carrier rate per acre",  :required => false %>
+    <%= f.input :problem_target , :label => "Problem targeted",  :required => false %>
+  <% end %>
+
+  <%= f.buttons do %>
+    <%= f.commit_button :label => "Update Supply", :button_html => { :class => "button" } %>
+  <% end %>
+<br>
+<% end %>

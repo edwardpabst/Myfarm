@@ -1,0 +1,85 @@
+<%= render "shared/error_messages", :object => @crop%>
+
+<%= semantic_form_for @crop do |form| %>
+
+
+
+  <%= form.inputs do %>
+
+	<br>
+ <li class="string input optional stringish">
+	<% get_types_by_name("crop_name") %>
+ 	<label class=" label" for="cropname">Crop name<abbr title="required"> </abbr> &nbsp;  &nbsp;</label> 		
+	<%= collection_select("crop", "cropname", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	</li> 
+    
+ 
+
+<!-- Select box for crop type -->
+ 
+<li class="string input optional stringish">	
+	<% get_types_by_name("crop_type") %>
+	<label class=" label" for="croptype">Crop type<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("crop", "croptype", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	</li> 
+    	
+	
+	<%= form.input :cropspecific, :label => "Specific crop",  :required => false  %> 
+	
+	<%= form.input :crop_purpose, :label => "Crop purpose",  :required => false  %> 
+		
+		
+ <li class="string input optional stringish">
+	<!-- Select box for package uom  -->
+	<% get_types_by_name("crop_uom") %>
+	<label class=" label" for="crop_uom">Harvest UOM<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("crop", "crop_uom", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %></li> 	
+   	 
+	    
+	
+	<%= form.input :avg_weight_uom, :as => :number, :label => "Avg weight UOM",  :required => false    %> 
+	
+	<%= form.input :avg_moisture_percent,  :as => :number, :label => "Avg moisture content (%)",  :required => false    %>
+	
+ 	<!-- Select box for inventory uom -->
+ <li class="string input optional stringish"> 
+	<% get_types_by_name("crop_inventory_uom") %>
+	<label class=" label" for="crop_inventory_uom">Inventory UOM<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("crop", "crop_inventory_uom", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %></li> 	
+    
+ 
+	
+	<%= form.input :price_per_uom, :as => :number, :label => "Price/Inventory UOM",  :required => false    %> 
+	
+	<%= form.input :avg_yield_acre,  :as => :number, :label => "Avg yield per acre",  :required => false    %>
+	
+		<% get_parties_by_type("Supplier") %>
+	 <li class="string input optional stringish"> 
+		<label class=" label" for="crop">Seed supplier*<abbr title="required"> </abbr>  </label> 
+		<% if !@party_types.nil? %>			
+			<%= collection_select("crop", "seed_company_id", @party_types, "id", "partyname", options = {:prompt => " ", :include_blank => ' '}) %>
+		<% end %></li>
+	
+
+
+	<%= form.input :variety_hybrid, :label => "Seed variety/hybrid",  :required => false    %> 
+	<%= form.input :lot_id, :label => "Lot I.D.",  :required => false    %> 
+	
+	<li class="string input optional stringish"> 
+	<% get_types_by_name("seed_rate_uom") %>
+	<label class=" label" for="seed_rate_uom">Seed rate UOM<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("crop", "seed_rate_uom", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %></li>
+	
+	<li class="string input optional stringish"> 
+	<% get_types_by_name("seed_rate_land") %>
+	<label class=" label" for="seed_rate_land">Land measure<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("crop", "seed_rate_land", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %></li>
+	<%= form.input :seed_rate,  :as => :number, :label => "Seed rate",  :required => false    %> 
+	<%= form.input :plant_depth, :label => "Planting depth",  :required => false    %> 
+  <% end %>
+
+  <%= form.buttons do %>
+      <%= form.commit_button :label => "Update Crop", :button_html => { :class => "button" } %>
+  <% end %>
+<br>
+<% end %>
+ 
+

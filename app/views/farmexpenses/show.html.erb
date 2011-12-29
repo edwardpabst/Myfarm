@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Farm:</b>
+  <%= @farmexpense.farm_id %>
+</p>
+
+<p>
+  <b>Expense type:</b>
+  <%= @farmexpense.expense_type %>
+</p>
+
+<p>
+  <b>Expense name:</b>
+  <%= @farmexpense.expense_name %>
+</p>
+
+<p>
+  <b>Expense amount:</b>
+  <%= @farmexpense.expense_amount %>
+</p>
+
+<p>
+  <b>Expense year:</b>
+  <%= @farmexpense.expense_year %>
+</p>
+
+
+<%= link_to 'Edit', edit_farmexpense_path(@farmexpense) %> |
+<%= link_to 'Back', farmexpenses_path %>

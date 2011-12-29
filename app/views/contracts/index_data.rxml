@@ -1,0 +1,16 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@contracts.each do |contract|
+		xml.tag!("row",{ "id" => contract.id }) do
+			xml.tag!("cell", contract.customername)
+			xml.tag!("cell", contract.contract_date)
+			xml.tag!("cell", contract.cropplanfull)
+			xml.tag!("cell", contract.contract_uom)
+			xml.tag!("cell", contract.contract_price)
+			xml.tag!("cell", contract.min_qty)
+			xml.tag!("cell", contract.max_qty)
+			xml.tag!("cell", contract.contract_number)
+			xml.tag!("cell", contract.payment_terms)
+		end
+	end
+end

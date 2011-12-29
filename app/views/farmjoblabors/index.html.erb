@@ -1,0 +1,29 @@
+<h1>Job labor</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Farmjob</th>
+    <th>Party</th>
+    <th>Task hours</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @farmjoblabors.each do |farmjoblabor| %>
+  <tr>
+    <td><%= farmjoblabor.user_id %></td>
+    <td><%= farmjoblabor.farmjob_id %></td>
+    <td><%= farmjoblabor.party_id %></td>
+    <td><%= farmjoblabor.task_hours %></td>
+    <td><%= link_to 'Show', farmjoblabor %></td>
+    <td><%= link_to 'Edit', edit_farmjoblabor_path(farmjoblabor) %></td>
+    <td><%= link_to 'Destroy', farmjoblabor, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Farmjoblabor', new_farmjoblabor_path %>

@@ -1,165 +1,104 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 		  <!--	 -->
   <title><%= title %>  </title> 
-  
-
-<%= javascript_include_tag :all %> 
-
-<script>
-	  jQuery.noConflict();
-	
-	function alertMe(){
-       	var country = "Fiji";
-			var city = "Suva";
-			alert('The city of ' + city + ' is located in ' + country + '.');
-        }
-
-function weatherpopup()
-		{
-		    window.open ("http://www.weather.com/weather/local/95476","weatherwindow","status=1, resizable=1,width=680, height=820");
-		}
-		
 
 
-<!--  Script for hover mega menus -->
-		var menuArray = new Array();
-		menuArray[0] = 'submenu1';
-		menuArray[1] = 'submenu2';
-		menuArray[2] = 'submenu3';
-		menuArray[3] = 'submenu4';
-		
+<!-- Javascript inclusion	 -->  
+<%= javascript_include_tag :all %>
+<!-- JQuery javascript for UI widgets-->	
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js" type="text/javascript"></script>
+<script src="http://jquery-ui.googlecode.com/svn/tags/latest/external/jquery.bgiframe-2.1.2.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/i18n/jquery-ui-i18n.min.js" type="text/javascript"></script>
 
-		
-		var globalObject = '';
-		var isActive = false;
-		var ourTimer;
-		
-		function showhide(obj, onlink)
-		{
-		    targetObject = document.getElementById(obj).style;
-		    globalObject = targetObject;
+<script src="http://code.google.com/apis/gears/gears_init.js" type="text/javascript"></script>
 
-		    if(onlink)
-		    {
-		        clearTimeout(ourTimer);
-
-		        for (i=0; i < menuArray.length; i++)
-		        {
-		            var tempObject = document.getElementById(menuArray[i]).style;
-		            tempObject.visibility = "hidden";
-		        }
-
-		        targetObject.visibility = 'visible';
-		        isActive = true;
-		    }
-		    else
-		    {
-		        isActive = false;
-		        layerTimer();
-		    }
-		}
-
-		function layerTimer()
-		{
-		    ourTimer = setTimeout("hideMenu()",0450);
-		}
-
-		function hideMenu()
-		{
-		    if( !isActive )
-		    {
-		        globalObject.visibility = 'hidden';
-		    }
-		}
-
-		function layerCheck(flag)
-		{
-		    if(flag)
-		    {
-		        isActive = true;
-		        clearTimeout(ourTimer);
-		    }
-		    else
-		    {
-		        isActive = false;
-		        layerTimer();
-		    }
-		}
-		
-		window.onload = function()
-		{
-		    for(var i=0;i<menuArray.length;i++)
-		    {
-		        var id = menuArray[i];
-		        var e = document.getElementById(id);
-		        e.onmouseover = function(e)
-		        {
-		            layerCheck(true);
-		        }
-		        e.onmouseout = function(e)
-		        {
-		            layerCheck(false);
-		        }
-		    }
-		}
-</script>
-
-
-<script type="text/javascript">
-
-   /* Locations can be edited manually by updating 'wx_locID' below.  Please also update */
-   /* the location name and link in the above div (wx_module) to reflect any changes made. */
-   var wx_locID = '95476';
-
-   /* If you are editing locations manually and are adding multiple modules to one page, each */
-   /* module must have a unique div id.  Please append a unique # to the div above, as well */
-   /* as the one referenced just below.  If you use the builder to create individual modules  */
-   /* you will not need to edit these parameters. */
-   var wx_targetDiv = 'wx_module_1759';
-
-   /* Please do not change the configuration value [wx_config] manually - your module */
-   /* will no longer function if you do.  If at any time you wish to modify this */
-   /* configuration please use the graphical configuration tool found at */
-   /* https://registration.weather.com/ursa/wow/step2 */
-   var wx_config='SZ=180x150*WX=FHW*LNK=SSNL*UNT=F*BGI=boat*MAP=null|null*DN=myfarm.com*TIER=0*PID=1268599066*MD5=7214d27b4c44f94976f1468029988d2b';
-
-   document.write('<scr'+'ipt src="'+document.location.protocol+'//wow.weather.com/weather/wow/module/'+wx_locID+'?config='+wx_config+'&proto='+document.location.protocol+'&target='+wx_targetDiv+'"></scr'+'ipt>');  
-</script>
-
-
- 
-
+<!-- Style sheet inclusion	 --> 
 <%= csrf_meta_tag %>  
 <%= render 'layouts/stylesheets' %>
 
 
+<!-- Jquery scripts for UI widgets	 -->
+<script>
+jQuery.noConflict();
+jQuery(document).ready(function($) {
+  // here the $ function is jQuery's because it's an argument
+  // to the ready handler
 
+	// following group defines date input for Jquery UI datepicker
+  $.datepicker.setDefaults($.datepicker.regional['']);
+  $('#party_created_at').datepicker( { dateFormat: 'yy-mm-dd' });
+  $('#farmjob_start_date').datepicker({ dateFormat: 'yy-mm-dd' });
+  $('#farmjob_stop_date').datepicker({ dateFormat: 'yy-mm-dd' });
+  $('#scaleticket_tran_date').datepicker({ dateFormat: 'yy-mm-dd' });
+  $('#contract_contract_date').datepicker({ dateFormat: 'yy-mm-dd' });
+  $('#shipment_ship_date').datepicker({ dateFormat: 'yy-mm-dd' }); 
+  $('#po_orderdate').datepicker({ dateFormat: 'yy-mm-dd' });
+  $('#po_duedate').datepicker({ dateFormat: 'yy-mm-dd' });
+  $('#start_date').datepicker({ dateFormat: 'yy-mm-dd' });
+  $('#stop_date').datepicker({ dateFormat: 'yy-mm-dd' });
+   
+
+});
+</script>
+
+<script>	
+		
+	function weatherpopup()			
+					{
+					    window.open ("http://www.weather.com/weather/local/<%= get_user_postal_code %>" ,"weatherwindow","status=1, resizable=1,width=660, height=1080, scrollbars=1, toolbar=1");
+					}
+					
+	function newspopup()			
+					{
+									    window.open ("http://www.agprofessional.com" ,"newswindow","status=1, resizable=1,width=960, height=1080, scrollbars=1, toolbar=1");
+					}
+</script>
+
+ 		 
 
 </head>
-<body>
+ 
+
+
+<body    onload= "<%= @onload %>" >  <!-- onload="initmap()" -->
+
+	<br>
+	<div class="container">
+	
 	<%=render 'layouts/header'%>
 
-	<!--- <input type="button" value="Alert me" onclick="alertMe()" /> -->
 
+
+
+
+ 
+		<div class="thinseparator"></div>
+ 		<br>
+		
+		<section class="round">
 	
-	<div class="container">
-	<section class="round">
 		<% flash.each do |key, value| %>
 			<div class="flash <%= key %> "> <font color="blue"> <%= value %> </font> </div>
+			 
 		<% end %>
-		
+
+	
 
 	
 		<%= yield %>
+		
 	</section>
 	
-
+		<br>
 		<%= render 'layouts/footer' %>
+		
+		<!--	
 		<%= debug(params) if Rails.env.development? %>
-
+		 -->
 	</div>
-
+ 
 </body>
 </html>

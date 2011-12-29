@@ -1,0 +1,80 @@
+
+
+<p>
+  <b>User:</b>
+  <%= @field.user_id %>
+</p>
+
+<p>
+  <b>Farm name:</b>
+  <%= @field.farmname %>
+</p>
+
+<p>
+  <b>Field name:</b>
+  <%= @field.fieldname %>
+</p>
+
+<p>
+  <b>Client:</b>
+  <%= @field.client_id %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @field.location %>
+</p>
+
+<p>
+  <b>Country:</b>
+  <%= @field.country_id %>
+</p>
+
+<p>
+  <b>Number acres:</b>
+  <%= @field.number_acres %>
+</p>
+
+<p>
+  <b>Holding status:</b>
+  <%= @field.holding_status %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%= @field.owner_id %>
+</p>
+
+<p>
+  <b>Area mapped:</b>
+  <%= @field.area_mapped %>
+</p>
+
+<p>
+  <b>Area legal:</b>
+  <%= @field.area_legal %>
+</p>
+
+<p>
+  <b>Area tillable:</b>
+  <%= @field.area_tillable %>
+</p>
+
+<p>
+  <b>Current state:</b>
+  <%= @field.current_state %>
+</p>
+
+<p>
+  <b>Start row:</b>
+  <%= @field.start_row %>
+</p>
+
+<p>
+  <b>End row:</b>
+  <%= @field.end_row %>
+</p>
+
+
+<%= link_to 'Edit', edit_field_path(@field) %> |
+<%= link_to 'Back', :action => "index_view" %>

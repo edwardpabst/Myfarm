@@ -1,0 +1,26 @@
+<h1>Times</h1>
+
+<%= link_to 'New Ztime', new_ztime_path %> <br />
+<table>
+  <tr>
+    <th>Time key</th>
+    <th>Time display</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ztimes.each do |ztime| %>
+  <tr>
+    <td><%= ztime.timekey %></td>
+    <td><%= ztime.timedisplay %></td>
+    <td><%= link_to 'Show', ztime %></td>
+    <td><%= link_to 'Edit', edit_ztime_path(ztime) %></td>
+    <td><%= link_to 'Destroy', ztime, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ztime', new_ztime_path %>

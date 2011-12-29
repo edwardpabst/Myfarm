@@ -1,36 +1,70 @@
-<table  width="800px" align="center">
+<br>
+<div id="signin">
+<table   align="center">
 	<tr>
 		<td align="center">
+			<br>
+			 <div class="field_user">
+				 <h1> Sign up </hi>
+			 </div>
+				 
 
-			<h1>Sign up</h1>
-
-			
 
 			<%= form_for(@user) do |f| %>
+				<div id="form_header">			 	 
+				 	By signing up you are entitled to a free 30 day trial of the farm management software. No muss no fuss. 			 
+				</div>			 
+			<br>
                 <%= render 'shared/error_messages', :object => f.object %>
 
-				<div class="field">
+				<div class="field_user">
 					<%= f.label :name, "Name" %> <br />
 					<%= f.text_field :name %>
 				</div>
-				<div class="field">
+				<div class="field_user">
 					<%= f.label :email, "Email" %> <br />
 					<%= f.text_field :email %>
 				</div>
-				<div class="field">
+				<div class="field_user">
 					<%= f.label :password, "Password" %> <br />
 					<%= f.password_field :password %>
 				</div>
-				<div class="field">
+				<div class="field_user">
 					<%= f.label :password_confirmation, "Confirmation" %> <br />
-					<%= f.password_field :password_confirmation %>
+					<%= f.password_field :password_confirmation %> <br>
 				</div>
-				<div class="actions">
-					<%= f.submit "Sign up" %>
+			<div id="message">	
+				_______________________________________________________________ <br>
+				Everyone forgets their passwords. Soooooo, <br> 
+				for security purposes please select a question and create an answer.<br>
+				 This will be used in the future for validation to reset your password. <br>
+			 	_______________________________________________________________ <br>
+			</div>
+			    
+				<div class="field_user">
+					<% get_types_by_name("security_question") %> 
+					<label class=" label" for="security_question">my Question<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>	<br>	
+					<%= collection_select("user", "security_question", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	
+				   	<br>
+					<br>
 				</div>
+				<div class="field_user">
+					<%= f.label :security_answer, "my Answer" %> <br />
+					<%= f.text_field :security_answer %>
+				
+			 
 
-
+				<br><br>
+					<div class="actions">
+						
+						<%= f.submit " Sign up ", :class => "button" %>
+						 
+					</div>
+			 	 <br><br>
+				</div>
+		
 			<% end %>
 		</td>
 	</tr>
 </table>
+</div>

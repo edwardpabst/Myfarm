@@ -1,0 +1,33 @@
+<%= semantic_form_for @cropplan do |f| %>
+<div id="form_header">			 	 
+	 	Crop plans define crop activity that you want to track for a season or year.  			 
+</div>
+<%= render "shared/error_messages", :object => f.object%>
+  <%= f.inputs do %>
+
+	<br>
+    <% get_crops_by_type %>
+	<label class=" label" for="crops">Crop<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("cropplan", "crop_id", @crops, "id", "cropfull", options = {:prompt => " "}) %>	
+   	<br>
+	<br>
+   
+	<% get_types_by_name("plan_year") %>
+	<label class=" label" for="plan_year">Plan year/season<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("cropplan", "plan_year", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	
+   	<br>
+	<br>
+    
+	<% get_types_by_name("plan_status") %>
+	<label class=" label" for="plan_status">Plan status<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("cropplan", "plan_status", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	
+   	<br>
+	<br>
+  <% end %>
+
+  <%= f.buttons do %>
+     <%= f.commit_button :label => "Update Plan", :button_html => { :class => "button" } %>
+  <% end %>
+	<br>
+		<br>
+<% end %>

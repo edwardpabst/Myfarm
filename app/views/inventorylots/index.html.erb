@@ -1,0 +1,35 @@
+<h1>Listing inventorylots</h1>
+
+<table>
+  <tr>
+    <th>Scaleticket</th>
+    <th>Cropplan</th>
+    <th>Inventory uom</th>
+    <th>Qty</th>
+    <th>Grade</th>
+    <th>Lab report</th>
+    <th>Storage</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @inventorylots.each do |inventorylot| %>
+  <tr>
+    <td><%= inventorylot.scaleticket_id %></td>
+    <td><%= inventorylot.cropplan_id %></td>
+    <td><%= inventorylot.inventory_uom %></td>
+    <td><%= inventorylot.qty %></td>
+    <td><%= inventorylot.grade %></td>
+    <td><%= inventorylot.lab_report %></td>
+    <td><%= inventorylot.storage_id %></td>
+    <td><%= link_to 'Show', inventorylot %></td>
+    <td><%= link_to 'Edit', edit_inventorylot_path(inventorylot) %></td>
+    <td><%= link_to 'Destroy', inventorylot, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Inventorylot', new_inventorylot_path %>

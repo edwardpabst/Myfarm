@@ -1,0 +1,39 @@
+<h1>Weather</h1>
+
+<table>
+  <tr>
+    <th>Weather date</th>
+    <th>Postal code</th>
+    <th>Segment</th>
+    <th>Temperature</th>
+    <th>Sky condition</th>
+    <th>Wind direction</th>
+    <th>Wind speed</th>
+    <th>Gusting to</th>
+    <th>Relative humidity</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @weathers.each do |weather| %>
+  <tr>
+    <td><%= weather.weather_date %></td>
+    <td><%= weather.postal_code %></td>
+    <td><%= weather.segment %></td>
+    <td><%= weather.temperature %></td>
+    <td><%= weather.sky_condition %></td>
+    <td><%= weather.wind_direction %></td>
+    <td><%= weather.wind_speed %></td>
+    <td><%= weather.gusting_to %></td>
+    <td><%= weather.relative_humidity %></td>
+    <td><%= link_to 'Show', weather %></td>
+    <td><%= link_to 'Edit', edit_weather_path(weather) %></td>
+    <td><%= link_to 'Destroy', weather, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Weather', new_weather_path %>

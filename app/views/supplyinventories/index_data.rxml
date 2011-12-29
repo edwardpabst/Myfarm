@@ -1,0 +1,19 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@supplyinventories.each do |si|
+		xml.tag!("row",{ "id" => si.id }) do
+			xml.tag!("cell", si.supplyname)
+			xml.tag!("cell", si.storagename)
+			xml.tag!("cell", si.supply_uom)
+			xml.tag!("cell", si.qty_in)
+			xml.tag!("cell", si.qty_out)
+			xml.tag!("cell", si.qty_onhand)
+			xml.tag!("cell", si.onhand_value)
+			xml.tag!("cell", si.avg_cost)
+			
+
+		end
+	end
+end
+
+ 

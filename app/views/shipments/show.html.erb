@@ -1,0 +1,100 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @shipment.user_id %>
+</p>
+
+<p>
+  <b>Customer:</b>
+  <%= @shipment.customer_id %>
+</p>
+
+<p>
+  <b>Ship date:</b>
+  <%= @shipment.ship_date %>
+</p>
+
+<p>
+  <b>Contract:</b>
+  <%= @shipment.contract_id %>
+</p>
+
+<p>
+  <b>Cropplan:</b>
+  <%= @shipment.cropplan_id %>
+</p>
+
+<p>
+  <b>Inventorylot:</b>
+  <%= @shipment.inventorylot_id %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @shipment.price %>
+</p>
+
+<p>
+  <b>Ship uom:</b>
+  <%= @shipment.ship_uom %>
+</p>
+
+<p>
+  <b>Trucker:</b>
+  <%= @shipment.trucker_id %>
+</p>
+
+<p>
+  <b>Trucker name:</b>
+  <%= @shipment.trucker_name %>
+</p>
+
+<p>
+  <b>Manifest:</b>
+  <%= @shipment.manifest_id %>
+</p>
+
+<p>
+  <b>Totalweight:</b>
+  <%= @shipment.totalweight %>
+</p>
+
+<p>
+  <b>Weight uom:</b>
+  <%= @shipment.weight_uom %>
+</p>
+
+<p>
+  <b>Shipto street:</b>
+  <%= @shipment.shipto_street %>
+</p>
+
+<p>
+  <b>Shipto city:</b>
+  <%= @shipment.shipto_city %>
+</p>
+
+<p>
+  <b>Shipto state:</b>
+  <%= @shipment.shipto_state %>
+</p>
+
+<p>
+  <b>Shipto postalcode:</b>
+  <%= @shipment.shipto_postalcode %>
+</p>
+
+<p>
+  <b>Shipping charge:</b>
+  <%= @shipment.shipping_charge %>
+</p>
+
+<p>
+  <b>Commission amount:</b>
+  <%= @shipment.commission_amount %>
+</p>
+
+
+<%= link_to 'Edit', edit_shipment_path(@shipment) %> |
+<%= link_to 'Back', shipments_path %>

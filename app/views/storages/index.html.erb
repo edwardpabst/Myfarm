@@ -1,0 +1,39 @@
+<br />
+<h1>Storage</h1>
+
+<table class="index">
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Size</th>
+    <th>Size uom</th>
+    <th>Location</th>
+    <th>Capacity</th>
+    <th>Capacity uom</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @storages.each do |storage| %>
+  <tr>
+    <td><%= storage.name %></td>
+    <td><%= storage.storage_type %></td>
+    <td><%= storage.size %></td>
+    <td><%= storage.size_uom %></td>
+    <td><%= storage.location %></td>
+    <td><%= storage.capacity %></td>
+    <td><%= storage.capacity_uom %></td>
+    <td><%= link_to 'Edit', edit_storage_path(storage) %></td>
+    <td><%= link_to 'Destroy', storage, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+<tr>
+  <th colspan="10">.</th>
+</tr>
+</table>
+
+<br />
+
+<%= link_to 'New Storage', new_storage_path %>
+<br />

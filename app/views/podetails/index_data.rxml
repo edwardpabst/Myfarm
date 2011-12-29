@@ -1,0 +1,17 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@podetails.each do |podetail|
+		xml.tag!("row",{ "id" => podetail.id }) do
+			
+			xml.tag!("cell", podetail.supplyname)			
+			xml.tag!("cell", podetail.qty_ordered)
+			xml.tag!("cell", podetail.supply_uom)
+			xml.tag!("cell", podetail.order_price)
+			xml.tag!("cell", podetail.ext_amount)
+			xml.tag!("cell", podetail.detail_status)
+			xml.tag!("cell", podetail.qty_received)
+		  xml.tag!("cell", podetail.storagename)
+		
+		end
+	end
+end

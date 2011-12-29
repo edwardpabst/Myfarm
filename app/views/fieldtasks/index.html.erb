@@ -1,0 +1,33 @@
+<h1>Field tasks</h1>
+ 
+<table  class="index">
+  <tr>
+    <th>Task type</th>
+    <th>Task description</th>
+    <th>Task notes</th>
+    <th>Task frequency days</th>
+	<th>Task Duration days </th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @fieldtasks.each do |fieldtask| %>
+  <tr>
+
+    <td><%= fieldtask.task_type %></td>
+    <td><%= fieldtask.taskdescription %></td>
+    <td><%= fieldtask.task_notes %></td>    
+    <td><%= fieldtask.task_frequency_days %></td>
+	<td><%= fieldtask.task_duration_days %></td>
+    <td><%= link_to 'Supplies', :controller => "fieldtasks", :action => "fieldtask_supplies", :id => fieldtask  %></td>
+    <td><%= link_to 'Edit', edit_fieldtask_path(fieldtask) %></td>
+    <td><%= link_to 'Destroy', fieldtask, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Field task', new_fieldtask_path %>
+ 

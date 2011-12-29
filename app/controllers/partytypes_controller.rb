@@ -1,6 +1,8 @@
 class PartytypesController < ApplicationController
   # GET /partytypes
   # GET /partytypes.xml
+  before_filter :authenticate
+  
   def index
     @partytypes = Partytype.all
 

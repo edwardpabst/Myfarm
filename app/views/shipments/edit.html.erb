@@ -1,0 +1,22 @@
+<script type="text/javascript"> 
+function checkContract() {
+
+if (document.sh.shipment_contract_id.value != ' ') {
+   document.sh.shipment_customer_id.disabled=true;  
+   document.sh.shipment_cropplan_id.disabled=true;
+}
+}
+</script>
+
+
+<br>
+<h1>Manage Shipment</h1>
+<%= link_to 'Back', "/shipmentview" %>
+
+<%= render 'form' %>
+
+<%= render 'shipmentdetails/index_view' %> 
+
+<%= link_to 'Back', "/shipmentview" %>
+
+

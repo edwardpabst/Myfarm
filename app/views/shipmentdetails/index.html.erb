@@ -1,0 +1,35 @@
+<h1>Listing shipmentdetails</h1>
+
+<table>
+  <tr>
+    <th>Inventorylot</th>
+    <th>Price</th>
+    <th>Qty</th>
+    <th>Qty uom</th>
+    <th>Detail status</th>
+    <th>Cropplan</th>
+    <th>Notes</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @shipmentdetails.each do |shipmentdetail| %>
+  <tr>
+    <td><%= shipmentdetail.inventorylot_id %></td>
+    <td><%= shipmentdetail.price %></td>
+    <td><%= shipmentdetail.qty %></td>
+    <td><%= shipmentdetail.qty_uom %></td>
+    <td><%= shipmentdetail.detail_status %></td>
+    <td><%= shipmentdetail.cropplan_id %></td>
+    <td><%= shipmentdetail.notes %></td>
+    <td><%= link_to 'Show', shipmentdetail %></td>
+    <td><%= link_to 'Edit', edit_shipmentdetail_path(shipmentdetail) %></td>
+    <td><%= link_to 'Destroy', shipmentdetail, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Shipmentdetail', new_shipmentdetail_path %>

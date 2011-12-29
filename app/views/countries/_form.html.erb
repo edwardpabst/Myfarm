@@ -1,0 +1,13 @@
+<%= semantic_form_for @country do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :code2 %>
+    <%= f.input :name %>
+    <%= f.input :namelc %>
+    <%= f.input :code3 %>
+    <%= f.input :number %>
+  <% end %>
+
+  <%= f.buttons do %>
+    <%= f.commit_button %>
+  <% end %>
+<% end %>

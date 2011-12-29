@@ -1,0 +1,47 @@
+<%= semantic_form_for @storage do |f| %>
+<%= render "shared/error_messages", :object => f.object%>
+<div id="form_header">			 	 
+ 	Storage units are defined to locate harvested crops and supplies.  			 
+</div>
+  <%= f.inputs do %>
+    <%= f.input :name  , :label => "Storage name",  :required => true %>
+
+    <% get_types_by_name("storage_type") %>
+ <li class="string input optional stringish"> 
+	<label class=" label" for="storage_type">Storage type<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("storage", "storage_type", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
+ </li>	
+    
+
+    <%= f.input :location  ,:as => :text,  :label => "Storage location",  :required => true %>
+
+    <% get_types_by_name("size_uom") %>
+ <li class="string input optional stringish"> 
+	<label class=" label" for="size_uom">Storage size UOM<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("storage", "size_uom", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
+  </li>		
+   
+
+    <%= f.input :size  , :label => "Storage size",  :required => false%>
+
+
+	
+	<% get_types_by_name("capacity_uom") %>
+ <li class="string input optional stringish"> 
+	<label class=" label" for="capacity_uom">Capacity UOM<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("storage", "capacity_uom", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
+ </li>		
+    
+
+    <%= f.input :capacity  , :label => "Capacity",  :required => false%>
+
+    <%= f.input :yearly_cost , :as => :number, :label => "Year/expense",  :required => false%>
+
+    
+  <% end %>
+<br>
+  <%= f.buttons do %>
+    <%= f.commit_button :label => "Update Storage", :button_html => { :class => "button" }%>
+  <% end %>
+<br> 
+<% end %>

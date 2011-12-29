@@ -1,0 +1,46 @@
+<h1>Farm jobs</h1>
+<%= link_to 'Job Calendar', "/calendar" %>
+<br>
+
+
+<table  class="index">
+  <tr>
+ 
+    <th>Task</th>
+    <th>Field</th>
+    <th>Crop plan</th>
+    <th>Job status</th>
+    <th>Start date</th>
+    <th>Stop date</th>
+    <th>Area size</th>
+
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% unless @farmjobs.empty? %>
+<% @farmjobs.each do |farmjob| %>
+  <tr>
+
+    <td><%= farmjob.taskdescription %></td>
+    <td><%= farmjob.fieldname %></td>
+    <td><%= farmjob.cropplanfull %></td>
+    <td><%= farmjob.job_status %></td>
+    <td><%= farmjob.start_date %></td>
+    <td><%= farmjob.stop_date %></td>
+	<td><%= farmjob.area_size %></td>
+
+  
+    <td><%= link_to 'Edit', :controller => "farmjobs" ,  :id => farmjob.id,  :action => :edit %></td>
+    <td><%= link_to 'Destroy', farmjob, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Farmjob', new_farmjob_path %>
+
+<br>

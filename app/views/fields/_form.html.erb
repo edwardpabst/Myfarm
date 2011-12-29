@@ -1,0 +1,64 @@
+ 
+
+
+<%= semantic_form_for @field do |f| %>
+<%= render "shared/error_messages", :object => f.object%>
+  <%= f.inputs do %>
+  
+ 
+    <% get_farms %>
+ <li class="string input optional stringish"> 
+	<label class=" label" for="fields">Farm*<abbr title="required"> </abbr> &nbsp; 	&nbsp;  &nbsp; &nbsp;   </label>		
+ 
+	<%= collection_select("field", "farm_id", @farms, "id", "farmname", options = {:prompt => " "}) %> </li>
+	<%= f.input :fieldname,   :label => "Field name",  :required => true  %>
+    <%= f.input :location,   :label => "Map Location" ,  :required => false %>
+    <%= f.input :country,  :as => :select,   :label => "Country",  :required => true   %>
+    <%= f.input :number_acres,   :label => "Number acres" ,  :required => true %> 
+ 
+	<%= f.input :latitude,   :label => "Latitude" ,  :required => false , :input_html => { :disabled => true }, :hint => "latitude and longitude are derived from geodcoding of the map location."%>
+	<%= f.input :longitude,   :label => "Longitude" ,  :required => false , :input_html => { :disabled => true }%>
+	<% get_types_by_name("holding_status") %>
+ <li class="string input optional stringish"> 
+	<label class=" label" for="owner_id">Holding status<abbr title="required"> </abbr> &nbsp;  &nbsp; &nbsp; &nbsp; </label>		
+	<%= collection_select("field", "holding_status", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %></li>	
+ 
+	 <%= f.input :land_expense_year,  :as => :number,  :label => "Land expense per year" ,  :required => false %>
+	
+ <li class="string input optional stringish"> 
+	<label class=" label" for="owner_id">Land owner<abbr title="required"> </abbr> &nbsp;  &nbsp; &nbsp; &nbsp; </label>		
+	<%= collection_select("field", "owner_id", @ownerparties, "id", "partyname", options = {:prompt => " "}) %></li>
+ 
+ 
+ <li class="string input optional stringish"> 
+	<label class=" label" for="client_id">Client<abbr title="required"> </abbr> &nbsp;  &nbsp; &nbsp; &nbsp; </label>		
+	<%= collection_select("field", "client_id", @clientparties, "id", "partyname", options = {:prompt => " "}) %></li>
+ 
+ 
+
+    <%= f.input :area_mapped,   :label => "area mapped/acres" ,  :required => false %>
+    <%= f.input :area_tillable,   :label => "area tillable/acres" ,  :required => false %>
+    <%= f.input :current_state,   :label => "Field state" ,  :required => true %>
+
+		<% get_parties_by_type("Soil test lab") %>
+	 <li class="string input optional stringish"> 
+		<label class=" label" for="field">Soil test lab<abbr title="required"> </abbr>  </label> 
+		<% if !@party_types.nil? %>			
+			<%= collection_select("field", "soil_testlab_id", @party_types, "id", "partyname", options = {:prompt => " ", :include_blank => ' '}) %>
+		<% end %></li>
+
+	<%= f.input :soil_testresults_file,   :label => "Test results file" ,  :required => false %>
+	<%= f.input :start_row,   :label => "Start row" ,  :required => false %>
+	<%= f.input :end_row,   :label => "End row" ,  :required => false %>
+	
+
+
+  <% end %>
+  	<br>
+  <%= f.buttons do %>
+    <%= f.commit_button :label => "Update Field", :button_html => { :class => "button" } %> 
+  <% end %>
+	<br>
+
+
+<% end %>

@@ -1,0 +1,29 @@
+<%= semantic_form_for @fieldtasksupply do |f| %>
+  <%= f.inputs do %>
+<br>
+    <% get_supplies_by_type %>
+ <li class="string input optional stringish">
+	<label class=" label" for="supplies">Supply name<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("fieldtasksupply", "supply_id", @supplies, "id", "supplyname", options = {:prompt => " "}) %>	
+  </li>  
+ 
+    
+
+<li class="string input optional stringish">
+	<label class=" label" for="supply_uom">Usage UOM<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>
+</li>		
+	<div class="hintbase"> Will be determined from supply definition.</div>
+ 	
+   	 
+<li class="string input optional stringish">
+	<label class=" label" for="qty_required">Qty required/acre<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+</li>
+	<div class="hintbase"> Will be determined from supply definition.</div>
+
+  <% end %>
+<br>
+  <%= f.buttons do %>
+    <%= f.commit_button :label => "Update Supply", :button_html => { :class => "button" }  %>
+  <% end %>
+<br>
+<% end %>

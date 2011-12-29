@@ -1,0 +1,36 @@
+<h1>Listing crops</h1>
+ 
+ 
+
+<table>
+  <tr>
+    <th>Crop name</th>
+    <th>Crop type</th>
+    <th>Specific</th>
+	<th>Inventory uom</th>
+	<th>Price per uom</th>
+	<th>Avg yield</th>
+
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @crops.each do |crop| %>
+  <tr>
+    <td><%= crop.cropname %></td>
+    <td><%= crop.croptype %></td>
+    <td><%= crop.cropspecific %></td>
+	<td><%= crop.crop_inventory_uom %></td>
+	<td><%= crop.price_per_uom %></td>
+	<td><%= crop.avg_yield_acre %></td>
+    <td><%= link_to 'Show', crop %></td>
+    <td><%= link_to 'Edit', edit_crop_path(crop) %></td>
+    <td><%= link_to 'Destroy', crop, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Crop', new_crop_path %>

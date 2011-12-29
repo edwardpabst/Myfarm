@@ -1,0 +1,26 @@
+
+
+
+<script type="text/javascript"> 
+function checkisprotected() {
+		
+		if (document.typ.type_type_isprotected.checked == true) {
+		   document.typ.type_typename.disabled=false;  
+		   document.typ.type_type_value_string.disabled=false;
+		   document.typ.type_type_value_integer.disabled=false;
+		   document.typ.type_type_boolean.disabled=false;
+		   document.typ.type_type_isprotected.disabled=false;
+		   document.typ.type_submit.disabled=false; 
+		   
+		}
+}
+</script>
+
+<br>
+<h1>Editing type</h1>
+<%= link_to 'Back', '/typeview' %>
+<br>
+<%= render 'form' %>
+
+
+<%= link_to 'Back', '/typeview' %>

@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Cropplan:</b>
+  <%= @scaleticket.cropplan_id %>
+</p>
+
+<p>
+  <b>Pack qty:</b>
+  <%= @scaleticket.pack_qty %>
+</p>
+
+<p>
+  <b>Weight uom:</b>
+  <%= @scaleticket.weight_uom %>
+</p>
+
+<p>
+  <b>Gross weight:</b>
+  <%= @scaleticket.gross_weight %>
+</p>
+
+<p>
+  <b>Tare weight:</b>
+  <%= @scaleticket.tare_weight %>
+</p>
+
+<p>
+  <b>Net weight:</b>
+  <%= @scaleticket.net_weight %>
+</p>
+
+<p>
+  <b>Moisture pct:</b>
+  <%= @scaleticket.moisture_pct %>
+</p>
+
+<p>
+  <b>Party:</b>
+  <%= @scaleticket.party_id %>
+</p>
+
+<p>
+  <b>Tran date:</b>
+  <%= @scaleticket.tran_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_scaleticket_path(@scaleticket) %> |
+<%= link_to 'Back', scaletickets_path %>

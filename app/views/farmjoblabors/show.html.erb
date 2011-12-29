@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @farmjoblabor.user_id %>
+</p>
+
+<p>
+  <b>Farmjob:</b>
+  <%= @farmjoblabor.farmjob_id %>
+</p>
+
+<p>
+  <b>Party:</b>
+  <%= @farmjoblabor.party_id %>
+</p>
+
+<p>
+  <b>Task hours:</b>
+  <%= @farmjoblabor.task_hours %>
+</p>
+
+
+<%= link_to 'Edit', edit_farmjoblabor_path(@farmjoblabor) %> |
+<%= link_to 'Back', farmjoblabors_path %>

@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   
   include SessionsHelper
   
+  
   def home
     @title = "Home"
   end
@@ -14,6 +15,7 @@ class ApplicationController < ActionController::Base
   def about
     @title = "About"
   end
+ 
   
-  
+
 end

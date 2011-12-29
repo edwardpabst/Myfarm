@@ -1,0 +1,33 @@
+<h1>Listing equipmentactivities</h1>
+
+<table>
+  <tr>
+    <th>Equipment</th>
+    <th>User</th>
+    <th>Activity</th>
+    <th>Activity date</th>
+    <th>Service cost</th>
+    <th>Service notes</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @equipmentactivities.each do |equipmentactivity| %>
+  <tr>
+    <td><%= equipmentactivity.equipment_id %></td>
+    <td><%= equipmentactivity.user_id %></td>
+    <td><%= equipmentactivity.activity %></td>
+    <td><%= equipmentactivity.activity_date %></td>
+    <td><%= equipmentactivity.service_cost %></td>
+    <td><%= equipmentactivity.service_notes %></td>
+    <td><%= link_to 'Show', equipmentactivity %></td>
+    <td><%= link_to 'Edit', edit_equipmentactivity_path(equipmentactivity) %></td>
+    <td><%= link_to 'Destroy', equipmentactivity, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Equipmentactivity', new_equipmentactivity_path %>

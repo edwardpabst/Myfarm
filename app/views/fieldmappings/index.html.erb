@@ -1,0 +1,21 @@
+<h1>Listing fieldmappings</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @fieldmappings.each do |fieldmapping| %>
+  <tr>
+    <td><%= link_to 'Show', fieldmapping %></td>
+    <td><%= link_to 'Edit', edit_fieldmapping_path(fieldmapping) %></td>
+    <td><%= link_to 'Destroy', fieldmapping, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Fieldmapping', new_fieldmapping_path %>

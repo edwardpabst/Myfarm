@@ -1,5 +1,5 @@
 class Micropost < ActiveRecord::Base
-  
+  #acts_as_reportable
   attr_accessible :content
   belongs_to :user
   

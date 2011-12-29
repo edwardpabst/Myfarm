@@ -1,0 +1,2 @@
+module EquipmentactivitiesHelper
+end

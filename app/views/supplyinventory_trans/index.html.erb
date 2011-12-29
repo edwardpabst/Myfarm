@@ -1,0 +1,31 @@
+<h1>Listing supplyinventory_trans</h1>
+
+<table>
+  <tr>
+    <th>Supplyinventory</th>
+    <th>Supply tran type</th>
+    <th>Supply tran type</th>
+    <th>Supply tran qty</th>
+    <th>Supply tran cost</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @supplyinventory_trans.each do |supplyinventory_tran| %>
+  <tr>
+    <td><%= supplyinventory_tran.supplyinventory_id %></td>
+    <td><%= supplyinventory_tran.supply_tran_type %></td>
+    <td><%= supplyinventory_tran.supply_tran_type_id %></td>
+    <td><%= supplyinventory_tran.supply_tran_qty %></td>
+    <td><%= supplyinventory_tran.supply_tran_cost %></td>
+    <td><%= link_to 'Show', supplyinventory_tran %></td>
+    <td><%= link_to 'Edit', edit_supplyinventory_tran_path(supplyinventory_tran) %></td>
+    <td><%= link_to 'Destroy', supplyinventory_tran, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Supplyinventory tran', new_supplyinventory_tran_path %>

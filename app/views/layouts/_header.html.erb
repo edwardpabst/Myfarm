@@ -1,31 +1,33 @@
 
-<header>
- 
-	<table width="100%">
+<header> 
+	<%= yield :head %>
+	<table width="100%"  class="header">
+
 		<tr>
 			<td align="left" valign="top">
-				<div id="farmlogo">
-					<span>MyFarm</span>
+				<div id="homepageh0">
+					<span>iFarmService</span>
   				</div>
 			</td>
 			<td align="right" valign="top">
 				<nav class="round">
 					<ul>
-						<li><font color="yellow">
+
+						<li><font color="slategrey">
 						<% if signed_in?  %>
-								Welcome - <%= get_current_user.name %> 
+								Welcome - <%= @current_user.name %> 
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<% end %>	
 							</font> </li>
 						<li> <%= link_to "Home", root_path %></li>
 						<li> <div id="wx_module_1759">
 						   <a href="#" onclick="weatherpopup()">Weather</a>
 						</div></li>
-
+						<li><a href="#" onclick="newspopup()">Ag News</a></li>
+						<li><%= link_to "Tutorial", tutorial_path %></li>
 				 		<% if signed_in? %>
 
-						<li><%= link_to "Farmers", users_path %></li>
-						<li><%= link_to "Profile", get_current_user %></li>
-						<li><%= link_to "Settings", edit_user_path(get_current_user) %></li>
+						<li><%= link_to "mySettings", edit_user_path(@current_user.id) %></li>
 
 						<% end %>
 
@@ -49,66 +51,116 @@
 			
 			</td>
 		</tr>
-	</table>
+
  
-<!---  Hover menu definition                             -->
-<% if signed_in? %>
+<tr>
+	<td colspan="2">
+		<!---  Hover menu definition                             -->
+		<% if signed_in? %>
  
-	<div id="globalNavDiv" class="round">
-	    <ul>
-			<span id="menu1">
-			<li><a href="#"
-			onmouseover="showhide('submenu1', true); return false;"
-			onmouseout="showhide('submenu1', false);">Farm profile</a></li>
-			</span>
+			<div id="globalNavDiv" class="menu">
+			    <ul>
+					<span id="menu1">
+					<li><a href="#"
+					onmouseover="showhide('submenu1', true); return false;"
+					onmouseout="showhide('submenu1', false);">FARM PROFILE</a></li>
+					</span>
 			
-			<span id="menu2">
-			<li><a href="#"
-			onmouseover="showhide('submenu2', true); return false;"
-			onmouseout="showhide('submenu2', false);">Inventory</a></li>
-			</span>
+					<span id="menu2">
+					<li><a href="#"
+					onmouseover="showhide('submenu2', true); return false;"
+					onmouseout="showhide('submenu2', false);">FARM OPERATIONS</a></li>
+					</span>
 			
-			<span id="menu3">
-			<li><a href="#"
-			onmouseover="showhide('submenu3', true); return false;"
-			onmouseout="showhide('submenu3', false);">Reports</a></li>
-			</span>
+					<span id="menu3">
+					<li><a href="#"
+					onmouseover="showhide('submenu3', true); return false;"
+					onmouseout="showhide('submenu3', false);">REPORTS AND VIEWS</a></li>
+					</span>
 			
-			<span id="menu4">
-			<li><a href="#"
-			onmouseover="showhide('submenu4', true); return false;"
-			onmouseout="showhide('submenu4', false);">About us</a></li>
-			</span>
+					<span id="menu4">
+					<li><a href="#"
+					onmouseover="showhide('submenu4', true); return false;"
+					onmouseout="showhide('submenu4', false);">UTILITIES</a></li>
+					</span>
 			
-	    </ul>
-	</div>
+			    </ul>
+			</div>
 	
-	<div id="submenu1" class="round">
-	    <a href="#">Menu Item 1 has much info. </br> So I'm going to break the line</a>
-	    <a href="#">Menu Item 2</a>
-	    <a href="#">Menu Item 3</a>
-		<a href="#">Menu Item 4</a>
-	</div>
-	<div id="submenu2" class="round">
-	    <a href="#">Menu Item 1</a>
-		<a href="#">Menu Item 2</a>
-		<a href="#">Menu Item 3</a>
-		<a href="#">Menu Item 4</a>
-	</div>
-	<div id="submenu3" class="round">
-	    <a href="#">Really really long long Menu Item 1</a>
-		<a href="#">Really really long long Menu Item 2</a>
-		<a href="#">Really really long long Menu Item 3</a>
-		<a href="#">Really really long long Menu Item 4</a>
-	</div>
-	<div id="submenu4" class="round">
-	    <a href="#">Menu Item 1</a>
-		<a href="#">Menu Item 2</a>
-		<a href="#">Menu Item 3</a>
-		<a href="#">Menu Item 4</a>
-	</div>
+			<div id="submenu1" class="round">
+				<div class="menugroup">
+					Build your farm profile &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</div>
+				    <a href="/partyview">Manage people and partners </a>
+					<a href="/farmview">Define Farms</a>
+					<a href="/fieldview">Define Fields</a>
+				    <a href="/cropview">Define crops </a>
+					<a href="/cropplanview">Set crop plan </a>
+				
+				<div class="menugroup">
+					Build the assets for your farm work
+				</div>
+					<a href="/fieldtaskview">Define Field tasks </a>			    
+					<a href="/supplyview">Define Supplies </a>
+					<a href="/equipmentview">Define Equipment </a>				
+					<a href="/storageview">Define Storage units </a>
+
+			</div>
+			<div id="submenu2" class="round">
+				<div class="menugroup">
+					Farm work tools &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				</div>
+			     <a href="/farmjobview">Manage Farm jobs</a>
+				 <a href="/calendar">View job calendar</a>
+				
+				 
+				
+				<div class="menugroup">
+					Crop Sales and Inventory
+				</div>
+				 <a href="/scaleticketview">Create Scale tickets</a>
+				 <a href="/inventorylotview">Crop Inventory</a>
+				 <a href="/contractview">Sales contracts</a>
+				 <a href="/shipmentview">Shipments</a>
+				 <a href="/supplyinventoryview">Supplies inventory</a>
+				
+				<div class="menugroup">
+					Purchase orders &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+				</div>						
+				 <a href="/poview">Purchase Orders</a>
  
- <% end %>
+			</div>
+			<div id="submenu3" class="round">
+				<div class="menugroup">
+					View your key indicators
+				</div>
+			     <a href="/farmjobreportrequestor">Job reports</a>
+				 <a href="/profitabilityreportrequestor">Profitability reports</a>
+ 
+			</div>
+			<div id="submenu4" class="round">
+				<div class="menugroup">
+					Farm network &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+				</div>
+				 <a href="/users">Farm community </a>
+				 <a href="/pages/home">My community </a>
+				 <a href= "/users/<%= session[:s_user_id] %>">My farm posts </a>
+				<div class="menugroup">
+					Utilities &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+				</div>
+			    <a href="/typeview">Maintain data types </a>
+				<a href="http://www.weather.com/weather/local/<%= get_user_postal_code %>">View Weather</a>
+				<a href="#" onclick="newspopup()">View Ag News</a> 
+				<a href="tutorial">Tutorial </a>
+ 
+			</div>
+ 
+		 <% end %>
+
+		</td>
+	</tr>
+
+</table>
 </header>
 
 

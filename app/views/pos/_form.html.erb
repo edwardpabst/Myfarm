@@ -1,0 +1,114 @@
+
+<%= form_for @po, :html => { :name => "po"} do |f| %>
+
+<%= render "shared/error_messages", :object => f.object%>
+
+<table class="twocolumn">
+	<tr>
+		<td colspan="4">
+			<div id="form_header">			 	 
+		 	Purchase orders - allow you to order and receive supplies that are used in farm jobs. Immediate purchases will automatically create receipts when you add PO lines. 			 
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label :ponumber, "P.O. number*" %> 
+		</td>
+		<td>
+			<%= f.text_field :ponumber %>
+		</td>
+		<td class="label">
+			<% get_parties_by_type("Supplier") %>
+			<label class=" label" for="po">Supplier*<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+			<% if !@party_types.nil? %>			
+				<%= collection_select("po", "supplier_id", @party_types, "id", "partyname", options = {:prompt => " ", :include_blank => ' '}) %>
+			<% end %> 
+	 	</td>
+	</tr>
+
+	<tr>
+
+	 
+			<td>
+				<%= f.label :orderdate, "Order date*" %> 
+			</td>
+			<td>
+				<%= f.text_field :orderdate %>
+			</td>
+			<td>
+				<%= f.label :duedate, "Due Date*" %> 
+			</td>
+			<td>
+				<%= f.text_field :duedate %>
+			</td>
+	</tr>
+	<tr> 
+		<% get_types_by_name("po_type") %>
+		<td>
+	 	<label class=" label" for="po">PO type<abbr title="required"> </abbr> &nbsp;  &nbsp;</label> 
+		<br><br><br>
+		</td>
+		<td>
+		<%= collection_select("po", "po_type", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
+ 
+			
+ 
+		</td>
+		<% get_types_by_name("po_status") %>
+		<td>
+	 	<label class=" label" for="po">PO status<abbr title="required"> </abbr> &nbsp;  &nbsp;</label> 
+		</td>
+		<td>
+		<%= collection_select("po", "po_status", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
+		</td>
+	</tr>
+	<tr> 
+		<% get_types_by_name("payment_type") %>
+		<td>
+	 	<label class=" label" for="po">Payment type<abbr title="required"> </abbr> &nbsp;  &nbsp;</label> 
+		</td>
+		<td>
+		<%= collection_select("po", "payment_type", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
+		</td>
+		<td>
+			<%= f.label :payment_number, "Payment I.D." %> 
+		</td>
+		<td>
+			<%= f.text_field :payment_number %>
+		</td>
+	</tr>
+  
+
+		<tr>
+			<td>
+				<%= f.label :notes, "Notes" %>  
+			</td>
+			<td>
+				<%= f.text_area :notes %>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<br>	&nbsp;&nbsp;&nbsp;&nbsp;
+			 	<%= f.submit "Update PO ", :class => "button" %>
+			<br> <br> 
+			</td>
+			<td>
+				<%= f.label :order_amount, "Order amount" %> 
+			</td>
+			<td>
+			  <div class="disabled">
+				<%= f.text_field :order_amount, :disabled => true %>
+			  </div>
+			</td>
+		</tr>	
+	 </table>
+
+
+
+
+
+	<% end %>

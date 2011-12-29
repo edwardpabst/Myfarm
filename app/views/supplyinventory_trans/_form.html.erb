@@ -1,0 +1,13 @@
+<%= semantic_form_for @supplyinventory_tran do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :supplyinventory_id %>
+    <%= f.input :supply_tran_type %>
+    <%= f.input :supply_tran_type_id %>
+    <%= f.input :supply_tran_qty %>
+    <%= f.input :supply_tran_cost %>
+  <% end %>
+
+  <%= f.buttons do %>
+    <%= f.commit_button %>
+  <% end %>
+<% end %>

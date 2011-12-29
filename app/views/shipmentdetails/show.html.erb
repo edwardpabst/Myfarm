@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Inventorylot:</b>
+  <%= @shipmentdetail.inventorylot_id %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @shipmentdetail.price %>
+</p>
+
+<p>
+  <b>Qty:</b>
+  <%= @shipmentdetail.qty %>
+</p>
+
+<p>
+  <b>Qty uom:</b>
+  <%= @shipmentdetail.qty_uom %>
+</p>
+
+<p>
+  <b>Detail status:</b>
+  <%= @shipmentdetail.detail_status %>
+</p>
+
+<p>
+  <b>Cropplan:</b>
+  <%= @shipmentdetail.cropplan_id %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%= @shipmentdetail.notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_shipmentdetail_path(@shipmentdetail) %> |
+<%= link_to 'Back', shipmentdetails_path %>

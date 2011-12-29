@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Po:</b>
+  <%= @podetail.po_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @podetail.user_id %>
+</p>
+
+<p>
+  <b>Supply:</b>
+  <%= @podetail.supply_id %>
+</p>
+
+<p>
+  <b>Storage:</b>
+  <%= @podetail.storage_id %>
+</p>
+
+<p>
+  <b>Qty ordered:</b>
+  <%= @podetail.qty_ordered %>
+</p>
+
+<p>
+  <b>Supply uom:</b>
+  <%= @podetail.supply_uom %>
+</p>
+
+<p>
+  <b>Order price:</b>
+  <%= @podetail.order_price %>
+</p>
+
+<p>
+  <b>Ext amount:</b>
+  <%= @podetail.ext_amount %>
+</p>
+
+<p>
+  <b>Detail status:</b>
+  <%= @podetail.detail_status %>
+</p>
+
+<p>
+  <b>Qty received:</b>
+  <%= @podetail.qty_received %>
+</p>
+
+<p>
+  <b>Receipt amount:</b>
+  <%= @podetail.receipt_amount %>
+</p>
+
+
+<%= link_to 'Edit', edit_podetail_path(@podetail) %> |
+<%= link_to 'Back', podetails_path %>

@@ -1,0 +1,101 @@
+
+<br>
+<h1>Profitability Report Requestor</h1>
+ 
+<%= link_to 'Back', session[:return_to] %>
+<br>
+
+<%= form_tag '/profitabilityjobreport.pdf', :method=>'post' , :html => { :name => "fj"} do %>
+ 
+
+ 
+
+ <table class="twocolumn">
+ 
+		<tr>
+			<td colspan="3">
+				<div id="form_header">			 	 
+	 You may select a report for a specific farm. Select the year and date range you desire. There are five separate profitability reports that can be selected.		 
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td width="25%"></td>
+			<td>
+		    <% get_farms %>
+			<label>Farm</label>
+			</td>
+			<td>
+			<%= collection_select("", "farm_id", @farms, "id", "farmname", options = {:prompt => " "}) %>
+
+		
+			</td>
+		</tr>
+		
+		<tr>
+			<td width="25%"></td>
+			<td>		
+		<% get_types_by_name("plan_year") %>
+		<label class=" label" for="plan_year">Year<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+		</td>
+		<td>
+		<%= collection_select("", "year", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	
+		
+			</td>
+		</tr>
+
+		 <tr>
+			<td width="25%"></td>
+			<td>
+			<label> Begin date* </label>   
+			</td>
+			<td>
+			<%= text_field_tag 'start_date' %>
+
+		 	</td>
+		 </tr>
+		
+		<tr>
+			<td width="25%"></td>
+			<td>
+		   	<label> End date* </label> 
+			</td>
+			<td>
+				<%= text_field_tag 'stop_date'  %>
+		    </td>
+
+
+		</tr>
+		
+		<tr>
+			<td width="25%"></td>
+			<td>		
+		<% get_types_by_name("profit_reports") %>
+		<label class=" label" for="Report version">Report version<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+		</td>
+		<td>
+		<%= collection_select("", "report_version", @types, "type_value_integer", "type_value_string", options = {:prompt => " "}) %>	
+		
+			</td>
+		</tr>
+
+		
+		<tr>
+			<td></td><td></td>
+			<td>
+				<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 	<%= submit_tag " Submit ", :class => "button", :id => "fjsubmit" %><br><br>
+			</td>
+
+
+		</tr>
+			</table>
+			</td>
+
+		</tr>
+
+			 
+ </table>
+<% end %>
+
+ 

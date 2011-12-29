@@ -1,0 +1,31 @@
+<%= semantic_form_for @equipment do |f| %>
+<br>
+<%= render "shared/error_messages", :object => f.object%>
+  <%= f.inputs do %>
+    <%= f.input :description, :label => "Description",  :required => true  %>
+    <% get_types_by_name("equipment_category") %>
+ <li class="string input optional stringish">
+	<label class=" label" for="category">Category<abbr title="required"> </abbr>  </label>		
+	<%= collection_select("equipment", "category", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	
+ </li>
+    <%= f.input :make , :label => "Make",  :required => false %>
+    <%= f.input :model , :label => "Model",  :required => false %>
+    <%= f.input :year , :label => "Year",  :required => false %> 
+	<%= f.input :serial_number , :label => "Serial number",  :required => false %> 
+	<%= f.input :cost_unit , :label => "Unit cost",  :required => true %>
+	<%= f.input :cost_unit_hour , :label => "Cost_per_hour",  :required => true %>
+    <%= f.input :rate_per_hour , :label => "Rate_per_hour",  :required => true %>
+    <%= f.input :width, :label => "Width",  :required => false  %>
+    <%= f.input :photo_path , :label => "photo file name",  :required => false %>
+    <%= f.input :frequency_hours , :label => "Service frequency/hours",  :required => false %>
+  <% end %>
+
+  <%= f.buttons do %>
+     <%= f.commit_button :label => "Update Equip", :button_html => { :class => "button" } %>
+  <% end %>
+<br>
+ <% if !@equipment.photo_path.blank?   %>
+	<%= image_tag("#{@equipment.photo_path}") %><br><br>
+ <% end %>
+
+<% end %>

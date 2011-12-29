@@ -1,0 +1,17 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@storages.each do |storage|
+		xml.tag!("row",{ "id" => storage.id }) do
+			xml.tag!("cell", storage.name)
+			xml.tag!("cell", storage.storage_type)
+			xml.tag!("cell", storage.size)
+			xml.tag!("cell", storage.size_uom)
+			xml.tag!("cell", storage.location)
+			xml.tag!("cell", storage.capacity)
+			xml.tag!("cell", storage.capacity_uom)
+			xml.tag!("cell", storage.yearly_cost)
+		
+
+		end
+	end
+end

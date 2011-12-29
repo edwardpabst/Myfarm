@@ -1,7 +1,7 @@
 class CreateParties < ActiveRecord::Migration
   def self.up
     create_table :parties do |t|
-      t.integer :userid
+      t.integer :user_id
       t.string :partyname
       t.string :partylastname
       t.string :partyfirstname

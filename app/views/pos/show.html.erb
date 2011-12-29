@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Ponumber:</b>
+  <%= @po.ponumber %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @po.user_id %>
+</p>
+
+<p>
+  <b>Orderdate:</b>
+  <%= @po.orderdate %>
+</p>
+
+<p>
+  <b>Duedate:</b>
+  <%= @po.duedate %>
+</p>
+
+<p>
+  <b>Po status:</b>
+  <%= @po.po_status %>
+</p>
+
+<p>
+  <b>Payment type:</b>
+  <%= @po.payment_type %>
+</p>
+
+<p>
+  <b>Payment number:</b>
+  <%= @po.payment_number %>
+</p>
+
+<p>
+  <b>Supplier:</b>
+  <%= @po.supplier_id %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%= @po.notes %>
+</p>
+
+<p>
+  <b>Po type:</b>
+  <%= @po.po_type %>
+</p>
+
+<p>
+  <b>Order amount:</b>
+  <%= @po.order_amount %>
+</p>
+
+
+<%= link_to 'Edit', edit_po_path(@po) %> |
+<%= link_to 'Back', pos_path %>

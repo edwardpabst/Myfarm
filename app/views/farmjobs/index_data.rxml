@@ -1,0 +1,15 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@farmjobs.each do |index|
+		xml.tag!("row",{ "id" => index.id }) do
+			xml.tag!("cell", index.taskdescription)
+			xml.tag!("cell", index.fieldname)
+			xml.tag!("cell", index.cropplanfull)
+			xml.tag!("cell", index.job_status)
+			xml.tag!("cell", index.start_date)
+			xml.tag!("cell", index.stop_date)
+			xml.tag!("cell", index.area_size)
+
+		end
+	end
+end

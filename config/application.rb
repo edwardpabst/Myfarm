@@ -2,18 +2,31 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
+ 
+
+
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
-module SampleApp
+
+ #require "ruport/util"
+# require 'country_select'
+
+module Myfarm
   class Application < Rails::Application
+ 
+     #require "ruport"
+     #require "ruport/acts_as_reportable"
+     config.autoload_paths += %W( #{::Rails.root.to_s}/app/reports )
+     
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
+   
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -31,7 +44,7 @@ module SampleApp
     # config.i18n.default_locale = :de
 
     # JavaScript files you want as :defaults (application.js is always included).
-    config.action_view.javascript_expansions[:defaults] = %w(jquery rails application)
+    config.action_view.javascript_expansions[:defaults] = %w(jquery datepicker rails application)
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"

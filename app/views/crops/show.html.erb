@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Cropname:</b>
+  <%= @crop.cropname %>
+</p>
+
+<p>
+  <b>Croptype:</b>
+  <%= @crop.croptype %>
+</p>
+
+<p>
+  <b>Cropspecific:</b>
+  <%= @crop.cropspecific %>
+</p>
+<p>
+  <b>Crop UOM:</b>
+  <%= @crop.crop_uom %>
+</p>
+<p>
+  <b>Avg weight UOM:</b>
+  <%= @crop.avg_weight_uom %>
+</p>
+<p>
+  <b>Inventory UOM:</b>
+  <%= @crop.crop_inventory_uom %>
+</p>
+<p>
+  <b>Price per uom:</b>
+  <%= @crop.price_per_uom %>
+</p>
+<p>
+  <b>Avg yield per acre:</b>
+  <%= @crop.avg_yield_acre %>
+</p>
+<p>
+  <b>Avg moisture content:</b>
+  <%= @crop.avg_moisture_percent %> %
+</p>
+
+<%= link_to 'Edit', edit_crop_path(@crop) %> |
+<%= link_to 'Back', :action => "index_view" %>

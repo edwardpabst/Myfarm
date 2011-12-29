@@ -1,0 +1,39 @@
+<h1>Listing scaletickets</h1>
+
+<table>
+  <tr>
+    <th>Cropplan</th>
+    <th>Pack qty</th>
+    <th>Weight uom</th>
+    <th>Gross weight</th>
+    <th>Tare weight</th>
+    <th>Net weight</th>
+    <th>Moisture pct</th>
+    <th>Party</th>
+    <th>Tran date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @scaletickets.each do |scaleticket| %>
+  <tr>
+    <td><%= scaleticket.cropplan_id %></td>
+    <td><%= scaleticket.pack_qty %></td>
+    <td><%= scaleticket.weight_uom %></td>
+    <td><%= scaleticket.gross_weight %></td>
+    <td><%= scaleticket.tare_weight %></td>
+    <td><%= scaleticket.net_weight %></td>
+    <td><%= scaleticket.moisture_pct %></td>
+    <td><%= scaleticket.party_id %></td>
+    <td><%= scaleticket.tran_date %></td>
+    <td><%= link_to 'Show', scaleticket %></td>
+    <td><%= link_to 'Edit', edit_scaleticket_path(scaleticket) %></td>
+    <td><%= link_to 'Destroy', scaleticket, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Scaleticket', new_scaleticket_path %>

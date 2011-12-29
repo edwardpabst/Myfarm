@@ -1,0 +1,33 @@
+<h1>Job equipment</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Farmjob</th>
+    <th>Equipment</th>
+    <th>Qty required</th>
+    <th>Qty actaul</th>
+    <th>Additional cost</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @farmjobequipments.each do |farmjobequipment| %>
+  <tr>
+    <td><%= farmjobequipment.user_id %></td>
+    <td><%= farmjobequipment.farmjob_id %></td>
+    <td><%= farmjobequipment.equipment_id %></td>
+    <td><%= farmjobequipment.qty_required %></td>
+    <td><%= farmjobequipment.qty_actaul %></td>
+    <td><%= farmjobequipment.additional_cost %></td>
+    <td><%= link_to 'Show', farmjobequipment %></td>
+    <td><%= link_to 'Edit', edit_farmjobequipment_path(farmjobequipment) %></td>
+    <td><%= link_to 'Destroy', farmjobequipment, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Farmjobequipment', new_farmjobequipment_path %>

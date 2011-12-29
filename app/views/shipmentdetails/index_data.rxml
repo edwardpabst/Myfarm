@@ -1,0 +1,23 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@shipmentdetails.each do |shipmentdetail|
+		xml.tag!("row",{ "id" => shipmentdetail.id }) do
+			
+			xml.tag!("cell", shipmentdetail.cropplanfull)
+			xml.tag!("cell", shipmentdetail.storagename)
+			xml.tag!("cell", shipmentdetail.grade)
+			xml.tag!("cell", shipmentdetail.qty)
+			xml.tag!("cell", shipmentdetail.price)
+			xml.tag!("cell", shipmentdetail.qty_uom)
+			xml.tag!("cell", shipmentdetail.price * shipmentdetail.qty)
+			xml.tag!("cell", shipmentdetail.detail_status)
+			xml.tag!("cell", shipmentdetail.notes)
+		 
+		
+			
+
+			
+
+		end
+	end
+end

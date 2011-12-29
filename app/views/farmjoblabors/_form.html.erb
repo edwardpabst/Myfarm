@@ -1,0 +1,22 @@
+<%= semantic_form_for @farmjoblabor do |f| %>
+ <%= f.inputs do %>  
+<br>
+   <% get_parties_for_labor %>
+<li class="string input optional stringish">
+	<label class=" label" for="farmjoblabor">Worker*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>
+   
+	<% if !@party_types.nil? %>		
+<%= collection_select("farmjoblabor", "party_id", @party_types, "id", "partyworkdescription", options = {:prompt => " "}) %> </li>
+	<% end %>
+	<br>
+	<%= f.input :task_hours , :label => "Hours",  :required => false %>
+	<div class="hintbase">If not entered job hours will be taken from farm job total hours.</div>
+    <%= f.input :rate , :label => "Rate",  :required => false %>
+    <div class="hintbase">If not entered labor rate will be taken from the party profile.</div>
+<% end %>
+<br>
+<%= f.buttons do %>
+  <%= f.commit_button  :label => "Update labor", :button_html => { :class => "button" }%>
+<% end %>
+<br>
+<% end %>

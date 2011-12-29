@@ -1,0 +1,17 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@pos.each do |po|
+		xml.tag!("row",{ "id" => po.id }) do
+		  xml.tag!("cell", po.suppliername)
+			xml.tag!("cell", po.ponumber)
+			xml.tag!("cell", po.orderdate)
+			xml.tag!("cell", po.duedate)
+			xml.tag!("cell", po.po_type)			
+			xml.tag!("cell", po.po_status)
+			xml.tag!("cell", po.order_amount)
+			xml.tag!("cell", po.notes)
+ 
+
+		end
+	end
+end

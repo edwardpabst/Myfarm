@@ -1,0 +1,43 @@
+<h1>Listing pos</h1>
+
+<table>
+  <tr>
+    <th>Ponumber</th>
+    <th>User</th>
+    <th>Orderdate</th>
+    <th>Duedate</th>
+    <th>Po status</th>
+    <th>Payment type</th>
+    <th>Payment number</th>
+    <th>Supplier</th>
+    <th>Notes</th>
+    <th>Po type</th>
+    <th>Order amount</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pos.each do |po| %>
+  <tr>
+    <td><%= po.ponumber %></td>
+    <td><%= po.user_id %></td>
+    <td><%= po.orderdate %></td>
+    <td><%= po.duedate %></td>
+    <td><%= po.po_status %></td>
+    <td><%= po.payment_type %></td>
+    <td><%= po.payment_number %></td>
+    <td><%= po.supplier_id %></td>
+    <td><%= po.notes %></td>
+    <td><%= po.po_type %></td>
+    <td><%= po.order_amount %></td>
+    <td><%= link_to 'Show', po %></td>
+    <td><%= link_to 'Edit', edit_po_path(po) %></td>
+    <td><%= link_to 'Destroy', po, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Po', new_po_path %>

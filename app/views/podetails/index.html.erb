@@ -1,0 +1,43 @@
+<h1>Listing podetails</h1>
+
+<table>
+  <tr>
+    <th>Po</th>
+    <th>User</th>
+    <th>Supply</th>
+    <th>Storage</th>
+    <th>Qty ordered</th>
+    <th>Supply uom</th>
+    <th>Order price</th>
+    <th>Ext amount</th>
+    <th>Detail status</th>
+    <th>Qty received</th>
+    <th>Receipt amount</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @podetails.each do |podetail| %>
+  <tr>
+    <td><%= podetail.po_id %></td>
+    <td><%= podetail.user_id %></td>
+    <td><%= podetail.supply_id %></td>
+    <td><%= podetail.storage_id %></td>
+    <td><%= podetail.qty_ordered %></td>
+    <td><%= podetail.supply_uom %></td>
+    <td><%= podetail.order_price %></td>
+    <td><%= podetail.ext_amount %></td>
+    <td><%= podetail.detail_status %></td>
+    <td><%= podetail.qty_received %></td>
+    <td><%= podetail.receipt_amount %></td>
+    <td><%= link_to 'Show', podetail %></td>
+    <td><%= link_to 'Edit', edit_podetail_path(podetail) %></td>
+    <td><%= link_to 'Destroy', podetail, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Podetail', new_podetail_path %>

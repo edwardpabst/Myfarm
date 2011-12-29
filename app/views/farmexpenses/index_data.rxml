@@ -1,0 +1,14 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@farmexpenses.each do |farmexpense|
+		xml.tag!("row",{ "id" => farmexpense.id }) do
+			xml.tag!("cell", farmexpense.expense_year)
+			xml.tag!("cell", farmexpense.expense_type)
+			xml.tag!("cell", farmexpense.expense_name)
+			xml.tag!("cell", farmexpense.expense_amount)
+		 
+ 
+ 
+		end
+	end
+end

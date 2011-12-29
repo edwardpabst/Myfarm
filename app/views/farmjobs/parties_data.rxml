@@ -1,0 +1,12 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@farmjoblabors.each do |labor|
+		xml.tag!("row",{ "id" => labor.id }) do
+			xml.tag!("cell", labor.partyname)
+			xml.tag!("cell", labor.partyjobtitle)
+			xml.tag!("cell", labor.task_hours)
+			xml.tag!("cell", labor.rate)
+
+		end
+	end
+end

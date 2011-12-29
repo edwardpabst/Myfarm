@@ -1,14 +1,24 @@
+
+.menu {
+ 	
+	background-color: #F6F9ED;
+}
+
+
 #globalNavDiv  
 {
-    border: 1px solid #a3a3a3;
-	background-color: #FFF5EE;
+	font-size:90%;
+    color: black;
+	background-color:whitesmoke;
+	border: solid 1px lightgray;
+	padding:7px;
+	
 	 
 }
 #globalNavDiv li
 {
     display: inline;
     padding: 0px 10px;
-    font-size: 12px;
 	color: black;
 	
 }
@@ -21,7 +31,8 @@
  
 #globalNavDiv li a:hover
 {
-    color: blue;
+    font-size:110%;
+	color: blue;
 }
 
 #menu1, #menu2, #menu3, #menu4
@@ -37,10 +48,10 @@
 }
 #submenu1, #submenu2, #submenu3, #submenu4
 {
-    background-color: #1E1E1E;
+    background-color: whitesmoke;
     border: 1px solid #a3a3a3;
 	font-size: 12px;
-	opacity: .7;
+	opacity: .9;
     z-index: 1000;
 }
  
@@ -48,7 +59,7 @@
 {
     border-top: 1px solid #fdd3df;
     display: block;
-    color: white;
+    color: black;
     text-decoration: none;
     padding: 5px 15px 5px 5px;
 }
@@ -127,47 +138,47 @@
 
 #menu1, #menu2, #menu3, #menu4
 {
-    top: 94px;
+    top: 92px;
 }
 
 #submenu1, #submenu2, #submenu3, #submenu4
 {
-    top: 112px;
+    top: 114px;
 }
 
  
 
 #menu1
 {
-    left: 20px;
+    left: 120px;
 }
 #menu2
 	{
-	left: 140px;
+	left: 240px;
 }
 #menu3
 {
-    left: 260px;
+    left: 390px;
 }
 #menu4
 	{
-	left: 380px;
+	left: 540px;
 }
 #submenu1
 {
-    left: 20px;
+    left: 120px;
 }
 #submenu2
 {
-    left: 140px;
+    left: 240px;
 }
 #submenu3
 {
-    left: 260px;
+    left: 390px;
 }
 #submenu4
 {
-    left: 380px;
+    left: 540px;
 }
 
  

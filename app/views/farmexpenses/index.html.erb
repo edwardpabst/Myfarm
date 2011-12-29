@@ -1,0 +1,31 @@
+<h1>Listing farmexpenses</h1>
+
+<table>
+  <tr>
+    <th>Farm</th>
+    <th>Expense type</th>
+    <th>Expense name</th>
+    <th>Expense amount</th>
+    <th>Expense year</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @farmexpenses.each do |farmexpense| %>
+  <tr>
+    <td><%= farmexpense.farm_id %></td>
+    <td><%= farmexpense.expense_type %></td>
+    <td><%= farmexpense.expense_name %></td>
+    <td><%= farmexpense.expense_amount %></td>
+    <td><%= farmexpense.expense_year %></td>
+    <td><%= link_to 'Show', farmexpense %></td>
+    <td><%= link_to 'Edit', edit_farmexpense_path(farmexpense) %></td>
+    <td><%= link_to 'Destroy', farmexpense, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Farmexpense', new_farmexpense_path %>

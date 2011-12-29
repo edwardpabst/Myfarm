@@ -1,0 +1,102 @@
+<p id="notice"><%= notice %></p>
+
+ 
+
+<p>
+  <b>Field task:</b>
+  <%= @farmjob.fieldtask_id %>
+</p>
+
+<p>
+  <b>Field:</b>
+  <%= @farmjob.field_id %>
+</p>
+
+<p>
+  <b>Crop:</b>
+  <%= @farmjob.crop_id %>
+</p>
+
+<p>
+  <b>Area size:</b>
+  <%= @farmjob.area_size %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @farmjob.start_date %>
+</p>
+
+<p>
+  <b>Start time:</b>
+  <%= @farmjob.start_time %>
+</p>
+
+<p>
+  <b>Stop date:</b>
+  <%= @farmjob.stop_date %>
+</p>
+
+<p>
+  <b>Stop time:</b>
+  <%= @farmjob.stop_time %>
+</p>
+
+<p>
+  <b>Total hours:</b>
+  <%= @farmjob.total_hours %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%= @farmjob.notes %>
+</p>
+
+<p>
+  <b>Equipment:</b>
+  <%= @farmjob.equipment_id %>
+</p>
+
+<p>
+  <b>Applied area:</b>
+  <%= @farmjob.applied_area %>
+</p>
+
+<p>
+  <b>Plan rate:</b>
+  <%= @farmjob.plan_rate %>
+</p>
+
+<p>
+  <b>Actual rate:</b>
+  <%= @farmjob.actual_rate %>
+</p>
+
+<p>
+  <b>Growth stage:</b>
+  <%= @farmjob.growth_stage %>
+</p>
+
+<p>
+  <b>Application method:</b>
+  <%= @farmjob.application_method %>
+</p>
+
+<p>
+  <b>Soil condition:</b>
+  <%= @farmjob.soil_condition %>
+</p>
+
+<p>
+  <b>Soil type:</b>
+  <%= @farmjob.soil_type %>
+</p>
+
+<p>
+  <b>Weather segment:</b>
+  <%= @farmjob.weather_segment %>
+</p>
+
+
+<%= link_to 'Edit', edit_farmjob_path(@farmjob) %> |
+<%= link_to 'Back', farmjobs_path %>

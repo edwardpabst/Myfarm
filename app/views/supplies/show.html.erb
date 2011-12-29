@@ -1,0 +1,70 @@
+ 
+
+<p>
+  <b>Item id:</b>
+  <%= @supply.item_number %>
+</p>
+
+<p>
+  <b>Supply name:</b>
+  <%= @supply.supplyname %>
+</p>
+
+<p>
+  <b>Supply type:</b>
+  <%= @supply.supply_type %>
+</p>
+
+<p>
+  <b>Supply UOM:</b>
+  <%= @supply.supply_uom %>
+</p>
+
+<p>
+  <b>Supply cost:</b>
+  <%= @supply.supply_cost_uom %>
+</p>
+
+<p>
+  <b>Distribution UOM:</b>
+  <%= @supply.distribution_uom %>
+</p>
+
+<p>
+  <b>Rate acre:</b>
+  <%= @supply.rate_acre %>
+</p>
+
+<p>
+  <b>EPA id:</b>
+  <%= @supply.epa_id %>
+</p>
+
+<p>
+  <b>Manufacturer:</b>
+  <%= @supply.manufacturer %>
+</p>
+
+<p>
+  <b>Formulation:</b>
+  <%= @supply.formulation %>
+</p>
+
+<p>
+  <b>Carrier:</b>
+  <%= @supply.carrier %>
+</p>
+
+<p>
+  <b>Carrier rate acre:</b>
+  <%= @supply.carrier_rate_acre %>
+</p>
+
+<p>
+  <b>Problem target:</b>
+  <%= @supply.problem_target %>
+</p>
+
+
+<%= link_to 'Edit', edit_supply_path(@supply) %> |
+<%= link_to 'Back', supplies_path %>

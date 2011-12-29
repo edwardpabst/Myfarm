@@ -1,0 +1,48 @@
+<h1>Listing Field task </h1>
+<table  class="index">
+  <tr>
+    <th>Task type</th>
+    <th>Task description</th>
+    <th>Task notes</th>
+
+  </tr>
+
+  <tr>
+
+    <td><%= @fieldtask.task_type %></td>
+    <td><%= @fieldtask.taskdescription %></td>
+    <td><%= @fieldtask.task_notes %></td>
+</tr>
+</table>
+
+<%= link_to 'Back to Field tasks',  :controller => "fieldtasks", :action => "index"  %>
+<br><br>
+<h1>Listing supplies</h1>
+ 
+
+<table  class="index">
+  <tr>
+    <th>Supply name</th>
+    <th>Usage UOM</th>
+    <th>Qty Required</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @fieldtasksupplies.each do |fieldtasksupply| %>
+  <tr>
+
+    <td><%= fieldtasksupply.supplyname %></td>
+	<td><%= fieldtasksupply.usage_uom %></td>
+	<td><%= fieldtasksupply.qty_required %></td>
+	<td><%= link_to 'Edit', :controller => "fieldtasksupplies", :action => "edit", :id => fieldtasksupply.id %></td>
+    <td><%= link_to 'Destroy', {:controller => "fieldtasksupplies", :action => "destroy", :id => fieldtasksupply.id} ,  {:confirm => 'Are you sure?', :method => :delete} %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Add a supply', new_fieldtasksupply_path %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<%= link_to 'Back',  fieldtasks_path %>

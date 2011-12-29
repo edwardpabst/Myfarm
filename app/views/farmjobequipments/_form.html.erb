@@ -1,0 +1,22 @@
+<%= semantic_form_for @farmjobequipment do |f| %>
+  <%= f.inputs do %>
+<br>
+<li class="string input optional stringish">
+   <% get_equipment_by_type() %>
+	<label class=" label" for="farmjobequipment">Equipment*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>   
+	<% if !@equipments.nil? %>		
+<%= collection_select("farmjobequipment", "equipment_id", @equipments, "id", "description", options = {:prompt => " "}) %> </li>
+ 	<% end %>
+
+    <%= f.input :qty_actual, :label => "Hours",  :required => false  %>
+   <div class="hintbase">If not entered job hours will be taken from farm job total hours.</div>
+    <%= f.input :cost_unit_hour, :label => "Cost/hour",  :required => false, :hint => "if blank then taken from equipment" %>
+    <%= f.input :additional_cost, :label => "Other cost",  :required => false, :hint => "if blank then taken from equipment" %>
+	 <%= f.input :rate_hour, :label => "Rate/hour",  :required => false, :hint => "if blank then taken from equipment" %>
+  <% end %>
+<br>
+  <%= f.buttons do %>
+    <%= f.commit_button :label => " Add Equip " , :button_html => { :class => "button" }%>
+  <% end %>
+<br>
+<% end %>

@@ -1,17 +1,21 @@
 class UsersController < ApplicationController
   
-  before_filter :authenticate, :except => [:show, :new, :create]
+  before_filter :authenticate, :except => [:show, :new, :create, :admin, :admin_edit]
   before_filter :correct_user, :only => [:edit, :update]
   before_filter :admin_user, :only => :destroy
   
    
   def index
-    @title = "All users"
+    @title = "All Farmers"
     #@users = User.paginate(:page => params[:pagegem 'name', "1.0", :require => "name", :group => :test])
-    @users = User.paginate(:page => params[:page], :per_page => 20)
+     #@users = User.paginate(:page => params[:page], :per_page => 20)
+     @users = User.find_by_sql("Select users.id, name, email, partycity, partystate   
+     from users 
+     left join parties on users.party_id = parties.id").paginate(:page => params[:page], :per_page => 20)
   end
   
   def show
+    
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(:page => params[:page])
     @title = @user.name
@@ -35,10 +39,12 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
+  
     if @user.save
       sign_in @user
-      flash[:success] = "Welcome to the User Authentication app"
-      redirect_back_or @user
+      flash[:success] = "Welcome to the iFarmService app. Please take a moment to complete your profile info before we begin to define your farm."
+      set_new_user_data
+      redirect_to new_party_path
     else
       flash[:success] = "Invalid email/password combination"
       @title = "Sign up"
@@ -47,15 +53,108 @@ class UsersController < ApplicationController
   end
   
   def update
-    @user = User.find(params[:id])
-    if @user.update_attributes(params[:user])
-      flash[:success] = "Profile updated"
-      redirect_to @user
+    #get email from params
+    params[:user].each do |key, value| 
+      if key == "email"
+        @email = value
+      elsif  key == "password"
+          @password = value      
+      elsif  key == "password_confirmation"
+          @confirmation = value       
+      end    
+    end
+     #logger.debug "USERPARAMS: #{params[:user].inspect}"
+        
+    @user = User.find(params[:id]) 
+
+    @useremail = User.find_by_email(@email)
+    if @user.nil? 
+
+       if @password == @confirmation
+          admin_update(@user)
+        else
+          
+          flash[:error] = "Passwords do not match"
+           redirect_to( :action => "edit", :id => user.id)
+        end
+    elsif @useremail.email == @user.email
+       if @password == @confirmation
+          admin_update(@user)
+        else
+          flash[:error] = "Passwords do not match"
+           redirect_to( :action => "edit", :id => @user.id)
+        end
     else
-      @title = "Edit user"
-      render 'edit'
+      flash[:error] = "Email is already being used"
+       redirect_to @user
     end
   end
+  
+  def admin
+     #logger.debug "PARAMS #{params.inspect}"
+     
+     # extract paramaters for processing
+     if !params[:user].nil?
+           params[:user].each do |key, value| 
+             if key == "email"
+               @email = value
+             elsif  key == "security_question"
+                 @securityquestion = value      
+             elsif  key == "security_answer"
+                 @securityanswer = value       
+             end    
+           end
+
+          if !@email.nil?
+            admin_edit(@email,@securityquestion,@securityanswer)
+          end
+      end
+    # render admin security page
+  end
+  
+  def admin_edit(email,security_question,security_answer)
+ 
+    @user = User.find_by_email(email)
+    
+    #logger.debug "USERPROFILE #{@user.attributes.inspect}"
+    if @user.nil?
+      flash[:error] = "This is an invalid Email."
+      
+    end
+    
+    if @user.security_question != security_question
+      @user.security_question = ""
+      @user.security_answer = ""
+      flash[:error] = "Incorrect question/answer "
+      
+    elsif  @user.security_answer.downcase != security_answer.downcase
+
+       @user.security_question = ""
+       @user.security_answer = ""
+      flash[:error] = "Incorrect question/answer "
+       
+    else
+        # go change the password
+        sign_in @user
+        @title = "Edit user"
+        redirect_to edit_user_path(@user.id)
+  
+    end
+  end
+  
+  def admin_update(user)   
+      if user.update_attributes(params[:user])
+        flash[:success] = "Profile updated"
+        redirect_to user
+      else
+        @title = "Edit user"
+        render 'edit'
+        
+      end
+
+  end
+  
+
   
   def following 
     @title = "Following"

@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Supply:</b>
+  <%= @supplyinventory.supply_id %>
+</p>
+
+<p>
+  <b>Supply uom:</b>
+  <%= @supplyinventory.supply_uom %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @supplyinventory.user_id %>
+</p>
+
+<p>
+  <b>Storage:</b>
+  <%= @supplyinventory.storage_id %>
+</p>
+
+<p>
+  <b>Qty in:</b>
+  <%= @supplyinventory.qty_in %>
+</p>
+
+<p>
+  <b>Qty onhand:</b>
+  <%= @supplyinventory.qty_onhand %>
+</p>
+
+<p>
+  <b>Qty out:</b>
+  <%= @supplyinventory.qty_out %>
+</p>
+
+<p>
+  <b>Onhand value:</b>
+  <%= @supplyinventory.onhand_value %>
+</p>
+
+<p>
+  <b>Avg cost:</b>
+  <%= @supplyinventory.avg_cost %>
+</p>
+
+
+<%= link_to 'Edit', edit_supplyinventory_path(@supplyinventory) %> |
+<%= link_to 'Back', supplyinventories_path %>

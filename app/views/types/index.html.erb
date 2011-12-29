@@ -1,0 +1,41 @@
+<h1>Data types</h1>
+
+<table  class="index">
+	<tr>
+		<td align="right" id="paginate" colspan="7">
+			<%= will_paginate %>
+		</td>
+	</tr>
+  <tr>
+    <th>Typename</th>
+    <th>Type value string</th>
+    <th>Type value integer</th>
+    <th>Type boolean</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<%= link_to 'New Type', new_type_path %> 
+
+<% @types.each do |type| %>
+  <tr>
+    <td><%= type.typename %></td>
+    <td><%= type.type_value_string %></td>
+    <td><%= type.type_value_integer %></td>
+    <td><%= type.type_boolean %></td>
+    <% if type.type_value_integer != 911 %>
+    	<td><%= link_to 'Edit', edit_type_path(type) %></td>
+    	<td><%= link_to 'Destroy', type, :confirm => 'Are you sure?', :method => :delete %></td>
+	<% end %>
+  </tr>
+<% end %>
+<tr>
+	<td align="right" id="paginate" colspan="7">
+		<%= will_paginate %>
+	</td>
+</tr>
+</table>
+
+
+<%= link_to 'New Type', new_type_path %> <br />
+ 

@@ -1,0 +1,34 @@
+<%= semantic_form_for @farmexpense do |f| %>
+		<div id="form_header">			 	 
+Farm expenses are used in your profitability statement. There are two types (cash and non-cash overhead).		 
+		</div>
+  <%= f.inputs do %>
+
+<br>
+    <% get_types_by_name("plan_year") %>
+<li class="string input optional stringish">
+	<label class=" label" for="plan_year">Expense year<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("farmexpense", "expense_year", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
+	</li>	
+   	 
+	<% get_types_by_name("expense_type") %>
+<li class="string input optional stringish">
+	<label class=" label" for="plan_year">Expense type<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("farmexpense", "expense_type", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
+	</li>	
+   	 
+	<% get_types_by_name("expense_name") %>
+<li class="string input optional stringish">
+	<label class=" label" for="plan_year">Expense_name<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("farmexpense", "expense_name", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
+	</li>	
+   	 
+<%= f.input :expense_amount %>
+  <% end %>
+
+  <%= f.buttons do %>
+  <br>
+  <%= f.commit_button :label => "Update Expense", :button_html => { :class => "button" } %> 
+  <br>
+  <% end %>
+<% end %>

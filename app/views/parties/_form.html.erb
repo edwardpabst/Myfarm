@@ -1,69 +1,52 @@
-<%= form_for(@party) do |f| %>
-  <% if @party.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@party.errors.count, "error") %> prohibited this party from being saved:</h2>
 
-      <ul>
-      <% @party.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+<%= semantic_form_for @party do |form| %>
+<%= render "shared/error_messages", :object => form.object%>
+<div id="form_header">			 	 
+	 	PARTIES define the people and organizations that are part of your business.  			 
+</div>
+  <%= form.inputs do %>
+
+	 
+	<%= form.input :partyfirstname, :label => "First name",  :required =>  false %> 
+	<%= form.input :partylastname, :label => "Last name",  :required =>  false  %> 
+	<%= form.input :partyname, :label => "Full name",  :required => false,  :hint => "created from first and last names if left blank"  %> 
+	<%= form.input :partyemail, :label => "Email",  :required => false , :input_html => {  :value => session[:s_user_email] }    %>  
+	<%= form.input :partyphone, :label => "Contact phone",  :required => false    %>  
+	<%= form.input :partyjobtitle, :label => "Primary role",  :required => false, :hint => "Primary job/responsibility of an employee"    %> 
+
+	&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;  &nbsp;&nbsp;
+	<p id="warning">Mailing/Billing address </p>   
+  
+	<%= form.input :partyaddress1, :label => "Address",  :required => false    %>  
+	<%= form.input :partyaddress2, :label => "Address +",  :required => false    %>  
+	<%= form.input :partycity, :label => "City",  :required => false    %> 
+	<%= form.input :partystate, :label => "State",  :required => false    %>  
+	<%= form.input :partypostalcode, :label => "Postal Code",  :required => false    %>
+	<%= form.input :country,  :as => :select,   :label => "Country",  :required => true%>
+	
+	<%= form.input :partyweatherpostalcode, :label => "Postal Code for weather",  :required => false, :hint => "Defined for main system user only. Used in all weather links."    %>
+
+	<%= form.input :partytypes,  :as => :select,   :label => "Parties roles",  :required => true, :hint => "Roles determine someones availability to specific functions on the farm. A customer is the target of a shipment. A laborer can be added to a farm job as labor, a Supplier is defined for a purchase order, etc. One person can have multiple roles."  %>
+	<%= form.input :rate_hour, :as => :string, :label => "Rate per hour",  :required => false , :hint => "Amount paid for an employee role."  %>
+	<%= form.input :charge_hour, :as => :string, :label => "Charge per hour",  :required => false , :hint => "Used by Farm Management users to invoice labor amount."   %>
+<br>
+	<div class="hintbase">
+		Shipping information (Only if different than billing info)
+	</div>
+  
+
+	<%= form.input :ship_phone, :label => "Contact phone",  :required => false    %>   
+	<%= form.input :ship_address1, :label => "Address",  :required => false    %>  
+	<%= form.input :ship_address2, :label => "Address +",  :required => false    %>  
+	<%= form.input :ship_city, :label => "City",  :required => false    %> 
+	<%= form.input :ship_state, :label => "State",  :required => false    %>  
+	<%= form.input :ship_postalcode, :label => "Postal Code",  :required => false    %>
+ <% end %>
+
+  <%= form.buttons do %>
+      <%= form.commit_button :label => "Update Party", :button_html => { :class => "button" } %>
   <% end %>
-
-  <div class="field">
-    <%= f.label :userid %><br />
-    <%= f.text_field :userid %>
-  </div>
-  <div class="field">
-    <%= f.label :partyname %><br />
-    <%= f.text_field :partyname %>
-  </div>
-  <div class="field">
-    <%= f.label :partylastname %><br />
-    <%= f.text_field :partylastname %>
-  </div>
-  <div class="field">
-    <%= f.label :partyfirstname %><br />
-    <%= f.text_field :partyfirstname %>
-  </div>
-  <div class="field">
-    <%= f.label :partyaddress1 %><br />
-    <%= f.text_field :partyaddress1 %>
-  </div>
-  <div class="field">
-    <%= f.label :partyaddress2 %><br />
-    <%= f.text_field :partyaddress2 %>
-  </div>
-  <div class="field">
-    <%= f.label :partycity %><br />
-    <%= f.text_field :partycity %>
-  </div>
-  <div class="field">
-    <%= f.label :partystate %><br />
-    <%= f.text_field :partystate %>
-  </div>
-  <div class="field">
-    <%= f.label :partypostalcode %><br />
-    <%= f.text_field :partypostalcode %>
-  </div>
-  <div class="field">
-    <%= f.label :partycountry %><br />
-    <%= f.text_field :partycountry %>
-  </div>
-  <div class="field">
-    <%= f.label :partyphone %><br />
-    <%= f.text_field :partyphone %>
-  </div>
-  <div class="field">
-    <%= f.label :partyemail %><br />
-    <%= f.text_field :partyemail %>
-  </div>
-  <div class="field">
-    <%= f.label :partyjobtitle %><br />
-    <%= f.text_field :partyjobtitle %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<br>
 <% end %>

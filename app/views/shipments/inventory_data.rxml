@@ -1,0 +1,14 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@inventorylots.each do |inventorylot|
+		xml.tag!("row",{ "id" => inventorylot.id }) do
+			xml.tag!("cell", inventorylot.cropplanfull)
+			xml.tag!("cell", inventorylot.storagename)
+			xml.tag!("cell", inventorylot.grade)
+			xml.tag!("cell", inventorylot.inventory_uom)
+			xml.tag!("cell", inventorylot.qty_onhand)
+			xml.tag!("cell", inventorylot.transfer_amount)			
+
+		end
+	end
+end

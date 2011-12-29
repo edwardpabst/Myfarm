@@ -1,0 +1,54 @@
+<%= semantic_form_for @type, :html => { :name => "typ", :class => "form_for"} do |f| %>
+  <%= f.inputs do %>
+<br>
+    <%= f.input :typename, :label => "Type name",  :required => true  %>
+    <%= f.input :type_value_string, :label => "Type value for string",  :required => false  %>
+    <%= f.input :type_value_integer, :label => "Type value for integer",  :required => false  %>
+
+
+	<table>
+		<tr>
+			<td colspan="4">&nbsp;</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>	
+				<label>Type value for boolean</label>
+			</td>
+			<td>	
+				<%= f.check_box :type_boolean%> 
+			</td>
+			<td></td>
+		</tr>
+ 	   	<tr>
+			<td colspan="4">&nbsp;</td>
+		</tr>	
+ 	   	<tr>
+			<td></td>
+			<td>
+				<label>Type is protected</label> 
+			</td>
+			<td>
+				<%= f.check_box :type_isprotected%> 
+	
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td colspan="2">
+			(if checked, no changes can be made)  
+		</td>
+	</tr>
+</table> 
+	
+ 	<br><br>
+  <% end %>
+
+  <%= f.buttons do %>
+    <%= f.commit_button :label => "Update Type ", :button_html => { :class => "button" }  %>
+  <% end %>
+<br>
+<% end %>
+
+ 

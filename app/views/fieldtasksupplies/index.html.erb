@@ -1,0 +1,43 @@
+<h1>Task supplies</h1>
+<table  class="index">
+  <tr>
+    <th>Task type</th>
+    <th>Task description</th>
+    <th>Task notes</th>
+
+  </tr>
+
+  <tr>
+
+    <td><%= fieldtask.task_type %></td>
+    <td><%= fieldtask.taskdescription %></td>
+    <td><%= fieldtask.task_notes %></td>
+</tr>
+</table>
+
+
+<table  class="index">
+  <tr>
+    <th>Supply name</th>
+    <th>Usage UOM</th>
+    <th>Qty Required</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @fieldtasksupplies.each do |fieldtasksupply| %>
+  <tr>
+
+    <td><%= fieldtasksupply.supplyname</td>
+	<td><%= fieldtasksupply.usage_uom</td>
+	<td><%= fieldtasksupply.qty_required</td>
+	<td><%= link_to 'Edit', edit_fieldtask_path(fieldtask) %></td>
+    <td><%= link_to 'Remove', fieldtasksupply, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Fieldtasksupply', new_fieldtasksupply_path %>

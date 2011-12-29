@@ -1,0 +1,59 @@
+<h1>Listing shipments</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Customer</th>
+    <th>Ship date</th>
+    <th>Contract</th>
+    <th>Cropplan</th>
+    <th>Inventorylot</th>
+    <th>Price</th>
+    <th>Ship uom</th>
+    <th>Trucker</th>
+    <th>Trucker name</th>
+    <th>Manifest</th>
+    <th>Totalweight</th>
+    <th>Weight uom</th>
+    <th>Shipto street</th>
+    <th>Shipto city</th>
+    <th>Shipto state</th>
+    <th>Shipto postalcode</th>
+    <th>Shipping charge</th>
+    <th>Commission amount</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @shipments.each do |shipment| %>
+  <tr>
+    <td><%= shipment.user_id %></td>
+    <td><%= shipment.customer_id %></td>
+    <td><%= shipment.ship_date %></td>
+    <td><%= shipment.contract_id %></td>
+    <td><%= shipment.cropplan_id %></td>
+    <td><%= shipment.inventorylot_id %></td>
+    <td><%= shipment.price %></td>
+    <td><%= shipment.ship_uom %></td>
+    <td><%= shipment.trucker_id %></td>
+    <td><%= shipment.trucker_name %></td>
+    <td><%= shipment.manifest_id %></td>
+    <td><%= shipment.totalweight %></td>
+    <td><%= shipment.weight_uom %></td>
+    <td><%= shipment.shipto_street %></td>
+    <td><%= shipment.shipto_city %></td>
+    <td><%= shipment.shipto_state %></td>
+    <td><%= shipment.shipto_postalcode %></td>
+    <td><%= shipment.shipping_charge %></td>
+    <td><%= shipment.commission_amount %></td>
+    <td><%= link_to 'Show', shipment %></td>
+    <td><%= link_to 'Edit', edit_shipment_path(shipment) %></td>
+    <td><%= link_to 'Destroy', shipment, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Shipment', new_shipment_path %>

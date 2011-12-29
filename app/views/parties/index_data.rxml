@@ -1,0 +1,15 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@parties.each do |party|
+		xml.tag!("row",{ "id" => party.id }) do
+			xml.tag!("cell", party.partyname)
+			xml.tag!("cell", party.partyjobtitle)
+			xml.tag!("cell", party.partycity)
+			xml.tag!("cell", party.partystate)
+			xml.tag!("cell", party.partyphone)
+			xml.tag!("cell", party.partyemail)
+			xml.tag!("cell", party.rate_hour)
+
+		end
+	end
+end
