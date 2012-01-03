@@ -162,7 +162,7 @@ module SessionsHelper
    end
     
     def get_fieldtasks_by_type()
-      @fieldtasks = Fieldtask.get_fieldtasks_by_type(@current_user.id)
+      @fieldtasks = Fieldtask.get_fieldtasks_by_type(session[:user_id])
     end
     
     def get_farms

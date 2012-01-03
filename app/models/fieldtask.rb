@@ -22,7 +22,4 @@ class Fieldtask < ActiveRecord::Base
         order by task_stage desc")
      end
      
-     def self.getall()
-     end
-     
 end
