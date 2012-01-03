@@ -46,7 +46,8 @@ class FarmjobequipmentsController < ApplicationController
     @farmjobequipment.farmjob_id = session[:s_farmjob_id]
     @farmjobequipment.qty_required = 0
     @equipment = Equipment.find(@farmjobequipment.equipment_id)
-    if @farmjobequipment.qty_actual.nil? || @farmjoblabor.qty_actual.blank? || @farmjoblabor.qty_actual == 0
+    #if @farmjobequipment.qty_actual.nil? || @farmjoblabor.qty_actual.blank? || @farmjoblabor.qty_actual == 0
+    if params[:farmjobequipment][:qty_actual].nil? || params[:farmjobequipment][:qty_actual].blank? || params[:farmjobequipment][:qty_actual] == 0  
       @farmjob = Farmjob.find(@farmjobequipment.farmjob_id)
       @farmjobequipment.qty_required = @farmjob.total_hours
       @farmjobequipment.qty_actual = @farmjob.total_hours

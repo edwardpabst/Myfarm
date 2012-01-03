@@ -14,7 +14,8 @@ class InventorylotsController < ApplicationController
       def index_data
 
         get_current_user
-        @inventorylots =  Inventorylot.find_by_sql("Select inventorylots.id, ticket_id, inventorylots.created_at, cropplanfull, qty_onhand, inventory_uom, grade, lab_report, storages.name as storagename  
+        @inventorylots =  Inventorylot.find_by_sql("Select inventorylots.id, ticket_id, inventorylots.created_at, 
+        cropplanfull, qty_onhand, inventorylots.inventory_uom, grade, lab_report, storages.name as storagename  
         from inventorylots 
         join scaletickets on inventorylots.scaleticket_id = scaletickets.id 
         join cropplans on inventorylots.cropplan_id = cropplans.id

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111220190240) do
+ActiveRecord::Schema.define(:version => 20111230021003) do
 
   create_table "contracts", :force => true do |t|
     t.integer  "party_id"
@@ -429,6 +429,8 @@ ActiveRecord::Schema.define(:version => 20111220190240) do
     t.integer  "field_id_4"
     t.integer  "field_pct_4"
     t.string   "ticket_id"
+    t.float    "weight_conversion"
+    t.string   "inventory_uom"
   end
 
   add_index "scaletickets", ["user_id"], :name => "index_scaletickets_on_user_id"

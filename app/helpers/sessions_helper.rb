@@ -101,6 +101,10 @@ module SessionsHelper
    @types = Type.where('typename' => name, 'user_id' => @current_user.id).order('type_value_string').all
   end
   
+  def get_types_by_name_0(name)
+   @types = Type.where('typename' => name).order('type_value_string').all
+  end
+  
   def get_supplies_by_type()
    @supplies = Supply.where('user_id' => @current_user.id).order('supply_type').all
   end
@@ -124,7 +128,7 @@ module SessionsHelper
       join partyroles on partytypes.id = partyroles.partytype_id
       join parties on partyroles.party_id = parties.id
       where parties.user_id = #{@current_user.id } 
-      and partytypes.typedescription in ('Employee', 'Labor machine', 'Labor non machine')")
+      and partytypes.typecode in ('EMPL', 'LBRMACH', 'LBRNON')")
   end
 
   def get_current_shipment()
@@ -158,7 +162,10 @@ module SessionsHelper
    end
     
     def get_fieldtasks_by_type()
-      @fieldtasks = Fieldtask.where('user_id' => @current_user.id).order('task_type').all
+    @fieldtasks = Fieldtask.find_by_sql("Select id, task_stage || ' - ' || taskdescription  as taskfull   
+     from fieldtasks 
+     where fieldtasks.user_id = #{@current_user.id }
+     order by task_stage desc")
     end
     
     def get_farms
@@ -195,7 +202,9 @@ module SessionsHelper
         session[:return_to] = nil
     end
     
-    
+    def precision(num)
+       number_with_precision(num, :precision => 2)
+    end 
     
     
 

@@ -13,7 +13,7 @@ class SuppliesController < ApplicationController
       def index_data
 
         get_current_user
-        @supplies = Supply.where('user_id' => @current_user.id).all
+        @supplies = Supply.where('user_id' => @current_user.id).order('supply_type').all
 
         #logger.debug "FARMJOBLABOR #{@farmjoblabors.size}" 
         #logger.debug "SESSION_JOBS_ID #{session[:s_farmjob_id]}"

@@ -9,6 +9,7 @@ xml.tag!("rows") do
 			xml.tag!("cell", index.start_date)
 			xml.tag!("cell", index.stop_date)
 			xml.tag!("cell", index.area_size)
+			xml.tag!("cell", index.total_cost)
 
 		end
 	end

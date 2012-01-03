@@ -1,4 +1,15 @@
+<script type="text/javascript"> 
+function updateNet() {
+ 
+document.st.scaleticket_net_weight.value = (document.st.scaleticket_gross_weight.value -0) - (document.st.scaleticket_tare_weight.value -0); 
 
+
+document.st.scaleticket_pack_qty.value = ((document.st.scaleticket_net_weight.value -0) /
+(document.st.scaleticket_weight_conversion.value -0)).toFixed(0);
+
+}
+
+</script>
 
 <%= form_for @scaleticket, :html => { :name => "st"} do |f| %>
 
@@ -12,7 +23,20 @@
 			</div>
 		</td>
 	</tr>
+	<tr>
+		<td colspan="2">
+			&nbsp;
+		</td>
+		<td  >
+			<%= f.label :ticket_id, "Ticket ID" %>
+		</td>
+		<td>
+			<% if !@scaleticket.ticket_id.nil? %>
+				<%= @scaleticket.ticket_id%>
+			<% end %>
+		</td>
 
+	</tr>
 	<tr>
 		<td>
 			<%= f.label :tran_date, "Transaction date*" %> 
@@ -31,7 +55,116 @@
 		</td>
 	</tr>
 
+	<tr>
+		<td>
+			<%= f.label :gross_weight, "Gross weight*" %>
+		
+		 
+		</td>
+		<td>
+			<%= f.text_field :gross_weight, :onchange => "updateNet()"  %>
+		</td>
+		<td>
 
+		</td>
+		<td>
+
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label :tare_weight, "Tare Weight*" %> 
+		</td>
+		<td>
+			<%= f.text_field :tare_weight, :onchange => "updateNet()"  %>
+		</td>
+		<td>
+
+		</td>
+		<td>
+
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label :net_weight, "Net Weight*" %> 
+		</td>
+		<td>
+			<%= f.text_field :net_weight, :onchange => "updateQty()" %>
+		</td>
+		<td>
+
+		</td>
+		<td>
+
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label :pack_qty, "Inventory Qty*" %> 
+		</td>
+		<td>
+				<%= f.text_field :pack_qty  %>
+		</td>
+		<td>
+			
+				<%= f.label :weight_conversion, "Weight conversion" %>
+		 
+		</td>
+		<td>
+			<div class="disabled">
+				<%= f.text_field :weight_conversion, :disabled => true %>
+			</div>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+		 
+				<%= f.label :inventory_uom, "Inventory UOM*" %> 
+		</td>
+		<td>
+			<div class="disabled">
+				<%= f.text_field :inventory_uom, :disabled => true %>
+			</div>
+		</td>
+ 
+	</tr>
+	
+	<tr>
+		<td>
+		    <% get_storage %>
+			<label class=" label" for="scaleticket">Storage unit<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+
+		</td>
+		<td>
+			<%= collection_select("scaleticket", "storage_id", @storages, "id", "name", options = {:prompt => " "}) %>
+
+		</td>
+		<td>
+		 
+		</td>
+		<td>
+			 
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label :moisture_pct, "Moisture %" %> 
+		</td>
+		<td>
+			<%= f.text_field :moisture_pct %>
+		</td>
+		<td>
+		   <% get_parties_by_type("Employee") %>
+			<label class=" label" for="scaleticket">Driver<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>
+		</td>
+		<td>
+			<%= collection_select("scaleticket", "party_id", @party_types, "id", "partyworkdescription", options = {:prompt => " "}) %>
+
+		</td>
+
+	</tr>
 	<tr>
 		<td colspan="4">
 		<div class="hintbase">	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		 	 
@@ -96,7 +229,7 @@
 		<td colspan="2">
 			<br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		 	<%= f.submit " Add Ticket ", :class => "button"  %>
+		 	<%= f.submit " Update ", :class => "button"  %>
 			<br><br>
 		</td>
 		<td>

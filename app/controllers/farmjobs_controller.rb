@@ -15,7 +15,8 @@ class FarmjobsController < ApplicationController
 
         get_current_user
 
-        @farmjobs = Farmjob.find_by_sql("Select farmjobs.id, fieldname, cropplanfull, plan_year, taskdescription, job_status, start_date, stop_date, area_size 
+        @farmjobs = Farmjob.find_by_sql("Select farmjobs.id, fieldname, cropplanfull, plan_year, 
+        taskdescription, job_status, start_date, stop_date, area_size, total_cost 
         from farmjobs  
         join cropplans on farmjobs.cropplan_id = cropplans.id
         join crops on cropplans.crop_id = crops.id  
@@ -422,12 +423,12 @@ class FarmjobsController < ApplicationController
             if @event.save 
             
             else
-              format.html { redirect_to(session[:return_to], :notice => 'Farmjob was updated but corresponding event was no.') }
+              format.html { redirect_to(:controller => :farmjobs, :action => :edit, :id => @farmjob.id, 	:notice => 'Farmjob was successfully created. But, corresponding event was not.') }
               format.xml  { head :ok }
             end  #end save
           end  #end nil
       
-        format.html { redirect_to(session[:return_to], :notice => 'Farmjob was successfully updated.') }
+        format.html { redirect_to(:controller => :farmjobs, :action => :edit, :id => @farmjob.id, 	:notice => 'Farmjob was successfully updated.') }
         format.xml  { head :ok }
         
       else
@@ -512,6 +513,7 @@ class FarmjobsController < ApplicationController
                  
                   attach_supplies
                   post_event
+                  Farmjob.calculate_job_cost(@farmjob.id)
 
                 else
                   @iserror = true
@@ -537,6 +539,15 @@ class FarmjobsController < ApplicationController
       @farmjobsupply.supply_id = ts.supply_id
       @farmjobsupply.actual_qty = ts.qty_required
       @farmjobsupply.usage_uom = ts.usage_uom 
+      
+      @supply = Supply.find(ts.supply_id)
+      if @farmjobsupply.actual_qty.nil? || @farmjobsupply.actual_qty.blank? || @farmjobsupply.actual_qty == 0      
+        rate_per_acre = @supply.rate_acre
+      else
+        rate_per_acre = @farmjobsupply.actual_qty
+      end
+      @farmjobsupply.actual_qty = rate_per_acre * @farmjob.area_size
+      
       @farmjobsupply.save
     end
   end

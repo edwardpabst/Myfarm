@@ -118,7 +118,7 @@
 				<div class="menugroup">
 					Crop Sales and Inventory
 				</div>
-				 <a href="/scaleticketview">Create Scale tickets</a>
+				 <a href="/scaleticketview">Scale tickets</a>
 				 <a href="/inventorylotview">Crop Inventory</a>
 				 <a href="/contractview">Sales contracts</a>
 				 <a href="/shipmentview">Shipments</a>
@@ -141,17 +141,22 @@
 			<div id="submenu4" class="round">
 				<div class="menugroup">
 					Farm network &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 				</div>
 				 <a href="/users">Farm community </a>
 				 <a href="/pages/home">My community </a>
 				 <a href= "/users/<%= session[:s_user_id] %>">My farm posts </a>
 				<div class="menugroup">
-					Utilities &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+					Utilities &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
 				</div>
 			    <a href="/typeview">Maintain data types </a>
 				<a href="http://www.weather.com/weather/local/<%= get_user_postal_code %>">View Weather</a>
 				<a href="#" onclick="newspopup()">View Ag News</a> 
+				<a href="#" onclick="sustainablepopup()">Sustainable Agriculture project</a>
 				<a href="tutorial">Tutorial </a>
+				
+			
  
 			</div>
  

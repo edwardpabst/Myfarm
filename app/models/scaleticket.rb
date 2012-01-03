@@ -2,7 +2,7 @@ class Scaleticket < ActiveRecord::Base
   #acts_as_reportable
   attr_accessible :user_id, :ticket_id, :tran_date, :cropplan_id, :storage_id, :gross_weight, :tare_weight, :net_weight,
                   :moisture_pct, :party_id, :pack_qty, :weight_uom, :field_id_1, :field_pct_1, :field_id_2, :field_pct_2,
-                  :field_id_3, :field_pct_3,:field_id_4, :field_pct_4
+                  :field_id_3, :field_pct_3,:field_id_4, :field_pct_4, :weight_conversion, :inventory_uom
   
 
   has_many :cropplans
@@ -11,7 +11,8 @@ class Scaleticket < ActiveRecord::Base
   before_save :default_values 
  
   	      
-  validates_presence_of :tran_date, :cropplan_id, :storage_id, :gross_weight, :tare_weight, :net_weight, :field_id_1 
+  validates_presence_of :tran_date, :cropplan_id, :field_id_1 
+  # :storage_id, :gross_weight, :tare_weight, :net_weight,
   validate :field_pct_validation
     #------------------------------------------------------------------------------
 

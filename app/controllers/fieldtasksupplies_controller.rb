@@ -104,6 +104,7 @@ class FieldtasksuppliesController < ApplicationController
     @fieldtasksupply.user_id = session[:s_user_id]
     @supply = Supply.find(@fieldtasksupply.supply_id)
     @fieldtasksupply.usage_uom = @supply.distribution_uom
+    @fieldtasksupply.qty_required = @supply.rate_acre
       
     
 

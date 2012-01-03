@@ -42,7 +42,7 @@
 			</div>
 			    
 				<div class="field_user">
-					<% get_types_by_name("security_question") %> 
+					<% get_types_by_name_0("security_question_0") %> 
 					<label class=" label" for="security_question">my Question<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>	<br>	
 					<%= collection_select("user", "security_question", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	
 				   	<br>

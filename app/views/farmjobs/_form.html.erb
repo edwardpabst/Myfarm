@@ -45,7 +45,7 @@ function checkStatus() {
 			<label class=" label" for="fieldtasks">Job task*<abbr title="required"> </abbr> 	&nbsp;  &nbsp; &nbsp;  </label>
 			</td>
 			<td>
-			<%= collection_select("farmjob", "fieldtask_id", @fieldtasks, "id", "taskdescription", options = {:prompt => " "}) %>
+			<%= collection_select("farmjob", "fieldtask_id", @fieldtasks, "id", "taskfull", options = {:prompt => " "}) %>
 
 			
 			</td>

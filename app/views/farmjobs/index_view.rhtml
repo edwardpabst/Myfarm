@@ -24,14 +24,14 @@
 	// data grid definition
      var indexgrid = new dhtmlXGridObject("index_grid");
      indexgrid.setImagePath("/images/");
-     indexgrid.setHeader("Task name, Field name, Crop plan , Status, Start date, Stop date, Area size");  
-     indexgrid.setInitWidths("130,130,140,100,100,100,100");
+     indexgrid.setHeader("Task name, Field name, Crop plan , Status, Start date, Stop date, Area size, Job cost");  
+     indexgrid.setInitWidths("130,130,140,100,75,75,75,75");
      indexgrid.setSkin("dhx_web");
      indexgrid.init();
 	 indexgrid.load("/farmjobdata");  	
 	 indexgrid.attachHeader("#text_filter,#text_filter,#text_filter,#text_filter");  
 	 indexgrid.setColSorting("str,str,str,str,str");	 
-	 indexgrid.setColTypes("ro,ro,ro,ro,ro,ro,ed"); // ed-editable, ro-read only price-money , ch-checkbox, 
+	 indexgrid.setColTypes("ro,ro,ro,ro,ro,ro,ed,price"); // ed-editable, ro-read only price-money , ch-checkbox, 
 											// txt-text editor ra-radio button, coro-select box, img, dhxcalendar 
 											//  subrow (ajax)	 
 	// data processor definition

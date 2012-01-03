@@ -370,6 +370,9 @@ label {
 	color:white;
 	padding-left:4px;
 	padding-right:4px;
+	width:80%;
+	border: solid 1px yellow;
+
 }
 
 .costdisplay {
