@@ -21,4 +21,8 @@ class Fieldtask < ActiveRecord::Base
         where fieldtasks.user_id = #{user_id}
         order by task_stage desc")
      end
+     
+     def self.getall()
+     end
+     
 end
