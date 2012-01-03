@@ -13,4 +13,12 @@ class Fieldtask < ActiveRecord::Base
        @fieldtask = Fieldtask.find_by_id(fieldtask_id)
        return @tasksupplies = @fieldtask.fieldtasksupplies.all 
      end
+     
+     def self.get_fieldtasks_by_type(user_id)
+       
+       return Fieldtask.find_by_sql("Select id, task_stage || ' - ' || taskdescription  as taskfull   
+        from fieldtasks 
+        where fieldtasks.user_id = #{user_id}
+        order by task_stage desc")
+     end
 end

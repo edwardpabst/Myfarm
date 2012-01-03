@@ -162,10 +162,7 @@ module SessionsHelper
    end
     
     def get_fieldtasks_by_type()
-    @fieldtasks = Fieldtask.find_by_sql("Select id, task_stage || ' - ' || taskdescription  as taskfull   
-     from fieldtasks 
-     where fieldtasks.user_id = #{@current_user.id }
-     order by task_stage desc")
+      @fieldtasks = Fieldtask.get_fieldtasks_by_type(@current_user.id)
     end
     
     def get_farms
