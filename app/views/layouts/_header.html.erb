@@ -57,6 +57,7 @@
 	<td colspan="2">
 		<!---  Hover menu definition                             -->
 		<% if signed_in? %>
+		<% if subscription_valid? %>
  
 			<div id="globalNavDiv" class="menu">
 			    <ul>
@@ -152,14 +153,16 @@
 				</div>
 			    <a href="/typeview">Maintain data types </a>
 				<a href="http://www.weather.com/weather/local/<%= get_user_postal_code %>">View Weather</a>
-				<a href="#" onclick="newspopup()">View Ag News</a> 
+				<a href="#" onclick="newspopup()">Ag News</a> 
 				<a href="#" onclick="sustainablepopup()">Sustainable Agriculture project</a>
+				<a href="#" onclick="usdapopup()">U.S. Department of Agriculture</a>
 				<a href="tutorial">Tutorial </a>
 				
 			
  
 			</div>
  
+		 <% end %>
 		 <% end %>
 
 		</td>

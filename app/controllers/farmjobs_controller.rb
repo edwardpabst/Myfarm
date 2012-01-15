@@ -22,7 +22,8 @@ class FarmjobsController < ApplicationController
         join crops on cropplans.crop_id = crops.id  
         join fields on farmjobs.field_id = fields.id 
         join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
-        where farmjobs.user_id = #{@current_user.id } ")
+        where farmjobs.user_id = #{@current_user.id } 
+        order by start_date")
 
         #logger.debug "FARMJOBLABOR #{@farmjoblabors.size}" 
         #logger.debug "SESSION_JOBS_ID #{session[:s_farmjob_id]}"
@@ -47,6 +48,11 @@ class FarmjobsController < ApplicationController
     			when "deleted"
     				@farmjob = Farmjob.find(@id)
     				@farmjob.destroy
+    				#update event calendar
+            @event = Event.find_by_farmjob_id(@id)
+            if !@event.nil?
+              @event.destroy
+            end
 
     				@tid = @id
     			when "updated"
@@ -204,6 +210,7 @@ class FarmjobsController < ApplicationController
           			when "deleted"
           				@farmjobequipment = Farmjobequipment.find(@id)
           				@farmjobequipment.destroy
+
 
           				@tid = @id
           			when "updated"

@@ -27,12 +27,12 @@ class Shipment < ActiveRecord::Base
          avg(price) as price_per_unit, 
          sum((price * qty) /number_acres) as value_per_acre
        from shipmentdetails sd
-       join shipments sh on sd.shipment_id = sh.id
-       join inventorylots il on sd.inventorylot_id = il.id
-       join scaletickets st on il.scaleticket_id  = st.id
-       join fields on fields.id = st.field_id_1
-       join farms on fields.farm_id = farms.id
-       join cropplans cp on sh.cropplan_id =  cp.id
+        join shipments sh on sd.shipment_id = sh.id
+        join inventorylots il on sd.inventorylot_id = il.id
+        join scaletickets st on il.scaleticket_id  = st.id
+        left join fields on fields.id = st.field_id_1
+        left join farms on fields.farm_id = farms.id
+        join cropplans cp on sh.cropplan_id =  cp.id
        where sd.user_id = #{user_id}
        and fields.farm_id = #{farm_id}
        and ship_date >= '#{start_date}'  

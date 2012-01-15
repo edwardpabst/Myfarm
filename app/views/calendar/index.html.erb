@@ -4,6 +4,16 @@
 <br> 
 <h1>Job calendar</h1>
 <% store_location %>
+<%= form_tag '/calendar', :method=>'post' , :html => { :name => "jc"} do  %>
+<div class="align_left">
+	
+		<label class=" label" for="calendars">Start date - <abbr title="required"> </abbr> &nbsp;  &nbsp;</label> 
+		<%= text_field_tag 'start_date', nil , :class => "input_small" %>	 
+		<%= submit_tag "Submit", :class => "button_very_small", :id => "jcsubmit" %>
+	
+</div>
+<% end %>
+
 (<label class="plan"><i>Plan</i></label>-<label class="inprocess"><i>In Process</i></label>-<label class="complete"><i>Complete</i></label>)
 
 <%= raw(event_calendar) %>

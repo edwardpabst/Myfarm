@@ -14,7 +14,7 @@ class ShipmentsController < ApplicationController
       def index_data
 
         get_current_user
-         @shipments = Shipment.find_by_sql("Select p1.partyname as customername, cropplanfull, ship_date, 
+         @shipments = Shipment.find_by_sql("Select shipments.id, p1.partyname as customername, cropplanfull, ship_date, 
          p2.partyname as truckcompany,  manifest_id, commission_amount, shipping_charge  
         from shipments 
         join parties p1 on shipments.customer_id = p1.id 
@@ -80,7 +80,7 @@ class ShipmentsController < ApplicationController
           get_current_user
           get_current_shipment
           
-          @inventorylots =  Inventorylot.find_by_sql("Select inventorylots.id,  cropplanfull, qty_onhand, inventory_uom, grade, transfer_amount, storages.name as storagename  
+          @inventorylots =  Inventorylot.find_by_sql("Select inventorylots.id,  cropplanfull, qty_onhand, inventorylots.inventory_uom, grade, transfer_amount, storages.name as storagename  
           from inventorylots 
           join scaletickets on inventorylots.scaleticket_id = scaletickets.id 
           join cropplans on inventorylots.cropplan_id = cropplans.id
@@ -162,8 +162,9 @@ class ShipmentsController < ApplicationController
 
   # GET /shipments/1/edit
   def edit
+    session[:s_shipment_id] = params[:id]
     @shipment = update_shipment_amount(params[:id])
-    session[:s_shipment_id] = @shipment.id
+
 
     @onload = 'checkContract()'
   end

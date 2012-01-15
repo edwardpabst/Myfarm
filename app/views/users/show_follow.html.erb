@@ -14,13 +14,22 @@
 					<%= will_paginate @users %>
 				</td>
 			</tr>
+			<tr>
+				<td>
+					&nbsp;
+				</td>
+			</tr>
 			
 			<% @users.each do |user| %>			
 				<tr>				 
 				<%= render user %>				 	
 				</tr>
 			<% end %>
-
+			<tr>
+				<td>
+					&nbsp;
+				</td>
+			</tr>
 			<tr>
 				<td>
 					<%= will_paginate @users %>

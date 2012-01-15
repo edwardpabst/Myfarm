@@ -2,7 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
- 
+
 
 
 # If you have a Gemfile, require the gems listed there, including any gems
@@ -18,7 +18,10 @@ module Myfarm
  
      #require "ruport"
      #require "ruport/acts_as_reportable"
+    
      config.autoload_paths += %W( #{::Rails.root.to_s}/app/reports )
+     
+     Paperclip.options[:command_path] = "/opt/local/bin/"
      
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

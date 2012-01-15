@@ -1,5 +1,5 @@
 <div id="form_header">			 	 
- 	Change any of your settings. Email and password are used to sign in. Security questions help you if you forget your password. Always confirm your password.  			 
+ 	Change any of your settings. <b>You can manage your subscription here.</b> Email and password are used to sign in. Security questions help you if you forget your password. Always confirm your password.  			 
 </div>
 			<br>
 			<h1>Change your settings</h1>
@@ -7,7 +7,38 @@
 			<%= render 'shared/error_messages', :object => @user %>
 
 			<%= form_for(@user) do |f| %>
-                
+			<section class="subscription">
+	  			<div class="field">
+					<h3><%= label_tag :status, "Subscription status" %></h3> 
+					<% get_subscription_status %>
+					<% if @subscription_status.count == 0 %>
+						<% get_trial_days_left %>
+						<div id="warning">
+						You have <%= @days_left %> days left before your free trial runs out.
+						</div>					
+						<%= link_to 'Click HERE to purchase a new subscription for $199.', '/subscriptions/new' %><br>						
+
+					<% else %>
+						<% @subscription_status.each do |ss| %>
+						<h3>
+						<div id="warning">
+							  <%= ss.status  %>
+						</div>
+						</h3>
+						<% end%>
+					 
+						<% get_subscription_end_date %>
+					
+
+						Your current subscription is valid through <%= @end_date.next_year.strftime('%B %d %Y') %>
+						<br>
+
+						<br>
+ <%= link_to 'Click here to cancel your subscription for next year.', '/subscriptions/destroy', :confirm => 'Are you sure? If you continue you will not have access to iFarmservice after your current subscription has expired.', :method => :delete %>
+					<% end %>
+					
+				</div>  
+			</section>          
 
 				<div class="field">
 					<%= f.label :name, "Name" %> <br />
@@ -46,7 +77,7 @@
 			<br> 
 			<div>
 				<%= gravatar_for @user %>
-				<a href="http://gravatar.com/emails" target="_blank"> change your photo</a>
+				<a href="http://gravatar.com/emails" target="_blank"> change your photo on the Gravatar Website</a>
 			
 			</div>
 			<br><br>

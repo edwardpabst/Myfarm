@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111230021003) do
+ActiveRecord::Schema.define(:version => 20120111225521) do
 
   create_table "contracts", :force => true do |t|
     t.integer  "party_id"
@@ -95,6 +95,11 @@ ActiveRecord::Schema.define(:version => 20111230021003) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "rate_per_hour"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.string   "photo"
   end
 
   create_table "equipmentactivities", :force => true do |t|
@@ -486,6 +491,22 @@ ActiveRecord::Schema.define(:version => 20111230021003) do
     t.float    "yearly_cost"
   end
 
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name_on_card"
+    t.string   "card_last4"
+    t.string   "card_exp_month"
+    t.string   "card_exp_year"
+    t.datetime "start_date"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "stripe_card_token"
+    t.string   "stripe_customer_token"
+    t.string   "address_line_1"
+    t.string   "address_zip"
+  end
+
   create_table "supplies", :force => true do |t|
     t.integer  "user_id"
     t.string   "supplyname"
@@ -556,6 +577,7 @@ ActiveRecord::Schema.define(:version => 20111230021003) do
     t.string   "security_question"
     t.string   "security_answer"
     t.integer  "party_id"
+    t.string   "stripe_customer_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

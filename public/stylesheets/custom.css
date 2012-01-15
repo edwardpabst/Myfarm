@@ -139,6 +139,17 @@ section h1 {
 
 }
 
+
+.center{
+	text-align:center;	
+
+}
+
+.align_left{
+	text-align:left;	
+
+}
+
 .community {
 	color: teal;
 }
@@ -274,15 +285,44 @@ padding:2px 2px 2px 2px;
 	vertical-align: top;
 	font-size: 100%;
 	color: white;
-	background-color:#FFCC99;
+	background-color:white; /*-------- //#FFCC99---------*/
+}
+
+
+#homepageh4 {
+	padding-left:10px;
+	vertical-align: top;
+	font-size: 20px;
+	color: black;
+	background-color:white;
 }
 
 #homepage {
- 	background-color: #FFCC99;
+ 	background-color: white;  /*-------- //#FFCC99---------*/
 
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10pz;
+}
+
+
+
+#frontpage {
+ 
+	font-size:100%;
+	width:90%;
+	color: slategray;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+
+#signup_message{
+ 
+	vertical-align: top;
+	font-size: 100%;
+	color: slategray;
+    text-align:center;
 }
 
 .tutorialpage {
@@ -319,15 +359,6 @@ padding:2px 2px 2px 2px;
 
 
 
-#frontpage {
- 
-	font-size:100%;
-	width:80%;
-	color: slategray;
-	margin-left:auto;
-	margin-right:auto;
-}
-
 #datadisplay {
  
 	font-size:100%;
@@ -356,6 +387,74 @@ input  {
 	
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
+}
+
+.input_medium  {
+   
+	font-family: Arial, Sans-Serif;
+    font-size: 13px;
+    padding: 4px;
+    border: solid 1px #85b1de;
+    width: 180px;
+    background-color: #EDF2F7;
+	background-image: 'images/green.gif' );
+	background-repeat: repeat-x;
+	background-position: top;
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+
+.input_medium_small  {
+   
+	font-family: Arial, Sans-Serif;
+    font-size: 13px;
+    padding: 4px;
+    border: solid 1px #85b1de;
+    width: 165px;
+    background-color: #EDF2F7;
+	background-image: 'images/green.gif' );
+	background-repeat: repeat-x;
+	background-position: top;
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+.input_small  {
+   
+	font-family: Arial, Sans-Serif;
+    font-size: 13px;
+    padding: 4px;
+    border: solid 1px #85b1de;
+    width: 110px;
+    background-color: #EDF2F7;
+
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+
+div.fileinputs {
+	position: relative;
+}
+
+div.fakefile {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+}
+
+input.file {
+	position: relative;
+	text-align: right;
+	-moz-opacity:0 ;
+	filter:alpha(opacity: 0);
+	opacity: 0;
+	z-index: 2;
 }
 
 label {
@@ -452,6 +551,24 @@ button:hover{
 
 button:onmousedown{
 	background-color:red;
+}
+
+.button_very_small {
+   
+	font-family: Arial, Sans-Serif;
+    font-size: 10px;
+    padding: 2px;
+    border: solid 1px #85b1de;
+    width: 50px;
+    background-color: #EDF2F7;
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+.button_very_small:hover{
+	background-color:lightsteelblue;
+	border: solid 1px orange;
 }
 
 /* Links #09c */
@@ -553,6 +670,24 @@ footer nav {
 	float: none;
 }
 
+.subscription{
+	
+	width: 50%;
+	margin-bottom: 0;
+	font-size: 100%;
+	font-color:slategray;
+	text-align: left;
+	background-color: white;
+	border-color: gray;
+   	border-width:1px;
+    border-style: solid;
+	margin-left: auto;
+	margin-right: auto;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10pz;
+}
+
 
 table.index {
 	
@@ -623,6 +758,45 @@ table.index_small th{
 }
 
 table.index_small td{
+	font-size: 100%;
+	text-align: left;
+	padding:2px
+
+}
+
+
+table.index_medium {
+	
+	width: 80%;
+	margin-bottom: 0;
+	font-family:"arial", Times, serif;
+	font-size: 100%;
+	text-align: left;
+	background-color: white;
+	border-color: gray;
+   	border-width:1px;
+    border-style: solid;
+	margin-left: auto;
+	margin-right: auto;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10pz;
+}
+
+
+table.index_medium th{
+	font-size: 100%;
+	text-align: center;
+	background-color: lightgray;
+	border-color: gray;
+   	border-width:1px;
+    border-style: solid;
+	padding:5px;
+	font-weight:normal;
+
+}
+
+table.index_medium td{
 	font-size: 100%;
 	text-align: left;
 	padding:2px
@@ -828,6 +1002,19 @@ div.field, div.actions {
 
 .field_with_errors label {
 	color: black;
+}
+
+.payment-errors {
+	width: 100%;
+	border: 0px solid red;
+	padding: 7px;
+	padding-bottom: 2px;
+	margin-bottom: 20px;
+	background-color: white;
+	margin-left: auto;
+	margin-right: auto;
+	color: red;
+	font-size:120%;
 }
 
 #error_explanation {

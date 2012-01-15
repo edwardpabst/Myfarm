@@ -7,8 +7,7 @@ class UsersController < ApplicationController
    
   def index
     @title = "All Farmers"
-    #@users = User.paginate(:page => params[:pagegem 'name', "1.0", :require => "name", :group => :test])
-     #@users = User.paginate(:page => params[:page], :per_page => 20)
+
      @users = User.find_by_sql("Select users.id, name, email, partycity, partystate   
      from users 
      left join parties on users.party_id = parties.id").paginate(:page => params[:page], :per_page => 20)
@@ -159,14 +158,24 @@ class UsersController < ApplicationController
   def following 
     @title = "Following"
     @user = User.find(params[:id])
-    @users = @user.following.paginate(:page => params[:page], :per_page => 20)
+    #@users = @user.following.paginate(:page => params[:page], :per_page => 20)
+    @users = User.find_by_sql("Select users.id, name, email, partycity, partystate   
+    from users 
+    join relationships on users.id = relationships.follower_id
+    left join parties on users.id = parties.user_id
+    where relationships.followed_id = #{@user.id}").paginate(:page => params[:page], :per_page => 20)
     render 'show_follow'
   end
   
   def followers 
     @title = "Followers"
     @user = User.find(params[:id])
-    @users = @user.followers.paginate(:page => params[:page], :per_page => 20)
+    #@users = @user.followers.paginate(:page => params[:page], :per_page => 20)
+    @users = User.find_by_sql("Select users.id, name, email, partycity, partystate   
+    from users 
+    join relationships on users.id = relationships.followed_id
+    left join parties on users.id = parties.user_id
+    where relationships.follower_id = #{@user.id}").paginate(:page => params[:page], :per_page => 20)
     render 'show_follow'
   end
   

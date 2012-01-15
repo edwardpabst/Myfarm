@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
   
   attr_accessor :password, :password_confirmation
   
-  attr_accessible :name, :email, :password, :password_confirmation, :security_question, :security_answer,:party_id
+  attr_accessible :name, :email, :password, :password_confirmation, :security_question, 
+                  :security_answer,:party_id, :created_at, :stripe_customer_id
   
   has_many :microposts, :dependent => :destroy
   
@@ -32,7 +33,7 @@ class User < ActiveRecord::Base
   has_many :followers, :through => :reverse_relationships, :source => :follower
   
   has_one :party
-  has_many :Farms
+  
 
   
  
@@ -99,6 +100,18 @@ class User < ActiveRecord::Base
   
   def unfollow!(followed)
    relationships.find_by_followed_id(followed).destroy
+  end
+
+  
+  def self.save_stripe_customer_id(id, customer_id)
+    @user = User.find(id)
+    @user.stripe_customer_id = customer_id
+    @user.save
+  end
+  
+  def self.get_stripe_customer_id(id)
+    @user = User.find(id)
+    return @user.stripe_customer_id
   end
   
   

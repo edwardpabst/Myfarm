@@ -4,6 +4,8 @@ Myfarm::Application.routes.draw do
 
 
 
+  resources :subscriptions
+
   resources :farmexpenses
 
   resources :supplyinventory_trans
@@ -95,6 +97,7 @@ Myfarm::Application.routes.draw do
   get "pages/route"
   get "pages/about"
   get "pages/home"
+  get "pages/home_new"
   get "pages/tutorial"
   get "pages/help"
   get "users/show"
@@ -103,6 +106,7 @@ Myfarm::Application.routes.draw do
  
   
   match '/', :to => 'pages#home'
+  match '/home_new', :to => 'pages#home_new'
   match '/mapcanvas', :to => 'pages#mapcanvas'
   match '/contact', :to => 'pages#contact'
   match '/about', :to => 'pages#about'
@@ -115,6 +119,7 @@ Myfarm::Application.routes.draw do
   match '/delete', :to => 'microposts#destroy'
   match '/fieldtasks/fieldtask_supplies', :to => 'fieldtasks#fieldtask_supplies'
   match '/fieldtasksupplies', :to => 'fieldtasks#fieldtask_supplies'
+
   
   #routes for dthmlxgrid processing
   #Parties

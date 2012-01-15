@@ -1,0 +1,138 @@
+
+
+<% if signed_in? %>
+	<% set_current_user_data %>
+	<table class="front_summary" ="For signed in users">
+		<tr>
+			
+		<td colspan="2">
+			 <div id="form_header">
+				What Farmers are talking about. Go to Community to view and select other farmers, to follow their ideas.
+			 </div>
+		</td>
+		<tr>
+			<td class="main">
+				<h1 class="micropost"> What's on your mind <%= @current_user.name %>  ? </h1> 
+				<%= render 'shared/micropost_form' %>
+				<%= render 'shared/feed' %>
+			</td>
+			<td class="sidebar round">
+				<%=  render 'shared/user_info' %>
+				<%=  render 'shared/stats' %>
+			</td>
+		</tr>
+	</table>
+	
+	
+<% else %>
+
+<div id="homepageh1">Farm management services</div>
+<div id="homepageh2">
+Services to help the small and medium size farmers manage their crops and their business in a cost effective way.
+<br><br>   
+
+
+<div id="homepage">
+<table>
+
+	<tr>
+		<td class="homepageimage"> 	<br> 
+	<img src="/images/barn-on-the-farm.jpg" width="380" height="360"></img>
+
+		</td>
+		
+		
+		<td>	
+				<br> 
+			<div id="homepageh4">
+				Designed with simplicity and <b>you</b> in mind.
+			</div>
+			
+			<br> 
+					 
+		  	<p id="frontpage"> Our objective is to keep it simple, elegant and cheap. Start with entering field records for crop plans, field preparation, scouting, farm jobs, scale tickets, equipment maintenance, shipments, invoices, restricted use chemicals and fertilizer applications.  Generate simple enterprise statements to track profitability on a field-by-field and crop-by-crop basis. </p> 
+<br> <br> 
+
+				 
+
+
+			 
+		</td>
+	</tr>
+	
+	<tr>
+		
+		<td>
+			 
+			<br> 
+			<div id="homepageh4">
+				For all facets of Farm Management.
+			</div>
+			
+			<br> 
+			<p id="frontpage">
+						   Services have been designed to accommodate the individual farmer, the community based farmer and farm management companies.</p>
+			<br> <br>		 
+				
+		</td>
+			<td class="homepageimage"> 	<br> 
+		<img src="/images/cultivating.jpg" width="380" height="360"></img>
+
+			</td>
+	</tr>
+	
+	<tr>
+		</td>
+			<td class="homepageimage"> 	<br> 
+		<img src="/images/farmjob.png" width="380" height="360"></img>
+
+			</td>
+		<td>
+			<br> 
+		 
+			<div id="homepageh4">
+				Powerful. Improved productivity, Great technology.
+			</div>
+			
+			<br>
+			<p id="frontpage">
+			 An easy-to-use internet based interface allows you to add your own clients, farms, fields, supplies, machines, employees, customers, tank mixes, and various other farm inputs.  All functionality is available wherever you have an internet connection. Built on the latest web technologies, the Cloud based software provides a great starting point for anyone looking to improve their field records, crop yield and financial performance and gain a detailed understanding of their business. It's easy and powerful. </p>	 
+				
+
+	</tr>
+
+
+		
+	<tr>
+
+		<td>
+			<br> 
+			<br>
+
+			<br> 
+			<div class="center">
+			<h3> $199 per year. <br><br>Latest web based technology.</h3>
+			</div>
+			<br> 
+			Sign up today for a no commitment 30 day tour of the system.
+			<br>	<br>
+			<div id="homepageh3"> 
+				 
+				<%= link_to "Sign up now!", signup_path, :class => "signup_button round " %>
+			 </div>	
+			
+		</td>
+			<td class="homepageimage"> 	<br> 
+		<img src="/images/planted_field_organic.jpg" width="380" height="360"></img></img>
+
+			</td> 
+
+
+	</tr>
+</table>
+</div>
+</div>
+
+
+
+<% end %>

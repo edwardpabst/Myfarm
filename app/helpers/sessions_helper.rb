@@ -143,17 +143,76 @@ module SessionsHelper
     @farms = Farm.where('user_id' => @current_user.id).all
    end
    
-   def get_contracts()
- 
-      @contracts = Contract.find_by_sql("Select contracts.id,  partyname || ' ' || cropplanfull  as contractfull   
-     from contracts 
-     join parties on contracts.party_id = parties.id
-     join cropplans on contracts.cropplan_id = cropplans.id
-     where contracts.user_id = #{@current_user.id } ")
+    def get_contracts()
+
+    @contracts = Contract.find_by_sql("Select contracts.id,  partyname || ' ' || cropplanfull  as contractfull   
+   from contracts 
+   join parties on contracts.party_id = parties.id
+   join cropplans on contracts.cropplan_id = cropplans.id
+   where contracts.user_id = #{@current_user.id } ")
+   end   
+   def get_subscription_status()
+      @subscription_status = Subscription.where('user_id' => @current_user.id)
+   end
+   
+   def get_trial_days_left
+     @user_trial = User.find(@current_user.id)
+     if !@user_trial.nil? 
+       @days_left = business_days_between(Date.parse(@user_trial.created_at.strftime('%Y/%m/%d')), Date.today)  
+       @days_left = 30 - @days_left
+     else
+       @days_left = 7
+     end
+   end
+   
+   def business_days_between(date1, date2)
+     business_days = 0
+     date = date2
+     while date > date1
+      business_days = business_days + 1 unless date.saturday? or date.sunday?
+      date = date - 1.day
+     end
+     business_days
+   end
+   
+   
+   def get_subscription_end_date
+     @subscription = Subscription.find_by_user_id(@current_user.id)
+     if !@subscription.nil? 
+       @end_date = @subscription.start_date
+
+     end
+   end
+   
+   def subscription_valid?
+      @subscription_status = Subscription.where('user_id' => @current_user.id)
+      if @subscription_status.count == 0
+        # determine if trial period is complete
+        get_trial_days_left
+        if @days_left <= 0
+          return false
+        else
+          return true
+        end
+      else
+        #see if subscription valid
+        @subscription_status.each do |ss|
+          
+          @end_date = ss.start_date.next_year
+          #logger.debug "AUTHENTICATE SUBSCRIPTION:- #{@end_date} - #{Date.today} "
+          if Date.today > @end_date.strftime('%Y/%m/%d').to_date
+            return false
+          else
+            return true
+          end
+      end
+        
+      end
+     
    end
 
+
    def get_cropplans_by_year()
-    get_current_user
     @cropplans = Cropplan.get_cropplan_index(@current_user.id)
    end
    
@@ -162,7 +221,7 @@ module SessionsHelper
    end
     
     def get_fieldtasks_by_type()
-      @fieldtasks = Fieldtask.get_fieldtasks_by_type(session[:user_id])
+      @fieldtasks = Fieldtask.get_fieldtasks_by_type(@current_user.id)
     end
     
     def get_farms

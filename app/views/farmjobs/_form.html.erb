@@ -40,16 +40,16 @@ function checkStatus() {
 		</td>
 	</tr>
   		<tr>
-			<td>
+			<td width="25%">
 		    <% get_fieldtasks_by_type %>
 			<label class=" label" for="fieldtasks">Job task*<abbr title="required"> </abbr> 	&nbsp;  &nbsp; &nbsp;  </label>
 			</td>
-			<td>
+			<td  width="25%">
 			<%= collection_select("farmjob", "fieldtask_id", @fieldtasks, "id", "taskfull", options = {:prompt => " "}) %>
 
 			
 			</td>
-			<td>
+			<td  width="25%">
 		    <% get_fields_by_farm %>
 			<label class=" label" for="fields">Field*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
 			</td>
@@ -59,7 +59,7 @@ function checkStatus() {
 			</td>
 		</tr>	
 		<tr>
- 			<td>
+ 			<td  width="25%">
 		    <% get_cropplans_by_year %>
 			<label class=" label" for="cropplans">Crop plan*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
 			</td>
@@ -137,7 +137,7 @@ function checkStatus() {
 			<%= f.text_field :total_hours %>
 			</td>
 			<td>
-				<%= f.label :applied_area, "Actual area size worked" %>  
+				<%= f.label :applied_area, "Actual area worked" %>  
 			</td>
 			<td>
 				<%= f.text_field :applied_area %>

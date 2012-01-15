@@ -1,4 +1,12 @@
-<%= semantic_form_for @equipment do |f| %>
+<script type="text/javascript"> 
+function loadFake() {
+   
+   document.eq.fake_input.value = document.eq.equipment_photo.value;  
+
+}
+</script>
+
+<%= semantic_form_for @equipment, :html => {:name => "eq", :multipart => true }  do |f| %>
 <br>
 <%= render "shared/error_messages", :object => f.object%>
   <%= f.inputs do %>
@@ -16,16 +24,33 @@
 	<%= f.input :cost_unit_hour , :label => "Cost_per_hour",  :required => true %>
     <%= f.input :rate_per_hour , :label => "Rate_per_hour",  :required => true %>
     <%= f.input :width, :label => "Width",  :required => false  %>
-    <%= f.input :photo_path , :label => "photo file name",  :required => false %>
-    <%= f.input :frequency_hours , :label => "Service frequency/hours",  :required => false %>
-  <% end %>
 
+    <%= f.input :frequency_hours , :label => "Service frequency/hours",  :required => false %>
+
+	<div class="fileinputs">
+		
+		<%= f.file_field :photo, :class => 'file', :onchange => 'loadFake()'  %>
+	
+		<div class="fakefile">		 	
+			<label class=" label" for="category">Photo <abbr title="required"> </abbr>  </label>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					
+			<input id="fake_input" class="input_medium"/>
+			<%= image_tag "combo_select.gif" %>
+		 
+		</div>
+	</div>
+	
+
+  <% end %>
+  <br><br>
   <%= f.buttons do %>
      <%= f.commit_button :label => "Update Equip", :button_html => { :class => "button" } %>
   <% end %>
 <br>
- <% if !@equipment.photo_path.blank?   %>
-	<%= image_tag("#{@equipment.photo_path}") %><br><br>
+ <% if !@equipment.photo.url.blank?   %>
+	<%= image_tag @equipment.photo.url(:large) %><br><br>
  <% end %>
 
 <% end %>

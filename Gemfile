@@ -14,8 +14,12 @@ gem "gmaps4rails", "~> 1.3.0"
 # gem 'ruport'
 # gem 'acts_as_reportable'
 # gem 'ruport-util'
-  gem 'prawn'
-  gem 'mail'
+gem 'prawn'
+gem 'mail'
+gem 'stripe'
+gem 'therubyracer', :require => nil
+gem 'barista'
+gem "paperclip", "~> 2.3"
 
 gem 'rake' , '~> 0.9.2'
 gem 'formtastic', '2.0.0.rc1'
