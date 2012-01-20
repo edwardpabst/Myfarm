@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120111225521) do
+ActiveRecord::Schema.define(:version => 20120119221753) do
 
   create_table "contracts", :force => true do |t|
     t.integer  "party_id"
@@ -221,6 +221,12 @@ ActiveRecord::Schema.define(:version => 20120111225521) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.float    "land_expense_year"
+    t.string   "logo"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.integer  "party_id"
   end
 
   add_index "farms", ["user_id"], :name => "index_farms_on_user_id"
@@ -311,6 +317,21 @@ ActiveRecord::Schema.define(:version => 20120111225521) do
   add_index "inventorylots", ["storage_id"], :name => "index_inventorylots_on_storage_id"
   add_index "inventorylots", ["user_id"], :name => "index_inventorylots_on_user_id"
 
+  create_table "invoices", :force => true do |t|
+    t.string   "invoice_number"
+    t.integer  "shipment_id"
+    t.float    "ship_amount"
+    t.float    "ship_charge"
+    t.float    "total_amount"
+    t.date     "invoice_date"
+    t.string   "invoice_terms"
+    t.string   "invoice_status"
+    t.string   "payment_reference"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
   create_table "microposts", :force => true do |t|
     t.string   "content"
     t.integer  "user_id"
@@ -346,6 +367,7 @@ ActiveRecord::Schema.define(:version => 20120111225521) do
     t.string   "ship_postalcode"
     t.string   "ship_phone"
     t.string   "partyweatherpostalcode"
+    t.integer  "farm_id"
   end
 
   add_index "parties", ["country_id"], :name => "index_parties_on_country_id"
@@ -475,6 +497,8 @@ ActiveRecord::Schema.define(:version => 20120111225521) do
     t.datetime "updated_at"
     t.integer  "broker_id"
     t.float    "ship_amount"
+    t.string   "ship_status"
+    t.integer  "farm_id"
   end
 
   create_table "storages", :force => true do |t|

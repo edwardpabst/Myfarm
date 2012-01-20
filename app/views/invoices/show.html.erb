@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Invoice number:</b>
+  <%= @invoice.invoice_number %>
+</p>
+
+<p>
+  <b>Shipment:</b>
+  <%= @invoice.shipment_id %>
+</p>
+
+<p>
+  <b>Ship amount:</b>
+  <%= @invoice.ship_amount %>
+</p>
+
+<p>
+  <b>Ship charge:</b>
+  <%= @invoice.ship_charge %>
+</p>
+
+<p>
+  <b>Total amount:</b>
+  <%= @invoice.total_amount %>
+</p>
+
+<p>
+  <b>Invoice date:</b>
+  <%= @invoice.invoice_date %>
+</p>
+
+<p>
+  <b>Invoice terms:</b>
+  <%= @invoice.invoice_terms %>
+</p>
+
+<p>
+  <b>Invoice status:</b>
+  <%= @invoice.invoice_status %>
+</p>
+
+<p>
+  <b>Payment reference:</b>
+  <%= @invoice.payment_reference %>
+</p>
+
+
+<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
+<%= link_to 'Back', invoices_path %>

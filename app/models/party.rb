@@ -4,7 +4,7 @@ class Party < ActiveRecord::Base
   attr_accessor :partyworkdescription
   attr_accessible :partylastname, :partyfirstname, :partyname, :partyaddress1, :partycity, :partystate, :partycountry,
   :partyphone, :partyemail, :partypostalcode, :partyjobtitle, :partytype_ids, :country_id, :rate_hour, :charge_hour,
-  :shipaddress1, :shipcity, :shipstate, :shipcountry, :shipphone, :partyweatherpostalcode
+  :ship_address1, :ship_city, :ship_state, :ship_phone, :partyweatherpostalcode, :farm_id
   
   belongs_to :user
   belongs_to :country

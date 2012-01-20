@@ -1,0 +1,41 @@
+<%= semantic_form_for @invoice do |f| %>
+  <%= f.inputs do %>
+<br>
+
+<% get_customer_name(@invoice.shipment_id)%>
+<li class="string input optional stringish">
+	<% @customer.each do |c| %>
+	<label class=" label" for="invoice">Customer &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<%=  c.customername %>   </label>
+	</li>	 
+	<% end %>
+ 
+
+    <%= f.input :invoice_number, :required => false,  :input_html => { :disabled => true } %>
+    <%= f.input :invoice_date, :as => :string %>
+ 
+
+	<% get_types_by_name("invoice_terms") %>
+	 <li class="string input optional stringish">
+		<label class=" label" for="invoice">Invoice terms<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+		<%= collection_select("invoice", "invoice_terms", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	</li>    
+	
+	<% get_invoice_status %>
+ <li class="string input optional stringish">
+	<label class=" label" for="invoice">Invoice status<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("invoice", "invoice_status", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	</li>
+	
+    <%= f.input :ship_amount,  :required => false, :input_html => { :disabled => true } %>
+    <%= f.input :ship_charge,  :required => false, :input_html => { :disabled => true } %>
+    <%= f.input :total_amount, :required => false, :input_html => { :disabled => true } %>
+
+    <%= f.input :payment_reference, :required => false, :hint => 'Can refer to payment method or something specific like check no.' %>
+  <% end %>
+<br>
+  <%= f.buttons do %>
+    <%= f.commit_button :label => "Update Invoice", :button_html => { :class => "button" }  %>
+  <% end %>
+<br>
+<br>
+<% end %>

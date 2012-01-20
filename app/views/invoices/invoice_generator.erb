@@ -1,0 +1,74 @@
+
+<br>
+<h1>Generate New Invoices</h1>
+ 
+
+<%= form_tag '/invoices', :method=>'post' , :html => { :name => "in"} do %>
+ 
+
+ 
+
+ <table class="twocolumn">
+ 
+		<tr>
+			<td colspan="3">
+				<div id="form_header">			 	 
+	 Invoices will be generated for all shipment's whose status is 'Shipped'. If you leave all options blank then all new invoices will be created. Or you can filter your selection by customer and/or ship date range.  
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td width="25%"></td>
+			<td class="label">
+				<% get_parties_by_type("Customer") %>
+				<label class=" label" for="shipment">Customer<abbr title="required"> </abbr>  </label> 
+			</td>
+			<td>
+				<% if !@party_types.nil? %>			
+					<%= collection_select("shipment", "customer_id", @party_types, "id", "partyname", options = {:prompt => " ", :include_blank => ' '}) %>
+				<% end %>  
+		 	</td>
+		</tr>
+		
+
+		 <tr>
+			<td width="25%"></td>
+			<td>
+			<label> Ship begin date </label>   
+			</td>
+			<td>
+			<%= text_field_tag 'start_date' %>
+
+		 	</td>
+		 </tr>
+		
+		<tr>
+			<td width="25%"></td>
+			<td>
+		   	<label> Ship end date </label> 
+			</td>
+			<td>
+				<%= text_field_tag 'stop_date'  %>
+		    </td>
+
+
+		</tr>
+
+		
+		<tr>
+			<td></td><td></td>
+			<td>
+				<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 	<%= submit_tag " Submit ", :class => "button", :id => "insubmit" %><br><br>
+			</td>
+
+
+		</tr>
+			</table>
+			</td>
+
+		</tr>
+
+			 
+ </table>
+<% end %>

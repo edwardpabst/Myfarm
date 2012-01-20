@@ -1,12 +1,10 @@
-<br> 
-<h1><p>Shipments</p></h1>
-
-<button type="button" value="New", onclick="newShipment()">New Shipment</button>
-<button type="button" value="New", onclick="editShipment()">Full Edit</button>
+<br>
+ <h1><p>Invoices</p></h1>
+<button type="button" value="New", onclick="editinvoice()">Full Edit</button>
 <input type="button" value="Delete" class="button" onclick="removeRow()">
-<br><br>
+ <br> <br>
 <!-- Div for capture of grid output -->
- <div id="Shipment_grid" style="width:800px; height:500px;">
+ <div id="invoice_grid" style="width:800px; height:500px;">
 
  </div>
 
@@ -14,20 +12,20 @@
  <script type="text/javascript" charset="utf-8">
 
 	// data grid definition
-     var grid = new dhtmlXGridObject("Shipment_grid");
+     var grid = new dhtmlXGridObject("invoice_grid");
      grid.setImagePath("/images/");
-     grid.setHeader("Customer, Crop plan, Ship date, Status, Manifest, Shipping Charge, Commission");  
-     grid.setInitWidths("140,150,70,120,120,100,100");
+     grid.setHeader("Invoice number, Invoice date, Status, Customer, Item, Ship amount, Ship charge, Total amount");  
+     grid.setInitWidths("100, 80,80,100,140,100,100,100");
      grid.setSkin("dhx_web");
      grid.init();
-	 grid.load("/shipmentdata");  	
-	 grid.attachHeader("#text_filter,#text_filter,#text_filter,,,,");  
-	 grid.setColSorting("str,str,str,,,,,");	 
-	 grid.setColTypes("ro,ro,ro,ro,ed,ed,ed");// ed-editable, ro-read only price-money , ch-checkbox, 
+	 grid.load("/invoicedata");  	
+	 grid.attachHeader("#text_filter,#text_filter,#text_filter");  
+	 grid.setColSorting("str,str,str");	 
+	 grid.setColTypes("ro,ro,ro,ro,ro,price,price,price");// ed-editable, ro-read only price-money , ch-checkbox, 
 													  // txt-text editor ra-radio button, coro-select box, img, dhxcalendar 
 													  //  subrow (ajax)	 
 	// data processor definition
-	dp = new dataProcessor("/shipmentgridaction/");
+	dp = new dataProcessor("/invoicegridaction/");
 	//dp.setTransactionMode("POST", true);
 	//set mode as send-all-by-post;
 	//dp.setUpdateMode("on");
@@ -44,12 +42,6 @@
 		//	window.location = "/cropview"
 	}
 	
-	// add row in the grid and database (in conflict with validation)
-	function addRow(){
-        var newId = (new Date()).valueOf()
-        grid.addRow(newId,"",grid.getRowsNum())
-        grid.selectRow(grid.getRowIndex(newId),false,false,true);
-    }
 
 	// remove row from grid and database
     function removeRow(){
@@ -85,21 +77,17 @@
 	    return value > 0;
 	}
 	
-	// branch to rails for record addition
-	function newShipment() {
-	// branch to add new supply
-	    window.location = "shipments/new";
-	}
+
 	// branch to rails for edit record
-	function editShipment() {
-	// edit selected supply
+	function editinvoice() {
+	// edit selected field
 	var selId = grid.getSelectedId()
 	if (selId < 1)
 		{
 		 alert("No record was selected for full edit");	
 		}
 	else {
-	    window.location = "shipments/"+selId+"/edit";
+	    window.location = "invoices/"+selId+"/edit";
 		}
 	}
 	
@@ -109,10 +97,12 @@
 
 <br>
 
-<button type="button" value="New", onclick="newShipment()">New Shipment</button>
-<button type="button" value="New", onclick="editShipment()">Full Edit</button>
+
+<button type="button" value="New", onclick="editinvoice()">Full Edit</button>
 <input type="button" value="Delete"  class="button" onclick="removeRow()">
-<br>
- 	
- 
+ <br>	 <br>
+ <!--  button controls for in grid addition and bulk update
+<input type="button" value="Add" onclick="grid.addRow(grid.uid(),'new user')">
+<input type="button" name="Submit changes" value="Submit changes" onclick="dp.sendData();"> -->
+
  

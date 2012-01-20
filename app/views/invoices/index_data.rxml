@@ -1,0 +1,19 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@invoices.each do |invoice|
+		xml.tag!("row",{ "id" => invoice.id }) do
+
+		  xml.tag!("cell", invoice.invoice_number)
+		  xml.tag!("cell", invoice.invoice_date)
+		  xml.tag!("cell", invoice.invoice_status)
+		  xml.tag!("cell", invoice.customer)
+		  xml.tag!("cell", invoice.cropplanfull)
+			xml.tag!("cell", invoice.ship_amount)
+			xml.tag!("cell", invoice.ship_charge)
+			xml.tag!("cell", invoice.total_amount)
+			xml.tag!("cell", invoice.invoice_terms)
+ 
+ 
+		end
+	end
+end

@@ -1,0 +1,116 @@
+
+<br>
+<h1>Invoice Print Requestor</h1>
+ 
+<%= link_to 'Back', session[:return_to] %>
+<br>
+
+<%= form_tag '/invoicereport.pdf', :method=>'post' , :html => { :name => "in"} do %>
+ 
+
+ 
+
+
+
+<table class="twocolumn">
+
+		<tr>
+			<td colspan="3">
+				<div id="form_header">			 	 
+	 Print invoices. You can either filter your print request by customer and date or print all invoices whose status is 'new'.  If you would like to reprint invoices or a single invoice then select 'yes' on the reprint option. This will only print invoices whose status is 'print'.  
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td width="25%"></td>
+			<td class="label">
+				<% get_parties_by_type("Customer") %>
+				<label class=" label" for="shipment">Customer<abbr title="required"> </abbr>  </label> 
+			</td>
+			<td>
+				<% if !@party_types.nil? %>			
+					<%= collection_select("shipment", "customer_id", @party_types, "id", "partyname", options = {:prompt => " ", :include_blank => ' '}) %>
+				<% end %>  
+		 	</td>
+		</tr>
+		
+
+		 <tr>
+			<td width="25%"></td>
+			<td>
+			<label> Invoice begin date </label>   
+			</td>
+			<td>
+			<%= text_field_tag 'start_date' %>
+
+		 	</td>
+		 </tr>
+		
+		<tr>
+			<td width="25%"></td>
+			<td>
+		   	<label> Invoice end date </label> 
+			</td>
+			<td>
+				<%= text_field_tag 'stop_date'  %>
+		    </td>
+
+
+		</tr>
+		
+		<tr>
+			<td width="25%"></td>
+			<td>
+		   	<label> Invoice number </label> 
+			</td>
+			<td>
+				<%= text_field_tag 'invoice_number'  %>
+		    </td>
+
+
+		</tr>
+		
+		<% get_types_by_name("task_type") %>
+
+		<td width="25%"></td>
+		<td>
+	   	<label> Reprint? </label> 
+		</td>
+		<td>
+					<%= collection_select("", "reprint", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
+	    </td>
+		
+		<tr>
+			
+			</tr>
+
+			<% get_types_by_name("task_type") %>
+
+			<td width="25%"></td>
+			<td>
+		   	<label> Sort sequence </label> 
+			</td>
+			<td>
+						<%= collection_select("", "sort_sequence", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
+		    </td>
+
+			<tr>
+			
+			
+			<td></td><td></td>
+			<td>
+				<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 	<%= submit_tag " Submit ", :class => "button", :id => "insubmit" %><br><br>
+			</td>
+
+
+		</tr>
+			</table>
+			</td>
+
+		</tr>
+
+			 
+</table>
+<% end %>
+

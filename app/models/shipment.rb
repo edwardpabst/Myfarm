@@ -5,7 +5,7 @@ class Shipment < ActiveRecord::Base
   attr_accessible :user_id, :customer_id, :ship_date, :cropplan_id,   :contract_id,
                   :trucker_id, :trucker_name,
                   :manifest_id, :shipto_city,:shipto_state,:shipto_postalcode,:shipto_street,
-                  :shipping_charge, :commission_amount, :broker_id, :ship_amount
+                  :shipping_charge, :commission_amount, :broker_id, :ship_amount, :ship_status, :farm_id
   
 
   has_many :cropplans
@@ -15,7 +15,7 @@ class Shipment < ActiveRecord::Base
    
  
   	      
-  validates_presence_of  :customer_id, :ship_date, :cropplan_id  
+  validates_presence_of  :customer_id, :ship_date, :cropplan_id, :farm_id  
 
 
   def self.profitability_revenue(user_id, view, farm_id, year, start_date, stop_date)

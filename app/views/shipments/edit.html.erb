@@ -1,12 +1,25 @@
 <script type="text/javascript"> 
-function checkContract() {
 
-if (document.sh.shipment_contract_id.value != ' ') {
-   document.sh.shipment_customer_id.disabled=true;  
-   document.sh.shipment_cropplan_id.disabled=true;
-}
+function checkShipment() {
+
+	if (document.sh.shipment_contract_id.value != ' ') {
+	   document.sh.shipment_customer_id.disabled=true;  
+	   document.sh.shipment_cropplan_id.disabled=true;
+	}
+
+	if (document.sh.shipment_ship_status.value == 'invoiced')
+	{
+	
+	   document.sh.shipment_ship_status.disabled=true;
+	   document.sh.sh_submit.disabled=true;
+	} 
 }
 </script>
+
+
+
+
+
 
 
 <br>

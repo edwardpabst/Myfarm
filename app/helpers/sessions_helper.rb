@@ -101,6 +101,21 @@ module SessionsHelper
    @types = Type.where('typename' => name, 'user_id' => @current_user.id).order('type_value_string').all
   end
   
+  def get_invoice_status
+    @types =  Type.find_by_sql("Select *  
+     from types 
+     where types.user_id = #{@current_user.id } 
+     and types.typename = 'invoice_status'
+     and type_value_string in ('PRINTED', 'RE-PRINTED', 'PAID/CLOSED')")
+  end
+  
+  def get_customer_name(shipment_id)
+    @customer =  Shipment.find_by_sql("Select partyname as customername 
+                  from shipments sh
+                  left join parties p1 on sh.customer_id = p1.id
+                  where sh.id = #{shipment_id}")
+  end
+  
   def get_types_by_name_0(name)
    @types = Type.where('typename' => name).order('type_value_string').all
   end
@@ -116,6 +131,8 @@ module SessionsHelper
   def find_parties_by_role(role)
       Party.joins(:partytypes).where('partytypes.typedescription' => role).where('user_id' => @current_user.id).all
   end
+  
+
   
   def get_parties_by_type(type)
       @party_types = Party.select("parties.id, partyname, partyjobtitle").joins(:partytypes).where('partytypes.typedescription' => type , 'parties.user_id' => session[:s_user_id]).all

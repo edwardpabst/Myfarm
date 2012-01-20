@@ -375,7 +375,7 @@ class Farmjob < ActiveRecord::Base
                                    and farmexpenses.user_id =  #{user_id}")
          end
          
-         def self.profitability_total_cost_summary(user_id, view, farm_id, year, start_date, stop_date, task_stage)
+         def self.profitability_total_cost_acre(user_id, view, farm_id, year, start_date, stop_date, task_stage)
            
            @cashoverhead_acre = 0
            @cashoverhead = profitability_cash_overhead_summary(user_id, view, farm_id, year, start_date, stop_date, task_stage)
@@ -391,14 +391,41 @@ class Farmjob < ActiveRecord::Base
            end          
      
            @operatingcost = profitability_operating_cost(user_id, view, farm_id, year, start_date, stop_date, task_stage)
+            
            @operatingcost.each do |o|
              @total_acre = o.total_cost_acre.to_f
              @total_acre += @cashoverhead_acre 
              @total_acre +=  @noncashoverhead_acre
              o.total_cost_acre = @total_acre.to_s
+            
            end
-
+            
+           
            return @operatingcost
            
          end
+         
+         def self.profitability_net_position(user_id, view, farm_id, year, start_date, stop_date, task_stage)         
+     
+           @operatingcost = profitability_total_cost_acre(user_id, view, farm_id, year, start_date, stop_date, task_stage)
+
+           @operatingcost.each do |o|
+             @total_acre = o.total_cost_acre.to_f          
+           end
+           
+            
+           @net_position = Shipment.profitability_revenue_summary(user_id, view, farm_id, year, start_date, stop_date)
+           @net_position.each do |o|
+             @total_revenue = o.value_per_acre.to_f
+             @total_revenue -= @total_acre
+             #logger.debug "REVENUE SUMMARY PARAMS- #{@net} revenue #{@total_revenue} cost #{@total_acre}"
+             o.value_per_acre =  @total_revenue.to_s         
+           end            
+          
+           return @net_position
+           
+         end
+         
+
+
 end

@@ -1,10 +1,49 @@
-<%= semantic_form_for @farm do |f| %>
+<script type="text/javascript"> 
+function loadFake() {
+   
+   document.fm.fake_input.value = document.fm.farm_logo.value;  
+
+}
+</script>
+
+<%= semantic_form_for @farm, :html => {:name => "fm", :multipart => true } do |f| %>
 <%= render "shared/error_messages", :object => f.object%>
+<% if !@farm.logo.url.blank?   %>
+	<%= image_tag @farm.logo.url(:medium) %><br> 
+<% end %>
   <%= f.inputs do %>
 <br /><br>
    <%= f.input :farmname, :label => "Farm name"%>
  
    <%= f.input :total_acres, :label => "Total acres"  %>
+
+<br>
+   <% get_parties_by_type('Billing source') %>
+<li class="string input optional stringish">
+	<label class=" label" for="farm">Billing source*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>
+
+	<% if !@party_types.nil? %>		
+<%= collection_select("farm", "party_id", @party_types, "id", "partyname", options = {:prompt => " "}) %> </li>
+	<% end %>
+	
+		<div class="hintbase">
+			This will establish the Billing source information for Invoicing.
+		</div>
+<br>
+	<div class="fileinputs">
+		
+		<%= f.file_field :logo, :class => 'file', :onchange => 'loadFake()'  %>
+	
+		<div class="fakefile">		 	
+			<label class=" label" for="category">Logo <abbr title="required"> </abbr>  </label>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					
+			<input id="fake_input" class="input_medium"/>
+			<%= image_tag "combo_select.gif" %>
+		 
+		</div>
+	</div>
   <% end %>
 <br />
   <%= f.buttons do %>

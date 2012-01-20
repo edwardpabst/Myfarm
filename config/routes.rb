@@ -4,6 +4,8 @@ Myfarm::Application.routes.draw do
 
 
 
+  resources :invoices
+
   resources :subscriptions
 
   resources :farmexpenses
@@ -202,6 +204,11 @@ Myfarm::Application.routes.draw do
   match '/shipmentdetaildata', :to => 'shipmentdetails#index_data'
   match '/shipmentdetailgridaction', :to => 'shipmentdetails#index_dbaction'
   match 'shipmentdetails/:id/add_detail', :to => 'shipmentdetails#add_detail'
+  #Invoices
+  match '/invoice_generator', :to => 'invoices#invoice_generator'
+  match '/invoiceview', :to => 'invoices#index_view'
+  match '/invoicedata', :to => 'invoices#index_data'
+  match '/invoicegridaction', :to => 'invoices#index_dbaction'
   #Inventory search
   match '/inventoryview', :to => 'shipments#inventory_view'
   match '/inventorydata', :to => 'shipments#inventory_data'
@@ -240,6 +247,9 @@ Myfarm::Application.routes.draw do
    match '/farmjobreport', :to => 'farmjobs#farmjobreport'
    match '/profitabilityreportrequestor', :to => 'farmjobs#profitability_report_requestor'
    match '/profitabilityjobreport', :to => 'farmjobs#profitabilityjobreport'
+   match '/invoicerequestor', :to => 'invoices#invoice_requestor'
+   match '/invoicereport', :to => 'invoices#invoicereport'
+   
   root :to => 'pages#home'
   #root_path => 'pages#home'
   #root_url => 'http://localhost:3000/'

@@ -15,7 +15,7 @@ class ShipmentsController < ApplicationController
 
         get_current_user
          @shipments = Shipment.find_by_sql("Select shipments.id, p1.partyname as customername, cropplanfull, ship_date, 
-         p2.partyname as truckcompany,  manifest_id, commission_amount, shipping_charge  
+         p2.partyname as truckcompany,  manifest_id, commission_amount, shipping_charge, ship_status  
         from shipments 
         join parties p1 on shipments.customer_id = p1.id 
         left join parties p2 on shipments.trucker_id = p2.id 
@@ -33,7 +33,7 @@ class ShipmentsController < ApplicationController
     		customername = params["c0"]
     		cropplanfull	 = params["c1"]
     		ship_date   	 = params["c2"]   
-    		truckcompany	= params["c3"]
+    		ship_status	= params["c3"]
     		manifest_id = params["c4"]
     		shipping_charge = params["c5"]
     		commission_amount = params["c6"]
@@ -83,9 +83,13 @@ class ShipmentsController < ApplicationController
           @inventorylots =  Inventorylot.find_by_sql("Select inventorylots.id,  cropplanfull, qty_onhand, inventorylots.inventory_uom, grade, transfer_amount, storages.name as storagename  
           from inventorylots 
           join scaletickets on inventorylots.scaleticket_id = scaletickets.id 
+          join fields on scaletickets.field_id_1 = fields.id
           join cropplans on inventorylots.cropplan_id = cropplans.id
           join storages on inventorylots.storage_id = storages.id
-          where inventorylots.user_id = #{@current_user.id }  and inventorylots.cropplan_id = #{@shipment.cropplan_id} and inventorylots.qty_onhand > 0")
+          where inventorylots.user_id = #{@current_user.id }  
+          and inventorylots.cropplan_id = #{@shipment.cropplan_id} 
+          and fields.farm_id = #{@shipment.farm_id}
+          and inventorylots.qty_onhand > 0")
 
 
        
@@ -164,9 +168,8 @@ class ShipmentsController < ApplicationController
   def edit
     session[:s_shipment_id] = params[:id]
     @shipment = update_shipment_amount(params[:id])
+    @onload = 'checkShipment()'
 
-
-    @onload = 'checkContract()'
   end
 
   # POST /shipments

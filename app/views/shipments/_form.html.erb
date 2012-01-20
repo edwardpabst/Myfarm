@@ -12,8 +12,17 @@
 			</div>
 		</td>
 	</tr>
+    <% get_farms %>
+	<tr>
+		<td class="label">
+			<label class=" label" for="shipment">Farm*<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+		 		
+			<%= collection_select("shipment", "farm_id", @farms, "id", "farmname", options = {:prompt => " "}) %>  
 
-
+	 	</td>
+	</tr>
 	<tr>
 		<td class="label">
 			<% get_parties_by_type("Customer") %>
@@ -57,6 +66,14 @@
 			</td>
 	</tr>
 	<tr>
+		<td>
+			<% get_types_by_name("ship_status") %>
+			<label class=" label" for="ship_status">Shipment status<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>
+		</td>
+		<td>
+			<%= collection_select("shipment", "ship_status", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
+
+		</td>
 		<td class="label">
 			<% get_parties_by_type("Trucker") %>
 			<label class=" label" for="shipment">Trucker<abbr title="required"> </abbr>  </label> 
@@ -66,13 +83,21 @@
 				<%= collection_select("shipment", "trucker_id", @party_types, "id", "partyname", options = {:prompt => " "}) %>
 			<% end %>
 	 	</td>
-		<td>
-			<%= f.label :trucker_name, "Driver name*" %> 
-		</td>
-		<td>
-			<%= f.text_field :trucker_name %>
-		</td>
+
 	</tr>
+	
+	<tr>
+		<td colspan="2">
+		 
+			<div class="hintbase">	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		 	 
+		      	Invoices will be created when the ship status is "Shipped".			 
+			</div>
+		</td>
+ 
+	</tr>
+	
+	
+
 	
 	<tr>
 		<td>
@@ -150,7 +175,7 @@
 		<tr>
 			<td colspan="2">
 			<br>	&nbsp;&nbsp;&nbsp;&nbsp;
-			 	<%= f.submit "Update Shipment ", :class => "button" %>
+			 	<%= f.submit "Update Shipment ", :class => "button", :id => "sh_submit" %>
 			<br> <br> 
 			</td>
 			<td>

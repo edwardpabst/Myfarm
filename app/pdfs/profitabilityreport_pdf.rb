@@ -47,6 +47,7 @@ class ProfitabilityreportPdf < Prawn::Document
            
     elsif @report_version == "2"    #profitability analysis
       
+         @total_cost_acre = 0
          profitability_revenue_header
          
          rowcount = 0
@@ -80,7 +81,7 @@ class ProfitabilityreportPdf < Prawn::Document
          @types.each do |t|
             profitability_supply_items(@user_id, @view, @farm_id, @year, @start_date, @stop_date, t.type_value_string)
          end
-         profitability_supply_summary(@user_id, @view, @farm_id, @year, @start_date, @stop_date)
+         profitability_supply_summary(@user_id, @view, @farm_id, @year, @start_date, @stop_date )
          
          move_down 10
          text "<u>Labor costs per acre</u>", size: 8, style: :bold, :align => :left, :inline_format => true
@@ -102,6 +103,14 @@ class ProfitabilityreportPdf < Prawn::Document
          profitability_operating_cost2(@user_id, @view, @farm_id, @year, @start_date, @stop_date, '')
          profitability_cash_overhead2(@user_id, @view, @farm_id, @year, @start_date, @stop_date, '') 
          profitability_non_cash_overhead2(@user_id, @view, @farm_id, @year, @start_date, @stop_date, '')
+         
+         move_down 20
+         text "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------", 
+         size: 8, style: :bold, :align => :left, :inline_format => true
+          move_down 20
+         profitability_total_cost_acre(@user_id, @view, @farm_id, @year, @start_date, @stop_date, '')
+         profitability_revenue_summary(@user_id, @view, @farm_id, @year, @start_date, @stop_date)
+         profitability_net_position(@user_id, @view, @farm_id, @year, @start_date, @stop_date, '')
       
      elsif @report_version == "3"    #costs by month
        
@@ -254,6 +263,7 @@ class ProfitabilityreportPdf < Prawn::Document
     table profitability_revenue_summary_rows(user_id, view, farm_id, year, start_date, stop_date), :row_colors => [ "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
       row(0).height = 0
       columns(0).font_style = :bold
+      columns(0).size = 9
       columns(4).font_style = :bold
       columns(0).width = 130
       columns(1).width = 80
@@ -800,7 +810,9 @@ class ProfitabilityreportPdf < Prawn::Document
 
      Farmjob.profitability_operating_cost(user_id, view, farm_id, year, start_date, stop_date, task_stage).map do |item|
        ['Total Operating Cost /acre', ' ', ' ', ' ', cost(item.total_cost_acre)]  
+     
      end
+    
 
    end
 
@@ -875,6 +887,7 @@ class ProfitabilityreportPdf < Prawn::Document
 
         Farmjob.profitability_cash_overhead_summary(user_id, view, farm_id, year, start_date, stop_date, task_stage).map do |item|
           [ 'Total Cash Overhead','','','', cost(item.expense_amount_acre)]
+           
         end      
 
 
@@ -922,7 +935,7 @@ class ProfitabilityreportPdf < Prawn::Document
 
      rowcount = 0
 
-     table profitability_non_cash_overhead_summary_rows2(user_id, view, farm_id, year, start_date, stop_date, task_stage), :row_colors => [ "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
+     table profitability_non_cash_overhead_summary_rows2(user_id, view, farm_id, year, start_date, stop_date, task_stage ), :row_colors => [ "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
        row(0).font_style = :bold
 
        #row(0).height = 0
@@ -944,14 +957,87 @@ class ProfitabilityreportPdf < Prawn::Document
 
 
    end
-   def profitability_non_cash_overhead_summary_rows2(user_id, view, farm_id, year, start_date, stop_date, task_stage)
+   def profitability_non_cash_overhead_summary_rows2(user_id, view, farm_id, year, start_date, stop_date, task_stage )
 
         Farmjob.profitability_non_cash_overhead_summary(user_id, view, farm_id, year, start_date, stop_date, task_stage).map do |item|
           [ 'Total Non Cash Overhead','','','', cost(item.expense_amount_acre)]
+         
         end      
 
 
    end
+   
+    def profitability_total_cost_acre(user_id, view, farm_id, year, start_date, stop_date, task_stage)
+
+
+      rowcount = 0
+
+      table profitability_total_cost_acre_summary(user_id, view, farm_id, year, start_date, stop_date, task_stage), :row_colors => [ "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
+        row(0).font_style = :bold
+
+        #row(0).height = 0
+        columns(0).font_style = :bold
+        columns(0).size = 9
+        columns(4).font_style = :bold
+        columns(0).width = 130
+        columns(1).width = 80
+        columns(2).width = 80
+        columns(3..4).width = 100
+        columns(0).align = :left
+        columns(1).align = :right
+        columns(2).align = :left
+        columns(3..4).align = :right
+
+
+        self.header = false
+        rowcount += 1
+      end
+
+    end
+    def profitability_total_cost_acre_summary(user_id, view, farm_id, year, start_date, stop_date, task_stage)
+
+         Farmjob.profitability_total_cost_acre(user_id, view, farm_id, year, start_date, stop_date, task_stage).map do |item|
+           [ 'Total Cost Per Acre','','','', cost(item.total_cost_acre)]
+         end      
+
+
+    end
+    
+    def profitability_net_position(user_id, view, farm_id, year, start_date, stop_date, task_stage)
+
+
+      rowcount = 0
+
+      table profitability_net_position_summary(user_id, view, farm_id, year, start_date, stop_date, task_stage), :row_colors => [ "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
+        row(0).font_style = :bold
+
+        #row(0).height = 0
+        columns(0).font_style = :bold
+        columns(0).size = 9
+        columns(4).font_style = :bold
+        columns(0).width = 130
+        columns(1).width = 80
+        columns(2).width = 80
+        columns(3..4).width = 100
+        columns(0).align = :left
+        columns(1).align = :right
+        columns(2).align = :left
+        columns(3..4).align = :right
+
+
+        self.header = false
+        rowcount += 1
+      end
+
+    end
+    def profitability_net_position_summary(user_id, view, farm_id, year, start_date, stop_date, task_stage)
+
+         Farmjob.profitability_net_position(user_id, view, farm_id, year, start_date, stop_date, task_stage).map do |item|
+           [ 'Net Returns Above Cost','','','', cost(item.value_per_acre)]
+         end      
+
+    end
+    
   
   #-------------------------------------------------------------------------------------------------------------
   
