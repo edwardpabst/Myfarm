@@ -189,9 +189,9 @@ class ShipmentsController < ApplicationController
        @shipment.cropplan_id = @contract.cropplan_id
     end
     
-    if params[:shipment][:shipto_street] == ""
+    if params[:shipment][:shipto_street].blank? || params[:shipment][:shipto_street].nil?
       @party = Party.find(@shipment.customer_id)
-      if @party.ship_address1 == ""
+      if @party.ship_address1.blank? || @party.ship_address1.nil?
         #use mailing address
         @shipment.shipto_street = @party.partyaddress1
         @shipment.shipto_city = @party.partycity

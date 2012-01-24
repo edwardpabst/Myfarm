@@ -1,6 +1,6 @@
-<h1>Editing equipmentactivity</h1>
+<h1>Edit Maintenance Record</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @equipmentactivity %> |
-<%= link_to 'Back', equipmentactivities_path %>
+ 
+<%= link_to 'Back', :controller => "equipment",  :action => "edit", :id => session[:s_equipment_id]  %>

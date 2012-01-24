@@ -121,12 +121,13 @@ class UsersController < ApplicationController
       
     end
     
-    if @user.security_question != security_question
+    if @user.security_question.downcase.strip != security_question.downcase.strip
+    #logger.debug "USERPROFILE STEP 1 #{@user.security_question.strip}, #{security_question.strip}"
       @user.security_question = ""
       @user.security_answer = ""
       flash[:error] = "Incorrect question/answer "
       
-    elsif  @user.security_answer.downcase != security_answer.downcase
+    elsif  @user.security_answer.downcase.strip != security_answer.downcase.strip
 
        @user.security_question = ""
        @user.security_answer = ""
@@ -159,11 +160,12 @@ class UsersController < ApplicationController
     @title = "Following"
     @user = User.find(params[:id])
     #@users = @user.following.paginate(:page => params[:page], :per_page => 20)
-    @users = User.find_by_sql("Select users.id, name, email, partycity, partystate   
+ 
+    @users = User.find_by_sql("Select users.id, users.name, email, partycity, partystate   
     from users 
-    join relationships on users.id = relationships.follower_id
-    left join parties on users.id = parties.user_id
-    where relationships.followed_id = #{@user.id}").paginate(:page => params[:page], :per_page => 20)
+    join relationships on users.id = relationships.followed_id
+    left join parties on users.id = parties.system_user_id
+    where relationships.follower_id = #{@user.id} ").paginate(:page => params[:page], :per_page => 20)
     render 'show_follow'
   end
   
@@ -171,11 +173,12 @@ class UsersController < ApplicationController
     @title = "Followers"
     @user = User.find(params[:id])
     #@users = @user.followers.paginate(:page => params[:page], :per_page => 20)
-    @users = User.find_by_sql("Select users.id, name, email, partycity, partystate   
+
+    @users = User.find_by_sql("Select users.id, users.name, email, partycity, partystate   
     from users 
-    join relationships on users.id = relationships.followed_id
-    left join parties on users.id = parties.user_id
-    where relationships.follower_id = #{@user.id}").paginate(:page => params[:page], :per_page => 20)
+    join relationships on users.id = relationships.follower_id
+    left join parties on users.id = parties.system_user_id
+    where relationships.followed_id = #{@user.id} ").paginate(:page => params[:page], :per_page => 20)
     render 'show_follow'
   end
   

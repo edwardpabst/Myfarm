@@ -6,51 +6,152 @@ function loadFake() {
 }
 </script>
 
-<%= semantic_form_for @equipment, :html => {:name => "eq", :multipart => true }  do |f| %>
-<br>
+<%= form_for @equipment, :html => { :name => "eq", :multipart => true } do |f| %>
+ 
 <%= render "shared/error_messages", :object => f.object%>
-  <%= f.inputs do %>
-    <%= f.input :description, :label => "Description",  :required => true  %>
-    <% get_types_by_name("equipment_category") %>
- <li class="string input optional stringish">
-	<label class=" label" for="category">Category<abbr title="required"> </abbr>  </label>		
-	<%= collection_select("equipment", "category", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	
- </li>
-    <%= f.input :make , :label => "Make",  :required => false %>
-    <%= f.input :model , :label => "Model",  :required => false %>
-    <%= f.input :year , :label => "Year",  :required => false %> 
-	<%= f.input :serial_number , :label => "Serial number",  :required => false %> 
-	<%= f.input :cost_unit , :label => "Unit cost",  :required => true %>
-	<%= f.input :cost_unit_hour , :label => "Cost_per_hour",  :required => true %>
-    <%= f.input :rate_per_hour , :label => "Rate_per_hour",  :required => true %>
-    <%= f.input :width, :label => "Width",  :required => false  %>
+ 
 
-    <%= f.input :frequency_hours , :label => "Service frequency/hours",  :required => false %>
+ <table class="twocolumn">
+ 
+	<tr>
+		<td colspan="5">
+			<div id="form_header">			 	 
+	       Define your equipment. You can view your equipment activity and generate maintenance activities. 		 
+			</div>
+		</td>
+	</tr>
+  		<tr>
+		    <td  width="25%">
+			<%= f.label :description, "Description" %>  
+		 	</td>
+			<td  width="25%">
+			<%= f.text_field :description %> 
 
-	<div class="fileinputs">
-		
-		<%= f.file_field :photo, :class => 'file', :onchange => 'loadFake()'  %>
+		  </td>
+			<td width="25%">
+				<label class=" label" for="category">Category<abbr title="required"> </abbr>  </label>
+			</td>
+			<td  width="20%">
+				<% get_types_by_name("equipment_category") %>
+	<%= collection_select("equipment", "category", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %></td>
 	
-		<div class="fakefile">		 	
-			<label class=" label" for="category">Photo <abbr title="required"> </abbr>  </label>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<td width="5%">
+			
+		</td>
+
+		</tr>
+  		<tr>
+		    <td>
+			 <%= f.label :make, "Make" %>
+		 	</td>
+			<td>
+		 		<%= f.text_field :make %> 
+		    </td>
+			<td>
+				<%= f.label :model, "Model" %>
+			</td>
+			<td>
+				<%= f.text_field :model %> 
+			</td>
+
+		</tr>
+  		<tr>
+		    <td>
+			 <%= f.label :year, "Year" %>
+		 	</td>
+			<td>
+		 		<%= f.text_field :year %> 
+		    </td>
+			<td>
+				<%= f.label :serial_number, "Serial number" %>
+			</td>
+			<td>
+				<%= f.text_field :serial_number%> 
+			</td>
+		</tr>
+  		<tr>
+		    <td>
+			 <%= f.label :cost_unit, "Purchase cost" %>
+		 	</td>
+			<td>
+		 		<%= f.text_field :cost_unit %> 
+		    </td>
+			<td>
+				<%= f.label :cost_unit_hour, "Cost per hour" %>
+			</td>
+			<td>
+				<%= f.text_field :cost_unit_hour%> 
+			</td>
+		</tr>
+  		<tr>
+		    <td>
+			 <%= f.label :rate_per_hour, "Usage rate/hour" %>
+		 	</td>
+			<td>
+		 		<%= f.text_field :rate_per_hour %> 
+		    </td>
+			<td>
+				<%= f.label :width, "Width" %>
+			</td>
+			<td>
+				<%= f.text_field :width%> 
+			</td>
+		</tr>
+  		<tr>
+		    <td>
+			 <%= f.label :frequency_hours, "Service frequency/hours" %>
+		 	</td>
+			<td>
+		 		<%= f.text_field :frequency_hours %> 
+		    </td>
+			<td>
+				<%= f.label :photo, "Photo upload" %>
+			</td>
+			<td>
+				<div class="fileinputs">
+
+					<%= f.file_field :photo, :class => 'file', :onchange => 'loadFake()'  %>
+
+					<div class="fakefile">		 	
+ 
+						<input id="fake_input" class="input_medium"/>
 					
-			<input id="fake_input" class="input_medium"/>
-			<%= image_tag "combo_select.gif" %>
-		 
-		</div>
-	</div>
-	
 
-  <% end %>
-  <br><br>
-  <%= f.buttons do %>
-     <%= f.commit_button :label => "Update Equip", :button_html => { :class => "button" } %>
-  <% end %>
-<br>
- <% if !@equipment.photo.url.blank?   %>
-	<%= image_tag @equipment.photo.url(:large) %><br><br>
- <% end %>
+					</div>
+					
+				</div>
+			</td>
+			<tr>
+			    <td>
+				 <%= f.label "", "Hours until next service:" %>
+			 	</td>
+				<td>
+					<% hours_to_service %>
+			 		<%= @to_service_hours %> 
+			    </td>
+			    <td colspan="2">
+				 <div class="hintbase">
+					Click on input box to select your photo.
+				 </div>
+			 	</td>
+			</tr>
+		</tr>
+			<td colspan="1">
+				<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 	<%= f.submit " Update ", :class => "button", :id => "eqsubmit" %><br><br>
+			</td>
+			<td colspan="3">
+			<% if !@equipment.photo.url.blank?   %>
+			<%= image_tag @equipment.photo.url(:medium) %> 
+			</td>
+		 <% end %>
+		</tr>
+
+</table>
+
 
 <% end %>
+ 
+
+
+ 

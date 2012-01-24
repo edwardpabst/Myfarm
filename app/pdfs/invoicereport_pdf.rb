@@ -25,20 +25,26 @@ class InvoicereportPdf < Prawn::Document
       text "by iFarmService", size: 8, style: :normal, :align => :right
       fill_color "404040"
       
-      image "/users/edwardpabst/rails_projects/myfarm/public/images/serresbanner.png", :at => [0, 700], :width => 160, :height => 32
-      
+      #image "/users/edwardpabst/rails_projects/myfarm/public/images/serresbanner.png", :at => [0, 700], :width => 160, :height => 32
+
       text "Invoice", size: 12, style: :bold, :align => :center
       
       #Date and invoice number
       draw_text  "Date ", size: 8, style: :normal,
                               :at => [420, 690] 
-      draw_text  "#{inv.invoice_date}", size: 8, style: :normal,
+      draw_text  "#{inv.invoice_date.to_formatted_s(:long)}", size: 8, style: :normal,
                               :at => [500, 690]                 
   
       draw_text  "Invoice No.", size: 8, style: :normal,
                   :at => [420, 680] 
       draw_text  "#{inv.invoice_number}", size: 8, style: :normal,
                   :at => [500, 680]
+      
+      fill_color "A7C6D6"
+      font("Helvetica") do
+        text "#{inv.billname}", size: 20, style: :italic, :align => :left
+      end
+      fill_color "404040"
 
       #Billing source info
       draw_text  "#{inv.billname}", size: 8, style: :normal,
@@ -107,7 +113,7 @@ class InvoicereportPdf < Prawn::Document
   end
   
   def invoice_totals(inv)
-    @types = Type.get_types_by_name(inv.invoice_terms, @user_id)
+    @types = Type.get_terms_by_name("#{inv.invoice_terms}", @user_id)
     @term_days = 0
     @types.each do |t|
       @term_days = t.type_value_integer
@@ -118,7 +124,7 @@ class InvoicereportPdf < Prawn::Document
     
     [["Sales person", "Shipped Amount",  "Shipping Charge" ,  "Total Amount Due" , "Terms", "Due Date"]] +
     Invoice.get_invoice_total_record(inv.id).map do |item|
-      [item.brokername, cost(item.ship_amount), cost(item.ship_charge), cost(item.total_amount),  item.invoice_terms, @duedate]
+      [item.brokername, cost(item.ship_amount), cost(item.ship_charge), cost(item.total_amount),  item.invoice_terms, @duedate.to_formatted_s(:long)]
     end
   end
   

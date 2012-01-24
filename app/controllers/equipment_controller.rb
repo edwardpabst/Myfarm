@@ -3,7 +3,7 @@ class EquipmentController < ApplicationController
   # GET /equipment.xml
   before_filter :authenticate
 
-  #-------supplies index----------------------------------------------------------------------------
+  #-------equipment index----------------------------------------------------------------------------
       def index_view
 
 
@@ -63,7 +63,77 @@ class EquipmentController < ApplicationController
     				@tid = @id
     		end 
     	end 
-  
+ 
+      #-------equipment jobs index----------------------------------------------------------------------------
+          def equipmentjob_view
+
+
+          end
+
+          def equipmentjob_data
+
+            get_current_user
+            @equipmentjobs = Equipment.find_by_sql(" Select fje.id, description, taskdescription, start_date, qty_actual as usage_hours
+                         from farmjobequipments fje
+                         join equipment eq on fje.equipment_id = eq.id
+                         join farmjobs fj on fje.farmjob_id = fj.id
+                         join fieldtasks ft on fj.fieldtask_id = ft.id
+                         where fj.job_status = 'Job complete' 
+                         and fje.user_id = #{@current_user.id}
+                         and fje.equipment_id = #{session[:s_equipment_id]}
+                         order by start_date") 
+
+            #logger.debug "FARMJOBLABOR #{@farmjoblabors.size}" 
+   
+          end
+
+          def equipmentjob_dbaction
+
+     
+        	end 
+
+          #-------equipment activity index----------------------------------------------------------------------------
+              def equipmentactivity_view
+
+
+              end
+
+              def equipmentactivity_data
+
+                get_current_user
+                @equipmentactivities = Equipmentactivity.find_by_sql(" Select ea.id, activity, activity_date, 
+                              service_cost, activity_type
+                             from equipmentactivities ea
+                             join equipment eq on ea.equipment_id = eq.id
+                             where ea.user_id = #{@current_user.id}
+                             and ea.equipment_id = #{session[:s_equipment_id]}
+                             order by activity_date")
+                #logger.debug "FARMJOBLABOR #{@farmjoblabors.size}" 
+                #logger.debug "SESSION_JOBS_ID #{session[:s_farmjob_id]}"
+
+              end
+
+              def equipmentactivity_dbaction
+
+
+            		@mode = params["!nativeeditor_status"]
+
+            		@id = params["gr_id"]
+            		case @mode
+
+            			when "deleted"
+            				@equipmentactivity = Equipmentactivity.find(@id)
+            				@equipmentactivity.destroy
+
+            				@tid = @id
+            			when "updated"
+
+
+            				@tid = @id
+            		end 
+            	end 
+
+
   #---------standard ROR scaffold ---------------------------------------------------------------- 
  
   
@@ -103,6 +173,7 @@ class EquipmentController < ApplicationController
   # GET /equipment/1/edit
   def edit
     @equipment = Equipment.find(params[:id])
+    session[:s_equipment_id] = @equipment.id
   end
 
   # POST /equipment

@@ -34,9 +34,9 @@ class Invoice < ActiveRecord::Base
                      
                      def self.get_ready_invoices(user_id, customer_id, start_date,  stop_date, invoice_number, reprint, sort_sequence)
                        sql_statement = "Select inv.id, inv.shipment_id, p1.partyname, p1.partyaddress1, p1.partycity, p1.partystate, 
-                                                p1.partypostalcode, p1.partyphone, p1.partyemail,p1.ship_address1, 
-                                                p1.ship_city, p1.ship_state, p1.ship_postalcode, p1.ship_phone,
-                                               p2.partyname as billname, p2.partyaddress1 as billaddress, 
+                                                p1.partypostalcode, p1.partyphone, p1.partyemail,sh.shipto_street as ship_address1, 
+                                               sh.shipto_city as ship_city, sh.shipto_state as ship_state, sh.shipto_postalcode as ship_postalcode, 
+                                               p1.ship_phone, p2.partyname as billname, p2.partyaddress1 as billaddress, 
                                                p2.partycity as billcity, p2.partystate as billstate, 
                                                p2.partypostalcode as billpostalcode, p2.partyphone as billphone, 
                                                p2.partyemail as billemail, p3. partyname as brokername,

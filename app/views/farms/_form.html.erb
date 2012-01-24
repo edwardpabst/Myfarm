@@ -38,14 +38,17 @@ function loadFake() {
 			<label class=" label" for="category">Logo <abbr title="required"> </abbr>  </label>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					
+				
 			<input id="fake_input" class="input_medium"/>
+			
+
 			<%= image_tag "combo_select.gif" %>
 		 
 		</div>
 	</div>
   <% end %>
 <br />
+ 
   <%= f.buttons do %>
     <%= f.commit_button :label => "Update Farm", :button_html => { :class => "button" }%>
   <% end %>

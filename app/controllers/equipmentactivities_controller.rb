@@ -41,10 +41,12 @@ class EquipmentactivitiesController < ApplicationController
   # POST /equipmentactivities.xml
   def create
     @equipmentactivity = Equipmentactivity.new(params[:equipmentactivity])
+    @equipmentactivity.user_id = session[:s_user_id]
+    @equipmentactivity.equipment_id = session[:s_equipment_id]
 
     respond_to do |format|
       if @equipmentactivity.save
-        format.html { redirect_to(@equipmentactivity, :notice => 'Equipmentactivity was successfully created.') }
+        format.html { redirect_to(:controller => "equipment",  :action => "edit", :id => session[:s_equipment_id] , :notice => 'Equipmentactivity was successfully created.') }
         format.xml  { render :xml => @equipmentactivity, :status => :created, :location => @equipmentactivity }
       else
         format.html { render :action => "new" }
@@ -60,7 +62,7 @@ class EquipmentactivitiesController < ApplicationController
 
     respond_to do |format|
       if @equipmentactivity.update_attributes(params[:equipmentactivity])
-        format.html { redirect_to(@equipmentactivity, :notice => 'Equipmentactivity was successfully updated.') }
+        format.html { redirect_to(:controller => "equipment",  :action => "edit", :id => session[:s_equipment_id] , :notice => 'Equipmentactivity was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

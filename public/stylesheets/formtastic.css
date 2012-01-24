@@ -204,6 +204,7 @@ This stylesheet forms part of the Formtastic Rails Plugin
   left-margin: 8em;
   background-color:#FFF8C6;
   font-style: italic;
+  font-size: 90%;
   padding-left: 10px;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;

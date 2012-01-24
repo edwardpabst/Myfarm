@@ -5,18 +5,18 @@
 			<tr>
 				<td>
 					
-	  				<a href= "<%= following_user_path(@current_user.id) %>">
+	  				<a href= "<%= followers_user_path(@current_user.id) %>">
 		 
-						<span id="following" class="stats">
-							<%= @current_user.following.count %> following me
+						<span id="followers" class="stats">
+							<%= @current_user.followers.count %> Following me
 						</span> 
 					</a>
  					<br>
 					
-					<a href= "<%= followers_user_path(@current_user.id) %>">
+					<a href= "<%= following_user_path(@current_user.id) %>">
 		 
-						<span id="followers" class="stats">
-							<%=  @current_user.followers.count %>  I'm following 
+						<span id="following" class="stats">
+							<%= @current_user.following.count %>  I'm following 
 						</span> 
 					</a>
 				</td>

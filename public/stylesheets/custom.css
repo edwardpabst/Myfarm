@@ -75,7 +75,7 @@ section h1 {
 #form_header{
 	
 	width: 99%;
-	font-size:100%;
+	font-size:90%;
 	font-weight:normal;
 	font-style: italic;
     color: slategray;
@@ -150,6 +150,11 @@ section h1 {
 
 }
 
+.valign_top{
+	vertical-align:top;	
+
+}
+
 .community {
 	color: teal;
 }
@@ -185,6 +190,7 @@ section h1 {
 }
 
 .hintbase {
+  font-size: 90%;
   color:#666;
   left-margin: 8em;
   background-color:	#FFF8C6;
@@ -267,7 +273,7 @@ padding:2px 2px 2px 2px;
 #homepageh1 {
 	padding-left:10px;
 	vertical-align: top;
-	font-size: 24px;
+	font-size: 20px;
 	color: orange;
 	background-color:white;
 }

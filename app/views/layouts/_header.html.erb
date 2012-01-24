@@ -145,7 +145,7 @@
 			</div>
 			<div id="submenu4" class="round">
 				<div class="menugroup">
-					Farm network &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+					Farm social network &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
 					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 				</div>
 				 <a href="/users">Farm community </a>
@@ -155,8 +155,9 @@
 					Utilities &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
 				</div>
+				<%= link_to "Manage Settings and Subscription", edit_user_path(@current_user.id) %>
 			    <a href="/typeview">Maintain data types </a>
-				<a href="http://www.weather.com/weather/local/<%= get_user_postal_code %>">View Weather</a>
+				<a href="#" onclick="weatherpopup()">Weather</a>
 				<a href="#" onclick="newspopup()">Ag News</a> 
 				<a href="#" onclick="sustainablepopup()">Sustainable Agriculture project</a>
 				<a href="#" onclick="usdapopup()">U.S. Department of Agriculture</a>

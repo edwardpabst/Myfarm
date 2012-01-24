@@ -1,0 +1,111 @@
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<b>Equipment Maintenance Records</b> 
+<br>
+
+<!-- Div for capture of grid output -->
+ <div id="equipmentactivity_grid" style="width:380px; height:300px;">
+
+ </div>
+
+<!-- script for dhtmlxgrid -->
+ <script type="text/javascript" charset="utf-8">
+
+	// data grid definition
+     var equipmentactivitygrid = new dhtmlXGridObject("equipmentactivity_grid");
+     equipmentactivitygrid.setImagePath("/images/");
+     equipmentactivitygrid.setHeader("Maintenance activity, Date, Cost, Type");  
+     equipmentactivitygrid.setInitWidths("140, 80, 70, 90");
+     equipmentactivitygrid.setSkin("dhx_web");
+     equipmentactivitygrid.init();
+	 equipmentactivitygrid.load("/equipmentactivitydata");  	
+	 equipmentactivitygrid.attachHeader("#text_filter,#text_filter,,#text_filter");  
+	 equipmentactivitygrid.setColSorting("str,str,str,str");	 
+	 equipmentactivitygrid.setColTypes("ro,ro,ro,ro"); // ed-editable, ro-read only price-money , ch-checkbox, 
+											// txt-text editor ra-radio button, coro-select box, img, dhxcalendar 
+											//  subrow (ajax)	 
+	// data processor definition
+	dp = new dataProcessor("/equipmentactivitygridaction");
+	//dp.setTransactionMode("POST", true);
+	//set mode as send-all-by-post;
+	//dp.setUpdateMode("on");
+	dp.init(equipmentactivitygrid);
+		// in grid validations
+	//	dp.setVerificator(0, not_empty);
+	//	dp.setVerificator(1, not_empty);
+	//	dp.setVerificator(2, not_empty);
+
+	
+	// handle XML errors	
+	function myErrorHandler(type,name,p){
+		alert('Error. The record was not updated. Click OK to view the error.')
+		//	window.location = "/parties_view"
+	}
+
+
+	// remove row from grid and database
+    function removeEquipmentactivityRow(){
+	
+		var selId = equipmentactivitygrid.getSelectedId()
+	
+		if (selId < 1)
+			{
+			 alert("No record was selected for deletion");	
+			}
+		else
+			{
+		var r=confirm("Are you sure you want to delete this record?");
+		if (r==true)
+		  {
+			
+	        equipmentactivitygrid.deleteRow(selId);
+		  	alert("Record deleted");
+		  }
+		else
+		  {
+		  alert("Delete cancelled");
+		  }
+		}
+	  }
+
+	// in grid validation for required string
+	function not_empty(value) {
+	    return value != "";
+	}
+	// in grid validation for required integer
+	function greater_0(value) {
+	    return value > 0;
+	}
+	
+	// branch to rails for record addition
+	function newEquipmentactivity() {
+	// branch to add new crop
+	    window.location = "/equipmentactivities/new";
+	}
+	// branch to rails for edit record
+	function editEquipmentactivity() {
+	// edit selected crop
+	var selId = equipmentactivitygrid.getSelectedId()
+	if (selId < 1)
+		{
+		 alert("No record was selected for full edit");	
+		}
+	else {
+	    window.location = "/equipmentactivities/"+selId+"/edit";
+		}
+	}
+	
+
+ 	
+ </script>
+
+<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 
+<button type="button" value="New", onclick="newEquipmentactivity()">Add</button>
+<button type="button" value="Edit", onclick="editEquipmentactivity()">Edit</button>
+<input type="button" value="Delete"  class="button" onclick="removeEquipmentactivityRow()">
+<br><br> 
+

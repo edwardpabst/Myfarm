@@ -7,8 +7,10 @@ class Equipment < ActiveRecord::Base
   
   has_many :farmjobequipments
   
-  has_attached_file :photo, :styles => { :large=> "700x700>", :medium => "300x300>", :thumb => "120x120>" }
+  has_attached_file :photo, :styles => { :large=> "700x700>", :medium => "260x300>", :thumb => "120x120>" }
  
   	      
   validates_presence_of :description,  :category, :cost_unit, :cost_unit_hour , :rate_per_hour
+  
+
 end

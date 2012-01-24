@@ -11,7 +11,7 @@ class Shipment < ActiveRecord::Base
   has_many :cropplans
   has_many :parties
   has_many :shipmentdetails , :dependent => :destroy
- 
+  has_many :invoices, :dependent => :destroy
    
  
   	      

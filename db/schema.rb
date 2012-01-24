@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120119221753) do
+ActiveRecord::Schema.define(:version => 20120123075627) do
 
   create_table "contracts", :force => true do |t|
     t.integer  "party_id"
@@ -111,6 +111,8 @@ ActiveRecord::Schema.define(:version => 20120119221753) do
     t.string   "service_notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_fullservice"
+    t.string   "activity_type"
   end
 
   create_table "events", :force => true do |t|
@@ -368,9 +370,11 @@ ActiveRecord::Schema.define(:version => 20120119221753) do
     t.string   "ship_phone"
     t.string   "partyweatherpostalcode"
     t.integer  "farm_id"
+    t.integer  "system_user_id"
   end
 
   add_index "parties", ["country_id"], :name => "index_parties_on_country_id"
+  add_index "parties", ["system_user_id"], :name => "index_parties_on_system_user_id"
   add_index "parties", ["user_id"], :name => "index_parties_on_user_id"
 
   create_table "partyroles", :force => true do |t|

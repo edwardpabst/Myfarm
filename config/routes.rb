@@ -241,6 +241,14 @@ Myfarm::Application.routes.draw do
   match '/farmexpenseview', :to => 'farmexpenses#index_view'
   match '/farmexpensedata', :to => 'farmexpenses#index_data'
   match '/farmexpensegridaction', :to => 'farmexpenses#index_dbaction'
+  #Equipmentjobs
+  match '/equipmentjobview', :to => 'equipment#equipmentjob_view'
+  match '/equipmentjobdata', :to => 'equipment#equipmentjob_data'
+  match '/equipmentjobgridaction', :to => 'equipment#equipmentjob_dbaction'
+  #Equipmentactivity
+  match '/equipementactivityview', :to => 'equipment#equiementactivity_view'
+  match '/equipmentactivitydata', :to => 'equipment#equipmentactivity_data'
+  match '/equipmentactivitygridaction', :to => 'equipment#equipmentactivity_dbaction'
   
   #Reports
    match '/farmjobreportrequestor', :to => 'farmjobs#farmjob_report_requestor'

@@ -120,16 +120,23 @@ class PartiesController < ApplicationController
     if @party.partyname.blank?
       @party.partyname = @party.partyfirstname + " " +@party.partylastname
     end
-    if @party.ship_address1.blank? 
+    if @party.ship_address1.blank? || @party.ship_address1.nil?
       @party.ship_address1 = @party.partyaddress1
       @party.ship_address2 = @party.partyaddress2
       @party.ship_city = @party.partycity
       @party.ship_state = @party.partystate
       @party.ship_postalcode = @party.partypostalcode
+      @party.ship_phone = @party.partyphone
     end
        
         @party.user_id = session[:s_user_id]
-  	  
+  	    session[:s_user_email] = nil
+  	    
+  	    if session[:s_is_new_user] == true
+  	      @party.system_user_id = session[:s_user_id]
+  	    else
+  	      @party.system_user_id = 0
+  	    end
 
     respond_to do |format|
       if @party.save
@@ -185,6 +192,7 @@ class PartiesController < ApplicationController
     @user = User.find(session[:s_user_id].to_i)
     @user.party_id = id
     @user.save
+     
   end
   
 

@@ -13,6 +13,7 @@ class TypesController < ApplicationController
         get_current_user
         @types = Type.find_by_sql("Select types.id, typename, type_value_string, type_value_integer, type_boolean, type_isprotected
         from types
+        where user_id = #{@current_user.id}
         order by typename ")
         
        # logger.debug "**** TYPES FILE ****** #{@types.size}" 

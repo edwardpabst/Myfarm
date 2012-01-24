@@ -1,0 +1,10 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@equipmentjobs.each do |ej|
+		xml.tag!("row",{ "id" => ej.id }) do
+			xml.tag!("cell", ej.taskdescription)
+			xml.tag!("cell", ej.start_date)
+			xml.tag!("cell", ej.usage_hours)
+		end
+	end
+end

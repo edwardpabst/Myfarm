@@ -13,6 +13,7 @@ class Farmjob < ActiveRecord::Base
   has_many :farmjobsupplies, :dependent => :destroy
   has_many :farmjoblabors, :dependent => :destroy
   has_many :farmjobequipments, :dependent => :destroy
+  has_many :events, :dependent => :destroy
   
   has_many :supplies, :through => :farmjobsupplies 
   has_many :equipment, :through => :farmjobequipments
@@ -271,9 +272,10 @@ class Farmjob < ActiveRecord::Base
 
          end
          
-         def self.get_types_by_name(name)
+         def self.get_types_by_name(name, user_id)
           return Type.find_by_sql("Select type_value_string from types 
                                    where typename = 'task_stage'
+                                   and user_id = #{user_id}
                                    order by type_value_integer")
          end
          

@@ -10,14 +10,11 @@ require 'rails/all'
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 
- #require "ruport/util"
-# require 'country_select'
 
 module Myfarm
   class Application < Rails::Application
  
-     #require "ruport"
-     #require "ruport/acts_as_reportable"
+   
     
      config.autoload_paths += %W( #{::Rails.root.to_s}/app/reports )
      

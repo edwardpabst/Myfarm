@@ -33,7 +33,7 @@ class ProfitabilityreportPdf < Prawn::Document
             rowcount += 1
           end
         
-        @types = Farmjob.get_types_by_name("task_stage")
+        @types = Farmjob.get_types_by_name("task_stage", @user_id)
      
         @types.each do |t|
            profitability_cost_items(@user_id, @view, @farm_id, @year, @start_date, @stop_date, t.type_value_string)
@@ -76,7 +76,7 @@ class ProfitabilityreportPdf < Prawn::Document
          move_down 10
          text "<u>Supply costs per acre</u>", size: 8, style: :bold, :align => :left, :inline_format => true
          
-         @types = Farmjob.get_types_by_name("task_stage")
+         @types = Farmjob.get_types_by_name("task_stage", @user_id)
          
          @types.each do |t|
             profitability_supply_items(@user_id, @view, @farm_id, @year, @start_date, @stop_date, t.type_value_string)
@@ -727,7 +727,7 @@ class ProfitabilityreportPdf < Prawn::Document
   end
   def profitability_total_cost_summary_rows(user_id, view, farm_id, year, start_date, stop_date, task_stage)
  
-    Farmjob.profitability_total_cost_summary(user_id, view, farm_id, year, start_date, stop_date, task_stage).map do |item|
+    Farmjob.profitability_total_cost_acre(user_id, view, farm_id, year, start_date, stop_date, task_stage).map do |item|
       ['Total Cost /acre',' ', ' ', 
         ' ', ' ', cost(item.total_cost_acre)]  
     end

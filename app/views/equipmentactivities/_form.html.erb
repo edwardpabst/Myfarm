@@ -1,14 +1,23 @@
 <%= semantic_form_for @equipmentactivity do |f| %>
   <%= f.inputs do %>
-    <%= f.input :equipment_id %>
-    <%= f.input :user_id %>
-    <%= f.input :activity %>
-    <%= f.input :activity_date %>
-    <%= f.input :service_cost %>
-    <%= f.input :service_notes %>
-  <% end %>
 
-  <%= f.buttons do %>
-    <%= f.commit_button %>
+<br>
+    <%= f.input :activity %>
+ <li class="string input optional stringish"> 
+	<% get_types_by_name("activity_type") %>
+	<label class=" label" for="activity_type">Activity type<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("equipmentactivity", "activity_type", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %></li>
+    <%= f.input :activity_date, :as => :string %>  
+    <%= f.input :service_cost, :required => false %>
+ <li class="valign_top"> 
+   	<%= f.label :service_notes, "Notes" %>  
+    <%= f.text_area :service_notes %>
+ </li>
+
   <% end %>
+<br>
+  <%= f.buttons do %>
+    <%= f.commit_button :label => "Update record", :button_html => { :class => "button" } %>
+  <% end %>
+<br>
 <% end %>

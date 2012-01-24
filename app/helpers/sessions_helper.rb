@@ -27,6 +27,7 @@ module SessionsHelper
     get_current_user
     set_current_parms
     session[:s_is_new_user] = true
+    create_base_data(@current_user.id)
   end
   
   def set_current_user_data
@@ -35,22 +36,57 @@ module SessionsHelper
     session[:s_is_new_user] = false
   end
   
+  def create_base_data(user_id)
+    #replicate types table with new user id
+    @types = Type.find_by_sql("select * from types where user_id = 1")
+    @types.each do |t|
+      @newtype = Type.new
+      @newtype.user_id = user_id 
+      @newtype.typename = t.typename
+      @newtype.type_value_string = t.type_value_string
+      @newtype.type_value_integer = t.type_value_integer
+      @newtype.type_boolean = t.type_boolean
+      @newtype.type_isprotected = t.type_isprotected
+      @newtype.save
+    end
+    
+    #replicate fieldtasks table with new user id
+    @fieldtasks = Fieldtask.find_by_sql("select * from fieldtasks where user_id = 1")
+    @fieldtasks.each do |t|
+      @newfieldtask = Fieldtask.new
+      @newfieldtask.user_id = user_id 
+      @newfieldtask.taskdescription = t.taskdescription
+      @newfieldtask.task_type = t.task_type
+      @newfieldtask.task_stage = t.task_stage
+      @newfieldtask.task_notes = t.task_notes
+      @newfieldtask.task_frequency_days = t.task_frequency_days
+      @newfieldtask.task_duration_days = t.task_duration_days
+      @newfieldtask.save
+    end
+    
+  end
+  
   def set_current_parms
     session[:s_user_id] = @current_user.id
     session[:s_user_name] = @current_user.name
-    session[:s_user_email] = @current_user.email
+    if session[:s_is_new_user] == true
+      session[:s_user_email] = @current_user.email
+    else
+      session[:s_user_email] = nil
+    end
   end
 
   
   def sign_out
     cookies.delete(:remember_token)
+    cookies.delete(:s_is_new_user)
     @current_user = nil
-    session[:s_user_id] = nil
-    session[:s_user_name] = nil
-    session[:s_user_email] = nil
-    session[:s_is_new_user] = nil
-    session[:email] = nil
-    session[:password] = nil
+    cookies.delete(:s_user_id)
+    cookies.delete(:s_user_name)
+    cookies.delete(:s_user_email)
+    cookies.delete(:s_is_new_user)
+    cookies.delete(:email)
+    cookies.delete(:password)
   end
   
   
@@ -98,6 +134,7 @@ module SessionsHelper
   end
   
   def get_types_by_name(name)
+    get_current_user
    @types = Type.where('typename' => name, 'user_id' => @current_user.id).order('type_value_string').all
   end
   
@@ -226,6 +263,48 @@ module SessionsHelper
         
       end
      
+   end
+   
+   
+   def hours_to_service
+     @to_service_hours = 0
+     @equipment = Equipment.find(session[:s_equipment_id])
+     @activity = Equipmentactivity.find_by_sql("Select activity_date
+                                from equipmentactivities
+                                where user_id = #{session[:s_user_id]}
+                                and equipment_id = #{session[:s_equipment_id]}
+                                and activity_type = 'full service'
+                                order by activity_date desc
+                                limit 1")
+                              
+     @activity.each do |a|  
+       @activity_date = a.activity_date
+     end
+     
+     if !@activity_date.nil?
+         @farmjobequipment = Farmjobequipment.find_by_sql(" Select sum(qty_actual) as usage_hours
+                                                 from farmjobequipments fje
+                                                 join equipment eq on fje.equipment_id = eq.id
+                                                 join farmjobs fj on fje.farmjob_id = fj.id
+                                                 where fj.job_status = 'Job complete' 
+                                                 and fje.user_id = #{@current_user.id}
+                                                 and fje.equipment_id = #{session[:s_equipment_id]}
+                                                 and start_date >= '#{@activity_date}'")
+        @usage_hours = 0
+        @farmjobequipment.each do |fe|
+          @usage_hours += fe.usage_hours.to_f
+        end
+        #logger.debug "HOURS TO SERVICE CALCULATION:- #{@equipment.frequency_hours} - #{@usage_hours} "
+        if @equipment.frequency_hours.nil? ||  @equipment.frequency_hours.blank?
+           @frequency_hours = 0
+        else
+           @frequency_hours = @equipment.frequency_hours
+        end
+        @to_service_hours = @frequency_hours - @usage_hours
+      else
+        @to_service_hours = @frequency_hours 
+    
+      end
    end
 
 
