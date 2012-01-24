@@ -1,6 +1,6 @@
 class RecreateParties < ActiveRecord::Migration
   def self.up
-
+    drop_table :parties
      
     create_table :parties do |t|
       t.integer :user_id
