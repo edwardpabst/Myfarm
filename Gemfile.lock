@@ -115,7 +115,6 @@ GEM
       rspec (~> 2.0.0)
     simple-navigation (3.3.3)
       activesupport (>= 2.3.2)
-    sqlite3-ruby (1.2.5)
     stripe (1.5.25)
       rest-client (~> 1.4)
     therubyracer (0.9.9)
@@ -152,7 +151,6 @@ DEPENDENCIES
   rspec (= 2.0.1)
   rspec-rails (= 2.0.1)
   simple-navigation (~> 3.3.3)
-  sqlite3-ruby (= 1.2.5)
   stripe
   therubyracer
   webrat
