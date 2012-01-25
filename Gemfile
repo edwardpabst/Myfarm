@@ -4,16 +4,15 @@ gem 'rails', '3.0.7'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
+# not used in heroku
 
-#gem 'sqlite3'
-#gem 'sqlite3-ruby', '1.2.5', :require => 'sqlite3'
 gem 'pg'
 gem 'taps'
 
 #web server for heroku
 group :production do
   gem 'thin'
-end  
+end
 
 gem 'gravatar_image_tag', '0.1.0'
 gem 'will_paginate', '3.0.pre2'
