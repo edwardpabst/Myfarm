@@ -121,7 +121,7 @@ Myfarm::Application.routes.draw do
   match '/delete', :to => 'microposts#destroy'
   match '/fieldtasks/fieldtask_supplies', :to => 'fieldtasks#fieldtask_supplies'
   match '/fieldtasksupplies', :to => 'fieldtasks#fieldtask_supplies'
-  match '/images', :to => '~/public#images'
+ 
 
   
   #routes for dthmlxgrid processing
