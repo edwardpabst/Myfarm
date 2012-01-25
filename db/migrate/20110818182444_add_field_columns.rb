@@ -1,7 +1,6 @@
 class AddFieldColumns < ActiveRecord::Migration
   def self.up
-    
-    remove_column :fields, :country_id
+
     add_column :fields, :country_id, :integer
    
  
@@ -10,7 +9,7 @@ class AddFieldColumns < ActiveRecord::Migration
 
   def self.down
   
-
+    remove_column :fields, :country_id
     
  
   end
