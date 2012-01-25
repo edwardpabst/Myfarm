@@ -1,5 +1,6 @@
 class AddCropIndexes < ActiveRecord::Migration
   def self.up
+    # additional columns
     add_column :crops, :user_id, :integer
     add_column :crops, :crop_uom, :string
     add_column :crops, :price_per_uom, :float
