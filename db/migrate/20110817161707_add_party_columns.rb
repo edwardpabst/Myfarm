@@ -1,7 +1,7 @@
 class AddPartyColumns < ActiveRecord::Migration
   def self.up
 
-    add_column :parties, :rate_hour, :floating
+    add_column :parties, :rate_hour, :float
    
  
  
@@ -10,7 +10,7 @@ class AddPartyColumns < ActiveRecord::Migration
   def self.down
   
 
-    remove_column :parties, :rate_hour, :floating
+    remove_column :parties, :rate_hour, :float
  
   end
 end
