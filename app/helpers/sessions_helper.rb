@@ -93,6 +93,11 @@ module SessionsHelper
   def authenticate
      # logger.debug "AUTHENTICATE:- #{@current_user.inspect} -"
       deny_access unless signed_in?
+      get_current_user
+      @user_complete = Party.find_by_system_user_id(@current_user.id)
+      if @user_complete.nil? || @user_complete.empty?
+        redirect_to 'parties/new', notice => "Please enter your party information to continue."  
+      end
   end
   
   def current_user?(user)
