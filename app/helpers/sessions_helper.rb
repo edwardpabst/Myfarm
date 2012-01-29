@@ -96,7 +96,7 @@ module SessionsHelper
       get_current_user
       @user_complete = Party.find_by_system_user_id(@current_user.id)
       if @user_complete.nil? || @user_complete.empty?
-        redirect_to 'parties/new', notice => "Please enter your party information to continue."  
+        redirect_to '/parties/new', notice => "Please enter your party information to continue."  
       end
   end
   
