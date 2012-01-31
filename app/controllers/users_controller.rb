@@ -123,14 +123,14 @@ class UsersController < ApplicationController
     
     if @user.security_question.downcase.strip != security_question.downcase.strip
     #logger.debug "USERPROFILE STEP 1 #{@user.security_question.strip}, #{security_question.strip}"
-      @user.security_question = ""
-      @user.security_answer = ""
+      #@user.security_question = ""
+      #@user.security_answer = ""
       flash[:error] = "Incorrect question/answer "
       
     elsif  @user.security_answer.downcase.strip != security_answer.downcase.strip
 
-       @user.security_question = ""
-       @user.security_answer = ""
+       #@user.security_question = ""
+       #@user.security_answer = ""
       flash[:error] = "Incorrect question/answer "
        
     else

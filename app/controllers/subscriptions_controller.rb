@@ -1,6 +1,7 @@
 class SubscriptionsController < ApplicationController
   # GET /subscriptions
   # GET /subscriptions.xml
+    before_filter :authenticate
   def index
     @subscriptions = Subscription.all
 

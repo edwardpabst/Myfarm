@@ -94,9 +94,7 @@ class FieldtasksuppliesController < ApplicationController
     @fieldtasksupply = Fieldtasksupply.find(params[:id])
   end
 
-  # POST /fieldtasksupplies
-  # POST /fieldtasksupplies.xml
-  before_filter :authenticate
+ 
   
   def create
     @fieldtasksupply = Fieldtasksupply.new(params[:fieldtasksupply])

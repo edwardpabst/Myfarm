@@ -24,7 +24,7 @@
 						   <a href="#" onclick="weatherpopup()">Weather</a>
 						</div></li>
 						<li><a href="#" onclick="newspopup()">Ag News</a></li>
-						<li><%= link_to "Tutorial", tutorial_path %></li>
+						<li><%= link_to "Overview", tutorial_path %></li>
 				 		<% if signed_in? %>
 
 						<li><%= link_to "mySettings", edit_user_path(@current_user.id) %></li>
@@ -58,6 +58,7 @@
 		<!---  Hover menu definition                             -->
 		<% if signed_in? %>
 		<% if subscription_valid? %>
+		<% if user_has_party? %>
  
 			<div id="globalNavDiv" class="menu">
 			    <ul>
@@ -161,12 +162,13 @@
 				<a href="#" onclick="newspopup()">Ag News</a> 
 				<a href="#" onclick="sustainablepopup()">Sustainable Agriculture project</a>
 				<a href="#" onclick="usdapopup()">U.S. Department of Agriculture</a>
-				<a href="tutorial">Tutorial </a>
+				<a href="tutorial">iFarmService Overview </a>
 				
 			
  
 			</div>
  
+		 <% end %>
 		 <% end %>
 		 <% end %>
 

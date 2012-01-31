@@ -1,6 +1,7 @@
 class FarmjobsuppliesController < ApplicationController
   # GET /farmjobsupplies
   # GET /farmjobsupplies.xml
+    before_filter :authenticate
   def index
     @farmjobsupplies = Farmjobsupply.all
 

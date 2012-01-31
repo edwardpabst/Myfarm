@@ -2,7 +2,9 @@ class PartiesController < ApplicationController
   # GET /parties
   # GET /parties.xml
   
-  before_filter :authenticate
+ 
+    before_filter :authenticate
+  
  
  
   #-------supplies index----------------------------------------------------------------------------

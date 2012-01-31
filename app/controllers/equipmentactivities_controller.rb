@@ -1,6 +1,7 @@
 class EquipmentactivitiesController < ApplicationController
   # GET /equipmentactivities
   # GET /equipmentactivities.xml
+    before_filter :authenticate
   def index
     @equipmentactivities = Equipmentactivity.all
 

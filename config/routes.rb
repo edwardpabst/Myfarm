@@ -107,7 +107,8 @@ Myfarm::Application.routes.draw do
   get "microposts/delete"
  
   
-  match '/', :to => 'pages#home'
+  match '/', :to => 'homes#validate_status'
+  match '/home', :to => 'pages#home'
   match '/home_new', :to => 'pages#home_new'
   match '/mapcanvas', :to => 'pages#mapcanvas'
   match '/contact', :to => 'pages#contact'

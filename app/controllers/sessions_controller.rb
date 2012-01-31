@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
       # sign the user in and redirect to the users show page
       
       sign_in user
-      redirect_back_or(user_path(user.id))
+       redirect_back_or("/")
        #redirect_to(User, :action => "show" :id => @current_user.id )
     end
   end
