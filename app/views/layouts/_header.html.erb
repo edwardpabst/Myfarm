@@ -28,14 +28,14 @@
 						   <a href="#" onclick="weatherpopup()">Weather</a>
 						</div></li>
 						<li><a href="#" onclick="newspopup()">Ag News</a></li>
-						<li><%= link_to "Overview", tutorial_path %></li>
+					 
 				 		<% if signed_in? %>
 
 						<li><%= link_to "mySettings", edit_user_path(@current_user.id) %></li>
 
 						<% end %>
 
-						<li><%= link_to "Help", help_path %></li>
+						<li><a href="/Images/ifarmservice_documentation.docx">Documentation</a></li>
 
 						<% if signed_in? %>
 							<li><%= link_to "Sign out", signout_path, :method => :delete %></li>
