@@ -7,6 +7,10 @@ module SessionsHelper
     cookies.permanent.signed[:remember_token] = [user.id, user.salt]
     @current_user = user 
     set_current_user_data
+    #logger.debug "STEP 1 OF CURRENT USER VERIFY:- #{@current_user.id} - #{@current_user.name} "
+    
+    
+    
   end
   
   #def current_user=(user)
@@ -348,8 +352,11 @@ module SessionsHelper
     end
 
     def store_location
-        session[:return_to] = request.fullpath
-     
+        session[:return_to] = request.fullpath      
+    end
+    
+    def store_location_calendar
+        session[:return_to] = '/calendar' + '/' + @year.to_s + '/' + @month .to_s    
     end
     
     def get_ztimes()

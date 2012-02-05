@@ -49,7 +49,7 @@
 		<% get_types_by_name("po_type") %>
 		<td>
 	 	<label class=" label" for="po">PO type<abbr title="required"> </abbr> &nbsp;  &nbsp;</label> 
-		<br><br><br>
+		 
 		</td>
 		<td>
 		<%= collection_select("po", "po_type", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
@@ -100,8 +100,8 @@
 				<%= f.label :order_amount, "Order amount" %> 
 			</td>
 			<td>
-			  <div class="disabled">
-				<%= f.text_field :order_amount, :disabled => true, :class => "input_medium" %>
+				<div class="disabled">
+				<%= number_to_currency(@po.order_amount, :precision => 2)  %>
 			  </div>
 			</td>
 		</tr>	

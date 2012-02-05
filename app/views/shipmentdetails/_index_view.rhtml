@@ -1,7 +1,4 @@
-
-<%= button_to 'Select inventory to ship', "/inventoryview", :class => "buttonlarge" %>
-<br>
-<h1> Shipment Details</h1>
+ 
 
 <!-- Div for capture of grid output -->
  <div id="shipmentdetail_grid" style="width:800px; height:200px;">
@@ -20,7 +17,7 @@
      grid.init();
 	 grid.load("/shipmentdetaildata");  	
 	 
-	 grid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ed,txt");// ed-editable, ro-read only price-money , ch-checkbox, 
+	 grid.setColTypes("ro,ro,ro,ro,price,ro,ro,ed,txt");// ed-editable, ro-read only price-money , ch-checkbox, 
 													  // txt-text editor ra-radio button, coro-select box, img, dhxcalendar 
 													  //  subrow (ajax)	 
 	// data processor definition
@@ -95,15 +92,16 @@
 	    window.location = "shipmentdetails/"+selId+"/edit";
 		}
 	}
-
-
+	
+	   function viewInventory(){
+		window.location = "/inventoryview";
+	}
 
  </script>
 
 <br>
 
 
-<button type="button" value="Delete", onclick="removeRow()">Delete</button>
 
 <br><br>
 
@@ -111,4 +109,4 @@
 <input type="button" value="Add" onclick="grid.addRow(grid.uid(),'new user')">
 <input type="button" name="Submit changes" value="Submit changes" onclick="dp.sendData();"> -->
 
-
+ 

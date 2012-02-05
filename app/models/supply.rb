@@ -5,7 +5,7 @@ class Supply < ActiveRecord::Base
                   :carrier, :carrier_rate_acre, :problem_target, :conversion_factor 
   
   belongs_to :Farmjob
-  has_many :fieldtasksupplies
+  has_many :fieldtasksupplies, :dependent => :destroy
   has_many :fieldtasks, :through => :fieldtasksupplies
  
   	      

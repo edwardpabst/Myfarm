@@ -40,6 +40,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
   
     if @user.save
+      UserMailer.registration_confirmation(@user).deliver
       sign_in @user
       flash[:success] = "Welcome to the iFarmService app. Please take a moment to complete your profile info before we begin to define your farm."
       set_new_user_data
@@ -52,6 +53,7 @@ class UsersController < ApplicationController
   end
   
   def update
+ 
     #get email from params
     params[:user].each do |key, value| 
       if key == "email"
@@ -62,19 +64,21 @@ class UsersController < ApplicationController
           @confirmation = value       
       end    
     end
+     
      #logger.debug "USERPARAMS: #{params[:user].inspect}"
-        
+     #logger.debug "USER ID PARAM: #{params[:id]}"  
     @user = User.find(params[:id]) 
 
     @useremail = User.find_by_email(@email)
-    if @user.nil? 
+    
+    if @useremail.nil? 
 
        if @password == @confirmation
           admin_update(@user)
         else
           
           flash[:error] = "Passwords do not match"
-           redirect_to( :action => "edit", :id => user.id)
+           redirect_to( :action => "edit", :id => @user.id)
         end
     elsif @useremail.email == @user.email
        if @password == @confirmation
@@ -100,7 +104,7 @@ class UsersController < ApplicationController
              elsif  key == "security_question"
                  @securityquestion = value      
              elsif  key == "security_answer"
-                 @securityanswer = value       
+                 @securityanswer = value    
              end    
            end
 
@@ -135,6 +139,7 @@ class UsersController < ApplicationController
        
     else
         # go change the password
+       
         sign_in @user
         @title = "Edit user"
         redirect_to edit_user_path(@user.id)
@@ -144,6 +149,9 @@ class UsersController < ApplicationController
   
   def admin_update(user)   
       if user.update_attributes(params[:user])
+
+          sign_in user
+
         flash[:success] = "Profile updated"
         redirect_to user
       else

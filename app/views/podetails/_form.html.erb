@@ -18,9 +18,9 @@ document.pd.podetail_ext_amount.value = (document.pd.podetail_qty_ordered.value 
 
     <%= f.input :qty_ordered,   :label => "Qty ordered" ,  :required => true, :input_html => { :onchange => "updateExt()"} %>
  
- <%= f.input :supply_uom,   :label => "Purchase UOM",  :required => false,  :input_html => {  :disabled => true }  %>
+ <%= f.input :supply_uom,   :label => "Purchase UOM",  :required => false, :hint => "will be taken from supply definition"  ,:input_html => {  :disabled => true }  %>
  	
-   <%= f.input :order_price,   :label => "Order price",  :required => false, :hint => "If not entered will be taken from the supply profile." , :input_html => { :onchange => "updateExt()"}%>
+   <%= f.input :order_price,   :label => "Order price",  :required => false, :hint => "If not entered will be taken from the supply definition." , :input_html => { :onchange => "updateExt()"}%>
 
     <%= f.input :ext_amount,   :label => "Extended amount",  :required => false,  :input_html => {  :disabled => true } %> 
 

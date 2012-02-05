@@ -1,6 +1,7 @@
 class SupplyinventoryTransController < ApplicationController
   # GET /supplyinventory_trans
   # GET /supplyinventory_trans.xml
+    before_filter :authenticate
   def index
     @supplyinventory_trans = SupplyinventoryTran.all
 

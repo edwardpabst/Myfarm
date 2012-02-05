@@ -3,9 +3,9 @@
  
 <%= link_to 'Back', :controller => :shipments, :action => :edit, :id => session[:s_shipment_id] %>
 <br><br>
-<button type="button" value="New",  class="button", onclick="editInventorylot()">View Inventory</button>
+<button type="button" value="New",  class="button", id="editbutton", onclick="editInventorylot()">View Inventory</button>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<button type="button" class="buttonlarge" value="New", onclick="selectInventory()">Add to Shipment</button>
+<button type="button" class="buttonlarge" value="New", id="selectbutton", onclick="selectInventory()">Add to Shipment</button>
 
 <br><br>
 <!-- Div for capture of grid output -->
@@ -98,7 +98,7 @@
 <br>
 
 
-<button type="button" value="New", onclick="selectInventory()">Add to Shipment</button>
+<button type="button" value="New", id="deletebutton", onclick="selectInventory()">Add to Shipment</button>
 
 <br><br>
 

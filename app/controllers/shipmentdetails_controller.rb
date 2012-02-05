@@ -34,8 +34,8 @@ class ShipmentdetailsController < ApplicationController
     		storagename	 = params["c1"]
     		grade  	 = params["c2"]   
     		qty	= params["c3"]
-    		qty_uom = params["c4"]
-    		price = params["c5"]
+    		price = params["c4"]
+    		qty_uom = params["c5"]
     		ext_amount = params["c6"]
     		detail_status = params["c7"]
     		notes = params["c8"]
@@ -78,6 +78,7 @@ class ShipmentdetailsController < ApplicationController
         				@inventorylot.save   	
 
                 @shipmentdetail.qty = qty
+                @shipmentdetail.price = price
                 @shipmentdetail.ext_amount = @shipmentdetail.qty * @shipmentdetail.price
 
         				if @shipmentdetail.save
