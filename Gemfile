@@ -6,7 +6,8 @@ gem 'rails', '3.0.7'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 # not used in heroku
 
-gem 'pg'
+
+ gem 'pg'
 gem 'taps'
 
 #web server for heroku

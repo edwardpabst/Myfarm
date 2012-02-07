@@ -192,7 +192,7 @@ Myfarm::Application.routes.draw do
   match '/podetailview', :to => 'podetails#index_view'
   match '/podetaildata', :to => 'podetails#index_data'
   match '/podetailgridaction', :to => 'podetails#index_dbaction'
-  match '/podetails/:id/receive_line', :to => 'podetails#receive_line'
+  match '/podetails/:id/receiveline', :to => 'podetails#receiveline'
   #Sales contracts
   match '/contractview', :to => 'contracts#index_view'
   match '/contractdata', :to => 'contracts#index_data'

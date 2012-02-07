@@ -111,7 +111,7 @@ class PodetailsController < ApplicationController
       @podetail = Podetail.find(params[:id])
     end
     
-    def receive_line
+    def receiveline
        @podetail = Podetail.find_by_sql("Select podetails.id, supplyname, podetails.supply_uom, qty_ordered, 
                    qty_received, receipt_amount 
       from podetails 
@@ -145,9 +145,9 @@ class PodetailsController < ApplicationController
           @po = Po.find(@podetail.po_id)
           if @po.po_type = 'Immediate purchase' and @po.po_status = 'Received'
             immediate_inventory_update 
-            format.html { redirect_to(:controller => "pos",  :action => "edit", :id => session[:s_po_id], :notice => 'po line was successfully created.') }
-            format.xml  { render :xml => @podetail, :status => :created, :location => @podetail }
           end
+          format.html { redirect_to(:controller => "pos",  :action => "edit", :id => session[:s_po_id], :notice => 'po line was successfully created.') }
+          format.xml  { render :xml => @podetail, :status => :created, :location => @podetail }
         else
           format.html { render :action => "new" }
           format.xml  { render :xml => @podetail.errors, :status => :unprocessable_entity }
@@ -209,7 +209,7 @@ class PodetailsController < ApplicationController
             end
         end
         if @error == true
-          format.html { redirect_to(:controller => "podetails",  :action => "receive_line", :id => @podetail.id) }
+          format.html { redirect_to(:controller => "podetails",  :action => "receiveline", :id => @podetail.id) }
           format.xml  { render :xml => @podetail.errors, :status => :unprocessable_entity }
         end
         
@@ -295,7 +295,7 @@ class PodetailsController < ApplicationController
           @supplyinv.qty_in += receipt_amount
           @supplyinv.qty_onhand += receipt_amount
           @supplyinv.onhand_value +=  @podetail.ext_amount 
-          @supplyinv.avg_cost = n @supplyinv.onhand_value / @supplyinv.qty_onhand 
+          @supplyinv.avg_cost = @supplyinv.onhand_value / @supplyinv.qty_onhand 
           @supplyinv.save  
           @supplyinventory = @supplyinv
         end     
