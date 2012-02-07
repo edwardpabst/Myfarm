@@ -32,10 +32,10 @@
 				 		<% if signed_in? %>
 
 						<li><%= link_to "mySettings", edit_user_path(@current_user.id) %></li>
+						<li><a href="/Images/ifarmservice_documentation.docx">Documentation</a></li>
 
 						<% end %>
 
-						<li><a href="/Images/ifarmservice_documentation.docx">Documentation</a></li>
 
 						<% if signed_in? %>
 							<li><%= link_to "Sign out", signout_path, :method => :delete %></li>

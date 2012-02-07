@@ -179,7 +179,7 @@ class SupplyinventoriesController < ApplicationController
     #logger.debug "INVENTORY LOT INSPECT #{@supplyinventory.inspect}" 
     @supplyinventory.qty_onhand -=  qty_onhand  
     @supplyinventory.qty_out +=  qty_onhand 
-    @supplyinventory.onhand_value = @supplyinventory.qty_onhand * @supplyinventory.avg_cost
+    @supplyinventory.onhand_value =  @supplyinventory.qty_onhand * @supplyinventory.avg_cost 
 
     if @supplyinventory.save
       #write transaction record 
@@ -195,8 +195,8 @@ class SupplyinventoriesController < ApplicationController
       @supplyinventorynew.qty_onhand =  qty_onhand  
       @supplyinventorynew.qty_in =  qty_onhand    
       @supplyinventorynew.qty_out = 0
-      @supplyinventorynew.onhand_value = qty_onhand * @supplyinventory.avg_cost
-      @supplyinventorynew.avg_cost = @supplyinventory.avg_cost
+      @supplyinventorynew.onhand_value =  qty_onhand * @supplyinventory.avg_cost 
+      @supplyinventorynew.avg_cost =  @supplyinventory.avg_cost 
       if @supplyinventorynew.save
           #write transaction record 
             SupplyinventoryTran.addtransaction("transfer_in", @supplyinventorynew.id, @supplyinventorynew.id, qty_onhand, @supplyinventorynew.avg_cost)

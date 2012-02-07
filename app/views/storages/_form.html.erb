@@ -15,6 +15,9 @@
 
     <%= f.input :location  ,:as => :text,  :label => "Storage location",  :required => true %>
 
+	<%= f.label :is_supply_default, "Supplies default storage?" %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<%= f.check_box :is_supply_default  %>  
+
     <% get_types_by_name("size_uom") %>
  <li class="string input optional stringish"> 
 	<label class=" label" for="size_uom">Storage size UOM<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		

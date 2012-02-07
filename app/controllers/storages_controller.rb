@@ -124,7 +124,7 @@ class StoragesController < ApplicationController
     @storage = Storage.find(params[:id])
 
     respond_to do |format|
-     # logger.debug "EVENTNAME PARAMS STORAGE#{params[:storage]}"
+   # logger.debug "STORAGE PARAMETERS --- #{params.inspect}"
       if @storage.update_attributes(params[:storage])
         format.html { redirect_to("/storageview", :notice => 'Storage was successfully updated.') }
         format.xml  { head :ok }

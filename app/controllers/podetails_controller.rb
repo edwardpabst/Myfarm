@@ -142,8 +142,12 @@ class PodetailsController < ApplicationController
       respond_to do |format|
         if @podetail.save
           buildtotalamount(@podetail.po_id)
-          format.html { redirect_to(:controller => "pos",  :action => "edit", :id => session[:s_po_id], :notice => 'po line was successfully created.') }
-          format.xml  { render :xml => @podetail, :status => :created, :location => @podetail }
+          @po = Po.find(@podetail.po_id)
+          if @po.po_type = 'Immediate purchase' and @po.po_status = 'Received'
+            immediate_inventory_update 
+            format.html { redirect_to(:controller => "pos",  :action => "edit", :id => session[:s_po_id], :notice => 'po line was successfully created.') }
+            format.xml  { render :xml => @podetail, :status => :created, :location => @podetail }
+          end
         else
           format.html { render :action => "new" }
           format.xml  { render :xml => @podetail.errors, :status => :unprocessable_entity }
@@ -183,7 +187,12 @@ class PodetailsController < ApplicationController
         @podetail.receipt_amount = params[:podetail][:receipt_amount]
       end
       
-      @podetail.qty_received += @podetail.receipt_amount
+      update_receipt_detail
+
+    end
+    
+    def update_receipt_detail 
+      @podetail.qty_received +=  @podetail.receipt_amount
       @receipt_amount = @podetail.receipt_amount
       @podetail.receipt_amount = 0
       @podetail.detail_status = "received"
@@ -233,17 +242,39 @@ class PodetailsController < ApplicationController
       @po.save
     end
     
+    def immediate_inventory_update
+
+       @podetail = Podetail.find(@podetail.id) 
+        @storage = Storage.find_by_is_supply_default(true)
+         #logger.debug "STORAGE INSPECT FOR EXIST - #{@storage.id}"
+        if !@storage.nil?
+             @podetail.storage_id = @storage.id
+        else
+          @storage = Storage.find(:first)
+           @podetail.storage_id = @storage.id
+        end
+        
+        @podetail.receipt_amount =  @podetail.qty_ordered
+        
+        @receipt_amount =  @podetail.qty_ordered
+        @podetail.qty_received +=  @podetail.qty_ordered
+        @podetail.receipt_amount = 0
+        @podetail.detail_status = "received"
+        if @podetail.save
+          update_supply_inventory 
+          buildtotalamount(@podetail.po_id)
+        end 
+    
+    end
+    
     def update_supply_inventory 
-      #@supplyinventory = Supplyinventory.find_by_sql("Select *
-      #from supplyinventories si
-      #where   si.supply_id = #{@podetail.supply_id}  and si.storage_id = #{@podetail.storage_id} limit 1")  
 
         get_current_user
       @supplyinventory = Supplyinventory.where('user_id' => @current_user.id , 'supply_id' => @podetail.supply_id , 'storage_id' => @podetail.storage_id)
       
       receipt_amount = @receipt_amount.to_f
-      logger.debug "SUPPLYINVENTORY **** receipt #{receipt_amount} and si- #{@supplyinventory.inspect}" 
-      if @supplyinventory.empty?
+ 
+       if @supplyinventory.empty?
         #add new inventory record
         
          @supplyinventory = Supplyinventory.new
@@ -254,7 +285,7 @@ class PodetailsController < ApplicationController
          @supplyinventory.supply_uom = @podetail.supply_uom
          @supplyinventory.user_id = session[:s_user_id]
          @supplyinventory.qty_out = 0
-         @supplyinventory.onhand_value = @podetail.ext_amount
+         @supplyinventory.onhand_value =  @podetail.ext_amount 
          @supplyinventory.avg_cost = @podetail.order_price
          @supplyinventory.save
       else
@@ -263,8 +294,8 @@ class PodetailsController < ApplicationController
           @supplyinv = Supplyinventory.find(si.id)
           @supplyinv.qty_in += receipt_amount
           @supplyinv.qty_onhand += receipt_amount
-          @supplyinv.onhand_value += @podetail.ext_amount
-          @supplyinv.avg_cost = @supplyinv.onhand_value / @supplyinv.qty_onhand
+          @supplyinv.onhand_value +=  @podetail.ext_amount 
+          @supplyinv.avg_cost = n @supplyinv.onhand_value / @supplyinv.qty_onhand 
           @supplyinv.save  
           @supplyinventory = @supplyinv
         end     
