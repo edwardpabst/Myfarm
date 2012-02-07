@@ -8,7 +8,7 @@ class ChangeFloatFields < ActiveRecord::Migration
         change_column  :crops, :avg_moisture_percent, :decimal, { :scale => 2, :precision => 9 }
         change_column  :crops, :avg_weight_uom, :decimal, { :scale => 2, :precision => 9 }
         change_column  :crops, :seed_rate, :decimal, { :scale => 2, :precision => 9 }
-        change_column  :crops, :price_per_uom, :decimal, { :scale => 2, :precision => 9 }
+       # change_column  :crops, :price_per_uom, :decimal, { :scale => 2, :precision => 9 }
         change_column :equipment, :cost_unit_hour, :decimal, { :scale => 2, :precision => 9 }
         change_column :equipment, :width, :decimal, { :scale => 2, :precision => 9 }
         change_column :equipment, :cost_unit, :decimal, { :scale => 2, :precision => 9 }
