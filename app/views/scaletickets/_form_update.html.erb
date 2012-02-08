@@ -161,6 +161,17 @@ document.st.scaleticket_pack_qty.value = ((document.st.scaleticket_net_weight.va
 		</td>
 	</tr>
 	<tr>
+		<td >
+			<%= f.label :grade, "Grade" %>
+		</td>
+
+
+		<td>
+			<% get_types_by_name("crop_grade") %>
+			<%= collection_select("scaleticket", "grade", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
+		</td>
+	</tr>
+	<tr>
 		<td>
 			<%= f.label :moisture_pct, "Moisture %" %> 
 		</td>

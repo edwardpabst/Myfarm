@@ -15,7 +15,7 @@ class InventorylotsController < ApplicationController
 
         get_current_user
         @inventorylots =  Inventorylot.find_by_sql("Select inventorylots.id, ticket_id, inventorylots.created_at, 
-        cropplanfull, qty_onhand, inventorylots.inventory_uom, grade, lab_report, storages.name as storagename  
+        cropplanfull, qty_onhand, inventorylots.inventory_uom, inventorylots.grade, lab_report, storages.name as storagename  
         from inventorylots 
         left join scaletickets on inventorylots.scaleticket_id = scaletickets.id 
         join cropplans on inventorylots.cropplan_id = cropplans.id
@@ -99,7 +99,7 @@ class InventorylotsController < ApplicationController
 
     @inventorylot_list =  Inventorylot.find_by_sql("Select inventorylots.id, ticket_id, inventorylots.created_at, 
     inventorylots.cropplan_id, cropname, cropspecific, plan_year, qty_onhand, qty_in, qty_out_ship, qty_out_transfer, inventorylots.inventory_uom, 
-    grade, lab_report, inventorylots.storage_id, storages.name as storagename  
+    inventorylots.grade, lab_report, inventorylots.storage_id, storages.name as storagename  
     from inventorylots 
     left join scaletickets on inventorylots.scaleticket_id = scaletickets.id 
     join cropplans on inventorylots.cropplan_id = cropplans.id
@@ -113,7 +113,7 @@ class InventorylotsController < ApplicationController
 
     @inventorylot_list =  Inventorylot.find_by_sql("Select inventorylots.id, ticket_id, inventorylots.created_at, 
     inventorylots.cropplan_id, cropname, cropspecific, plan_year, qty_onhand, qty_in, qty_out_ship, qty_out_transfer, inventorylots.inventory_uom, 
-    grade, lab_report, inventorylots.storage_id, storages.name as storagename  
+    inventorylots.grade, lab_report, inventorylots.storage_id, storages.name as storagename  
     from inventorylots 
     left join scaletickets on inventorylots.scaleticket_id = scaletickets.id 
     join cropplans on inventorylots.cropplan_id = cropplans.id

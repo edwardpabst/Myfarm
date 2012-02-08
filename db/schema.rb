@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120207183324) do
+ActiveRecord::Schema.define(:version => 20120208062446) do
 
   create_table "contracts", :force => true do |t|
     t.integer  "party_id"
@@ -477,6 +477,7 @@ ActiveRecord::Schema.define(:version => 20120207183324) do
     t.decimal  "weight_conversion"
     t.string   "inventory_uom"
     t.string   "inventory_update"
+    t.string   "grade"
   end
 
   add_index "scaletickets", ["user_id"], :name => "index_scaletickets_on_user_id"

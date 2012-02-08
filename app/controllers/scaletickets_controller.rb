@@ -15,7 +15,7 @@ class ScaleticketsController < ApplicationController
 
         get_current_user
          @scaletickets = Scaleticket.find_by_sql("Select scaletickets.id, ticket_id, tran_date, cropplanfull, 
-         pack_qty, inventory_uom, gross_weight, tare_weight, net_weight, storages.name as storagename, moisture_pct 
+         pack_qty, inventory_uom, grade, gross_weight, tare_weight, net_weight, storages.name as storagename, moisture_pct 
         from scaletickets  
         join cropplans on scaletickets.cropplan_id = cropplans.id
         left join storages on scaletickets.storage_id = storages.id
@@ -170,7 +170,7 @@ class ScaleticketsController < ApplicationController
          
         #---- update inventory record for scaleticket -------------------
         if @scaleticket.inventory_update = "Consolidated"
-          @inventorylothold = Inventorylot.where('user_id' => @current_user.id , 'cropplan_id' => @scaleticket.cropplan_id , 'storage_id' => @scaleticket.storage_id, 'scaleticket_id' => 0)
+          @inventorylothold = Inventorylot.where('user_id' => @current_user.id , 'cropplan_id' => @scaleticket.cropplan_id , 'storage_id' => @scaleticket.storage_id, 'scaleticket_id' => 0, 'grade' => @scaleticket.grade)
           @inventorylothold.each do |inventorylot|
             @inventorylot = inventorylot
           end
@@ -212,7 +212,7 @@ class ScaleticketsController < ApplicationController
             @inventorylot.qty_out_transfer = 0
             @inventorylot.transfer_amount = 0
             @inventorylot.inventory_uom = @scaleticket.inventory_uom
-            @inventorylot.grade =  ""
+            @inventorylot.grade =   @scaleticket.grade
             @inventorylot.lab_report = ""
             @inventorylot.save
              

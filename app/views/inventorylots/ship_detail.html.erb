@@ -1,6 +1,8 @@
  
+<h1>Add Inventory to Shipment</h1>
+ 
 <%= link_to 'Back', "/inventoryview" %>
-<br><br>
+<br> 
 <%= form_tag('/ship_line') do |f| %>
  
 
@@ -24,10 +26,28 @@
 		 
 		</td>
 		<td>
-
+	
+		</td>
+	</tr>	
+	<tr>
+		<td >
+			<label><b>Grade</b> </label>
+		</td>
+		<td>
+			<li id='datadisplay'><%= list.grade %></li>
 		</td>
 
 	</tr>
+	
+	<tr>
+		<td >
+			<label><b>Storage</b> </label>
+		</td>
+		<td>
+		<li id='datadisplay'>	<%= list.storagename %></li>
+		</td>
+	</tr>
+		
 	<tr>
 		<td >
 			<label><b>Ticket ID</b></label> 
