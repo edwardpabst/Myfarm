@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120208062446) do
+ActiveRecord::Schema.define(:version => 20120208225033) do
 
   create_table "contracts", :force => true do |t|
     t.integer  "party_id"
@@ -269,6 +269,9 @@ ActiveRecord::Schema.define(:version => 20120208062446) do
     t.integer  "soil_testlab_id"
     t.string   "soil_testresults_file"
     t.integer  "farm_id"
+    t.decimal  "percent_harvest_acre",  :precision => 9, :scale => 2
+    t.decimal  "fixed_amount_acre",     :precision => 9, :scale => 2
+    t.string   "fixed_uom"
   end
 
   add_index "fields", ["farm_id"], :name => "index_fields_on_farm_id"

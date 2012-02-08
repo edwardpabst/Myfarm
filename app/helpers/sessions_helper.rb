@@ -346,6 +346,10 @@ module SessionsHelper
       @farms = Farm.where('user_id' => @current_user.id).all
     end
     
+    def get_countries
+      @countries = Country.order(:id).all
+    end
+       
     def get_storage
       get_current_user
       @storages = Storage.where('user_id' => @current_user.id).all

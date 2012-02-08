@@ -1,64 +1,236 @@
+<%= form_for @field, :html => { :name => "fd"} do |f| %>
  
-
-
-<%= semantic_form_for @field do |f| %>
 <%= render "shared/error_messages", :object => f.object%>
-  <%= f.inputs do %>
-  
  
-    <% get_farms %>
- <li class="string input optional stringish"> 
-	<label class=" label" for="fields">Farm*<abbr title="required"> </abbr> &nbsp; 	&nbsp;  &nbsp; &nbsp;   </label>		
+
+
  
-	<%= collection_select("field", "farm_id", @farms, "id", "farmname", options = {:prompt => " "}) %> </li>
-	<%= f.input :fieldname,   :label => "Field name",  :required => true  %>
-    <%= f.input :location,   :label => "Map Location" ,  :required => false %>
-    <%= f.input :country,  :as => :select,   :label => "Country",  :required => true   %>
-    <%= f.input :number_acres,   :label => "Number acres" ,  :required => true %> 
+ <table class="twocolumn">
  
-	<%= f.input :latitude,   :label => "Latitude" ,  :required => false , :input_html => { :disabled => true }, :hint => "latitude and longitude are derived from geodcoding of the map location."%>
-	<%= f.input :longitude,   :label => "Longitude" ,  :required => false , :input_html => { :disabled => true }%>
-	<% get_types_by_name("holding_status") %>
- <li class="string input optional stringish"> 
-	<label class=" label" for="owner_id">Holding status<abbr title="required"> </abbr> &nbsp;  &nbsp; &nbsp; &nbsp; </label>		
-	<%= collection_select("field", "holding_status", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %></li>	
- 
-	 <%= f.input :land_expense_year,  :as => :number,  :label => "Land expense per year" ,  :required => false %>
+	<tr>
+		<td colspan="4">
+			<div id="form_header">			 	 
+	 Field Information 		 
+			</div>
+		</td>
+	</tr>
+  	<tr>
+		<td width="30">
+			<%= f.label :farmname, "Farm" %> 
+		</td>
+		<td  width="20" >
+			<% get_farms %>
+			<%= collection_select("field", "farm_id", @farms, "id", "farmname", options = {:prompt => " "}) %>
+
+		</td>
+		<td  width="30" >
+			<%= f.label :fieldname, "Field Name" %> 
+		</td>
+		<td  width="20" >
+			<%= f.text_field :fieldname %>
+		</td>
+	</tr>
+	<tr>
+		<td >
+			<%= f.label :location, "Map location" %> 
+		
+		</td>
+		<td  >
+			<%= f.text_field :location %>
+		</td>
+		<td  >
+		 
+		   <%= f.label :country, "Country" %> 
+		</td>
+		<td  >
 	
- <li class="string input optional stringish"> 
-	<label class=" label" for="owner_id">Land owner<abbr title="required"> </abbr> &nbsp;  &nbsp; &nbsp; &nbsp; </label>		
-	<%= collection_select("field", "owner_id", @ownerparties, "id", "partyname", options = {:prompt => " "}) %></li>
- 
- 
- <li class="string input optional stringish"> 
-	<label class=" label" for="client_id">Client<abbr title="required"> </abbr> &nbsp;  &nbsp; &nbsp; &nbsp; </label>		
-	<%= collection_select("field", "client_id", @clientparties, "id", "partyname", options = {:prompt => " "}) %></li>
- 
- 
+			<% get_countries %>
+			<%= collection_select("field", "country_id", @countries, "id", "name", options = {:prompt => " "}) %>
+			
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<div class="hintbase">
+			 This location will be geocoded to longitude and latitude for the farm map.
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td >
+			 <%= f.label :latitude, "Latitiude" %> 
+		</td>
+		<td  >
+			<%= f.text_field :latitude, :disabled => true  %> 
+		</td>
+		<td  >
+			 <%= f.label :longitude, "Longitude" %> 
+		</td>
+		<td  >
+			<%= f.text_field :longitude, :disabled => true  %>  
+			
+		</td>
+	</tr>
+	<tr>
+		<td >
+			 <%= f.label :number_acres, "Number of acres" %> 
+		</td>
+		<td  >
+			 <%= f.text_field :number_acres %>
+		</td>
+		<td  >
+			 <%= f.label :holding_status, "Holding status" %> 
+		</td>
+		<td  >
+			<% get_types_by_name("holding_status") %>
+			<%= collection_select("field", "holding_status", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %> 
+		</td>
+	</tr>
 
-    <%= f.input :area_mapped,   :label => "area mapped/acres" ,  :required => false %>
-    <%= f.input :area_tillable,   :label => "area tillable/acres" ,  :required => false %>
-    <%= f.input :current_state,   :label => "Field state" ,  :required => false %>
 
-		<% get_parties_by_type("Soil test lab") %>
-	 <li class="string input optional stringish"> 
-		<label class=" label" for="field">Soil test lab<abbr title="required"> </abbr>  </label> 
-		<% if !@party_types.nil? %>			
-			<%= collection_select("field", "soil_testlab_id", @party_types, "id", "partyname", options = {:prompt => " ", :include_blank => ' '}) %>
-		<% end %></li>
-
-	<%= f.input :soil_testresults_file,   :label => "Test results file" ,  :required => false %>
-	<%= f.input :start_row,   :label => "Start row" ,  :required => false %>
-	<%= f.input :end_row,   :label => "End row" ,  :required => false %>
+	<tr>
+		<td >
+			 <%= f.label :land_expense_year, "Lease/Rent/year" %> 
+		</td>
+		<td  >
+			<%= f.text_field :land_expense_year %>		 
+		</td>
+		<td  >
+			 <%= f.label :percent_harvest_acre, "% harvest" %> 
+		</td>
+		<td  >
+			<%= f.text_field :percent_harvest_acre %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4">
+			<div class="hintbase">
+			 Used when holding status is 'leased'. Amount paid to landlord. Can be rent or % of harvest or both. % of  harvest can also be used when status is 'Manage'.
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td >
+			 <%= f.label :fixed_amount_acre, "Fixed amount/acre" %> 
+		</td>
+		<td  >
+			<%= f.text_field :fixed_amount_acre %>		 
+		</td>
+		<td  >
+			 <%= f.label :fixed_uom, "Fixed UOM" %> 
+		</td>
+		<td  >
+			<% get_types_by_name("crop_inventory_uom") %>		
+			<%= collection_select("field", "fixed_uom", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
+		</td>
+	</tr>
 	
+	<tr>
+		<td colspan="4">
+			<div class="hintbase">
+			 Used when holding status is 'share crop'. Amount paid to landlord. Guaranteed fixed yield amount per acre by UOM.
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td >
+			 <%= f.label :owner_id, "Landlord" %> 
+		</td>
+		<td  >
+			<%= collection_select("field", "owner_id", @ownerparties, "id", "partyname", options = {:prompt => " "}) %> 
+			
+		</td>
+		<td  >
+			 <%= f.label :client_id, "Client" %> 
+		</td>
+		<td  >
+			<%= collection_select("field", "client_id", @clientparties, "id", "partyname", options = {:prompt => " "}) %> 
+			
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<div class="hintbase">
+			 Landlord should be defined when holding status is 'Leased' or 'Share crop'
+			</div>
+		</td>
+		<td colspan="2">
+			<div class="hintbase">
+			 Client should be defined when holding status is 'Manage'
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td >
+			 <%= f.label :area_mapped, "Mapped/acres" %> 
+		</td>
+		<td  >
+			
+		   <%= f.text_field :area_mapped %>	
+		    
+		    
+		</td>
+		<td  >
+			 <%= f.label :area_tillable, "Tillable/acres" %> 
+		</td>
+		<td  >
+			<%= f.text_field :area_tillable %>	
+		</td>
+	</tr>
+	<tr>
+		<td >
+			 <%= f.label :current_state, "Field state" %> 
+		</td>
+		<td  >
+			<%= f.text_field :current_state %>	
+		</td>
+		<td  >
+		 
+		</td>
+		<td  >
+			
+		</td>
+	</tr>
+	<tr>
+		<td >
+			 <%= f.label :soil_testlab_id, "Soil test lab" %> 
+		</td>
+		<td  >
+			<% get_parties_by_type("Soil test lab") %> 
+			<% if !@party_types.nil? %>			
+				<%= collection_select("field", "soil_testlab_id", @party_types, "id", "partyname", options = {:prompt => " ", :include_blank => ' '}) %>
+			<% end %> 
+		</td>
+		<td  >
+			 <%= f.label :soil_testresults_file, "Test results file" %> 
+		</td>
+		<td  >
+			<%= f.text_field :soil_testresults_file %>	
+		</td>
+	</tr> 
+	<tr>
+		<td >
+			 <%= f.label :start_row, "Start row" %> 
+		</td>
+		<td  >
+			<%= f.text_field :start_row %>	
+		</td>
+		<td  >
+		 <%= f.label :end_row, "End row" %> 
+		</td>
+		<td  >
+			<%= f.text_field :end_row %>	
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">
+			<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		 	<%= f.submit " Update ", :class => "button", :id => "fdsubmit" %><br><br>
+		</td>
 
 
-  <% end %>
-  	<br>
-  <%= f.buttons do %>
-    <%= f.commit_button :label => "Update Field", :button_html => { :class => "button" } %> 
-  <% end %>
-	<br>
+	</tr>
 
-
+</table>
 <% end %>
