@@ -30,10 +30,39 @@
 
 		</td>
 	</tr>
+	<tr>
+		<td>
+		 
+			<label class=" label" for="scaletickets">Inventory update*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+<br>
 
+		</td>
+		<td>
+			<% get_types_by_name("inventory_update") %>		
+			<%= collection_select("scaleticket", "inventory_update", @types, "type_value_string", "type_value_string") %>
+
+		</td>
+		<td>
+		    <% get_storage %>
+			<label class=" label" for="scaleticket">Storage unit<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+
+		</td>
+		<td>
+			<%= collection_select("scaleticket", "storage_id", @storages, "id", "name", options = {:prompt => " "}) %>
+
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+		<div class="hintbase">			 	 
+			will determine whether to consolidate inventory or maintain scaleticket integrity in inventory. 			 
+		</div>
+		</td>
+	</tr>
 
 	<tr>
 		<td colspan="4">
+			<br><br>
 		<div class="hintbase">	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		 	 
 	      Establish which field or fields the harvested crop originated from.			 
 		</div>

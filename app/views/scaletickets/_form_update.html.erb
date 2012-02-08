@@ -1,4 +1,6 @@
 <script type="text/javascript"> 
+ 
+
 function updateNet() {
  
 document.st.scaleticket_net_weight.value = (document.st.scaleticket_gross_weight.value -0) - (document.st.scaleticket_tare_weight.value -0); 
@@ -8,6 +10,8 @@ document.st.scaleticket_pack_qty.value = ((document.st.scaleticket_net_weight.va
 (document.st.scaleticket_weight_conversion.value -0)).toFixed(0);
 
 }
+
+
 
 </script>
 
@@ -24,9 +28,6 @@ document.st.scaleticket_pack_qty.value = ((document.st.scaleticket_net_weight.va
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2">
-			&nbsp;
-		</td>
 		<td  >
 			<%= f.label :ticket_id, "Ticket ID" %>
 		</td>
@@ -35,6 +36,17 @@ document.st.scaleticket_pack_qty.value = ((document.st.scaleticket_net_weight.va
 				<%= @scaleticket.ticket_id%>
 			<% end %>
 		</td>
+			<td>
+
+				<label class=" label" for="scaletickets">Inventory update*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+
+			</td>
+			<td>
+ 				<div class="disabled">
+					<%= f.text_field :inventory_update, :disabled => true %>
+				</div>
+
+			</td>
 
 	</tr>
 	<tr>

@@ -175,7 +175,7 @@ module SessionsHelper
   end
   
   def get_types_by_name_0(name)
-   @types = Type.where('typename' => name).order('type_value_string').all
+   @types = Type.where('typename' => name, 'user_id' => 1).order('type_value_string').all
   end
   
   def get_supplies_by_type()

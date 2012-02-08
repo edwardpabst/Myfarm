@@ -24,8 +24,8 @@ class Invoice < ActiveRecord::Base
                       end
 
                      if !start_date.nil? and !start_date.blank?
-                       date_select =  " and ship_date >= #{start_date}"
-                       date_select =  " and ship_date <= #{stop_date}"
+                       date_select =  " and ship_date >= '#{start_date}'"
+                       date_select +=  " and ship_date <= '#{stop_date}'"
                        sql_statement += date_select
                      end
                      

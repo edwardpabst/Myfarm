@@ -4,6 +4,8 @@ Myfarm::Application.routes.draw do
 
 
 
+  resources :inventorytickets
+
   resources :invoices
 
   resources :subscriptions
@@ -176,6 +178,8 @@ Myfarm::Application.routes.draw do
   match '/inventorylotview', :to => 'inventorylots#index_view'
   match '/inventorylotdata', :to => 'inventorylots#index_data'
   match '/inventorylotgridaction', :to => 'inventorylots#index_dbaction'
+  match '/inventorylots/:id/ship_detail', :to => 'inventorylots#ship_detail'
+  match '/ship_detail', :to => 'inventorylots#ship_detail'
   #Supplies inventory
   match '/supplyinventoryview', :to => 'supplyinventories#index_view'
   match '/supplyinventorydata', :to => 'supplyinventories#index_data'
@@ -206,6 +210,7 @@ Myfarm::Application.routes.draw do
   match '/shipmentdetaildata', :to => 'shipmentdetails#index_data'
   match '/shipmentdetailgridaction', :to => 'shipmentdetails#index_dbaction'
   match 'shipmentdetails/:id/add_detail', :to => 'shipmentdetails#add_detail'
+  match '/ship_line', :to => 'shipmentdetails#add_detail'
   #Invoices
   match '/invoice_generator', :to => 'invoices#invoice_generator'
   match '/invoiceview', :to => 'invoices#index_view'

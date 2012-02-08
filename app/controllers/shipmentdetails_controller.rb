@@ -136,20 +136,22 @@ class ShipmentdetailsController < ApplicationController
   # POST /shipmentdetails
   # POST /shipmentdetails.xml
   def add_detail
-    @inventorylots = Inventorylot.find(params[:id])
     
-    if @inventorylots.transfer_amount > 0
+    @ship_qty =  params[:ship_qty].to_f 
+    @inventorylot_id = params[:inventorylot_id].to_i 
+
+    @inventorylots = Inventorylot.find(@inventorylot_id)
+    
+    if @ship_qty > 0
       
-        @shipmentdetail = Shipmentdetail.new(params[:shipmentdetail])
+        @shipmentdetail = Shipmentdetail.new()
         @shipmentdetail.user_id = session[:s_user_id]
         @shipmentdetail.shipment_id = session[:s_shipment_id]
-        @shipmentdetail.inventorylot_id = params[:id]
+        @shipmentdetail.inventorylot_id = @inventorylot_id
     
 
-        @shipmentdetail.qty = @inventorylots.transfer_amount
-         #logger.debug "TRANSFERAMOUNT----#{@inventorylots.transfer_amount}" 
-         #logger.debug "TRANSFERID-----#{@inventorylots.id}" 
-        @shipmentdetail.original_inv_amount = @inventorylots.transfer_amount
+        @shipmentdetail.qty = @ship_qty
+        @shipmentdetail.original_inv_amount = @ship_qty
         @shipmentdetail.qty_uom = @inventorylots.inventory_uom
     
         @shipmentdetail.cropplan_id = @inventorylots.cropplan_id
@@ -173,14 +175,14 @@ class ShipmentdetailsController < ApplicationController
     
     
         respond_to do |format|
-           logger.debug "INVENTORYLOTID STEP 1----#{@shipmentdetail.inventorylot_id}" 
+           
   
           if @shipmentdetail.save
         
             #decrement inventory record
             @inventorylot = Inventorylot.find(@shipmentdetail.inventorylot_id) 
-            @inventorylot.qty_out_ship += @inventorylots.transfer_amount
-            @inventorylot.qty_onhand -= @inventorylots.transfer_amount
+            @inventorylot.qty_out_ship += @ship_qty
+            @inventorylot.qty_onhand -= @ship_qty
             @inventorylot.transfer_amount = 0  
             @inventorylot.save
         

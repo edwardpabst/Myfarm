@@ -19,7 +19,7 @@ class FieldtasksController < ApplicationController
     end
  
     
-    def dbaction
+    def index_dbaction
   		#called for all db actions
   		taskdescription = params["c0"]
   		task_type	 = params["c1"]

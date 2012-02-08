@@ -82,17 +82,15 @@ class ShipmentsController < ApplicationController
           
           @inventorylots =  Inventorylot.find_by_sql("Select inventorylots.id,  cropplanfull, qty_onhand, inventorylots.inventory_uom, grade, transfer_amount, storages.name as storagename  
           from inventorylots 
-          join scaletickets on inventorylots.scaleticket_id = scaletickets.id 
-          join fields on scaletickets.field_id_1 = fields.id
           join cropplans on inventorylots.cropplan_id = cropplans.id
           join storages on inventorylots.storage_id = storages.id
           where inventorylots.user_id = #{@current_user.id }  
           and inventorylots.cropplan_id = #{@shipment.cropplan_id} 
-          and fields.farm_id = #{@shipment.farm_id}
           and inventorylots.qty_onhand > 0")
 
-
-       
+          #left join scaletickets on inventorylots.scaleticket_id = scaletickets.id 
+          #left join fields on scaletickets.field_id_1 = fields.id
+          #and fields.farm_id = #{@shipment.farm_id}
 
       end
 

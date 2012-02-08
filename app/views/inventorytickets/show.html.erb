@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Scaleticket:</b>
+  <%= @inventoryticket.scaleticket_id %>
+</p>
+
+<p>
+  <b>Field:</b>
+  <%= @inventoryticket.field_id %>
+</p>
+
+<p>
+  <b>Pack qty:</b>
+  <%= @inventoryticket.pack_qty %>
+</p>
+
+<p>
+  <b>Inventory uom:</b>
+  <%= @inventoryticket.inventory_uom %>
+</p>
+
+<p>
+  <b>Inventorylot:</b>
+  <%= @inventoryticket.inventorylot_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_inventoryticket_path(@inventoryticket) %> |
+<%= link_to 'Back', inventorytickets_path %>

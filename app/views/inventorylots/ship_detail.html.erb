@@ -1,0 +1,162 @@
+ 
+<%= link_to 'Back', "/inventoryview" %>
+<br><br>
+<%= form_tag('/ship_line') do |f| %>
+ 
+
+<% @inventorylot_list.each do |list| %>
+ <table class="twocolumn">
+	<tr>
+		<td colspan="4">
+			<div id="form_header">			 	 
+		     Add Inventory to the Shipment			 
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td ><br>
+			<label><b>Crop plan</b> </label>
+		</td>
+		<td><br>
+		<li id='datadisplay'>	<%= list.cropname %>-<%= list.cropspecific %>-<%= list.plan_year %></li>
+		</td>
+		<td  >
+		 
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			<label><b>Ticket ID</b></label> 
+		</td>
+		<td>
+			<li id='datadisplay'><%= list.ticket_id %></li>
+		</td>
+		<td  >
+		 
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			 <label><b>Created </b></label>
+		</td>
+		<td>
+			<li id='datadisplay'><%= list.created_at.to_date %></li>
+		</td>
+		<td  >
+		 
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			 <label><b>UOM </b></label>
+		</td>
+		<td>
+			<li id='datadisplay'><%= list.inventory_uom %></li>
+		</td>
+		<td  >
+		 
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+
+
+	<tr>
+		<td >
+			<label><b>  Qty in  </b></label>
+		</td>
+		<td>
+			<li id='datadisplay'><%= list.qty_in %></li>
+		</td>
+		<td  >
+		 
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			 
+			<label><b>  Ship out  </b></label>
+		</td>
+		<td>
+			<li id='datadisplay'><%= list.qty_out_ship %></li>
+		</td>
+		<td  colspan="2">
+		   
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			<label><b>  Transfer out  </b></label>
+		</td>
+		<td>
+			<li id='datadisplay'><%= list.qty_out_transfer %></li>
+		</td>
+		<td  colspan="2" id="warning">
+		    <u>Enter full or partial quantity to ship.</u>
+		</td>
+		<td>
+
+		</td>
+
+	</tr>
+	<tr>
+		<td >
+			<label><b>  Qty onhand  </b></label>
+		</td>
+		<td>
+			<li id='datadisplay'><%= list.qty_onhand %></li>
+		</td>
+		<td >
+			<label><b>  Ship Qty  </b></label>
+		</td>
+		<td>
+			<%= text_field_tag 'ship_qty' , value= list.qty_onhand%>
+			<%= hidden_field_tag 'inventorylot_id' , value= list.id%>
+		</td>
+
+	</tr>
+
+
+
+	<tr>
+		<td colspan="2">
+
+		</td>
+		<td colspan="2">
+				<br>
+			   
+			<%= submit_tag " Ship Qty", :class => "button", :id => "insubmit" %><br><br>
+		</td>
+	</tr>
+ 	
+ </table>
+ 
+
+<br>
+
+<%= link_to 'Back', "/inventoryview" %>
+ 
+ <% end %>
+<% end %>

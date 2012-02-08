@@ -19,14 +19,14 @@
 	// data grid definition
      var grid = new dhtmlXGridObject("inventory_grid");
      grid.setImagePath("/images/");
-     grid.setHeader("Crop plan, Storage,  grade  , UOM , Qty Onhand , <b><i>Double click <br> Enter Ship Qty</i> </b>");  
-     grid.setInitWidths("140,140,130,130,130,130");
+     grid.setHeader("Crop plan, Storage,  grade  , UOM , Qty Onhand ");  
+     grid.setInitWidths("170,170,160,160,140");
      grid.setSkin("dhx_web");
      grid.init();
 	 grid.load("/inventorydata");  	
 	 grid.attachHeader(",#text_filter,#text_filter");  
 	 grid.setColSorting(",str,str");	 
-	 grid.setColTypes("ro,ro,ro,ro,ro,ed");// ed-editable, ro-read only price-money , ch-checkbox, 
+	 grid.setColTypes("ro,ro,ro,ro,ro");// ed-editable, ro-read only price-money , ch-checkbox, 
 													  // txt-text editor ra-radio button, coro-select box, img, dhxcalendar 
 													  //  subrow (ajax)	 
 	// data processor definition
@@ -75,7 +75,7 @@
 		 alert("No record was selected for full edit");	
 		}
 	else {
-	    window.location = "shipmentdetails/"+selId+"/add_detail";
+	    window.location = "inventorylots/"+selId+"/ship_detail";
 		}
 	}
 	
@@ -96,10 +96,9 @@
  </script>
 
 <br>
-
-
-<button type="button" value="New", id="deletebutton", onclick="selectInventory()">Add to Shipment</button>
-
+<button type="button" value="New",  class="button", id="editbutton", onclick="editInventorylot()">View Inventory</button>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button type="button" class="buttonlarge" value="New", id="selectbutton", onclick="selectInventory()">Add to Shipment</button>
 <br><br>
 
  <!--  button controls for in grid addition and bulk update

@@ -163,6 +163,7 @@ class EquipmentController < ApplicationController
   # GET /equipment/new.xml
   def new
     @equipment = Equipment.new
+    @transaction = 'new'
 
     respond_to do |format|
       format.html # new.html.erb
@@ -173,6 +174,7 @@ class EquipmentController < ApplicationController
   # GET /equipment/1/edit
   def edit
     @equipment = Equipment.find(params[:id])
+     @transaction = 'edit'
     session[:s_equipment_id] = @equipment.id
   end
 

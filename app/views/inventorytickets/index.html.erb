@@ -1,0 +1,31 @@
+<h1>Listing inventorytickets</h1>
+
+<table>
+  <tr>
+    <th>Scaleticket</th>
+    <th>Field</th>
+    <th>Pack qty</th>
+    <th>Inventory uom</th>
+    <th>Inventorylot</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @inventorytickets.each do |inventoryticket| %>
+  <tr>
+    <td><%= inventoryticket.scaleticket_id %></td>
+    <td><%= inventoryticket.field_id %></td>
+    <td><%= inventoryticket.pack_qty %></td>
+    <td><%= inventoryticket.inventory_uom %></td>
+    <td><%= inventoryticket.inventorylot_id %></td>
+    <td><%= link_to 'Show', inventoryticket %></td>
+    <td><%= link_to 'Edit', edit_inventoryticket_path(inventoryticket) %></td>
+    <td><%= link_to 'Destroy', inventoryticket, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Inventoryticket', new_inventoryticket_path %>

@@ -161,26 +161,49 @@ class ScaleticketsController < ApplicationController
   # PUT /scaletickets/1.xml
   def update
     @scaleticket = Scaleticket.find(params[:id])
-  
+    @original_qty = @scaleticket.pack_qty.to_f
      
     respond_to do |format|
       if @scaleticket.update_attributes(params[:scaleticket])
         
-        #---- update inventory record for scaleticket ------------------- 
-         @inventorylot = Inventorylot.find_by_scaleticket_id(@scaleticket.id)
+        @update_amount = (@scaleticket.pack_qty - @original_qty)
+         
+        #---- update inventory record for scaleticket -------------------
+        if @scaleticket.inventory_update = "Consolidated"
+          @inventorylothold = Inventorylot.where('user_id' => @current_user.id , 'cropplan_id' => @scaleticket.cropplan_id , 'storage_id' => @scaleticket.storage_id, 'scaleticket_id' => 0)
+          @inventorylothold.each do |inventorylot|
+            @inventorylot = inventorylot
+          end
+          
+        else
+          @inventorylothold = Inventorylot.find_by_scaleticket_id(@scaleticket.id)
+          @inventorylot = @inventorylothold
+          
+        end 
+         
          if !@inventorylot.nil?
-           @inventorylot.qty_in = @scaleticket.pack_qty
-           @inventorylot.qty_onhand = @scaleticket.pack_qty
-           @inventorylot.qty_out_ship = 0
-           @inventorylot.qty_out_transfer = 0
-           @inventorylot.transfer_amount = 0
-           @inventorylot.inventory_uom = @scaleticket.inventory_uom
-           @inventorylot.save
+            if @scaleticket.inventory_update  = "Consolidated"
+              @inventorylot.qty_in += @update_amount
+              @inventorylot.qty_onhand += @update_amount
+              @inventorylot.save
+              
+            else
+              @inventorylot.qty_in = @scaleticket.pack_qty
+              @inventorylot.qty_onhand = @scaleticket.pack_qty
+              @inventorylot.inventory_uom = @scaleticket.inventory_uom
+              @inventorylot.save
+              
+            end
+
          else
            #---- create inventory record for scaleticket ------------------- 
             @inventorylot = Inventorylot.new
-            @inventorylot.user_id = @scaleticket.user_id
-            @inventorylot.scaleticket_id = @scaleticket.id
+            if @scaleticket.inventory_update = "Consolidated"
+              @inventorylot.scaleticket_id = 0
+            else
+              @inventorylot.scaleticket_id = @scaleticket.id
+            end
+            @inventorylot.user_id = @scaleticket.user_id            
             @inventorylot.storage_id = @scaleticket.storage_id
             @inventorylot.cropplan_id = @scaleticket.cropplan_id
             @inventorylot.qty_in = @scaleticket.pack_qty
@@ -192,7 +215,27 @@ class ScaleticketsController < ApplicationController
             @inventorylot.grade =  ""
             @inventorylot.lab_report = ""
             @inventorylot.save
+             
          end
+         
+         # create/update inventory ticket
+         
+         @inventoryticket = Inventoryticket.find_by_scaleticket_id(@scaleticket.id)
+         if !@inventoryticket.nil?
+           @inventoryticket.pack_qty += @update_amount
+         else
+           @inventoryticket = Inventoryticket.new
+           @inventoryticket.scaleticket_id = @scaleticket.id
+           @inventoryticket.inventorylot_id = @inventorylot.id
+           @inventoryticket.field_id = @scaleticket.field_id_1
+           @inventoryticket.inventory_uom = @scaleticket.inventory_uom
+           @inventoryticket.pack_qty = @update_amount
+           @inventoryticket.save
+           
+         end
+         
+         
+         
         format.html { redirect_to("/scaleticketview", :notice => 'Scaleticket was successfully updated.') }
         format.xml  { head :ok }
       else

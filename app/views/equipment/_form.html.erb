@@ -123,11 +123,15 @@ function loadFake() {
 			</td>
 			<tr>
 			    <td>
-				 <%= f.label "", "Hours until next service:" %>
+				<% if @transaction != 'new' %>
+				 	<%= f.label "", "Hours until next service:" %>
+				<% end %>
 			 	</td>
 				<td>
+				<% if @transaction != 'new' %>
 					<% hours_to_service %>
 			 		<%= @to_service_hours %> 
+				<% end %>
 			    </td>
 			    <td colspan="2">
 				 <div class="hintbase">

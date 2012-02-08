@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120207012333) do
+ActiveRecord::Schema.define(:version => 20120207183324) do
 
   create_table "contracts", :force => true do |t|
     t.integer  "party_id"
@@ -319,6 +319,20 @@ ActiveRecord::Schema.define(:version => 20120207012333) do
   add_index "inventorylots", ["storage_id"], :name => "index_inventorylots_on_storage_id"
   add_index "inventorylots", ["user_id"], :name => "index_inventorylots_on_user_id"
 
+  create_table "inventorytickets", :force => true do |t|
+    t.integer  "scaleticket_id"
+    t.integer  "field_id"
+    t.integer  "pack_qty"
+    t.string   "inventory_uom"
+    t.integer  "inventorylot_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "inventorytickets", ["field_id"], :name => "index_inventorytickets_on_field_id"
+  add_index "inventorytickets", ["inventorylot_id"], :name => "index_inventorytickets_on_inventorylot_id"
+  add_index "inventorytickets", ["scaleticket_id"], :name => "index_inventorytickets_on_scaleticket_id"
+
   create_table "invoices", :force => true do |t|
     t.string   "invoice_number"
     t.integer  "shipment_id"
@@ -462,6 +476,7 @@ ActiveRecord::Schema.define(:version => 20120207012333) do
     t.string   "ticket_id"
     t.decimal  "weight_conversion"
     t.string   "inventory_uom"
+    t.string   "inventory_update"
   end
 
   add_index "scaletickets", ["user_id"], :name => "index_scaletickets_on_user_id"

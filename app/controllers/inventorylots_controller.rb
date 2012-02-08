@@ -17,7 +17,7 @@ class InventorylotsController < ApplicationController
         @inventorylots =  Inventorylot.find_by_sql("Select inventorylots.id, ticket_id, inventorylots.created_at, 
         cropplanfull, qty_onhand, inventorylots.inventory_uom, grade, lab_report, storages.name as storagename  
         from inventorylots 
-        join scaletickets on inventorylots.scaleticket_id = scaletickets.id 
+        left join scaletickets on inventorylots.scaleticket_id = scaletickets.id 
         join cropplans on inventorylots.cropplan_id = cropplans.id
         join storages on inventorylots.storage_id = storages.id
         where inventorylots.user_id = #{@current_user.id } ")
@@ -101,7 +101,21 @@ class InventorylotsController < ApplicationController
     inventorylots.cropplan_id, cropname, cropspecific, plan_year, qty_onhand, qty_in, qty_out_ship, qty_out_transfer, inventorylots.inventory_uom, 
     grade, lab_report, inventorylots.storage_id, storages.name as storagename  
     from inventorylots 
-    join scaletickets on inventorylots.scaleticket_id = scaletickets.id 
+    left join scaletickets on inventorylots.scaleticket_id = scaletickets.id 
+    join cropplans on inventorylots.cropplan_id = cropplans.id
+    join crops on cropplans.crop_id = crops.id
+    join storages on inventorylots.storage_id = storages.id
+    where inventorylots.id = #{params[:id]} limit 1")
+  end
+  
+  def ship_detail
+    @inventorylot = Inventorylot.find(params[:id])
+
+    @inventorylot_list =  Inventorylot.find_by_sql("Select inventorylots.id, ticket_id, inventorylots.created_at, 
+    inventorylots.cropplan_id, cropname, cropspecific, plan_year, qty_onhand, qty_in, qty_out_ship, qty_out_transfer, inventorylots.inventory_uom, 
+    grade, lab_report, inventorylots.storage_id, storages.name as storagename  
+    from inventorylots 
+    left join scaletickets on inventorylots.scaleticket_id = scaletickets.id 
     join cropplans on inventorylots.cropplan_id = cropplans.id
     join crops on cropplans.crop_id = crops.id
     join storages on inventorylots.storage_id = storages.id
@@ -233,5 +247,7 @@ class InventorylotsController < ApplicationController
       return @success = false
     end
   end
+  
+
   
 end

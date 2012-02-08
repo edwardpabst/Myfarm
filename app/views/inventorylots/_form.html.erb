@@ -48,7 +48,7 @@
 			 <label><b>Created </b></label>
 		</td>
 		<td>
-			<li id='datadisplay'><%= list.created_at %></li>
+			<li id='datadisplay'><%= list.created_at.to_date %></li>
 		</td>
 		<td  >
 		 
@@ -113,7 +113,7 @@
 			<li id='datadisplay'><%= @inventorylot.qty_out_transfer %></li>
 		</td>
 		<td  colspan="2" id="warning">
-		    <u>Transfer a qty to another location or another grade.</u>
+		    <u>Transfer a full or partial qty to another location or another grade.</u>
 		</td>
 		<td>
 

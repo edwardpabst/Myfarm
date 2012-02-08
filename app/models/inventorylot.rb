@@ -8,6 +8,12 @@ class Inventorylot < ActiveRecord::Base
   has_many :scaletickets
   has_many :storages
   
-  
+  def self.get_consolidated_record(scaleticket)
+    return @inventory = Inventorylot.find_by_sql("Select *
+     from inventorylots  il
+     where il.user_id = #{session[:s_user_id]  } 
+     and il.cropplan_id = #{scaleticket.cropplan_id}
+     and il.storage_id = #{scaleticket.storage_id}")
+  end
   
 end

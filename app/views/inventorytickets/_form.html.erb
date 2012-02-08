@@ -1,0 +1,13 @@
+<%= semantic_form_for @inventoryticket do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :scaleticket_id %>
+    <%= f.input :field_id %>
+    <%= f.input :pack_qty %>
+    <%= f.input :inventory_uom %>
+    <%= f.input :inventorylot_id %>
+  <% end %>
+
+  <%= f.buttons do %>
+    <%= f.commit_button %>
+  <% end %>
+<% end %>
