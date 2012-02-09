@@ -260,6 +260,9 @@ function checkStatus() {
 
 			 
  </table>
+		<% if @transaction == 'edit'%>
+		<%= render 'dependant_form' %>
+		<% end %>
 <% end %>
 
 <!--	    <% get_ztimes %>

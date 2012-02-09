@@ -8,6 +8,12 @@ function checkFarmjob() {
 	{
 	   document.fj.farmjob_job_status.disabled=true;
 	   document.fj.fjsubmit.disabled=true;
+	   document.fj.partyadd.disabled=true;
+	   document.fj.partydelete.disabled=true;
+	   document.fj.supplyadd.disabled=true;
+	   document.fj.supplydelete.disabled=true;
+	   document.fj.equipmentadd.disabled=true;
+	   document.fj.equipmentdelete.disabled=true;
 	} 
 }
 
@@ -20,7 +26,7 @@ function checkFarmjob() {
 <br>
 <%= render 'form' %>
 
-<%= render 'dependant_form' %>
+
 
 
 <%= link_to 'Back', session[:return_to] %>

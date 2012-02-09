@@ -206,8 +206,11 @@ class FieldsController < ApplicationController
   def create
     @field = Field.new(params[:field])
     @field.user_id = session[:s_user_id]
-    @farm = Farm.find(@field.farm_id)
-    @field.farmname = @farm.farmname
+    if !@field.farm_id.nil?
+      @farm = Farm.find(@field.farm_id)
+      @field.farmname = @farm.farmname
+    end
+    
     
     respond_to do |format|
       if @field.save

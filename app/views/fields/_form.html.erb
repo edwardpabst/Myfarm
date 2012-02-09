@@ -137,15 +137,17 @@
 			 <%= f.label :owner_id, "Landlord" %> 
 		</td>
 		<td  >
-			<%= collection_select("field", "owner_id", @ownerparties, "id", "partyname", options = {:prompt => " "}) %> 
-			
+			<% if !@ownerparties.nil?%>
+			  <%= collection_select("field", "owner_id", @ownerparties, "id", "partyname", options = {:prompt => " "}) %> 
+			<% end%>
 		</td>
 		<td  >
 			 <%= f.label :client_id, "Client" %> 
 		</td>
 		<td  >
+		  <% if !@clientparties.nil?%>
 			<%= collection_select("field", "client_id", @clientparties, "id", "partyname", options = {:prompt => " "}) %> 
-			
+		  <% end%>	
 		</td>
 	</tr>
 	<tr>

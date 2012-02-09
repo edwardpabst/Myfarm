@@ -268,7 +268,7 @@ class FarmjobsController < ApplicationController
   # GET /farmjobs/new.xml
   def new
     @farmjob = Farmjob.new
-
+    @transaction = 'new'
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @farmjob }
@@ -282,6 +282,7 @@ class FarmjobsController < ApplicationController
     @farmjob = Farmjob.find(params[:id])
     session[:s_farmjob_id] = @farmjob.id
     @onload = 'checkFarmjob()'
+    @transaction = 'edit'
      
 
    # logger.debug "FARMJOBSUPPLIES #{@farmjobsupplies.size}" 
