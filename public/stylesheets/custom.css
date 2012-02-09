@@ -442,6 +442,20 @@ input  {
 	-moz-border-radius: 3px;
 }
 
+.input_verysmall  {
+   
+	font-family: Arial, Sans-Serif;
+    font-size: 13px;
+    padding: 4px;
+    border: solid 1px #85b1de;
+    width: 50px;
+    background-color: #EDF2F7;
+
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
 
 div.fileinputs {
 	position: relative;
@@ -536,6 +550,26 @@ select  {
 .buttonlarge:hover{
 	background-color:lightsteelblue;
 		border: solid 1px yellow;
+}
+
+.button_center {
+
+	font-family: Arial, Sans-Serif;
+    font-size: 12px;
+    padding: 4px;
+    border: solid 1px #85b1de;
+    width: 210px;
+    background-color: #EDF2F7;
+	margin-left:auto;
+	margin-right:auto;
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+.button_center:hover{
+	background-color:lightsteelblue;
+	border: solid 1px orange;
 }
 button {
    

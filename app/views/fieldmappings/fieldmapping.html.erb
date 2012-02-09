@@ -2464,8 +2464,9 @@ input  {
 	        <input type="text"  id="centerofmap" />
 	        &nbsp;&nbsp;&nbsp;&nbsp;
 	        <label id="label_reverse">Zoom level:</label>
-
-	        <select id="myzoom" name="myzoom" class="selectsmall">
+			<input id="myzoom" name="myzoom" class="input_verysmall" disabled="true" value="16">
+	
+	<!--        <select id="myzoom" name="myzoom" class="selectsmall" disabled="true">
 		        <option value="1">1</option>
 		        <option value="2">2</option>
 		        <option value="3">3</option>
@@ -2485,7 +2486,7 @@ input  {
 				<option value="17">17</option>
 				<option value="18">18</option>
 				<option value="19">19</option>
-				<option value="20">20</option>
+				<option value="20">20</option>  -->
 
 	        </select>
         </form>
@@ -2544,7 +2545,7 @@ input  {
 	<div class="topbutton">
 	 <form  action="#" onsubmit="showAddress(this.address.value); return false">
 	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Field location -
-	 <input type="text"  class="inputlong" name="address" value="<%= @fieldmapping.location %>" />
+	 <input type="text"  class="inputlong" name="address" disabled="true" value="<%= @fieldmapping.location %>" />
 	 &nbsp;
 	<!--
 	 <input type="submit" class="button" value="Search" />

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120208225033) do
+ActiveRecord::Schema.define(:version => 20120209200440) do
 
   create_table "contracts", :force => true do |t|
     t.integer  "party_id"
@@ -269,9 +269,13 @@ ActiveRecord::Schema.define(:version => 20120208225033) do
     t.integer  "soil_testlab_id"
     t.string   "soil_testresults_file"
     t.integer  "farm_id"
-    t.decimal  "percent_harvest_acre",  :precision => 9, :scale => 2
-    t.decimal  "fixed_amount_acre",     :precision => 9, :scale => 2
+    t.decimal  "percent_harvest_acre",    :precision => 9, :scale => 2
+    t.decimal  "fixed_amount_acre",       :precision => 9, :scale => 2
     t.string   "fixed_uom"
+    t.string   "soilreport_file_name"
+    t.string   "soilreport_content_type"
+    t.integer  "soilreport_file_size"
+    t.datetime "soilreport_updated_at"
   end
 
   add_index "fields", ["farm_id"], :name => "index_fields_on_farm_id"
@@ -315,6 +319,10 @@ ActiveRecord::Schema.define(:version => 20120208225033) do
     t.decimal  "transfer_amount"
     t.decimal  "qty_out_transfer"
     t.decimal  "qty_out_ship"
+    t.string   "cropreport_file_name"
+    t.string   "cropreport_content_type"
+    t.integer  "cropreport_file_size"
+    t.datetime "cropreport_updated_at"
   end
 
   add_index "inventorylots", ["cropplan_id"], :name => "index_inventorylots_on_cropplan_id"

@@ -1,4 +1,4 @@
-<%= form_for @field, :html => { :name => "fd"} do |f| %>
+<%= form_for @field,  :html => { :multipart => true , :name => "fd" } do |f| %>
  
 <%= render "shared/error_messages", :object => f.object%>
  
@@ -204,12 +204,34 @@
 			<% end %> 
 		</td>
 		<td  >
-			 <%= f.label :soil_testresults_file, "Test results file" %> 
+			 <%= f.label :soil_testresults_file, "Soil test report" %> 
 		</td>
 		<td  >
-			<%= f.text_field :soil_testresults_file %>	
+			<%= f.file_field :soilreport %>	
 		</td>
 	</tr> 
+
+	<tr>
+		<td colspan="2">
+
+		</td>
+		<td colspan="2">
+			<% if !@field.soilreport_file_name.nil? %> 		
+			 	<a href="<%= @field.soilreport.url %> "> 
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				Click here to view Soil test report.
+				</a>
+			<% end %>
+			<div class="hintbase">
+				Click on 'browse' to upload Soil test report.
+			</div>
+
+	 
+		</td>
+	</tr>
+	
+	
+	
 	<tr>
 		<td >
 			 <%= f.label :start_row, "Start row" %> 

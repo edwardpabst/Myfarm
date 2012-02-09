@@ -1,5 +1,5 @@
 
-<%= form_for @inventorylot, :html => { :name => "inv"} do |f| %>
+<%= form_for @inventorylot,  :html => { :multipart => true , :name => "inv" } do |f| %>
 <%= render "shared/error_messages", :object => f.object %>
 
 
@@ -172,19 +172,27 @@
 	</tr>
 	<tr>
 		<td >
-			<%= f.label :lab_report, "Lab report (file.type)" %>
+			<%= f.label :lab_report, "Lab report" %>
 		</td>
-		<td>
-			<%= f.text_field :lab_report %>
+		<td  colspan="2">
+			 <%= f.file_field :cropreport %>
 		</td>
 		<td  >
-		 
+		<% if !@inventorylot.cropreport_file_name.nil? %>
+		 	<a href="<%= @inventorylot.cropreport.url %> "> 
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			Click here to view Lab report.
+			</a>
+			<br>
+			<div class="hintbase">
+				Click on 'browse' to upload Lab report.
+			</div>
+	 	<% end %>
 		</td>
-		<td>
 
-		</td>
 
 	</tr>
+
 	<tr>
 		<td colspan="2">
 			<br>
