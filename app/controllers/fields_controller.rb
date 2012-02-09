@@ -113,6 +113,7 @@ class FieldsController < ApplicationController
     @field = Field.new
     @ownerparties = find_parties_by_role("Landlord")
     @clientparties = find_parties_by_role("Client")
+  
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @field }
@@ -217,6 +218,8 @@ class FieldsController < ApplicationController
         format.html { redirect_to("/fieldview", :notice => 'Field was successfully created.') }
         format.xml  { render :xml => "/fieldview", :status => :created, :location => @field }
       else
+        @ownerparties = find_parties_by_role("Landlord")
+        @clientparties = find_parties_by_role("Client")
         format.html { render :action => "new" }
         format.xml  { render :xml => @field.errors, :status => :unprocessable_entity }
       end
@@ -246,6 +249,8 @@ class FieldsController < ApplicationController
         end
         format.xml  { render :xml => "/fieldview", :status => :created, :location => @field }
       else
+        @ownerparties = find_parties_by_role("Landlord")
+        @clientparties = find_parties_by_role("Client")
         format.html { render :action => "edit" }
         format.xml  { render :xml => @field.errors, :status => :unprocessable_entity }
       end
