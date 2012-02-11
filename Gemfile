@@ -8,7 +8,8 @@ gem 'rails', '3.0.7'
 
 
 
-  gem 'pg'
+
+   gem 'pg'
 gem 'taps'
 
 #web server for heroku

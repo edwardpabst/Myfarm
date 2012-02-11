@@ -17,6 +17,15 @@ class Scaleticket < ActiveRecord::Base
   validate :field_pct_validation
     #------------------------------------------------------------------------------
 
+def self.get_by_cropplan_field(cropplan_id, field_id)
+  
+  return @st = Scaleticket.find_by_sql(" Select * 
+               from scaletickets 
+               where cropplan_id = #{cropplan_id} 
+               and field_id_1 = #{field_id}")
+  
+end
+
  private
  
     def default_values

@@ -264,6 +264,8 @@ Myfarm::Application.routes.draw do
    match '/profitabilityjobreport', :to => 'farmjobs#profitabilityjobreport'
    match '/invoicerequestor', :to => 'invoices#invoice_requestor'
    match '/invoicereport', :to => 'invoices#invoicereport'
+   match '/yieldrequestor', :to => 'crops#yield_requestor'
+   match '/yieldreport', :to => 'crops#yieldreport'
    
   root :to => 'pages#home'
   #root_path => 'pages#home'

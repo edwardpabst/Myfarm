@@ -163,4 +163,36 @@ class CropsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def yield_requestor 
+    
+    
+    respond_to do |format|
+      format.html
+
+    end
+       
+  end
+  
+  def yieldreport
+    
+ 
+     #logger.debug "YIELD REPORT  PARAMS- CROP -#{params[:cropplan_id]} FIELD -#{params[:field_id]} "
+    respond_to do |format|
+      format.html
+      format.pdf do
+        
+        pdf = YieldreportPdf.new(session[:s_user_id], view_context, params[:cropplan_id], params[:field_id],
+        params[:start_date], params[:stop_date])
+        send_data pdf.render, filename: "yield_report",
+                                type: "application/pdf",
+                                disposition: "inline"
+        
+      end
+    end
+    
+    
+  end
+
+  
 end

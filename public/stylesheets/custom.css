@@ -91,6 +91,16 @@ section h1 {
 	border-radius: 10pz;
 }
 
+#tutorial_stage{
+	font-size:130%;
+	font-style:bold;
+    color: orange;
+	background-color:white;
+	padding:5px;
+	text-align:center;
+ 
+}
+
 #tutorial_header{
 	float:left;
 	width: 23%;

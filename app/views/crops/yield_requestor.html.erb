@@ -1,0 +1,88 @@
+
+<br>
+<h1>Yield Report Requestor</h1>
+ 
+<%= link_to 'Back', session[:return_to] %>
+<br>
+
+<%= form_tag '/yieldreport.pdf', :method=>'post' , :html => { :name => "in"} do %>
+ 
+
+
+<table class="twocolumn">
+
+		<tr>
+			<td colspan="3">
+				<div id="form_header">			 	 
+	 Yield Report calculates harvest yield per acre and compares to average yield. It also includes Total harvest yield, 
+	 Total revenue and revenue per acre by Crop and field. The report can be run for a specfic Crop plan and/or field.
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td width="25%"></td>
+ 			<td >
+		    <% get_cropplans_by_year %>
+			<label class=" label" for="cropplans">Crop plan<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+			</td>
+			<td>
+			<%= collection_select("", "cropplan_id", @cropplans, "id", "cropplanfull", options = {:prompt => " "}) %>	
+    		</td>
+		</tr>
+		<tr>
+			<td width="25%"></td>
+
+			<td>
+		    <% get_fields_by_farm %>
+			<label class=" label" for="fields">Field<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+			</td>
+			<td>
+			<%= collection_select("", "field_id", @fields, "id", "fieldname", options = {:prompt => " "}) %>	
+
+			</td>
+		 </tr>
+		 <tr>
+			<td width="25%"></td>
+			<td>
+			<label> Harvest begin date </label>   
+			</td>
+			<td>
+			<%= text_field_tag 'start_date' %>
+
+		 	</td>
+		 </tr>
+		
+		<tr>
+			<td width="25%"></td>
+			<td>
+		   	<label> Harvest end date </label> 
+			</td>
+			<td>
+				<%= text_field_tag 'stop_date'  %>
+		    </td>
+
+
+		</tr>
+		
+
+
+			<tr>
+			
+			
+			<td></td><td></td>
+			<td>
+				<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 	<%= submit_tag " Submit ", :class => "button", :id => "insubmit" %><br><br>
+			</td>
+
+
+		</tr>
+			</table>
+			</td>
+
+		</tr>
+
+			 
+</table>
+<% end %>
+

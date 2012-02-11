@@ -115,7 +115,7 @@
 			</div>
 			<div id="submenu2" class="round">
 				<div class="menugroup">
-					Farm work tools &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+					Farm work tools &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
 				</div>
 			     <a href="/farmjobview">Manage Farm jobs</a>
 				 <a href="/calendar">View job calendar</a>
@@ -123,7 +123,7 @@
 				 
 				
 				<div class="menugroup">
-					Crop Sales and Inventory
+					Crop Sales and Inventory &nbsp; &nbsp;&nbsp; &nbsp;
 				</div>
 				 <a href="/scaleticketview">Scale tickets</a>
 				 <a href="/inventorylotview">Crop Inventory</a>
@@ -134,7 +134,7 @@
 				 
 				
 				<div class="menugroup">
-					Purchase orders &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+					Purchase orders &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
 				</div>						
 				 <a href="/poview">Purchase Orders</a>
 				 <a href="/supplyinventoryview">Supplies inventory</a>
@@ -142,31 +142,41 @@
 			</div>
 			<div id="submenu3" class="round">
 				<div class="menugroup">
-					View your key indicators
+					View your key indicators &nbsp; &nbsp;&nbsp; &nbsp;
 				</div>
 			     <a href="/farmjobreportrequestor">Job reports</a>
 				 <a href="/profitabilityreportrequestor">Profitability reports</a>
+				<a href="/yieldrequestor">Harvest Yield report</a>
 				 <a href="/invoicerequestor">Print Invoices</a>
  
 			</div>
 			<div id="submenu4" class="round">
 				<div class="menugroup">
 					Farm social network &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
 				</div>
 				 <a href="/users">Farm community </a>
 				 <a href="/pages/home">My community </a>
 				 <a href= "/users/<%= session[:s_user_id] %>">My farm posts </a>
 				<div class="menugroup">
-					Utilities &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+					Account Management &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+					&nbsp; &nbsp;  &nbsp;     
 				</div>
 				<%= link_to "Manage Settings and Subscription", edit_user_path(@current_user.id) %>
 			    <a href="/typeview">Maintain data types </a>
+				<div class="menugroup">
+					News and Weather &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;   
+				</div>
 				<a href="#" onclick="weatherpopup()">Weather</a>
 				<a href="#" onclick="newspopup()">Ag News</a> 
 				<a href="#" onclick="sustainablepopup()">Sustainable Agriculture project</a>
 				<a href="#" onclick="usdapopup()">U.S. Department of Agriculture</a>
+				<div class="menugroup">
+					Documentation&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
+					&nbsp;   
+				</div>
 				<a href="/tutorial">iFarmService Overview </a>
 				<a href="/Images/ifarmservice_documentation.docx">iFarmService Documentation</a>
 				

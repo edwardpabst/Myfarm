@@ -16,7 +16,7 @@ class FarmjobfieldreportPdf < Prawn::Document
   end
   
   def farmjob_header
-    text "Farmjob Report", size: 20, style: :bold, :align => :center
+    text "Farmjob Report", size: 14, style: :bold, :align => :center
     move_down 5
     text "for Date Range - (#{@start_date} - #{@stop_date})", size: 8, style: :bold, :align => :center
   end
