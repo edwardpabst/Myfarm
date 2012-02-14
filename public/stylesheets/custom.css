@@ -494,12 +494,16 @@ label {
 }
  
 
+.shade {
+	background-color:lightgray;
+}
+
 .disabled {
 	background-color:darkgray;
 	color:white;
 	padding-left:4px;
 	padding-right:4px;
-	width:80%;
+	width:210px;
 	border: solid 1px yellow;
 
 }

@@ -1,6 +1,6 @@
 
 
-<%= form_for @scaleticket, :html => { :name => "st"} do |f| %>
+<%= form_for @scaleticket,  :url => '/set_defaults', :method => :post, :html => { :name => "st"} do |f| %>
 
 <%= render "shared/error_messages", :object => f.object%>
 
@@ -125,7 +125,7 @@
 		<td colspan="2">
 			<br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		 	<%= f.submit " Add Ticket ", :class => "button"  %>
+		 	<%= f.submit " Set Ticket ", :class => "button"  %>
 			<br><br>
 		</td>
 		<td>

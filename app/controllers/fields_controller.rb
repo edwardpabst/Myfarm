@@ -126,7 +126,8 @@ class FieldsController < ApplicationController
     @clientparties = find_parties_by_role("Client")
     @field = Field.find(params[:id]) 
     session[:s_field_id] = @field.id
-    @json = Field.find(params[:id]).to_gmaps4rails  
+    @json = Field.find(params[:id]).to_gmaps4rails
+     logger.debug "JSON FOR GOOGLE MAP**** #{@json}" 
     
  #--------------------------------------------------------------------------------------------------
 #first element of the array, describing the first polygon
@@ -215,7 +216,7 @@ class FieldsController < ApplicationController
     
     respond_to do |format|
       if @field.save
-        format.html { redirect_to("/fieldview", :notice => 'Field was successfully created.') }
+        format.html { redirect_to :action => "edit" , :id => @field.id }
         format.xml  { render :xml => "/fieldview", :status => :created, :location => @field }
       else
         @ownerparties = find_parties_by_role("Landlord")
@@ -245,7 +246,7 @@ class FieldsController < ApplicationController
         if ismapping == true
           format.html { redirect_to :action => "edit" , :id => session[:s_field_id]}
         else
-          format.html { redirect_to("/fieldview", :notice => 'Field was successfully updated.') }
+          format.html { redirect_to("/fieldview" , :notice => 'Field was successfully updated.') }
         end
         format.xml  { render :xml => "/fieldview", :status => :created, :location => @field }
       else

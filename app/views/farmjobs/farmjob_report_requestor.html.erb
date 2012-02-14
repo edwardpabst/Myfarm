@@ -35,7 +35,7 @@
 			<td width="25%"></td>
 			<td>
 		    <% get_fields_by_farm %>
-			<label class=" label" for="fields">Field*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+			<label class=" label" for="fields">Field<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
 			</td>
 			<td>
 			<%= collection_select("", "field_id", @fields, "id", "fieldname", options = {:prompt => " ", :include_blank => ' '}
@@ -47,7 +47,7 @@
 			<td width="25%"></td>
  			<td>
 		    <% get_cropplans_by_year %>
-			<label class=" label" for="cropplans">Crop plan*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+			<label class=" label" for="cropplans">Crop plan<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
 			</td>
 			<td>
 			<%= collection_select("", "cropplan_id", @cropplans, "id", "cropplanfull", options = {:prompt => " ", :include_blank => ' '}) %>	
@@ -60,7 +60,7 @@
 			<td width="25%"></td>
 			<td>
 			<% get_types_by_name("job_status") %>
-			<label class=" label" for="job_status">Job status*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+			<label class=" label" for="job_status">Job status<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
 			</td>
 			<td>
 			<%= collection_select("", "job_status", @types, "type_value_string", "type_value_string", options = {:prompt => " ", :include_blank => ' '}) %>	

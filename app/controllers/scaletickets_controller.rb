@@ -7,8 +7,20 @@ class ScaleticketsController < ApplicationController
 
   #-------scaleticket index----------------------------------------------------------------------------
       def index_view
-
-
+        cookies.delete(:s_cropplan_id) 
+        cookies.delete(:s_storage_id)  
+        cookies.delete(:s_inventory_update)  
+        cookies.delete(:s_tran_date) 
+        cookies.delete(:s_field_id_1)  
+        cookies.delete(:s_field_pct_1) 
+        cookies.delete(:s_field_id_2)  
+        cookies.delete(:s_field_pct_2)  
+        cookies.delete(:s_field_id_3)  
+        cookies.delete(:s_field_pct_3)  
+        cookies.delete(:s_field_id_4)  
+        cookies.delete(:s_field_pct_4) 
+        cookies.delete(:weight_conversion)  
+        cookies.delete(:inventory_uom)
       end
 
       def index_data
@@ -112,16 +124,77 @@ class ScaleticketsController < ApplicationController
   # GET /scaletickets/new.xml
   def new
     @scaleticket = Scaleticket.new
+    @transaction = "new"
+    @typeprefix = Type.find_by_typename("scaleticket_prefix")
+    @typenumber = Type.find_by_typename("scaleticket_number")
+    @typenumber.type_value_integer += 1
+    @typenumber.save    
+    @scaleticket.ticket_id = (@typeprefix.type_value_string + @typenumber.type_value_integer.to_s)
+    
+    @scaleticket.cropplan_id = session[:s_cropplan_id]  
+    @scaleticket.storage_id = session[:s_storage_id]  
+    @scaleticket.inventory_update = session[:s_inventory_update]  
+    @scaleticket.tran_date = session[:s_tran_date]  
+    @scaleticket.field_id_1 = session[:s_field_id_1]  
+    @scaleticket.field_pct_1 = session[:s_field_pct_1] 
+    @scaleticket.field_id_2 = session[:s_field_id_2]  
+    @scaleticket.field_pct_2 = session[:s_field_pct_2]  
+    @scaleticket.field_id_3 = session[:s_field_id_3]  
+    @scaleticket.field_pct_3 = session[:s_field_pct_3]  
+    @scaleticket.field_id_4 = session[:s_field_id_4]  
+    @scaleticket.field_pct_4 = session[:s_field_pct_4] 
+    @scaleticket.weight_conversion = session[:weight_conversion]  
+    @scaleticket.inventory_uom = session[:inventory_uom]  
+    
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @scaleticket }
+    end
+  end
+  
+  def set_ticket
+    @scaleticket = Scaleticket.new
 
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @scaleticket }
     end
   end
+  
+  def set_defaults
+    
+    session[:s_cropplan_id] = params[:scaleticket][:cropplan_id]
+    session[:s_storage_id] = params[:scaleticket][:storage_id]
+    session[:s_inventory_update] = params[:scaleticket][:inventory_update]
+    session[:s_tran_date] = params[:scaleticket][:tran_date]
+    session[:s_field_id_1] = params[:scaleticket][:field_id_1]
+    session[:s_field_pct_1] = params[:scaleticket][:field_pct_1]
+    session[:s_field_id_2] = params[:scaleticket][:field_id_2]
+    session[:s_field_pct_2] = params[:scaleticket][:field_pct_2]
+    session[:s_field_id_3] = params[:scaleticket][:field_id_3]
+    session[:s_field_pct_3] = params[:scaleticket][:field_pct_3]
+    session[:s_field_id_4] = params[:scaleticket][:field_id_4]
+    session[:s_field_pct_4] = params[:scaleticket][:field_pct_4]
+    
+    if !params[:scaleticket][:cropplan_id].nil? 
+      @cropplan = Cropplan.find(params[:scaleticket][:cropplan_id].to_i)
+      @crop = Crop.find(@cropplan.crop_id)
+      session[:weight_conversion] = @crop.avg_weight_uom
+      session[:inventory_uom] = @crop.crop_inventory_uom
+    end
+
+    respond_to do |format|
+      format.html { redirect_to(:controller => :scaletickets, :action => :new, :notice => 'Begin entering scale tickets.') }
+      format.xml  { render :xml => @scaleticket, :status => :created, :location => @scaleticket }
+    end
+  end
 
   # GET /scaletickets/1/edit
   def edit
     @scaleticket = Scaleticket.find(params[:id])
+    @cropplan = Cropplan.find(@scaleticket.cropplan_id)
+    @storage = Storage.find(@scaleticket.storage_id)
+    @transaction = "edit"
   end
 
   # POST /scaletickets
@@ -129,13 +202,7 @@ class ScaleticketsController < ApplicationController
   def create
     @scaleticket = Scaleticket.new(params[:scaleticket])
     @scaleticket.user_id = session[:s_user_id]
-    @typeprefix = Type.find_by_typename("scaleticket_prefix")
-    @typenumber = Type.find_by_typename("scaleticket_number")
-    
-    @scaleticket.ticket_id = (@typeprefix.type_value_string + @typenumber.type_value_integer.to_s)
-      
-    @typenumber.type_value_integer += 4
-    @typenumber.save
+
     
     @cropplan = Cropplan.find(@scaleticket.cropplan_id)
     if !@cropplan.nil? 
@@ -146,11 +213,15 @@ class ScaleticketsController < ApplicationController
     
     respond_to do |format|
       if @scaleticket.save
-
-          format.html { redirect_to(:controller => :scaletickets, :action => :edit, :id => @scaleticket.id, :notice => 'Scaleticket was successfully created.') }
+        @update_amount = @scaleticket.pack_qty
+        
+        update_crop_inventory
+        
+          format.html { redirect_to(:controller => :scaletickets, :action => :new, :notice => 'Scaleticket created. Add next ticket.') }
           format.xml  { render :xml => @scaleticket, :status => :created, :location => @scaleticket }
  
       else
+        @transaction = "new"
         format.html { render :action => "new" }
         format.xml  { render :xml => @scaleticket.errors, :status => :unprocessable_entity }
       end
@@ -168,81 +239,86 @@ class ScaleticketsController < ApplicationController
         
         @update_amount = (@scaleticket.pack_qty - @original_qty)
          
-        #---- update inventory record for scaleticket -------------------
-        if @scaleticket.inventory_update = "Consolidated"
-          @inventorylothold = Inventorylot.where('user_id' => @current_user.id , 'cropplan_id' => @scaleticket.cropplan_id , 'storage_id' => @scaleticket.storage_id, 'scaleticket_id' => 0, 'grade' => @scaleticket.grade)
-          @inventorylothold.each do |inventorylot|
-            @inventorylot = inventorylot
-          end
-          
-        else
-          @inventorylothold = Inventorylot.find_by_scaleticket_id(@scaleticket.id)
-          @inventorylot = @inventorylothold
-          
-        end 
-         
-         if !@inventorylot.nil?
-            if @scaleticket.inventory_update  = "Consolidated"
-              @inventorylot.qty_in += @update_amount
-              @inventorylot.qty_onhand += @update_amount
-              @inventorylot.save
-              
-            else
-              @inventorylot.qty_in = @scaleticket.pack_qty
-              @inventorylot.qty_onhand = @scaleticket.pack_qty
-              @inventorylot.inventory_uom = @scaleticket.inventory_uom
-              @inventorylot.save
-              
-            end
-
-         else
-           #---- create inventory record for scaleticket ------------------- 
-            @inventorylot = Inventorylot.new
-            if @scaleticket.inventory_update = "Consolidated"
-              @inventorylot.scaleticket_id = 0
-            else
-              @inventorylot.scaleticket_id = @scaleticket.id
-            end
-            @inventorylot.user_id = @scaleticket.user_id            
-            @inventorylot.storage_id = @scaleticket.storage_id
-            @inventorylot.cropplan_id = @scaleticket.cropplan_id
-            @inventorylot.qty_in = @scaleticket.pack_qty
-            @inventorylot.qty_onhand = @scaleticket.pack_qty
-            @inventorylot.qty_out_ship = 0
-            @inventorylot.qty_out_transfer = 0
-            @inventorylot.transfer_amount = 0
-            @inventorylot.inventory_uom = @scaleticket.inventory_uom
-            @inventorylot.grade =   @scaleticket.grade
-            @inventorylot.lab_report = ""
-            @inventorylot.save
-             
-         end
-         
-         # create/update inventory ticket
-         
-         @inventoryticket = Inventoryticket.find_by_scaleticket_id(@scaleticket.id)
-         if !@inventoryticket.nil?
-           @inventoryticket.pack_qty += @update_amount
-         else
-           @inventoryticket = Inventoryticket.new
-           @inventoryticket.scaleticket_id = @scaleticket.id
-           @inventoryticket.inventorylot_id = @inventorylot.id
-           @inventoryticket.field_id = @scaleticket.field_id_1
-           @inventoryticket.inventory_uom = @scaleticket.inventory_uom
-           @inventoryticket.pack_qty = @update_amount
-           @inventoryticket.save
-           
-         end
-         
-         
-         
+        update_crop_inventory
+                  
         format.html { redirect_to("/scaleticketview", :notice => 'Scaleticket was successfully updated.') }
         format.xml  { head :ok }
       else
+        @transaction = "edit"
         format.html { render :action => "edit" }
         format.xml  { render :xml => @scaleticket.errors, :status => :unprocessable_entity }
       end
     end
+  end
+  
+  def update_crop_inventory
+    
+    #---- update inventory record for scaleticket -------------------
+    if @scaleticket.inventory_update == "Consolidated"
+      @inventorylothold = Inventorylot.where('user_id' => @current_user.id , 'cropplan_id' => @scaleticket.cropplan_id , 'storage_id' => @scaleticket.storage_id, 'scaleticket_id' => 0, 'grade' => @scaleticket.grade)
+      @inventorylothold.each do |inventorylot|
+        @inventorylot = inventorylot
+      end
+      
+    else
+      @inventorylothold = Inventorylot.find_by_scaleticket_id(@scaleticket.id)
+      @inventorylot = @inventorylothold
+      
+    end 
+     
+     if !@inventorylot.nil?
+        if @scaleticket.inventory_update  == "Consolidated"
+          @inventorylot.qty_in += @update_amount
+          @inventorylot.qty_onhand += @update_amount
+          @inventorylot.save
+          
+        else
+          @inventorylot.qty_in = @scaleticket.pack_qty
+          @inventorylot.qty_onhand = @scaleticket.pack_qty
+          @inventorylot.inventory_uom = @scaleticket.inventory_uom
+          @inventorylot.save
+          
+        end
+
+     else
+       #---- create inventory record for scaleticket ------------------- 
+        @inventorylot = Inventorylot.new
+        if @scaleticket.inventory_update == "Consolidated"
+          @inventorylot.scaleticket_id = 0
+        else
+          @inventorylot.scaleticket_id = @scaleticket.id
+        end
+        @inventorylot.user_id = @scaleticket.user_id            
+        @inventorylot.storage_id = @scaleticket.storage_id
+        @inventorylot.cropplan_id = @scaleticket.cropplan_id
+        @inventorylot.qty_in = @scaleticket.pack_qty
+        @inventorylot.qty_onhand = @scaleticket.pack_qty
+        @inventorylot.qty_out_ship = 0
+        @inventorylot.qty_out_transfer = 0
+        @inventorylot.transfer_amount = 0
+        @inventorylot.inventory_uom = @scaleticket.inventory_uom
+        @inventorylot.grade =   @scaleticket.grade
+        @inventorylot.lab_report = ""
+        @inventorylot.save
+         
+     end
+     
+     # create/update inventory ticket
+     
+     @inventoryticket = Inventoryticket.find_by_scaleticket_id(@scaleticket.id)
+     if !@inventoryticket.nil?
+       @inventoryticket.pack_qty += @update_amount
+     else
+       @inventoryticket = Inventoryticket.new
+       @inventoryticket.scaleticket_id = @scaleticket.id
+       @inventoryticket.inventorylot_id = @inventorylot.id
+       @inventoryticket.field_id = @scaleticket.field_id_1
+       @inventoryticket.inventory_uom = @scaleticket.inventory_uom
+       @inventoryticket.pack_qty = @update_amount
+       @inventoryticket.save
+       
+     end
+    
   end
 
   # DELETE /scaletickets/1

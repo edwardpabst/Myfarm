@@ -174,6 +174,8 @@ Myfarm::Application.routes.draw do
   match '/scaleticketview', :to => 'scaletickets#index_view'
   match '/scaleticketdata', :to => 'scaletickets#index_data'
   match '/scaleticketgridaction', :to => 'scaletickets#index_dbaction'
+  match '/setticket', :to => 'scaletickets#set_ticket'
+  match '/set_defaults', :to => 'scaletickets#set_defaults'
   #Inventory lots
   match '/inventorylotview', :to => 'inventorylots#index_view'
   match '/inventorylotdata', :to => 'inventorylots#index_data'

@@ -20,58 +20,29 @@ document.st.scaleticket_pack_qty.value = ((document.st.scaleticket_net_weight.va
 <%= render "shared/error_messages", :object => f.object%>
 
  <table class="twocolumn">
-	<tr>
+	<tr class="shade">
 		<td colspan="4">
 			<div id="form_header">			 	 
 		 SCALE TICKETS register the net weight of harvested crops, convert them to their inventory unit of measure  and assign them to a storage location. 			 
 			</div>
 		</td>
 	</tr>
-	<tr>
-		<td  >
-			<%= f.label :ticket_id, "Ticket ID" %>
-		</td>
+	 
+
+ 
+
+	<tr colspan="4">
 		<td>
-			<% if !@scaleticket.ticket_id.nil? %>
-				<%= @scaleticket.ticket_id%>
-			<% end %>
-		</td>
-			<td>
-
-				<label class=" label" for="scaletickets">Inventory update*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
-
-			</td>
-			<td>
- 				<div class="disabled">
-					<%= f.text_field :inventory_update, :disabled => true %>
-				</div>
-
-			</td>
-
-	</tr>
-	<tr>
-		<td>
-			<%= f.label :tran_date, "Transaction date*" %> 
-		</td>
-		<td>
-			<%= f.text_field :tran_date %>
-		</td>
-		<td>
-		    <% get_cropplans_by_year %>
-			<label class=" label" for="scaletickets">Crop plan*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
-
-		</td>
-		<td>
-			<%= collection_select("scaleticket", "cropplan_id", @cropplans, "id", "cropplanfull", options = {:prompt => " "}) %>
-
-		</td>
-	</tr>
-
-	<tr>
-		<td>
-			<%= f.label :gross_weight, "Gross weight*" %>
+			&nbsp;
 		
 		 
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= f.label :gross_weight, "Gross weight/count*" %>
+
+
 		</td>
 		<td>
 			<%= f.text_field :gross_weight, :onchange => "updateNet()"  %>
@@ -99,7 +70,7 @@ document.st.scaleticket_pack_qty.value = ((document.st.scaleticket_net_weight.va
 	</tr>
 	<tr>
 		<td>
-			<%= f.label :net_weight, "Net Weight*" %> 
+			<%= f.label :net_weight, "Net Weight/count*" %> 
 		</td>
 		<td>
 			<%= f.text_field :net_weight, :onchange => "updateQty()" %>
@@ -143,23 +114,7 @@ document.st.scaleticket_pack_qty.value = ((document.st.scaleticket_net_weight.va
  
 	</tr>
 	
-	<tr>
-		<td>
-		    <% get_storage %>
-			<label class=" label" for="scaleticket">Storage unit<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
 
-		</td>
-		<td>
-			<%= collection_select("scaleticket", "storage_id", @storages, "id", "name", options = {:prompt => " "}) %>
-
-		</td>
-		<td>
-		 
-		</td>
-		<td>
-			 
-		</td>
-	</tr>
 	<tr>
 		<td >
 			<%= f.label :grade, "Grade" %>
@@ -189,12 +144,106 @@ document.st.scaleticket_pack_qty.value = ((document.st.scaleticket_net_weight.va
 
 	</tr>
 	<tr>
+		<td colspan="2">
+			<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<% if @transaction == 'new' %>
+		 		<%= f.submit " Add Ticket ", :class => "button"  %>
+			<% else %>
+				<%= f.submit " Update Ticket", :class => "button"  %>
+			<% end %>
+			<br><br>
+		</td>
+		<td>
+		 
+		</td>
+	</tr>
+	<tr class="shade">
+		<td  colspan="4">
+			&nbsp;
+		</td>
+	</tr>	
+	<tr class="shade">
+		<td  >
+			<%= f.label :ticket_id, "Ticket ID" %>
+		</td>
+		<td colspan="3">
+ 
+				<%= f.text_field :ticket_id %>
+ 
+		</td>
+	</tr>
+
+	<tr class="shade">
+		<td>
+			<%= f.label :tran_date, "Transaction date*" %> 
+		</td>
+		<td>
+ 
+			<%= f.text_field :tran_date %>
+	 
+		</td>
+		<td>
+		    
+			<label class=" label" for="scaletickets">Crop plan*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+
+		</td>
+		<td>
+			<% if @transaction == 'new' %>
+				<% get_cropplans_by_year %>
+				<%= collection_select("scaleticket", "cropplan_id", @cropplans, "id", "cropplanfull", options = {:prompt => :cropplan_id}) %>
+			<% else %>
+				<div class="disabled">
+					<%= @cropplan.cropplanfull %>					 
+				</div>
+			<% end %>
+
+		</td>
+		<tr class="shade">
+
+			<td>
+			   
+				<label class=" label" for="scaleticket">Storage unit<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+
+			</td>
+			<td>
+				<% if @transaction == 'new' %>
+				 	<% get_storage %>
+					<%= collection_select("scaleticket", "storage_id", @storages, "id", "name", options = {:prompt => " "}) %>
+				<% else %>
+					<div class="disabled">
+						<%= @storage.name %>					 
+					</div>
+				<% end %>
+			</td>
+				<td>
+
+					<label class=" label" for="scaletickets">Inventory update*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+
+				</td>
+				<td>
+					<% if @transaction == 'new' %>
+				 		<% get_types_by_name("inventory_update") %>		
+						<%= collection_select("scaleticket", "inventory_update", @types, "type_value_string", "type_value_string") %>
+						
+					<% else %>
+						<div class="disabled">
+							<%= @scaleticket.inventory_update %>					 
+						</div>
+					<% end %>
+
+
+				</td>
+
+		</tr>
+	</tr>
+	<tr class="shade">
 		<td colspan="4">
 		<div class="hintbase">	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		 	 
 	      Establish which field or fields the harvested crop originated from.			 
 		</div>
 	</tr>
-	<tr>
+	<tr class="shade">
 		<td>
 	    <% get_fields_by_farm %>
 		<label class=" label" for="scaleticket">Field*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
@@ -209,7 +258,7 @@ document.st.scaleticket_pack_qty.value = ((document.st.scaleticket_net_weight.va
 		</td>
 	</tr>
 
-	<tr>
+	<tr class="shade">
 		<td>
 	  
 		<label class=" label" for="scaleticket">Field<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
@@ -222,7 +271,7 @@ document.st.scaleticket_pack_qty.value = ((document.st.scaleticket_net_weight.va
 			<%= f.text_field :field_pct_2 %>   
 		</td>
 	</tr>
-	<tr>
+	<tr class="shade">
 		<td>
 	  
 		<label class=" label" for="scaleticket">Field<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
@@ -235,7 +284,7 @@ document.st.scaleticket_pack_qty.value = ((document.st.scaleticket_net_weight.va
 		<%= f.text_field :field_pct_3 %>
 		</td>
 	</tr>
-	<tr>
+	<tr class="shade">
 		<td>
 	  
 		<label class=" label" for="scaleticket">Field<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
@@ -248,17 +297,7 @@ document.st.scaleticket_pack_qty.value = ((document.st.scaleticket_net_weight.va
 			<%= f.text_field :field_pct_4 %>
 		</td>
 	</tr>
-	<tr>
-		<td colspan="2">
-			<br>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		 	<%= f.submit " Update ", :class => "button"  %>
-			<br><br>
-		</td>
-		<td>
-		 
-		</td>
-	</tr>	
+	
  </table>
  
 

@@ -12,7 +12,7 @@ class Scaleticket < ActiveRecord::Base
   before_save :default_values 
  
   	      
-  validates_presence_of :tran_date, :cropplan_id, :field_id_1 
+  validates_presence_of :tran_date, :cropplan_id, :field_id_1, :storage_id, :inventory_update, :pack_qty 
   # :storage_id, :gross_weight, :tare_weight, :net_weight,
   validate :field_pct_validation
     #------------------------------------------------------------------------------
