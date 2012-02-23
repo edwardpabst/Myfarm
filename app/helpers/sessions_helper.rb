@@ -178,8 +178,12 @@ module SessionsHelper
    @types = Type.where('typename' => name, 'user_id' => 1).order('type_value_string').all
   end
   
-  def get_supplies_by_type()
-   @supplies = Supply.where('user_id' => @current_user.id).order('supply_type').all
+  def get_supplies_by_type(type)
+   if type.nil? || type.blank?
+     @supplies = Supply.where('user_id' => @current_user.id).order('supply_type').all
+   else
+     @supplies = Supply.where('user_id' => @current_user.id, 'supply_type' => type).order('supply_type').all
+   end
   end
   
   def get_equipment_by_type()

@@ -30,8 +30,22 @@ class Cropplan < ActiveRecord::Base
            sql_statement += " group by cp.id, cropplanfull"
            
            return @cropplans = Cropplan.find_by_sql(sql_statement)
+                     
+         end
+         
+         def self.get_cropplan_for_scaleticket(user_id, cropplan_id, start_date, stop_date)
+          
+           sql_statement =  ("Select cp.id, cropplanfull, field_id_1 as field_id, fieldname, farmname
+           from cropplans cp
+           join scaletickets st on cp.id = st.cropplan_id
+           left join fields on st.field_id_1 = fields.id
+           where cp.user_id = #{user_id} " )
            
+           sql_statement = build_where_clause(sql_statement, cropplan_id, "",  start_date, stop_date)
+           sql_statement += " group by farmname, cropplanfull, fieldname"
            
+           return @cropplans = Cropplan.find_by_sql(sql_statement)
+                     
          end
          
          def self.cropplan_yield_items(user_id, cropplan_id, field_id, start_date, stop_date)
@@ -76,10 +90,10 @@ class Cropplan < ActiveRecord::Base
          
          def self.build_where_clause(sql_statement, cropplan_id, field_id,  start_date, stop_date)
             
-            #if !cropplan_id.nil? and !cropplan_id.blank?
-            #  cropplan_select =  "and cropplan_id = #{cropplan_id}"
-            #  sql_statement += cropplan_select
-            #end
+            if !cropplan_id.nil? and !cropplan_id.blank?
+              cropplan_select =  "and cropplan_id = #{cropplan_id}"
+              sql_statement += cropplan_select
+            end
                        
            if !field_id.nil? and !field_id.blank?
              field_select =  " and field_id_1 = #{field_id}"
@@ -89,11 +103,67 @@ class Cropplan < ActiveRecord::Base
              date_select =  " and tran_date >= '#{start_date}'"
              date_select +=  " and tran_date <= '#{stop_date}'"
              sql_statement += date_select
-             
-            
+                        
              return sql_statement
- 
-
            
          end
+         
+
+         def self.cropplan_scaleticket_items(user_id, cropplan_id, field_id, start_date, stop_date)
+           
+          
+           sql_statement = ("Select cropplanfull, fieldname, number_acres, ticket_id, tran_date, gross_weight,
+                                tare_weight, net_weight, inventory_uom, moisture_pct, 
+                                (net_weight/weight_conversion) as qty_wet, 
+                                (net_weight/weight_conversion) - (((net_weight/weight_conversion) * moisture_pct) / 100) as qty_dry
+           from cropplans cp
+           join scaletickets st on cp.id = st.cropplan_id
+           join crops on cp.crop_id = crops.id
+           left join fields on st.field_id_1 = fields.id
+           where cp.user_id = #{user_id } ")
+          
+           sql_statement = build_where_clause(sql_statement, cropplan_id, field_id,  start_date, stop_date)
+           sql_statement += " order by tran_date"
+           
+           return @cropscaletickets = Cropplan.find_by_sql(sql_statement) 
+         end
+         
+         def self.cropplan_scaleticket_field_summary(user_id, id, start_date, stop_date, field_id)
+           
+          
+           sql_statement = ("Select cropplanfull, fieldname,  sum(gross_weight) as gross_weight,
+                                 sum(tare_weight) as tare_weight, sum(net_weight) as net_weight, 
+                                 sum((net_weight/weight_conversion)) as qty_wet, 
+                                 sum((net_weight/weight_conversion)) - sum((((net_weight/weight_conversion) * moisture_pct) / 100)) as qty_dry
+           
+           from cropplans cp
+           join scaletickets st on cp.id = st.cropplan_id
+           join crops on cp.crop_id = crops.id
+           join fields on st.field_id_1 = fields.id
+           where cp.user_id = #{user_id }  " )
+          
+           sql_statement = build_where_clause(sql_statement, id, field_id,  start_date, stop_date)
+           sql_statement += " group by cropplanfull, fieldname"
+           return @cropfields = Cropplan.find_by_sql(sql_statement) 
+         end
+         
+         def self.cropplan_scaleticket_cropplan_summary(user_id, id, start_date, stop_date)
+           
+          
+           sql_statement = ("Select cropplanfull,  sum(gross_weight) as gross_weight,
+                                  sum(tare_weight) as tare_weight, sum(net_weight) as net_weight, 
+                                  sum((net_weight/weight_conversion)) as qty_wet, 
+                                  sum((net_weight/weight_conversion)) - sum((((net_weight/weight_conversion) * moisture_pct) / 100)) as qty_dry
+           
+           from cropplans cp
+           join scaletickets st on cp.id = st.cropplan_id
+           join crops on cp.crop_id = crops.id
+           join fields on st.field_id_1 = fields.id
+           where cp.user_id = #{user_id }  ")
+          
+           sql_statement = build_where_clause(sql_statement, id, "",  start_date, stop_date)
+           sql_statement += " group by cropplanfull"
+           return @cropcropplans = Cropplan.find_by_sql(sql_statement) 
+         end
+         
 end

@@ -1,0 +1,92 @@
+
+<br>
+<h1>Restricted Use Chemical Report Requestor</h1>
+ 
+<%= link_to 'Back', session[:return_to] %>
+<br>
+
+<%= form_tag '/chemicalreport.pdf', :method=>'post' , :html => { :name => "in"} do %>
+ 
+
+
+<table class="twocolumn">
+
+		<tr>
+			<td colspan="3">
+				<div id="form_header">			 	 
+	 Lists Restricted use chemical usage or planned usage. Breaks out element composition and amounts. Status dictates whether the usage is planned or complete. You can select one chemical or leave blank for all. Date range will select the farm jobs that the chemical is used on.
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td width="25%"></td>
+ 			<td >
+				<label class=" label" for="Supply">Chemical<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>	
+			</td>
+			<td>
+				   <% get_supplies_by_type('restricted use') %>
+
+				<%= collection_select("", "supply_id", @supplies, "id", "supplyname", options = {:prompt => " "}) %></li>
+			
+ 
+
+	</td>
+		</tr>
+		<tr>
+			<td width="25%"></td>
+			<td>
+			<% get_types_by_name("job_status") %>
+			<label class=" label" for="job_status">Job status<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+			</td>
+			<td>
+			<%= collection_select("", "job_status", @types, "type_value_string", "type_value_string", options = {:prompt => " ", :include_blank => ' '}) %>	
+		   	</td>
+		
+
+
+		 </tr>
+		 <tr>
+			<td width="25%"></td>
+			<td>
+			<label> Job Begin date* </label>   
+			</td>
+			<td>
+			<%= text_field_tag 'start_date' %>
+
+		 	</td>
+		 </tr>
+		
+		<tr>
+			<td width="25%"></td>
+			<td>
+		   	<label> Job End date* </label> 
+			</td>
+			<td>
+				<%= text_field_tag 'stop_date'  %>
+		    </td>
+
+
+		</tr>
+		
+
+
+			<tr>
+			
+			
+			<td></td><td></td>
+			<td>
+				<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 	<%= submit_tag " Submit ", :class => "button", :id => "insubmit" %><br><br>
+			</td>
+
+
+		</tr>
+			</table>
+			</td>
+
+		</tr>
+
+			 
+</table>
+<% end %>
+

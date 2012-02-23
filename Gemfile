@@ -31,6 +31,7 @@ gem 'therubyracer', :require => nil
 gem 'barista'
 gem "paperclip", "~> 2.3"
 
+
 gem 'rake' , '~> 0.9.2'
 gem 'formtastic', '2.0.0.rc1'
 gem 'event-calendar', :require => 'event_calendar'

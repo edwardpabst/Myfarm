@@ -101,6 +101,7 @@ class SuppliesController < ApplicationController
   # GET /supplies/1/edit
   def edit
     @supply = Supply.find(params[:id])
+     @onload = 'checkType()'
   end
 
   # POST /supplies
@@ -146,4 +147,70 @@ class SuppliesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def fertilizer_requestor 
+
+
+     respond_to do |format|
+       format.html
+
+     end
+
+   end
+
+   def fertilizerreport
+
+
+      #logger.debug "scale ticket REPORT  PARAMS- CROP -#{params[:cropplan_id]} FIELD -#{params[:field_id]} "
+     respond_to do |format|
+       format.html
+       format.pdf do
+
+         pdf = FertilizerreportPdf.new(session[:s_user_id], view_context, params[:supply_id], params[:job_status],
+         params[:start_date], params[:stop_date])
+         send_data pdf.render, filename: "fertilizer_report",
+                                 type: "application/pdf",
+                                 :page_layout => :landscape,
+                                 disposition: "inline"
+                                 
+
+       end
+     end
+
+
+   end  
+   
+   def chemical_requestor 
+
+
+       respond_to do |format|
+         format.html
+
+       end
+
+     end
+
+     def chemicalreport
+
+
+        #logger.debug "scale ticket REPORT  PARAMS- CROP -#{params[:cropplan_id]} FIELD -#{params[:field_id]} "
+       respond_to do |format|
+         format.html
+         format.pdf do
+
+           pdf = ChemicalreportPdf.new(session[:s_user_id], view_context, params[:supply_id], params[:job_status],
+           params[:start_date], params[:stop_date])
+         
+           
+           send_data pdf.render, filename: "chemical_report",
+                                   type: "application/pdf",
+                                   disposition: "inline"
+                                   
+
+         end
+       end
+
+
+     end
+  
 end

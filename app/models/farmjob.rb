@@ -3,7 +3,8 @@ class Farmjob < ActiveRecord::Base
   attr_accessible :fieldtask_id, :field_id, :crop_id, :cropplan_id, :area_size,  :start_date, :stop_date, :start_time, :stop_time, :job_status , :workorder,
                   :total_hours, :notes, :equipment_id, :applied_area, :plan_rate, :actual_rate, :growth_stage, :application_method, :soil_condition,
                   :soil_type, :weather_segment, :eventname, :isreplicate, :from_farmjob_id, :has_been_completed,
-                  :total_cost, :supply_cost, :labor_cost, :equipment_cost
+                  :total_cost, :supply_cost, :labor_cost, :equipment_cost, :wind_direction,  :wind_speed, 
+                  :temperature, :humidity, :sky_condition
                 
   belongs_to :Fieldtask
   belongs_to :Crop

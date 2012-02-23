@@ -11,7 +11,7 @@ class Fieldtask < ActiveRecord::Base
      
      def self.get_supplies_by_fieldtask_id(fieldtask_id)
        @fieldtask = Fieldtask.find_by_id(fieldtask_id)
-       return @tasksupplies = @fieldtask.fieldtasksupplies.all 
+       return @tasksupplies = Fieldtasksupply.find_by_sql("select * from fieldtasksupplies where fieldtask_id = #{@fieldtask.id}") 
      end
      
      def self.get_fieldtasks_by_type(user_id)

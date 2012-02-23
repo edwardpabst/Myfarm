@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120209200440) do
+ActiveRecord::Schema.define(:version => 20120221000755) do
 
   create_table "contracts", :force => true do |t|
     t.integer  "party_id"
@@ -201,6 +201,11 @@ ActiveRecord::Schema.define(:version => 20120209200440) do
     t.decimal  "labor_cost"
     t.decimal  "equipment_cost"
     t.decimal  "total_cost"
+    t.string   "wind_direction"
+    t.string   "wind_speed"
+    t.integer  "temperature"
+    t.integer  "humidity"
+    t.string   "sky_condition"
   end
 
   add_index "farmjobs", ["cropplan_id"], :name => "index_farmjobs_on_cropplan_id"
@@ -582,6 +587,18 @@ ActiveRecord::Schema.define(:version => 20120209200440) do
     t.string   "distribution_uom"
     t.decimal  "conversion_factor"
     t.decimal  "supply_charge_uom"
+    t.decimal  "nitrogen_content",    :precision => 9, :scale => 2
+    t.decimal  "phosphorous_content", :precision => 9, :scale => 2
+    t.decimal  "potassium_content",   :precision => 9, :scale => 2
+    t.decimal  "calcium_content",     :precision => 9, :scale => 2
+    t.decimal  "manganese_content",   :precision => 9, :scale => 2
+    t.decimal  "magnesium_content",   :precision => 9, :scale => 2
+    t.string   "chemical_type"
+    t.string   "active_ingredient"
+    t.decimal  "chemical_rate_acre",  :precision => 9, :scale => 2
+    t.string   "chemical_uom"
+    t.string   "carrier_uom"
+    t.decimal  "restricted_hours",    :precision => 9, :scale => 2
   end
 
   create_table "supplyinventories", :force => true do |t|

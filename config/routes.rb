@@ -166,6 +166,10 @@ Myfarm::Application.routes.draw do
   match '/supplyview', :to => 'supplies#index_view'
   match '/supplydata', :to => 'supplies#index_data'
   match '/supplygridaction', :to => 'supplies#index_dbaction'
+  match '/fertilizerreport', :to => 'supplies#fertilizerreport'
+  match '/fertilizerrequestor', :to => 'supplies#fertilizer_requestor'
+  match '/chemicalreport', :to => 'supplies#chemicalreport'
+  match '/chemicalrequestor', :to => 'supplies#chemical_requestor'
   #Equipment
   match '/equipmentview', :to => 'equipment#index_view'
   match '/equipmentdata', :to => 'equipment#index_data'
@@ -176,6 +180,8 @@ Myfarm::Application.routes.draw do
   match '/scaleticketgridaction', :to => 'scaletickets#index_dbaction'
   match '/setticket', :to => 'scaletickets#set_ticket'
   match '/set_defaults', :to => 'scaletickets#set_defaults'
+  match '/scaleticketreport', :to => 'scaletickets#scaleticketreport'
+  match '/scaleticketrequestor', :to => 'scaletickets#scaleticket_requestor'
   #Inventory lots
   match '/inventorylotview', :to => 'inventorylots#index_view'
   match '/inventorylotdata', :to => 'inventorylots#index_data'
