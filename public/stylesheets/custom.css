@@ -101,6 +101,9 @@ section h1 {
 	background-color:white;
 	padding:5px;
 	text-align:center;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10pz;
  
 }
 
@@ -111,6 +114,20 @@ section h1 {
     color: black;
 	background-color:white;
 	border: solid 1px #8B864E;
+	padding:5px;
+	text-align:left;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10pz;
+}
+
+
+#tutorial_header:hover{
+	float:left;
+	width: 25%;
+	font-size:90%;
+	background-color:#4682B4;
+	border: solid 1px orange;
 	padding:5px;
 	text-align:left;
 	-moz-border-radius: 10px;
@@ -129,6 +146,7 @@ section h1 {
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10pz;
+	padding-left:3px;
 }
 #tutorial_point{
 
@@ -137,6 +155,10 @@ section h1 {
 	background-color:white;
 	text-align:left;
 	font-weight:normal;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10pz;
+	padding-left:3px;
 }
 #tutorial_bullet{
 
@@ -145,6 +167,10 @@ section h1 {
 	background-color:white;
 	text-align:left;
 	font-weight:normal;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10pz;
+	padding-left:3px;
 }
 
 .footer{

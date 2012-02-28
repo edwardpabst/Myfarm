@@ -3,8 +3,7 @@ class WeathersController < ApplicationController
   # GET /weathers.xml
   
      def index_view
-
-
+       Party.create_weather
       end
 
       def index_data

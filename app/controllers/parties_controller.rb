@@ -99,7 +99,7 @@ class PartiesController < ApplicationController
   # GET /parties/new.xml
   def new
     @party = Party.new
-
+    @user_email = session[:s_user_email]
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @party }
@@ -110,6 +110,7 @@ class PartiesController < ApplicationController
   def edit
     @party = Party.find(params[:id])
     getroles(params[:id])
+    @user_email = @party.partyemail
     if @party.partyname.blank?
       @party.partyname = @party.partyfirstname + " " +@party.partylastname
     end
@@ -160,15 +161,21 @@ class PartiesController < ApplicationController
   # PUT /parties/1.xml
   def update
     @party = Party.find(params[:id])
-
+    @setweather = false
+    #logger.debug "WEATHER PARTY *** #{@party.inspect}" 
     if @party.partyweatherpostalcode != params{:partyweatherpostalcode}
-     if !params{:partyweatherpostalcode}.nil?
-       Party.get_weather(session[:s_user_id])
+    if !params{:partyweatherpostalcode}.nil?
+      @setweather = true
      end
     end
 
     respond_to do |format|
       if @party.update_attributes(params[:party])
+        
+        if @setweather == true
+            Party.get_weather(session[:s_user_id])
+        end
+        
         format.html { redirect_to("/partyview" , :notice => 'Party was successfully updated.') }
         format.xml  { head :ok }
       else

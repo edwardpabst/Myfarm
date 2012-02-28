@@ -10,7 +10,7 @@
 	<%= form.input :partyfirstname, :label => "First name",  :required =>  false %> 
 	<%= form.input :partylastname, :label => "Last name",  :required =>  false  %> 
 	<%= form.input :partyname, :label => "Full name",  :required => false,  :hint => "created from first and last names if left blank"  %> 
-	<%= form.input :partyemail, :label => "Email",  :required => false , :input_html => {  :value => session[:s_user_email] }    %>  
+	<%= form.input :partyemail, :label => "Email",  :required => false , :input_html => {  :value => @user_email }    %>  
 	<%= form.input :partyphone, :label => "Contact phone",  :required => false    %>  
 	<%= form.input :partyjobtitle, :label => "Primary role",  :required => false, :hint => "Primary job/responsibility of an employee"    %> 
 
