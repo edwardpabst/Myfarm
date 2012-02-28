@@ -1,6 +1,8 @@
 class FieldsController < ApplicationController
   # GET /fields
   # GET /fields.xml
+
+  
   before_filter :authenticate
   
   def index_view
@@ -241,6 +243,7 @@ class FieldsController < ApplicationController
     
     @field = Field.find(params[:id])
 
+
     respond_to do |format|
       if @field.update_attributes(params[:field])
         if ismapping == true
@@ -257,6 +260,8 @@ class FieldsController < ApplicationController
       end
     end
   end
+  
+  
 
   # DELETE /fields/1
   # DELETE /fields/1.xml

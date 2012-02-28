@@ -1,4 +1,8 @@
-<p id="notice"><%= notice %></p>
+<%= link_to 'Back', '/weatherview' %>
+<br><br>
+<h3>Weather</h3>
+
+
 
 <p>
   <b>Weather date:</b>
@@ -6,28 +10,23 @@
 </p>
 
 <p>
-  <b>Postal code:</b>
-  <%= @weather.postal_code %>
+  <b>Weather time:</b>
+  <%= @weather.weather_time %>
 </p>
 
 <p>
-  <b>Segment:</b>
-  <%= @weather.segment %>
+  <b>Postalcode:</b>
+  <%= @weather.postalcode %>
 </p>
 
 <p>
-  <b>Temperature:</b>
-  <%= @weather.temperature %>
+  <b>Temperature high:</b>
+  <%= @weather.temperature_high %>
 </p>
 
 <p>
-  <b>Sky condition:</b>
-  <%= @weather.sky_condition %>
-</p>
-
-<p>
-  <b>Wind direction:</b>
-  <%= @weather.wind_direction %>
+  <b>Temperature low:</b>
+  <%= @weather.temperature_low %>
 </p>
 
 <p>
@@ -36,15 +35,65 @@
 </p>
 
 <p>
-  <b>Gusting to:</b>
-  <%= @weather.gusting_to %>
+  <b>Wind direction degrees:</b>
+  <%= @weather.wind_direction_degrees %>
 </p>
 
 <p>
-  <b>Relative humidity:</b>
-  <%= @weather.relative_humidity %>
+  <b>Wind direction compass:</b>
+  <%= @weather.wind_direction_compass %>
+</p>
+
+<p>
+  <b>Precipitation:</b>
+  <%= @weather.precipitation %>
+</p>
+
+<p>
+  <b>Cloud cover %:</b>
+  <%= @weather.sky_condition %>
+</p>
+
+<p>
+  <b>Weather condition (3 hours):</b>
+  <%= @weather.weather_condition_1 %>
+</p>
+
+<p>
+  <b>Weather condition (+ 3 hours):</b>
+  <%= @weather.weather_condition_2 %>
+</p>
+
+<p>
+  <b>Weather condition (+ 3 hours):</b>
+  <%= @weather.weather_condition_3 %>
+</p>
+
+<p>
+  <b>Weather condition (+ 3 hours):</b>
+  <%= @weather.weather_condition_4 %>
+</p>
+
+<p>
+  <b>Weather condition (+ 3 hours):</b>
+  <%= @weather.weather_condition_5 %>
+</p>
+
+<p>
+  <b>Weather condition (+ 3 hours):</b>
+  <%= @weather.weather_condition_6 %>
+</p>
+
+<p>
+  <b>Weather condition (+ 3 hours):</b>
+  <%= @weather.weather_condition_7 %>
+</p>
+
+<p>
+  <b>Weather condition (+ 3 hours):</b>
+  <%= @weather.weather_condition_8 %>
 </p>
 
 
-<%= link_to 'Edit', edit_weather_path(@weather) %> |
-<%= link_to 'Back', weathers_path %>
+
+<%= link_to 'Back', '/weatherview' %>

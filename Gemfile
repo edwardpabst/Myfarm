@@ -7,8 +7,7 @@ gem 'rails', '3.0.7'
 # not used in heroku
 
 
-
-  gem 'pg'
+ gem 'pg'
  gem 'taps'
 
 #web server for heroku
@@ -30,6 +29,10 @@ gem 'stripe'
 gem 'therubyracer', :require => nil
 gem 'barista'
 gem "paperclip", "~> 2.3"
+gem 'nokogiri'
+gem 'whenever', :require => false
+
+ 
 
 
 gem 'rake' , '~> 0.9.2'
@@ -61,7 +64,7 @@ end
 
 # Bundle the extra gems:
 # gem 'bj'
-# gem 'nokogiri'
+
 
 # gem 'aws-s3', :require => 'aws/s3'
 

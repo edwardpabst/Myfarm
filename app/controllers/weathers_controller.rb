@@ -2,8 +2,50 @@ class WeathersController < ApplicationController
   # GET /weathers
   # GET /weathers.xml
   
-  before_filter :authenticate
-  
+     def index_view
+
+
+      end
+
+      def index_data
+
+        get_current_user
+        @party = Party.select('partyweatherpostalcode').where('system_user_id' => @current_user.id)
+        @party.each do |p|
+          @weatherpostalcode = p.partyweatherpostalcode
+        end
+        
+        if !@party.nil?
+          @weathers = Weather.find_by_sql("Select *  
+          from weathers 
+          where weathers.postalcode = #{@weatherpostalcode } ")  
+        end
+        
+        
+       
+
+      end
+
+      def index_dbaction
+    		#called for all db actions
+ 
+
+    		@mode = params["!nativeeditor_status"]
+
+    		@id = params["gr_id"]
+    		case @mode
+
+    			when "deleted"
+ 
+
+    				@tid = @id
+    			when "updated"
+ 
+
+    				@tid = @id
+    		end 
+    	end
+    	
   def index
     @weathers = Weather.all
 

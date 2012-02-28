@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120221000755) do
+ActiveRecord::Schema.define(:version => 20120227213347) do
 
   create_table "contracts", :force => true do |t|
     t.integer  "party_id"
@@ -657,17 +657,29 @@ ActiveRecord::Schema.define(:version => 20120221000755) do
 
   create_table "weathers", :force => true do |t|
     t.date     "weather_date"
-    t.string   "postal_code"
-    t.string   "segment"
-    t.integer  "temperature"
+    t.datetime "weather_time"
+    t.string   "postalcode"
+    t.string   "temperature_high"
+    t.string   "temperature_low"
+    t.string   "wind_speed"
+    t.string   "wind_direction_degrees"
+    t.string   "wind_direction_compass"
+    t.string   "precipitation"
     t.string   "sky_condition"
-    t.string   "wind_direction"
-    t.integer  "wind_speed"
-    t.integer  "gusting_to"
-    t.integer  "relative_humidity"
+    t.string   "weather_condition_1"
+    t.string   "weather_condition_2"
+    t.string   "weather_condition_3"
+    t.string   "weather_condition_4"
+    t.string   "weather_condition_5"
+    t.string   "weather_condition_6"
+    t.string   "weather_condition_7"
+    t.string   "weather_condition_8"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "weathers", ["postalcode"], :name => "index_weathers_on_postalcode"
+  add_index "weathers", ["weather_date"], :name => "index_weathers_on_weather_date"
 
   create_table "ztimes", :force => true do |t|
     t.string   "timekey"

@@ -6,7 +6,7 @@ class Field < ActiveRecord::Base
   
   attr_accessible :fieldname, :farmname, :location, :country_id, :number_acres, :holding_status, 
   :owner_id, :client_id, :area_mapped, :area_legal, :area_tillable, :current_state, 
-  :longitude, :latitude, :gmaps, :from_row, :to_row, :user_id, :land_expense_year,  
+  :longitude, :latitude, :gmaps, :start_row, :end_row, :user_id, :land_expense_year,  
   :soil_testlab_id, :soil_testresults_file, :farm_id, :percent_harvest_acre, :fixed_amount_acre, :fixed_uom ,
   :soilreport, :soilreport_file_name, :soilreport_content_type, :soilreport_file_size, :soilreport_updated_at
   

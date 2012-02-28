@@ -1,0 +1,16 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@weathers.each do |weather|
+		xml.tag!("row",{ "id" => weather.id }) do
+			xml.tag!("cell", weather.postalcode)
+			xml.tag!("cell", weather.weather_date)
+			xml.tag!("cell", weather.temperature_high)
+			xml.tag!("cell", weather.temperature_low)
+			xml.tag!("cell", weather.wind_speed)
+			xml.tag!("cell", weather.wind_direction_compass)
+			xml.tag!("cell", weather.precipitation)
+			xml.tag!("cell", weather.sky_condition)
+
+		end
+	end
+end

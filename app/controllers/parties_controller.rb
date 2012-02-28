@@ -161,6 +161,12 @@ class PartiesController < ApplicationController
   def update
     @party = Party.find(params[:id])
 
+    if @party.partyweatherpostalcode != params{:partyweatherpostalcode}
+     if !params{:partyweatherpostalcode}.nil?
+       Party.get_weather(session[:s_user_id])
+     end
+    end
+
     respond_to do |format|
       if @party.update_attributes(params[:party])
         format.html { redirect_to("/partyview" , :notice => 'Party was successfully updated.') }

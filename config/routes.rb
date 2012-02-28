@@ -264,6 +264,10 @@ Myfarm::Application.routes.draw do
   match '/equipementactivityview', :to => 'equipment#equiementactivity_view'
   match '/equipmentactivitydata', :to => 'equipment#equipmentactivity_data'
   match '/equipmentactivitygridaction', :to => 'equipment#equipmentactivity_dbaction'
+  #Weather
+  match '/weatherview', :to => 'weathers#index_view'
+  match '/weatherdata', :to => 'weathers#index_data'
+  match '/weathergridaction', :to => 'weathers#index_dbaction'
   
   #Reports
    match '/farmjobreportrequestor', :to => 'farmjobs#farmjob_report_requestor'

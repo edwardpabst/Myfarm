@@ -1,14 +1,23 @@
 <%= semantic_form_for @weather do |f| %>
   <%= f.inputs do %>
     <%= f.input :weather_date %>
-    <%= f.input :postal_code %>
-    <%= f.input :segment %>
-    <%= f.input :temperature %>
-    <%= f.input :sky_condition %>
-    <%= f.input :wind_direction %>
+    <%= f.input :weather_time %>
+    <%= f.input :postalcode %>
+    <%= f.input :temperature_high %>
+    <%= f.input :temperature_low %>
     <%= f.input :wind_speed %>
-    <%= f.input :gusting_to %>
-    <%= f.input :relative_humidity %>
+    <%= f.input :wind_direction_degrees %>
+    <%= f.input :wind_direction_compass %>
+    <%= f.input :precipitation %>
+    <%= f.input :sky_condition %>
+    <%= f.input :weather_condition_1 %>
+    <%= f.input :weather_condition_2 %>
+    <%= f.input :weather_condition_3 %>
+    <%= f.input :weather_condition_4 %>
+    <%= f.input :weather_condition_5 %>
+    <%= f.input :weather_condition_6 %>
+    <%= f.input :weather_condition_7 %>
+    <%= f.input :weather_condition_8 %>
   <% end %>
 
   <%= f.buttons do %>
