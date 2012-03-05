@@ -106,5 +106,84 @@ class Invoice < ActiveRecord::Base
                                      join shipments sh on inv.shipment_id = sh.id
                                      left join parties p1 on sh.customer_id = p1.id
                                      where inv.id = #{inv_id}") 
-                     end  
+                     end 
+                     
+  #----------------------------------------------------------------------------------------------------                   
+                      def self.get_customer_for_invoice(user_id, id, start_date, stop_date)
+
+                        sql_statement =  ("Select parties.id, partyname
+                        from invoices inv
+                        join shipments sh on inv.shipment_id = sh.id
+                        join parties on sh.customer_id = parties.id
+                        where inv.user_id = #{user_id} " )
+
+                        sql_statement = build_where_clause_detail(sql_statement, id, "",  start_date, stop_date)
+                        sql_statement += " group by parties.id, partyname"
+
+                        return @invoices = Invoice.find_by_sql(sql_statement)
+
+                      end
+
+                      def self.invoice_detail_items(user_id, id, invoice_status, start_date, stop_date)
+
+                        sql_statement =  ("Select parties.id, partyname, invoice_number, invoice_date, invoice_status,
+                                           inv.ship_amount, inv.ship_charge, inv.total_amount, invoice_terms, payment_reference
+                        from invoices inv
+                        join shipments sh on inv.shipment_id = sh.id
+                        join parties on sh.customer_id = parties.id
+                        where inv.user_id = #{user_id} " )
+
+                        sql_statement = build_where_clause_detail(sql_statement, id, invoice_status,  start_date, stop_date)
+                     
+
+                        return @invoices = Invoice.find_by_sql(sql_statement) 
+                      end
+
+                      def self.invoice_detail_item_summary(user_id, id, invoice_status, start_date, stop_date)
+
+                        sql_statement =  ("Select parties.id, partyname, sum(inv.ship_amount) as ship_amount, 
+                                     sum(inv.ship_charge) as ship_charge, sum(inv.total_amount) as total_amount
+                        from invoices inv
+                        join shipments sh on inv.shipment_id = sh.id
+                        join parties on sh.customer_id = parties.id
+                        where inv.user_id = #{user_id} " )
+
+                        sql_statement = build_where_clause_detail(sql_statement, id, invoice_status,  start_date, stop_date)
+
+                        sql_statement += " group by parties.id, partyname"
+                        return @invoices = Invoice.find_by_sql(sql_statement) 
+                      end
+                      
+                      def self.invoice_total_item_summary(user_id, id,  invoice_status, start_date, stop_date)
+
+                        sql_statement =  ("Select sum(inv.ship_amount) as ship_amount, 
+                                     sum(inv.ship_charge) as ship_charge, sum(inv.total_amount) as total_amount
+                        from invoices inv
+                        join shipments sh on inv.shipment_id = sh.id
+                        where inv.user_id = #{user_id} " )
+
+                        sql_statement = build_where_clause_detail(sql_statement, id, invoice_status,  start_date, stop_date)
+
+                        return @invoices = Invoice.find_by_sql(sql_statement) 
+                      end
+
+                      def self.build_where_clause_detail(sql_statement, customer_id, invoice_status,  start_date, stop_date)
+
+                         if !customer_id.nil? and !customer_id.blank?
+                           customer_select =  "and customer_id = #{customer_id}"
+                           sql_statement += customer_select
+                         end
+
+                        if !invoice_status.nil? and !invoice_status.blank?
+                          statusselect =  " and invoice_status = #{invoice_status}"
+                          sql_statement += status_select
+                        end
+
+                          date_select =  " and invoice_date >= '#{start_date}'"
+                          date_select +=  " and invoice_date <= '#{stop_date}'"
+                          sql_statement += date_select
+
+                          return sql_statement
+
+                      end 
 end

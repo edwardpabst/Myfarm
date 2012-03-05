@@ -60,7 +60,7 @@ class Cropplan < ActiveRecord::Base
            join crops on cp.crop_id = crops.id
            join fields on st.field_id_1 = fields.id
            where cp.user_id = #{user_id } 
-           and cp.id = #{cropplan_id}")
+           and cp.id = #{cropplan_id} ")
           
            sql_statement = build_where_clause(sql_statement, cropplan_id, field_id,  start_date, stop_date)
            sql_statement += " group by cropplanfull, avg_yield_acre, fieldname, number_acres"

@@ -90,6 +90,13 @@
 					onmouseover="showhide('submenu4', true); return false;"
 					onmouseout="showhide('submenu4', false);">UTILITIES</a></li>
 					</span>
+					
+					
+					<span id="menu5">
+					<li><a href="#"
+					onmouseover="showhide('submenu5', true); return false;"
+					onmouseout="showhide('submenu5', false);">NEWS</a></li>
+					</span>
 			
 			    </ul>
 			</div>
@@ -148,6 +155,7 @@
 				 <a href="/profitabilityreportrequestor">Profitability reports</a>
 				<a href="/yieldrequestor">Harvest Yield report</a>
 				 <a href="/invoicerequestor">Print Invoices</a>
+				<a href="/invoicereportrequestor">Invoice detail report</a>
 				 <a href="/scaleticketrequestor">Scaletickets report</a>
 				<a href="/fertilizerrequestor">Fertilizer report</a>
 				<a href="/chemicalrequestor">Restricted use chemical report</a>
@@ -168,16 +176,13 @@
 				<%= link_to "Manage Settings and Subscription", edit_user_path(@current_user.id) %>
 			    <a href="/typeview">Maintain data types </a>
 				<div class="menugroup">
-					News and Weather &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;   
+					Weather &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;  
+					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;   
+					&nbsp; 
 				</div>
 				<a href="#" onclick="weatherpopup()">Current Weather</a>
 				<a href="/weatherview">Historical Weather</a>				
-				<a href="#" onclick="agnewspopup()">Ag Professional news</a> 
-				<a href="#" onclick="finewspopup()">Farm industry news</a> 
-				<a href="#" onclick="agrinewspopup()">Agriculture.com news</a> 
-				<a href="#" onclick="awnewspopup()">Ag Web.com news</a> 
-				<a href="#" onclick="usdapopup()">U.S. Department of Agriculture</a>
+
 				<div class="menugroup">
 					Documentation&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
 					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
@@ -189,7 +194,17 @@
 			
  
 			</div>
- 
+ 			<div id="submenu5" class="round">
+				<div class="menugroup">
+					Agriculture News &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+				</div>
+				<a href="#" onclick="agnewspopup()">Ag Professional news</a> 
+				<a href="#" onclick="finewspopup()">Farm industry news</a> 
+				<a href="#" onclick="agrinewspopup()">Agriculture.com news</a> 
+				<a href="#" onclick="awnewspopup()">Ag Web.com news</a> 
+				<a href="#" onclick="usdapopup()">U.S. Department of Agriculture</a>
+			</div>
 		 <% end %>
 		 <% end %>
 		 <% end %>

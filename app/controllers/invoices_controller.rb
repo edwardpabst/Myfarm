@@ -186,8 +186,7 @@ class InvoicesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
-  
+
   def invoice_requestor 
     
     
@@ -209,6 +208,36 @@ class InvoicesController < ApplicationController
         pdf = InvoicereportPdf.new(session[:s_user_id], view_context, params[:customer_id],params[:start_date], 
         params[:stop_date], params[:invoice_number], params[:reprint], params[:invoice_sort_sequence])
         send_data pdf.render, filename: "invoice_report",
+                                type: "application/pdf",
+                                disposition: "inline"
+        
+      end
+    end
+    
+    
+  end
+
+  def invoice_report_requestor 
+    
+    
+    respond_to do |format|
+      format.html
+
+    end
+       
+  end
+  
+  def invoicedetailreport
+    
+ 
+    
+    respond_to do |format|
+      format.html
+      format.pdf do
+        
+        pdf = InvoicedetailreportPdf.new(session[:s_user_id], view_context, params[:customer_id], params[:invoice_status] ,
+        params[:start_date],   params[:stop_date])
+        send_data pdf.render, filename: "invoice_detail_report",
                                 type: "application/pdf",
                                 disposition: "inline"
         

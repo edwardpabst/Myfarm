@@ -9,6 +9,7 @@
 		menuArray[1] = 'submenu2';
 		menuArray[2] = 'submenu3';
 		menuArray[3] = 'submenu4';
+		menuArray[4] = 'submenu5';
 
 
 

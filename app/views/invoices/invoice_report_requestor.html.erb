@@ -1,0 +1,90 @@
+
+<br>
+<h1>Invoice Detail Report Requestor</h1>
+ 
+<%= link_to 'Back', session[:return_to] %>
+<br>
+
+<%= form_tag '/invoicedetailreport.pdf', :method=>'post' , :html => { :name => "in"} do %>
+ 
+
+
+<table class="twocolumn">
+
+		<tr>
+			<td colspan="3">
+				<div id="form_header">			 	 
+	 Invoice Report lists generated invoices.  The report can be run for a specfic Customer and/or Invoice status. Selection if based on a desired invoice date range.
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td width="25%"></td>
+			<td class="label">
+				<% get_parties_by_type("Customer") %>
+				<label class=" label" for="shipment">Customer<abbr title="required"> </abbr>  </label> 
+			</td>
+			<td>
+				<% if !@party_types.nil? %>			
+					<%= collection_select("", "customer_id", @party_types, "id", "partyname", options = {:prompt => " ", :include_blank => ' '}) %>
+				<% end %>  
+		 	</td>
+		</tr>
+		<tr>
+			<td width="25%"></td>
+			<td>
+			<% get_types_by_name("invoice_status") %>
+			<label class=" label" for="invoice_status">Invoice status<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+			</td>
+			<td>
+			<%= collection_select("", "invoice_status", @types, "type_value_string", "type_value_string", options = {:prompt => " ", :include_blank => ' '}) %>	
+		   	</td>
+		
+
+
+		 </tr>
+		 <tr>
+			<td width="25%"></td>
+			<td>
+			<label> Invoice begin date </label>   
+			</td>
+			<td>
+			<%= text_field_tag 'start_date' %>
+
+		 	</td>
+		 </tr>
+		
+		<tr>
+			<td width="25%"></td>
+			<td>
+		   	<label> Invoice end date </label> 
+			</td>
+			<td>
+				<%= text_field_tag 'stop_date'  %>
+		    </td>
+
+
+		</tr>
+		
+
+
+			<tr>
+			
+			
+			<td></td><td></td>
+			<td>
+				<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 	<%= submit_tag " Submit ", :class => "button", :id => "insubmit" %><br><br>
+			</td>
+
+
+		</tr>
+			</table>
+			</td>
+
+		</tr>
+
+			 
+</table>
+<% end %>
+

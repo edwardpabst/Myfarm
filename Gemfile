@@ -7,7 +7,6 @@ gem 'rails', '3.0.7'
 # not used in heroku
 
 
-
   gem 'pg'
  gem 'taps'
 

@@ -1,8 +1,5 @@
 class ChemicalreportPdf < Prawn::Document
   def initialize(user_id, view, supply_id, job_status, start_date, stop_date)
-    Prawn::Document.generate("page_size.pdf",
-                             :page_size   => "EXECUTIVE",
-                             :page_layout => :landscape)
     @user_id = user_id
     super(top_margin: 30)
     @supply_id, = supply_id
@@ -27,7 +24,7 @@ class ChemicalreportPdf < Prawn::Document
          
          @supplylist.each do |t|
            text "  Chemical - (#{t.supplyname}) Active ingredient - (#{t.active_ingredient}) Formulation - (#{t.formulation}) Restricted hours - (#{t.restricted_hours}) ", 
-           size: 8, style: :bold, :align => :left 
+           size: 7, style: :bold, :align => :left 
            move_down 2
            supply_items(t.id)
      
@@ -43,7 +40,7 @@ class ChemicalreportPdf < Prawn::Document
          
          @supplylist.each do |t|
            text "  Chemical - (#{t.supplyname}) Active ingredient - (#{t.active_ingredient}) Formulation - (#{t.formulation}) Restricted hours - (#{t.restricted_hours}) ", 
-           size: 8, style: :bold, :align => :left 
+           size: 7, style: :bold, :align => :left 
            move_down 2
           supply_items(t.id)
           supply_summary(@user_id, t.id, @job_status, @start_date, @stop_date )
@@ -70,7 +67,7 @@ class ChemicalreportPdf < Prawn::Document
 
         
        table [["Crop",  "Field", "Area size", "App Date", "Qty /acre", "UOM", "Total usage", "Carr rate", "UOM", "Carr usage",  "Weather", "Wind", "Temperature"]] ,
-        :row_colors => [ "FFFFFF"], :cell_style => {:border_width => 1, :size => 8, :text_color => "346842" } do
+        :row_colors => [ "FFFFFF"], :cell_style => {:border_width => 1, :size => 7, :text_color => "346842" } do
 
             row(0).font_style = :bold
             #row(rowcount).font_size = 10
@@ -97,7 +94,7 @@ class ChemicalreportPdf < Prawn::Document
   def supply_items(id)
     
     rowcount = 0
-    table supply_item_rows(id), :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0,  :size => 8, :text_color => "346842" } do  
+    table supply_item_rows(id), :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0,  :size => 7, :text_color => "346842" } do  
       #row(0).font_style = :bold
       #row(0).border_width = 1 
       columns(0).width = 45
@@ -129,7 +126,7 @@ class ChemicalreportPdf < Prawn::Document
   def supply_summary(user_id, id, job_status, start_date, stop_date)
 
     rowcount = 0
-    table supply_chemical_summary(user_id, id, job_status, start_date, stop_date), :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
+    table supply_chemical_summary(user_id, id, job_status, start_date, stop_date), :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0, :size => 7, :text_color => "346842" } do  
       row(0).font_style = :bold
       column(0..1)..font_style = :bold
       
