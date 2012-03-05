@@ -185,7 +185,8 @@ class Party < ActiveRecord::Base
                     children_named_value.each do |ea|
                       count += 1
                       if count <= 4
-                        precip += precision(ea.text.to_f)
+                        
+                        precip += ea.text.to_f 
                       end
                     end 
                     precip = (precip / 4)
@@ -283,11 +284,7 @@ class Party < ActiveRecord::Base
    
   end
   
-  
-  def precision(num)
-    @view.number_with_precision(num, :precision => 2)
-  end
-  
+
 
 end
  
