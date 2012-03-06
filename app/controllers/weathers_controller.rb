@@ -17,7 +17,7 @@ class WeathersController < ApplicationController
         if !@party.nil? and !@weatherpostalcode.nil?
           @weathers = Weather.find_by_sql("Select *  
           from weathers 
-          where weathers.postalcode = #{@weatherpostalcode} ")  
+          where weathers.postalcode = '#{@weatherpostalcode}' ")  
         end
         
         

@@ -10,6 +10,7 @@ xml.tag!("rows") do
 			xml.tag!("cell", weather.wind_direction_compass)
 			xml.tag!("cell", weather.precipitation)
 			xml.tag!("cell", weather.sky_condition)
+			#--
 
 		end
 	end
