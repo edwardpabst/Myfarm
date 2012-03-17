@@ -57,10 +57,10 @@ function loadFake() {
 		</tr>
   		<tr>
 		    <td>
-			 <%= f.label :year, "Year" %>
+			 <%= f.label :model_year, "Model Year" %>
 		 	</td>
 			<td>
-		 		<%= f.text_field :year %> 
+		 		<%= f.text_field :model_year %> 
 		    </td>
 			<td>
 				<%= f.label :serial_number, "Serial number" %>
@@ -69,19 +69,234 @@ function loadFake() {
 				<%= f.text_field :serial_number%> 
 			</td>
 		</tr>
-  		<tr>
+		
+		<tr>
 		    <td>
-			 <%= f.label :cost_unit, "Purchase cost" %>
+			 <%= f.label :horsepower, "Horsepower" %>
 		 	</td>
 			<td>
-		 		<%= f.text_field :cost_unit %> 
+		 		<%= f.text_field :horsepower %> 
 		    </td>
 			<td>
-				<%= f.label :cost_unit_hour, "Cost per hour" %>
+				<%= f.label :fuel_type, "Fuel type" %>
 			</td>
 			<td>
-				<%= f.text_field :cost_unit_hour%> 
+							<% get_types_by_name("fuel_type") %>
+				<%= collection_select("equipment", "fuel_type", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
 			</td>
+		</tr>
+		
+		<tr>
+		    <td>
+			 <%= f.label :purchase_price, "Purchase price" %>
+		 	</td>
+			<td>
+		 		<%= f.text_field :purchase_price %> 
+		    </td>
+			<td>
+				<%= f.label :list_price, "List price" %>
+			</td>
+			<td>
+				<%= f.text_field :list_price%> 
+			</td>
+		</tr>
+		<tr>
+		    <td colspan="4">
+			 	<div class="hintbase">		 	 
+			      Depreciation and Cost of ownership section. If you enter the complete information we will calculate your depreciation and cost of ownership by year.			 
+				</div>
+		 	</td>		
+		</tr>
+		
+
+		
+		<tr>
+		    <td>
+			 <%= f.label :life_years, "Depreciation years" %>
+		 	</td>
+			<td>
+		 			<% get_types_by_name("depreciation_years") %>
+		<%= collection_select("equipment", "life_years", @types, "type_value_integer", "type_value_integer", options = {:prompt => " "}) %> 
+		    </td>
+			<td>
+				<%= f.label :hours_usage_year, "Usage hours per year" %>
+			</td>
+			<td>
+				<%= f.text_field :hours_usage_year%> 
+			</td>
+		</tr>
+		
+
+		
+				 ,    
+
+		<tr>
+		    <td>
+			 <%= f.label :purchase_year, "Year purchased" %>
+		 	</td>
+			<td>
+		 		<%= f.text_field :purchase_year %> 
+		    </td>
+			<td>
+				<%= f.label :salvage_value, "Salvage value" %>
+			</td>
+			<td>
+				<%= f.text_field :salvage_value %> 
+			</td>
+		</tr>
+		
+		
+  		<tr>
+		    <td>
+			 <%= f.label :loan_amount, "Loan amount" %>
+		 	</td>
+			<td>
+		 		<%= f.text_field :loan_amount %> 
+		    </td>
+			<td>
+				<%= f.label :interest_rate, "Interest rate" %>
+			</td>
+			<td>
+				<% get_types_by_name("interest_rate") %>
+		<%= collection_select("equipment", "interest_rate", @types, "type_value_integer", "type_value_integer", options = {:prompt => " "}) %>
+			</td>
+		</tr>
+	 
+	 
+	    
+		<tr>
+		    <td>
+			 <%= f.label :tax_amount, "Property tax/year" %>
+		 	</td>
+			<td>
+		 		<%= f.text_field :tax_amount %> 
+		    </td>
+			<td>
+				<%= f.label :insurance_amount, "Insurance cost/year" %>
+			</td>
+			<td>
+				<%= f.text_field :insurance_amount %> 
+			</td>
+		</tr>
+		<tr>
+			 <td colspan="2">
+			 </td>
+			 <td colspan="2">
+				<div class="hintbase">		 	 
+			      If not entered then .5% of equipment value is used.
+						 
+				</div>
+			 </td>
+		</tr>		
+		<tr>
+
+		    <td>
+			 <%= f.label :depreciation_year, "Depreciation/year" %>
+		 
+
+		 	</td>
+			<td>
+		 		<div class="disabled">
+				    <% if @equipment.depreciation_year.nil? %>			
+						0
+					<% else %>
+						<%= number_to_currency(@equipment.depreciation_year, :precision => 2)  %>
+					<% end %>
+				
+			  </div>
+		 
+		    </td>
+		    <td>
+			 <%= f.label :housing_cost, "Housing cost/year" %>
+		 
+
+		 	</td>
+			<td>
+		 		<%= f.text_field :housing_cost %>
+		 		 
+		    </td>
+		</tr>
+		
+		<tr>
+			 <td colspan="2">
+			 </td>
+			 <td colspan="2">
+				<div class="hintbase">		 	 
+			      If not entered then .5% of equipment value is used.		 
+				</div>
+					
+			 </td>
+		</tr>				
+				
+		<tr>
+		    <td>
+			 <%= f.label :capital_recovery_year, "Capital recovery/year" %>
+		 	</td>
+			<td>
+		 		<div class="disabled">
+			    <% if @equipment.capital_recovery_year.nil? %>			
+					0
+				<% else %>
+					<%= number_to_currency(@equipment.capital_recovery_year, :precision => 2)  %>
+				<% end %>				
+			  </div>
+		    </td>
+			<td>
+				<%= f.label :capital_recovery_factor, "Capital recovery factor" %>
+			</td>
+			<td>
+				<div class="disabled">
+				    <% if @equipment.capital_recovery_factor.nil? %>			
+						0
+					<% else %>
+						<%= @equipment.capital_recovery_factor  %>
+					<% end %>
+				
+			  </div>
+			</td>
+		</tr>
+		<tr>
+
+			 <td colspan="2">
+				&nbsp;
+			 </td>
+			 <td colspan="2">
+			 </td>
+		</tr>
+		<tr>
+		    <td>
+			 <%= f.label :cost_unit, "Ownership cost/year" %>
+		 	</td>
+			<td>
+		 		<div class="disabled">
+				<%= number_to_currency(@equipment.cost_unit, :precision => 2)  %>
+			  </div>
+		    </td>
+			<td>
+				<%= f.label :cost_unit_hour, "Equipment cost per hour" %>
+			</td>
+			<td>
+			 <div class="disabled">
+				    <% if @equipment.cost_unit_hour.nil? %>			
+						0
+					<% else %>
+						<%= number_to_currency(@equipment.cost_unit_hour, :precision => 2)  %>
+					<% end %>
+
+			  </div> 
+			</td>
+		</tr>
+		<tr>
+		    <td colspan="4">
+			 	<div class="hintbase">		 	 
+			      End of Depreciation and Cost of ownership section. If you don't enter the complete data you can just enter an hourly equipment cost.			 
+				</div>
+		 	</td>		
+		</tr>
+		<tr>
+		    <td colspan="4">
+ 				&nbsp;  
+		 	</td>		
 		</tr>
   		<tr>
 		    <td>
@@ -130,12 +345,14 @@ function loadFake() {
 				<td>
 				<% if @transaction != 'new' %>
 					<% hours_to_service %>
-			 		<%= @to_service_hours %> 
+					<div class="disabled">
+			 			<%= @to_service_hours %> 
+					</div>
 				<% end %>
 			    </td>
 			    <td colspan="2">
 				 <div class="hintbase">
-					Click on input box to select your photo.
+					Click on 'Photo upload' box to select your photo.
 				 </div>
 			 	</td>
 			</tr>
@@ -144,7 +361,8 @@ function loadFake() {
 				<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			 	<%= f.submit " Update ", :class => "button", :id => "eqsubmit" %><br><br>
 			</td>
-			<td colspan="3">
+			<td colspan="1"></td>
+			<td colspan="2">
 			<% if !@equipment.photo.url.blank?   %>
 			<%= image_tag @equipment.photo.url(:medium) %> 
 			</td>

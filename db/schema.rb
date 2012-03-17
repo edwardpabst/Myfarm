@@ -10,7 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120227213347) do
+ActiveRecord::Schema.define(:version => 20120317000930) do
+
+  create_table "capitalrecoveries", :force => true do |t|
+    t.integer  "recovery_year"
+    t.integer  "interest_rate"
+    t.decimal  "recovery_factor"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "contracts", :force => true do |t|
     t.integer  "party_id"
@@ -100,6 +108,23 @@ ActiveRecord::Schema.define(:version => 20120227213347) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.string   "photo"
+    t.decimal  "list_price"
+    t.decimal  "purchase_price"
+    t.decimal  "salvage_value"
+    t.integer  "life_years"
+    t.integer  "model_year"
+    t.integer  "purchase_year"
+    t.integer  "hours_usage_year"
+    t.decimal  "loan_amount"
+    t.decimal  "depreciation_year"
+    t.decimal  "capital_recovery_year"
+    t.decimal  "capital_recovery_factor"
+    t.decimal  "tax_amount"
+    t.decimal  "insurance_amount"
+    t.decimal  "housing_cost"
+    t.integer  "horsepower"
+    t.string   "fuel_type"
+    t.integer  "interest_rate"
   end
 
   create_table "equipmentactivities", :force => true do |t|

@@ -1,6 +1,7 @@
 class EquipmentController < ApplicationController
   # GET /equipment
   # GET /equipment.xml
+ 
   before_filter :authenticate
 
   #-------equipment index----------------------------------------------------------------------------
@@ -11,6 +12,7 @@ class EquipmentController < ApplicationController
 
       def index_data
 
+   
         get_current_user
         @equipments = Equipment.where('user_id' => @current_user.id).all
 
@@ -183,9 +185,12 @@ class EquipmentController < ApplicationController
   def create
     @equipment = Equipment.new(params[:equipment])
     @equipment.user_id = session[:s_user_id]
+    calc_capitalrecovery
     respond_to do |format|
       if @equipment.save
-        format.html { redirect_to("/equipmentview", :notice => 'Equipment was successfully created.') }
+
+        format.html { redirect_to(:controller => :equipment, :action => :edit, :id => @equipment.id, 	:notice => 'Equipment was successfully created.') }
+        
         format.xml  { render :xml => @equipment, :status => :created, :location => @equipment }
       else
         format.html { render :action => "new" }
@@ -198,10 +203,13 @@ class EquipmentController < ApplicationController
   # PUT /equipment/1.xml
   def update
     @equipment = Equipment.find(params[:id])
-
+    
+    calc_capitalrecovery
+    
     respond_to do |format|
       if @equipment.update_attributes(params[:equipment])
-        format.html { redirect_to("/equipmentview", :notice => 'Equipment was successfully updated.') }
+        format.html { redirect_to(:controller => :equipment, :action => :edit, :id => @equipment.id, 	:notice => 'Equipment was successfully updated.') }
+        
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -220,5 +228,61 @@ class EquipmentController < ApplicationController
       format.html { redirect_to(equipment_index_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def calc_capitalrecovery
+    #logger.debug "DEPRECIATION PARAMETERS #{params[:equipment].inspect}"
+    #Total depreciation = purchase price - salvage value
+        purchase_price =  params[:equipment][:purchase_price].to_i
+        salvage_value = params[:equipment][:salvage_value].to_i
+        total_depreciation =   purchase_price - salvage_value
+        life_years = params[:equipment][:life_years].to_i
+        depreciation_year = total_depreciation /  life_years
+        params[:equipment][:depreciation_year] = depreciation_year.to_s
+        
+    #Capital recovery = (total depreciation x capital recovery factor) + (salvage value x interest rate)
+        
+        interest_rate = params[:equipment][:interest_rate].to_i
+        capitalrecovery_factor = Capitalrecovery.get_factor(params[:equipment][:life_years].to_i, params[:equipment][:interest_rate].to_i)
+        interest_float = interest_rate.to_f
+        capital_recovery = (total_depreciation * capitalrecovery_factor) + (salvage_value * (interest_float / 100))
+        params[:equipment][:capital_recovery_year] = capital_recovery.to_s
+        params[:equipment][:capital_recovery_factor] = capitalrecovery_factor.to_s
+        
+    # Tax, insurance and housing ((TIH))
+        if params[:equipment][:tax_amount].nil? || params[:equipment][:tax_amount].blank?
+          tax_amount = 0
+        else
+          tax_amount = params[:equipment][:tax_amount].to_i
+        end
+        
+        if params[:equipment][:insurance_amount].nil? || params[:equipment][:insurance_amount].blank?  || params[:equipment][:insurance_amount] == '0'
+          insurance_amount = (params[:equipment][:purchase_price].to_i * 0.005)
+        else
+          insurance_amount = params[:equipment][:insurance_amount].to_i
+        end
+        
+        if params[:equipment][:housing_cost].nil? || params[:equipment][:housing_cost].blank? || params[:equipment][:housing_cost] == '0'
+          housing_cost = (params[:equipment][:purchase_price].to_i * 0.005)
+        else
+          housing_cost = params[:equipment][:housing_cost].to_i
+        end
+        
+        tih = tax_amount + insurance_amount + housing_cost
+    
+        params[:equipment][:housing_cost] = housing_cost.to_s
+        params[:equipment][:insurance_amount] = insurance_amount.to_s
+        params[:equipment][:tax_amount] = tax_amount.to_s
+        
+        
+    # Total cost of ownership (TCO) = Capital recovery + TIH
+      
+       tco = capital_recovery + tih
+       params[:equipment][:cost_unit] = tco.to_s
+       hours = params[:equipment][:hours_usage_year].to_i
+       cost_hour = tco / hours
+       params[:equipment][:cost_unit_hour] = cost_hour
+   
+    
   end
 end

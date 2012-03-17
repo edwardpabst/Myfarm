@@ -1,0 +1,2 @@
+module CapitalrecoveriesHelper
+end

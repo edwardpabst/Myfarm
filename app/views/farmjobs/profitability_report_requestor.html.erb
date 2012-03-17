@@ -26,7 +26,7 @@
 			<label>Farm</label>
 			</td>
 			<td>
-			<%= collection_select("", "farm_id", @farms, "id", "farmname", options = {:prompt => " "}) %>
+			<%= collection_select("", "farm_id", @farms, "id", "farmname") %>
 
 		
 			</td>
@@ -39,7 +39,7 @@
 		<label class=" label" for="plan_year">Year<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
 		</td>
 		<td>
-		<%= collection_select("", "year", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	
+		<%= collection_select("", "year", @types, "type_value_string", "type_value_string") %>	
 		
 			</td>
 		</tr>

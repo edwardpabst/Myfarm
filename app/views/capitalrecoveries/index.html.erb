@@ -1,0 +1,27 @@
+<h1>Listing capitalrecoveries</h1>
+
+<table>
+  <tr>
+    <th>Recovery year</th>
+    <th>Interest rate</th>
+    <th>Recovery factor</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @capitalrecoveries.each do |capitalrecovery| %>
+  <tr>
+    <td><%= capitalrecovery.recovery_year %></td>
+    <td><%= capitalrecovery.interest_rate %></td>
+    <td><%= capitalrecovery.recovery_factor %></td>
+    <td><%= link_to 'Show', capitalrecovery %></td>
+    <td><%= link_to 'Edit', edit_capitalrecovery_path(capitalrecovery) %></td>
+    <td><%= link_to 'Destroy', capitalrecovery, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Capitalrecovery', new_capitalrecovery_path %>

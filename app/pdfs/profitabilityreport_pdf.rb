@@ -7,9 +7,16 @@ class ProfitabilityreportPdf < Prawn::Document
     @start_date = start_date
     @stop_date = stop_date
     @view = view 
-    @farm = Farm.find(@farm_id)
-    @farmname = @farm.farmname
-    @total_acres = @farm.total_acres
+    if !@farm_id.nil? and !@farm_id.blank?
+      @farm = Farm.find(@farm_id)
+      @farmname = @farm.farmname
+      @total_acres = @farm.total_acres
+    else
+      @farmname = ""
+      @total_acres = 0
+    end
+   
+    
     @report_version = report_version
     
      

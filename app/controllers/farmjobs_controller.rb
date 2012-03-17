@@ -630,7 +630,7 @@ class FarmjobsController < ApplicationController
   end
   
   
-  def profitability_report_requestor 
+  def profitability_report_requestor
     
    @farmjob = Farmjob.new
     
@@ -660,5 +660,8 @@ class FarmjobsController < ApplicationController
     
     
   end
+ 
+  
+  
   
 end

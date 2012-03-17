@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Recovery year:</b>
+  <%= @capitalrecovery.recovery_year %>
+</p>
+
+<p>
+  <b>Interest rate:</b>
+  <%= @capitalrecovery.interest_rate %>
+</p>
+
+<p>
+  <b>Recovery factor:</b>
+  <%= @capitalrecovery.recovery_factor %>
+</p>
+
+
+<%= link_to 'Edit', edit_capitalrecovery_path(@capitalrecovery) %> |
+<%= link_to 'Back', capitalrecoveries_path %>

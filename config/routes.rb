@@ -4,6 +4,8 @@ Myfarm::Application.routes.draw do
 
 
 
+  resources :capitalrecoveries
+
   resources :inventorytickets
 
   resources :invoices

@@ -6,8 +6,8 @@ xml.tag!("rows") do
 			xml.tag!("cell", equipment.category)
 			xml.tag!("cell", equipment.make)
 			xml.tag!("cell", equipment.model)
-			xml.tag!("cell", equipment.year)
-			xml.tag!("cell", equipment.cost_unit)
+			xml.tag!("cell", equipment.model_year)
+			xml.tag!("cell", equipment.purchase_price)
 			xml.tag!("cell", equipment.cost_unit_hour)
 			xml.tag!("cell", equipment.rate_per_hour)
 
