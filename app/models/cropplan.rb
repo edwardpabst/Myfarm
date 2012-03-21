@@ -42,7 +42,7 @@ class Cropplan < ActiveRecord::Base
            where cp.user_id = #{user_id} " )
            
            sql_statement = build_where_clause(sql_statement, cropplan_id, "",  start_date, stop_date)
-           sql_statement += " group by farmname, cropplanfull, fieldname"
+           sql_statement += " group by farmname, cp.id, cropplanfull, field_id_1, fieldname"
            
            return @cropplans = Cropplan.find_by_sql(sql_statement)
                      

@@ -47,7 +47,7 @@ class Supply < ActiveRecord::Base
              
             sql_statement = build_where_clause(sql_statement, "", job_status,  start_date, stop_date)
 
-            sql_statement += " group by supplies.id, supplyname " 
+            sql_statement += " group by fjs.user_id, supplies.id, supplyname " 
 
             return @supply_fertilizer = Supply.find_by_sql(sql_statement)
 
