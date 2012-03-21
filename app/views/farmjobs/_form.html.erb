@@ -230,12 +230,14 @@ function checkStatus() {
 		
 		<tr>
 			<td colspan="2">
-
-				<%= f.label :isreplicate, "Replicate?" %> 
-				<%= f.check_box :isreplicate%> 
-				<div class="hintbase">
-					Replication will create duplicate jobs based on task defined frequency. (Only for a new job.)
-				</div>
+				<% if @transaction == 'new' %>
+		
+					<%= f.label :isreplicate, "Replicate?" %> 
+					<%= f.check_box :isreplicate%> 
+					<div class="hintbase">
+						Replication will create duplicate jobs based on task defined frequency. (Only for a new job.)
+					</div>
+				<% end %>
 			</td>
 			<td>
 				<%= f.label :notes, "Notes" %>  

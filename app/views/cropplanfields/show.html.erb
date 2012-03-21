@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Cropplan:</b>
+  <%= @cropplanfield.cropplan_id %>
+</p>
+
+<p>
+  <b>Field:</b>
+  <%= @cropplanfield.field_id %>
+</p>
+
+<p>
+  <b>Plan acres:</b>
+  <%= @cropplanfield.plan_acres %>
+</p>
+
+<p>
+  <b>Avg yield:</b>
+  <%= @cropplanfield.avg_yield %>
+</p>
+
+<p>
+  <b>Yield uom:</b>
+  <%= @cropplanfield.yield_uom %>
+</p>
+
+
+<%= link_to 'Edit', edit_cropplanfield_path(@cropplanfield) %> |
+<%= link_to 'Back', cropplanfields_path %>

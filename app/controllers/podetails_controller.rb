@@ -6,7 +6,7 @@ class PodetailsController < ApplicationController
     before_filter :authenticate
 
 
-    #-------scaleticket index----------------------------------------------------------------------------
+    #-------po detail index----------------------------------------------------------------------------
         def index_view
 
 

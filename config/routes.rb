@@ -4,6 +4,8 @@ Myfarm::Application.routes.draw do
 
 
 
+  resources :cropplanfields
+
   resources :capitalrecoveries
 
   resources :inventorytickets
@@ -142,6 +144,11 @@ Myfarm::Application.routes.draw do
   match '/cropplanview', :to => 'cropplans#index_view'
   match '/cropplandata', :to => 'cropplans#index_data'
   match '/cropplangridaction', :to => 'cropplans#dbaction'
+  #Crop plan fields
+  match '/cropplanfieldview', :to => 'cropplanfields#index_view'
+  match '/cropplanfielddata', :to => 'cropplanfields#index_data'
+  match '/cropplanfieldgridaction', :to => 'cropplanfields#index_dbaction'
+
   #Farms
   match '/farmview', :to => 'farms#index_view'
   match '/farmdata', :to => 'farms#index_data'
@@ -282,6 +289,8 @@ Myfarm::Application.routes.draw do
    match '/yieldreport', :to => 'crops#yieldreport'
    match '/invoicereportrequestor', :to => 'invoices#invoice_report_requestor'
    match '/invoicedetailreport', :to => 'invoices#invoicedetailreport'
+   match '/depreciationrequestor', :to => 'equipment#depreciation_requestor'
+   match '/depreciationreport', :to => 'equipment#depreciationreport'
    
   root :to => 'pages#home'
   #root_path => 'pages#home'

@@ -190,7 +190,7 @@ class Party < ActiveRecord::Base
                       end
                     end 
                     precip = (precip / 4)
-                    @weather.precipitation =  "#{precip.to_s} in."
+                    @weather.precipitation =  "#{precip.to_s.to(5)} in."
 
                  #--  node - Sky condition
                     parent_node = doc.root.xpath("//cloud-amount[@type='total']") 

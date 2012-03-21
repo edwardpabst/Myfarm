@@ -208,6 +208,7 @@ class EquipmentController < ApplicationController
     
     respond_to do |format|
       if @equipment.update_attributes(params[:equipment])
+        flash[:notice] = 'Equipment was successfully updated'
         format.html { redirect_to(:controller => :equipment, :action => :edit, :id => @equipment.id, 	:notice => 'Equipment was successfully updated.') }
         
         format.xml  { head :ok }
@@ -283,6 +284,35 @@ class EquipmentController < ApplicationController
        cost_hour = tco / hours
        params[:equipment][:cost_unit_hour] = cost_hour
    
+    
+  end
+  
+  def depreciation_requestor 
+    
+    
+    respond_to do |format|
+      format.html
+
+    end
+       
+  end
+  
+  def depreciationreport
+    
+ 
+     #logger.debug "depreciation REPORT  PARAMS- CATEGORY -#{params[:category]} "
+    respond_to do |format|
+      format.html
+      format.pdf do
+        
+        pdf = DepreciationreportPdf.new(session[:s_user_id], view_context, params[:equipment][:category])
+        send_data pdf.render, filename: "depreciation_report",
+                                type: "application/pdf",
+                                disposition: "inline"
+        
+      end
+    end
+    
     
   end
 end

@@ -1,12 +1,14 @@
-<br> 
-<h1><p>Crop Plans</p></h1>
+<br>
+<h1> Crop plan fields</h1>
+ 
 
-<button type="button" value="New", onclick="newCropplan()">New Crop Plan</button>
-<button type="button" value="New", onclick="editCropplan()">Full Edit</button>
-<input type="button" value="Delete"  class="button" onclick="removeRow()">
+<button type="button" value="New", onclick="newCropplanfield()">Add Field</button>
+<button type="button" value="New", onclick="editCropplanfield()">Edit Field</button>
+<button type="button" value="New", onclick="removeRow()">Remove Field</button>
+
 <br><br>
 <!-- Div for capture of grid output -->
- <div id="cropplan_grid" style="width:400px; height:400px;">
+ <div id="cropplanfield_grid" style="width:620px; height:200px;">
 
  </div>
 
@@ -14,20 +16,19 @@
  <script type="text/javascript" charset="utf-8">
 
 	// data grid definition
-     var grid = new dhtmlXGridObject("cropplan_grid");
+     var grid = new dhtmlXGridObject("cropplanfield_grid");
      grid.setImagePath("/images/");
-     grid.setHeader("<b>Crop Plan</b>, <b>Plan Status</b>");  
-     grid.setInitWidths("200,200");
+     grid.setHeader("Farm, Field, Field acres, Plan acres, Avg yield/acre, UOM");  
+     grid.setInitWidths("120,120,100,100,100,80");
      grid.setSkin("dhx_web");
      grid.init();
-	 grid.load("/cropplandata");  	
-	 grid.attachHeader("#text_filter,#text_filter");  
-	 grid.setColSorting("str,str");	 
-	 grid.setColTypes("ro,ro");// ed-editable, ro-read only price-money , ch-checkbox, 
+	 grid.load("/cropplanfielddata");  	
+	 
+	 grid.setColTypes("ro,ro,ro,ro,ro,ro");// ed-editable, ro-read only price-money , ch-checkbox, 
 													  // txt-text editor ra-radio button, coro-select box, img, dhxcalendar 
 													  //  subrow (ajax)	 
 	// data processor definition
-	dp = new dataProcessor("/cropplangridaction/");
+	dp = new dataProcessor("/cropplanfieldgridaction/");
 	//dp.setTransactionMode("POST", true);
 	//set mode as send-all-by-post;
 	//dp.setUpdateMode("on");
@@ -37,13 +38,13 @@
 	//	dp.setVerificator(1, not_empty);
 	//	dp.setVerificator(2, not_empty);
 
-	
+
 	// handle XML errors	
 	function myErrorHandler(type,name,p){
 		alert('Error. The record was not updated. Click OK to view the error.')
 		//	window.location = "/cropview"
 	}
-	
+
 	// add row in the grid and database (in conflict with validation)
 	function addRow(){
         var newId = (new Date()).valueOf()
@@ -84,35 +85,41 @@
 	function greater_0(value) {
 	    return value > 0;
 	}
+
+
 	
 	// branch to rails for record addition
-	function newCropplan() {
-	// branch to add new crop
-	    window.location = "cropplans/new";
+	function newCropplanfield() {
+	// branch to add new supply
+	    window.location = "/cropplanfields/new";
 	}
 	// branch to rails for edit record
-	function editCropplan() {
-	// edit selected crop
+	function editCropplanfield() {
+	// edit selected supply
 	var selId = grid.getSelectedId()
 	if (selId < 1)
 		{
 		 alert("No record was selected for full edit");	
 		}
 	else {
-	    window.location = "cropplans/"+selId+"/edit";
+	    window.location = "/cropplanfields/"+selId+"/edit";
 		}
 	}
-	
 
- 	
+
+
  </script>
 
 <br>
+<button type="button" value="New", onclick="newCropplanfield()">Add Field</button>
+<button type="button" value="New", onclick="editCropplanfield()">Edit Field</button>
+<button type="button" value="New", onclick="removeRow()">Remove Field</button>
+
+<br><br>
 
 
- 	
  <!--  button controls for in grid addition and bulk update
 <input type="button" value="Add" onclick="grid.addRow(grid.uid(),'new user')">
 <input type="button" name="Submit changes" value="Submit changes" onclick="dp.sendData();"> -->
 
- 
+

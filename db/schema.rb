@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120317000930) do
+ActiveRecord::Schema.define(:version => 20120321201648) do
 
   create_table "capitalrecoveries", :force => true do |t|
     t.integer  "recovery_year"
@@ -50,6 +50,17 @@ ActiveRecord::Schema.define(:version => 20120317000930) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "country_id"
+  end
+
+  create_table "cropplanfields", :force => true do |t|
+    t.integer  "cropplan_id"
+    t.integer  "field_id"
+    t.integer  "avg_yield"
+    t.string   "yield_uom"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.decimal  "plan_acres",  :precision => 9, :scale => 2
+    t.integer  "user_id"
   end
 
   create_table "cropplans", :force => true do |t|

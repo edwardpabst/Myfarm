@@ -63,9 +63,8 @@ section h1 {
 	margin-left: auto;
 	margin-right: auto;
 }
-
-
-
+ 
+ 
  h1 {
 	font-size: 110%;
 	font-weight: bold;
@@ -530,8 +529,8 @@ label {
 .disabled {
 	background-color:darkgray;
 	color:white;
-	padding-left:4px;
-	padding-right:4px;
+	padding:4px;
+
 	width:210px;
 	border: solid 1px yellow;
 

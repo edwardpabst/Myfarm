@@ -1,0 +1,59 @@
+
+<br>
+<h1>Depreciation and Cost of ownership Requestor</h1>
+ 
+<%= link_to 'Back', session[:return_to] %>
+<br>
+
+<%= form_tag '/depreciationreport.pdf', :method=>'post' , :html => { :name => "in"} do %>
+ 
+
+
+<table class="twocolumn">
+
+		<tr>
+			<td colspan="3">
+				<div id="form_header">			 	 
+	 Depreciation and Cost of ownership report lists total depreciation, yearly depreciation, yearly cost of ownership and develops the cost per hour that is used in farm job costing for all farm equipment and machinery. You can select the report for a specific equipment category or for all equipment.
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">&nbsp;
+			</td>
+		</tr
+		<tr>
+			<td width="25%"></td>
+
+					<td >
+						<label class=" label" for="category">Category<abbr title="required"> </abbr>  </label>
+					</td>
+					<td >
+						<% get_types_by_name("equipment_category") %>
+			<%= collection_select("equipment", "category", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %></td>
+		 </tr>
+
+
+		
+
+
+		<tr>
+			
+			
+			<td></td><td></td>
+			<td>
+				<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 	<%= submit_tag " Submit ", :class => "button", :id => "insubmit" %><br><br>
+			</td>
+
+
+		</tr>
+			</table>
+			</td>
+
+		</tr>
+
+			 
+</table>
+<% end %>
+

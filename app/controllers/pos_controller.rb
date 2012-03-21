@@ -194,7 +194,9 @@ class PosController < ApplicationController
 
        respond_to do |format|
          if @po.update_attributes(params[:po])
-           format.html { redirect_to("/poview", :notice => 'Purchase order was successfully updated.') }
+           flash[:notice] = 'Purchase order was successfully updated'
+           format.html { redirect_to(:action => :edit, :id => @po.id, :notice => 'Purchase order was successfully updated.') }
+           
            format.xml  { head :ok }
          else
            format.html { render :action => "edit" }

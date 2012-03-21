@@ -222,6 +222,17 @@ module SessionsHelper
     @farms = Farm.where('user_id' => @current_user.id).all
    end
    
+   def get_cropplanfield_info
+     get_current_user
+      @cpf = Cropplanfield.find_by_sql("Select cropplanfull,
+                            crops.avg_yield_acre, crops.crop_inventory_uom 
+     from cropplans cp
+     join crops on cp.crop_id = crops.id
+
+     where cp.user_id = #{@current_user.id } 
+     and cp.id = #{session[:s_cropplan_id]}")
+   end
+   
     def get_contracts()
 
     @contracts = Contract.find_by_sql("Select contracts.id,  partyname || ' ' || cropplanfull  as contractfull   
@@ -339,6 +350,13 @@ module SessionsHelper
    
    def get_fields_by_farm()
      @fields = Field.where('user_id' => @current_user.id).order('farmname').all
+   end
+   
+   def get_fields_by_farm_full()
+     @fields =  Field.find_by_sql("Select fields.id, farmname || ' - ' || fieldname   || '  (' || number_acres  || '  ' || 'acres' || ' )' as fieldnamefull   
+     from fields 
+     where fields.user_id = #{@current_user.id } 
+     order by farmname")
    end
     
     def get_fieldtasks_by_type()

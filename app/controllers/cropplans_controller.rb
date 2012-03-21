@@ -66,6 +66,7 @@ class CropplansController < ApplicationController
   # GET /cropplans/1/edit
   def edit
     @cropplan = Cropplan.find(params[:id])
+     session[:s_cropplan_id] = @cropplan.id
   end
 
   # POST /cropplans
@@ -79,7 +80,8 @@ class CropplansController < ApplicationController
     end
     respond_to do |format|
       if @cropplan.save
-        format.html { redirect_to("/cropplanview", :notice => 'Cropplan was successfully created.') }
+        format.html { redirect_to(:action => :edit, :id => @cropplan.id, :notice => 'Crop plan was successfully created.') }
+       
         format.xml  { render :xml => @cropplan, :status => :created, :location => @cropplan }
       else
         format.html { render :action => "new" }
@@ -97,7 +99,9 @@ class CropplansController < ApplicationController
     
     respond_to do |format|
       if @cropplan.update_attributes(params[:cropplan])
-        format.html { redirect_to("/cropplanview", :notice => 'Cropplan was successfully updated.') }
+        flash[:notice] = 'Crop plan was successfully updated'
+        format.html { redirect_to(:action => :edit, :id => @cropplan.id, :notice => 'Crop plan was successfully updated.') }
+        
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

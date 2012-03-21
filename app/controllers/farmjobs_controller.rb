@@ -281,8 +281,9 @@ class FarmjobsController < ApplicationController
     Farmjob.calculate_job_cost(params[:id])
     @farmjob = Farmjob.find(params[:id])
     session[:s_farmjob_id] = @farmjob.id
-    @onload = 'checkFarmjob()'
     @transaction = 'edit'
+    @onload = 'checkFarmjob()'
+
      
 
    # logger.debug "FARMJOBSUPPLIES #{@farmjobsupplies.size}" 
@@ -305,18 +306,27 @@ class FarmjobsController < ApplicationController
     #get dependant info
     @farmjob = Farmjob.new(params[:farmjob])
     @farmjob.user_id = session[:s_user_id]
-    @cropplan = Cropplan.find_by_id(@farmjob.cropplan_id)
+    if !params[:farmjob][:cropplan_id].nil? and !params[:farmjob][:cropplan_id].blank?
+      @cropplan = Cropplan.find_by_id(params[:farmjob][:cropplan_id])
+    end
+    if !params[:farmjob][:field_id].nil? and !params[:farmjob][:field_id].blank?
+      @field = Field.select("fieldname").find(params[:farmjob][:field_id])
+    end
+    if !params[:farmjob][:fieldtask_id].nil? and !params[:farmjob][:fieldtask_id].blank?
+      @fieldtask = Fieldtask.find_by_id(params[:farmjob][:fieldtask_id])
+    end
     if !@cropplan.nil?
       @farmjob.crop_id = @cropplan.crop_id
-  end
-    @fieldtask = Fieldtask.find_by_id(@farmjob.fieldtask_id)
-    if @farmjob.notes.blank?
+    end
+ 
+    if params[:farmjob][:notes].blank?
       if !@fieldtask.nil?
         @farmjob.notes = @fieldtask.task_notes
       end
     end
     
     #fill event with task description if blank
+   
     if  params[:farmjob][:eventname].blank? || params[:farmjob][:eventname].nil? 
       if @farmjob.notes.blank?
          if !@fieldtask.nil?
@@ -338,31 +348,49 @@ class FarmjobsController < ApplicationController
 
      #@farmjob.start_time = params[:farmjob][:"start_time"] 
     # @farmjob.stop_time = params[:stop_time][:"time(i)"]
+    
+    #validate the cropplan and field are defined
+    if !params[:farmjob][:cropplan_id].nil? and !params[:farmjob][:cropplan_id].blank?  and !params[:farmjob][:field_id].blank? and !params[:farmjob][:field_id].blank?
+    
+      is_plan_ok = Cropplanfield.validate_cropplanfield(params[:farmjob][:cropplan_id], params[:farmjob][:field_id])
+      if is_plan_ok == false
+        flash[:error] = 'The crop plan/field combination are not defined. To correct define them in set-cropplan'
+      end
+    else
+      is_plan_ok = true
+    end
+    
       
     respond_to do |format|
-      if @farmjob.save
-        @save_id = @farmjob.id
+      if is_plan_ok == true
+          if @farmjob.save 
+        
+            @save_id = @farmjob.id
 
-        #write calendar event for the job
-        post_event
+            #write calendar event for the job
+            post_event
       
-        # if task supplies exist then write them to the job supplies
-        attach_supplies       
+            # if task supplies exist then write them to the job supplies
+            attach_supplies       
         
-        # if frequency defined for the task then generate additional duplicate tasks
+            # if frequency defined for the task then generate additional duplicate tasks
         
-        if @farmjob.isreplicate?
-            replicate_farmjob           
-        end
+            if @farmjob.isreplicate?
+                replicate_farmjob           
+            end
 
-        flash[:notice] = 'Farmjob was successfully created. You can now add supplies, labor and equipment.'
-        format.html { redirect_to(:controller => :farmjobs, :action => :edit, :id => @save_id, 	:notice => 'Farmjob was successfully created. You can now add supplies, labor and equipment.') }
-        format.xml  { render :xml => @farmjob, :status => :created, :location => @farmjob }
-      else
+            flash[:notice] = 'Farmjob was successfully created. You can now add supplies, labor and equipment.'
+            format.html { redirect_to(:controller => :farmjobs, :action => :edit, :id => @save_id, 	:notice => 'Farmjob was successfully created. You can now add supplies, labor and equipment.') }
+            format.xml  { render :xml => @farmjob, :status => :created, :location => @farmjob }
+          else
          
-        format.html { render :action => "new" }
+            format.html { render :action => "new" }
         
-        format.xml  { render :xml => @farmjob.errors, :status => :unprocessable_entity }
+            format.xml  { render :xml => @farmjob.errors, :status => :unprocessable_entity }
+          end
+      else     
+        format.html { redirect_to(:controller => :farmjobs, :action => :new) }
+        format.xml  { head :ok }
       end
     end
   end
@@ -376,9 +404,15 @@ class FarmjobsController < ApplicationController
      #params[:farmjob][:stop_time] = (Time.parse(params[:farmjob][:"stop_time(5i)"]))
      #params[:farmjob].delete(:"stop_time(i)")
     @farmjob = Farmjob.find(params[:id])
-    @cropplan = Cropplan.find_by_id(@farmjob.cropplan_id)
-    @field = Field.select("fieldname").find(@farmjob.field_id)
-    @fieldtask = Fieldtask.find_by_id(@farmjob.fieldtask_id)
+    if !params[:farmjob][:cropplan_id].nil? and !params[:farmjob][:cropplan_id].blank?
+      @cropplan = Cropplan.find_by_id(params[:farmjob][:cropplan_id])
+    end
+    if !params[:farmjob][:field_id].nil? and !params[:farmjob][:field_id].blank?
+      @field = Field.select("fieldname").find(params[:farmjob][:field_id])
+    end
+    if !params[:farmjob][:fieldtask_id].nil? and !params[:farmjob][:fieldtask_id].blank?
+      @fieldtask = Fieldtask.find_by_id(params[:farmjob][:fieldtask_id])
+    end
     if @farmjob.notes.blank?
         @farmjob.notes = @fieldtask.task_notes
     end
@@ -396,56 +430,64 @@ class FarmjobsController < ApplicationController
     end 
     
     params[:farmjob][:crop_id] = @cropplan.crop_id   
-     
-  
+    
+     #validate the cropplan and field are defined 
+    is_plan_ok = Cropplanfield.validate_cropplanfield(params[:farmjob][:cropplan_id], params[:farmjob][:field_id])
+    if  is_plan_ok == false
+      flash[:error] = 'The crop plan/field combination are not defined. To correct define them in set-cropplan'
+    end
     
     respond_to do |format|
-      if @farmjob.update_attributes(params[:farmjob])
+        if is_plan_ok == true
+          if @farmjob.update_attributes(params[:farmjob])  
         
-       # build job cost 
-       Farmjob.calculate_job_cost(@farmjob.id)
+             # build job cost 
+             Farmjob.calculate_job_cost(@farmjob.id)
        
-       #decrement supplies inventory, close job
-        if @is_first_time == true
-          #logger.debug "FARMJOB INVENTORY STEP 3 **** "
-          Farmjobsupply.decrement_supply_inventory(@farmjob.id)
-        end
+             #decrement supplies inventory, close job
+              if @is_first_time == true
+                #logger.debug "FARMJOB INVENTORY STEP 3 **** "
+                Farmjobsupply.decrement_supply_inventory(@farmjob.id)
+              end
         
-        #update event calendar
-        @event = Event.find_by_farmjob_id(@farmjob.id)
-        if !@event.nil?
-          @event.name = @farmjob.eventname + "/" + @field.fieldname + "/" + @cropplan.cropplanfull
-          @event.notes = @farmjob.notes
-          @event.start_at = @farmjob.start_date 
-          @event.end_at = @farmjob.stop_date 
-          @event.farmjob_id = @farmjob.id
-         #set cell colors
-            @colors = serve_colors
-            @colors.each do|key,value|
-              if key.downcase  == @farmjob.job_status.downcase 
-                @event.color = value
-              end 
-            end   #end colors
+              #update event calendar
+              @event = Event.find_by_farmjob_id(@farmjob.id)
+              if !@event.nil?
+                @event.name = @farmjob.eventname + "/" + @field.fieldname + "/" + @cropplan.cropplanfull
+                @event.notes = @farmjob.notes
+                @event.start_at = @farmjob.start_date 
+                @event.end_at = @farmjob.stop_date 
+                @event.farmjob_id = @farmjob.id
+               #set cell colors
+                  @colors = serve_colors
+                  @colors.each do|key,value|
+                    if key.downcase  == @farmjob.job_status.downcase 
+                      @event.color = value
+                    end 
+                  end   #end colors
       
  
-            if @event.save 
+                  if @event.save 
             
-            else
-              format.html { redirect_to(:controller => :farmjobs, :action => :edit, :id => @farmjob.id, 	:notice => 'Farmjob was successfully created. But, corresponding event was not.') }
+                  else
+                    format.html { redirect_to(:controller => :farmjobs, :action => :edit, :id => @farmjob.id, 	:notice => 'Farmjob was successfully created. But, corresponding event was not.') }
+                    format.xml  { head :ok }
+                  end  #end save
+                end  #end nil
+              flash[:notice] = 'Farm job was successfully updated'
+              format.html { redirect_to(:controller => :farmjobs, :action => :edit, :id => @farmjob.id, 	:notice => 'Farmjob was successfully updated.') }
               format.xml  { head :ok }
-            end  #end save
-          end  #end nil
-      
-        format.html { redirect_to(:controller => :farmjobs, :action => :edit, :id => @farmjob.id, 	:notice => 'Farmjob was successfully updated.') }
-        format.xml  { head :ok }
         
-      else
+            else
          
         
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @farmjob.errors, :status => :unprocessable_entity }
-      end      
-     
+              format.html { render :action => "edit" }
+              format.xml  { render :xml => @farmjob.errors, :status => :unprocessable_entity }
+            end 
+      else     
+        format.html { redirect_to(:controller => :farmjobs, :action => :edit, :id => @farmjob.id ) }
+        format.xml  { head :ok }
+      end
     end  #end respond to
   end  #end update
  
@@ -467,7 +509,6 @@ class FarmjobsController < ApplicationController
   end
   
 
-  
   def replicate_farmjob 
      original_id = @farmjob.id
      original_startdate = @farmjob.start_date

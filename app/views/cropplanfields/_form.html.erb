@@ -1,0 +1,113 @@
+
+<%= form_for @cropplanfield, :html => { :name => "cpf"} do |f| %>
+
+<%= render "shared/error_messages", :object => f.object%>
+
+    <% get_cropplanfield_info %> 
+	<% @cpf.each do |c| %>
+		<% @cropplanfull = c.cropplanfull %>
+		<% @avg_yield_acre = c.avg_yield_acre %>
+		<% @crop_inventory_uom = c.crop_inventory_uom %>
+	<% end %>
+	
+ <table class="twocolumn">
+	<tr>
+		<td colspan="4">
+			&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td width="25%">
+		</td>
+		<td  width="25%">
+				<label class=" label" for="fields">Crop plan<abbr title="required"> </abbr>	</label>	
+		</td>
+		<td  width="25%">
+			<div class="disabled"> <%= @cropplanfull %>	</div>	
+		</td>
+		<td  width="25%">
+		</td>
+	</tr>
+	<tr>
+		<td width="25%">			
+		</td>
+		<td  width="25%">
+			<label class=" label" for="fields">Field*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>	
+		</td>
+		<td  width="25%">
+			<% get_fields_by_farm_full() %>
+			<%= collection_select("cropplanfield", "field_id", @fields, "id", "fieldnamefull", options = {:prompt => " "}) %>		
+		</td>
+		<td  width="25%">			
+		</td>
+	</tr>
+
+ 	<tr>
+		<td width="25%">			
+		</td>
+		<td  width="25%">
+			<label class=" label" for="fields">Plan acres*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>	
+		</td>
+		<td  width="25%">
+			<%= f.text_field :plan_acres %> 	
+		</td>
+		<td  width="25%">			
+		</td>
+	</tr>
+ 
+	<tr>
+		<td width="25%">
+		</td>
+		<td  width="25%">
+				<label class=" label" for="fields">Crop avg yield<abbr title="required"> </abbr>	</label>	
+		</td>
+		<td  width="25%">
+			<div class="disabled"> <%= @avg_yield_acre %>	</div>	
+		</td>
+		<td  width="25%">
+		</td>
+	</tr>
+ 
+   
+	<tr>
+		<td width="25%">
+		</td>
+		<td  width="25%">
+				<label class=" label" for="fields">Field avg yield<abbr title="required"> </abbr>	</label>	
+		</td>
+		<td  width="25%">
+			 <%= f.text_field :avg_yield %> 	
+		</td>
+		<td  width="25%">
+		</td>
+	</tr>
+	
+	<tr>
+		<td width="25%">
+		</td>
+		<td  width="25%">
+				<label class=" label" for="fields">Yield UOM<abbr title="required"> </abbr>	</label>	
+		</td>
+		<td  width="25%">
+			<div class="disabled"> <%= @crop_inventory_uom %>	</div>	
+		</td>
+		<td  width="25%">
+		</td>
+	</tr>
+
+	<tr>
+		<td width="25%">
+		</td>
+		<td colspan="2">
+			<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		 	<%= f.submit " Update ", :class => "button" %><br><br>
+		</td>
+
+
+	</tr>
+</table>
+<% end %>
+
+
+
+

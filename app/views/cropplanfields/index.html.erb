@@ -1,0 +1,31 @@
+<h1>Listing cropplanfields</h1>
+
+<table>
+  <tr>
+    <th>Cropplan</th>
+    <th>Field</th>
+    <th>Plan acres</th>
+    <th>Avg yield</th>
+    <th>Yield uom</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @cropplanfields.each do |cropplanfield| %>
+  <tr>
+    <td><%= cropplanfield.cropplan_id %></td>
+    <td><%= cropplanfield.field_id %></td>
+    <td><%= cropplanfield.plan_acres %></td>
+    <td><%= cropplanfield.avg_yield %></td>
+    <td><%= cropplanfield.yield_uom %></td>
+    <td><%= link_to 'Show', cropplanfield %></td>
+    <td><%= link_to 'Edit', edit_cropplanfield_path(cropplanfield) %></td>
+    <td><%= link_to 'Destroy', cropplanfield, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Cropplanfield', new_cropplanfield_path %>

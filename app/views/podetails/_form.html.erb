@@ -1,16 +1,10 @@
-<script type="text/javascript"> 
-function updateExt() {
 
-document.pd.podetail_ext_amount.value = (document.pd.podetail_qty_ordered.value -0) * (document.pd.podetail_order_price.value -0);
-}
-
-</script>
 
 <%= semantic_form_for @podetail, :html => { :name => "pd"} do |f| %>
   <%= f.inputs do %>
 <%= render "shared/error_messages", :object => f.object%>
 <br>
-    <% get_supplies_by_type %>
+    <% get_supplies_by_type('') %>
  <li class="string input optional stringish">
 	<label class=" label" for="supplies">Supply<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
 	<%= collection_select("podetail", "supply_id", @supplies, "id", "supplyfull", options = {:prompt => " "}) %>	
@@ -32,7 +26,7 @@ document.pd.podetail_ext_amount.value = (document.pd.podetail_qty_ordered.value 
 
 
   <%= f.buttons do %>
-    <%= f.commit_button :label => "Update Supply", :button_html => { :class => "button" }  %>
+    <%= f.commit_button :label => "Update PO line", :button_html => { :class => "button" }  %>
   <% end %>
 <br>
 <% end %>
