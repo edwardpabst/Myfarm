@@ -169,11 +169,12 @@ class Farmjob < ActiveRecord::Base
            return Farmjob.find_by_sql("#{sql}")
 
          end
-         
+     #farmjob summary    
          def self.farmjob_field_summary(user_id, fieldtask_id, field_id, cropplan_id,  start_date, job_status, stop_date, sort_sequence)
            sql_statement = "Select sum(total_hours) as total_hours,  sum(total_cost) as total_cost, sum(supply_cost) as supply_cost, sum(labor_cost) as labor_cost, sum(equipment_cost) as equipment_cost
            from farmjobs 
-           join fields on farmjobs.field_id = fields.id  
+           join fields   on farmjobs.field_id = fields.id 
+            
            where farmjobs.user_id = #{user_id}
            and start_date >= '#{start_date}'  
            and start_date <= '#{stop_date}' "
