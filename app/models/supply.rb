@@ -38,7 +38,7 @@ class Supply < ActiveRecord::Base
           
           def self.get_supply_for_chemical(user_id, job_status, start_date, stop_date)
 
-            sql_statement =  ("Select supplies.*
+            sql_statement =  ("Select supplies.id, supplyname
             from farmjobsupplies fjs
             join farmjobs fj on fjs.farmjob_id = fj.id
             join supplies on fjs.supply_id = supplies.id
@@ -47,7 +47,7 @@ class Supply < ActiveRecord::Base
              
             sql_statement = build_where_clause(sql_statement, "", job_status,  start_date, stop_date)
 
-            sql_statement += " group by supplies.user_id, supplies.id, supplyname " 
+            sql_statement += " group by supplies.id, supplyname " 
 
             return @supply_fertilizer = Supply.find_by_sql(sql_statement)
 
