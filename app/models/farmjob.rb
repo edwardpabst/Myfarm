@@ -179,7 +179,7 @@ class Farmjob < ActiveRecord::Base
            and start_date >= '#{start_date}'  
            and start_date <= '#{stop_date}' "
            
-           sql = build_where_clause(sql_statement, fieldtask_id, field_id, cropplan_id,  start_date, job_status, stop_date, sort_sequence )
+           sql = build_summary_where_clause(sql_statement, fieldtask_id, field_id, cropplan_id,  start_date, job_status, stop_date, sort_sequence )
             
            return Farmjob.find_by_sql("#{sql}")           
          end
@@ -206,6 +206,39 @@ class Farmjob < ActiveRecord::Base
              sql_statement += job_status_select
            end
            
+           return sql_statement = sort_clauses(sql_statement, sort_sequence)
+           
+          
+         end
+         
+         def self.build_summary_where_clause(sql_statement, fieldtask_id, field_id, cropplan_id, start_date, job_status, stop_date, sort_sequence )
+            
+            if !fieldtask_id.nil? and !fieldtask_id.blank?
+              fieldtask_select =  "and fieldtask_id = #{fieldtask_id}"
+              sql_statement += fieldtask_select
+            end
+                       
+           if !field_id.nil? and !field_id.blank?
+             field_select =  " and field_id = #{field_id}"
+             sql_statement += field_select
+           end
+           
+           if !cropplan_id.nil? and !cropplan_id.blank?
+             cropplan_select =  " and cropplan_id = #{cropplan_id}"
+             sql_statement += cropplan_select
+           end
+           
+           if !job_status.nil? and !job_status.blank?
+             job_status_select =  " and job_status = '#{job_status}'"
+             sql_statement += job_status_select
+           end
+           
+           return sql_statement
+           
+          
+         end
+         
+         def self.sort_clauses(sql_statement, sort_sequence)
            if !sort_sequence.nil? and !sort_sequence.blank?
              if sort_sequence == 'field'
                sort_sequence = 'fieldname'
@@ -220,10 +253,10 @@ class Farmjob < ActiveRecord::Base
              end
                            
              sort_sequence =  " order by  #{sort_sequence}"
-             sql_statement += sort_sequence
+             
            end
            
-           return sql_statement
+           return sql_statement += sort_sequence
            
          end
          
