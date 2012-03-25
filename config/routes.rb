@@ -105,6 +105,7 @@ Myfarm::Application.routes.draw do
   get "pages/route"
   get "pages/about"
   get "pages/home"
+  get "pages/mynetwork"
   get "pages/home_new"
   get "pages/tutorial"
   get "pages/help"
@@ -115,6 +116,7 @@ Myfarm::Application.routes.draw do
   
   match '/', :to => 'homes#validate_status'
   match '/home', :to => 'pages#home'
+  match '/mynetwork', :to => 'pages#mynetwork'
   match '/home_new', :to => 'pages#home_new'
   match '/mapcanvas', :to => 'pages#mapcanvas'
   match '/contact', :to => 'pages#contact'
@@ -291,6 +293,7 @@ Myfarm::Application.routes.draw do
    match '/invoicedetailreport', :to => 'invoices#invoicedetailreport'
    match '/depreciationrequestor', :to => 'equipment#depreciation_requestor'
    match '/depreciationreport', :to => 'equipment#depreciationreport'
+
    
   root :to => 'pages#home'
   #root_path => 'pages#home'

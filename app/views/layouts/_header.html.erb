@@ -27,8 +27,7 @@
 						<li> <div id="wx_module_1759">
 						   <a href="#" onclick="weatherpopup()">Weather</a>
 						</div></li>
-					
-						<li><%= link_to "Overview", '/tutorial' %></li>
+
 					 
 				 		<% if signed_in? %>
 
@@ -168,7 +167,8 @@
 					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
 				</div>
 				 <a href="/users">Farm community </a>
-				 <a href="/pages/home">My community </a>
+				 <%= link_to "My community", mynetwork_path %>
+
 				 <a href= "/users/<%= session[:s_user_id] %>">My farm posts </a>
 				<div class="menugroup">
 					Account Management &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -204,6 +204,7 @@
 				<a href="#" onclick="finewspopup()">Farm industry news</a> 
 				<a href="#" onclick="agrinewspopup()">Agriculture.com news</a> 
 				<a href="#" onclick="awnewspopup()">Ag Web.com news</a> 
+				<a href="#" onclick="futurefarmerspopup()">Farmers for the future news</a> 		
 				<a href="#" onclick="usdapopup()">U.S. Department of Agriculture</a>
 			</div>
 		 <% end %>

@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
      @users = User.find_by_sql("Select users.id, name, email, partycity, partystate   
      from users 
-     left join parties on users.party_id = parties.id").paginate(:page => params[:page], :per_page => 20)
+     left join parties on users.party_id = parties.id").paginate(:page => params[:page], :per_page => 14)
   end
   
   def show
@@ -173,7 +173,7 @@ class UsersController < ApplicationController
     from users 
     join relationships on users.id = relationships.followed_id
     left join parties on users.id = parties.system_user_id
-    where relationships.follower_id = #{@user.id} ").paginate(:page => params[:page], :per_page => 20)
+    where relationships.follower_id = #{@user.id} ").paginate(:page => params[:page], :per_page => 14)
     render 'show_follow'
   end
   
@@ -186,7 +186,7 @@ class UsersController < ApplicationController
     from users 
     join relationships on users.id = relationships.follower_id
     left join parties on users.id = parties.system_user_id
-    where relationships.followed_id = #{@user.id} ").paginate(:page => params[:page], :per_page => 20)
+    where relationships.followed_id = #{@user.id} ").paginate(:page => params[:page], :per_page => 14)
     render 'show_follow'
   end
   

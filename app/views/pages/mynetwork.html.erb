@@ -1,0 +1,21 @@
+<% set_current_user_data %>
+<table class="front_summary" ="For signed in users">
+	<tr>
+		
+	<td colspan="2">
+		 <div id="form_header">
+			What Farmers are talking about. Go to Farm Community to view and select other farmers, to follow their ideas.
+		 </div>
+	</td>
+	<tr>
+		<td class="main">
+			<h1 class="micropost"> What's on your mind <%= @current_user.name %>  ? </h1> 
+			<%= render 'shared/micropost_form' %>
+			<%= render 'shared/feed' %>
+		</td>
+		<td class="sidebar round">
+			<%=  render 'shared/user_info' %>
+			<%=  render 'shared/stats' %>
+		</td>
+	</tr>
+</table>

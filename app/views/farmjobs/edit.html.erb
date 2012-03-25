@@ -1,8 +1,6 @@
 <script type="text/javascript"> 
 function checkFarmjob() {
-   
-   document.fj.farmjob_isreplicate.disabled=true; 
-
+ 
 
 	if (document.fj.farmjob_job_status.value == 'Job complete')
 	{
@@ -21,7 +19,7 @@ function checkFarmjob() {
 
 <br>
 <h1>Editing Farm job</h1>
- 
+
 <%= link_to 'Back', session[:return_to] %>
 <br>
 <%= render 'form' %>

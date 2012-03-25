@@ -1,7 +1,8 @@
 class HomesController < ApplicationController
   
   def validate_status
-
+     
+   
      if signed_in?
        if user_has_party?     
            redirect_to "/home"
@@ -13,4 +14,5 @@ class HomesController < ApplicationController
      end
   end
   
+ 
 end
