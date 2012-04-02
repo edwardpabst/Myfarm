@@ -278,6 +278,7 @@ class FarmjobsController < ApplicationController
   # GET /farmjobs/1/edit
   
   def edit
+
     Farmjob.calculate_job_cost(params[:id])
     @farmjob = Farmjob.find(params[:id])
     session[:s_farmjob_id] = @farmjob.id
@@ -702,7 +703,38 @@ class FarmjobsController < ApplicationController
     
   end
  
+ 
+  def farmjob__billing_requestor 
+    
+   @farmjob = Farmjob.new
+    
+    respond_to do |format|
+      format.html
+
+    end
+       
+  end
   
+  def farmjobbillingreport
+    
+   #logger.debug "FARMJOB REQUEST PARAMS- #{params[:job_status]}"
+    
+    respond_to do |format|
+      format.html
+      format.pdf do
+   
+        pdf = FarmjobbillingreportPdf.new(session[:s_user_id], view_context, params[:client_id], params[:farm_id],
+        params[:fieldtask_id], params[:field_id], params[:cropplan_id], params[:start_date], params[:job_status], 
+        params[:stop_date], params[:sort_sequence])
+        send_data pdf.render, filename: "farmjob_billing_report",
+                                type: "application/pdf",
+                                disposition: "inline"
+        
+      end
+    end
+    
+    
+  end 
   
   
 end

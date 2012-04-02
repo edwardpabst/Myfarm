@@ -43,24 +43,16 @@ function initHome() {
 		hide('viewinvoices'); 
 		hide('shipments'); 
 		hide('purchaseorders'); 
-		hide('suppliesinventory'); 
-		hide('farmjobreport');
-		hide('profitabilityreport'); 
-		hide('harvestyieldreport'); 
-		hide('printinvoices'); 
-		hide('invoicedetailreport'); 
-		hide('scaleticketreport');
-		hide('fertilizerreport'); 
-		hide('chemicalreport'); 
-		hide('depreciationreport'); 
-		hide('socialnetwork'); 
-		hide('accountmanagement');
+		hide('suppliesinventory'); 		
+		hide('reports');
+		hide('socialnetwork');
 		hide('weather'); 
+		hide('accountmanagement');
 		hide('documentation'); 
 		hide('news'); 
-
-		 
+		hide('datatypes');
 		
+
 }
 
 </script>
@@ -201,16 +193,22 @@ function initHome() {
 				       	&nbsp;&nbsp;Supplies inventory
 					  </a>	
 					 </li>
-					 <li >
-
-				       	&nbsp; 
-
-					 </li>
 
 					 <li  id="active">
 					  <a href="#" onclick="showContent('reports')">	 	 
 				       	&nbsp;&nbsp;Reports
 					  </a>	
+					 </li>					
+					
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+					 <li >
+
+				       	&nbsp;<u>Utilities</u>
+
 					 </li>
 					 <li  id="active">
 					  <a href="#" onclick="showContent('socialnetwork')"> 	 
@@ -218,24 +216,29 @@ function initHome() {
 					  </a>	
 					 </li>
 					 <li >
-
-				       	&nbsp; 
-
+					  <a href="#" onclick="showContent('weather')"> 	 
+				       	&nbsp;&nbsp;Weather
+					  </a>
 					 </li>
 					 <li >
-
-				       	&nbsp; 
-
+					  <a href="#" onclick="showContent('news')"> 	 
+				       	&nbsp;&nbsp;News
+					  </a>
 					 </li>
 					 <li >
-
-				       	&nbsp; 
-
+					  <a href="#" onclick="showContent('accountmanagement')"> 	 
+				       	&nbsp;&nbsp;Account Management
+					  </a>
 					 </li>
 					 <li >
-
-				       	&nbsp; 
-
+					  <a href="#" onclick="showContent('documentation')"> 	 
+				       	&nbsp;&nbsp;Documentation
+					  </a>
+					 </li>
+					 <li >
+					  <a href="#" onclick="showContent('datatypes')"> 	 
+				       	&nbsp;&nbsp;Data Types
+					  </a>
 					 </li>
 					 <li >
 
@@ -319,7 +322,7 @@ function initHome() {
 				<br> explanation. While rich in functionality the software is simple, elegant and easy to use. 
 				<br><br>
 				
-				Check out the rich functionality by clicking on any topic on the left.
+				<b>Check out the rich functionality by clicking on any topics on the left.</b>
 				<br><br>&nbsp;
 				</p>
 				
@@ -711,56 +714,70 @@ function initHome() {
 				
 				</p>			 	  			 
 			</div>
-			
-			
-			
-			<div id="farmjobreport" class="hidden">
-				Stuff about farmjobreport			 	  			 
+			<div id="reports" class="hidden">
+				<p id="tutorial_stage">
+				 	Reports
+				</p>			 	  			 
 			</div>
-			<div id="profitabilityreport" class="hidden">
-				Stuff about profitabilityreport			 	  			 
-			</div>
-			<div id="harvestyieldreport" class="hidden">
-				Stuff about yield			 	  			 
-			</div>
-			<div id="printinvoices" class="hidden">
-				Stuff about print invoices			 	  			 
-			</div>
-			<div id="invoicedetailreport" class="hidden">
-				Stuff about invoicedetail			 	  			 
-			</div>
-			<div id="scaleticketreport" class="hidden">
-				Stuff about scaleticket			 	  			 
-			</div>
-			<div id="fertilizerreport" class="hidden">
-				Stuff about fertilizer			 	  			 
-			</div>
-			<div id="chemicalreport" class="hidden">
-				Stuff about chemicals			 	  			 
-			</div>
-			<div id="depreciationreport" class="hidden">
-				Stuff about depreciation			 	  			 
-			</div>
-
-
 			
 			
 			
 			<div id="socialnetwork" class="hidden">
-				Stuff about Farm social network			 	  			 
-			</div>
-			<div id="accountmanagement" class="hidden">
-				Stuff about account management		 	  			 
+				<p id="tutorial_stage">
+				 	Farmers Network
+				</p>
+				<p id="tutorial_point">
+				The iFarmService social network allows all registered users (farmers) to exchange thoughts, ideas,
+				<br> inspiration and business information with others.  Each farmer can post any information they wish and 
+				<br>it becomes visible to other farmers. A farmer can then select specific farmers to join their community 
+				<br>which will weave a continuous idea and information flow for your personal community.
+				<br><br>When you view the farm community you can select an individual farmer, click on their name, and 
+				<br>view all of there comments.  If you like what they have to say you  click the “Follow” button and they 	
+				<br>will be come part of your personal community. You have a personal community page. Here you can post 	
+				<br>your personal comments, reply to others,  and you can see all of your comments interwoven by date and 
+				<br>time with the comments of other farmers that you “Follow”. 
+				<br>A statistics panel contains your community statistics.  Number of farmers that are following you and 
+				<br>number of farmers that you are following. You can click on the statistics to view the individual 
+				<br>farmers. From there you can choose to “Follow” or “Unfollow” any given farmer.
+				</p>			 	  			 
 			</div>
 			<div id="weather" class="hidden">
-				Stuff about weather			 	  			 
-			</div>
-			<div id="documentation" class="hidden">
-				Stuff about documentation			 	  			 
+				<p id="tutorial_stage">
+				 	Weather
+				</p>
+				<p id="tutorial_point">	
+					The user of iFarmService defines a weather postal code. That postal code is used to manage weather. We 
+					<br>off links to current weather conditions and maintain a daily weather history for the postal code. 
+					<br>We automatically gather the information from the National Weather Service (NOAA).  Historical 
+					<br>weather can be retrieved at any time for assistance in your farm decisions.				
+				</p>
+				<br> <br> 
+					<img src="/Images/weather.png" width="580" height="380"></img>
+					 	  			 
 			</div>
 			<div id="news" class="hidden">
-				Stuff about news			 	  			 
+				<p id="tutorial_stage">
+				 	News
+				</p>		 	  			 
 			</div>
+			<div id="accountmanagement" class="hidden">
+				<p id="tutorial_stage">
+				 	Account Management
+				</p>			 	  			 
+			</div>
+			<div id="documentation" class="hidden">
+				<p id="tutorial_stage">
+				 	Documentation
+				</p>			 	  			 
+			</div>
+			<div id="datatypes" class="hidden">
+				<p id="tutorial_stage">
+				 	Data Types
+				</p>			 	  			 
+			</div>
+
+ 
+
 
 		</td>
 	</tr>

@@ -40,47 +40,57 @@ class Farmjob < ActiveRecord::Base
            
            @job = Farmjob.find(jobid)
            
-           #calculate supply cost
+           #calculate supply cost and billing
            @farmjobsupplies = Farmjob.find_by_sql(" Select farmjobsupplies.id, actual_qty, usage_uom,
-                 supply_cost_uom, conversion_factor
+                 supply_cost_uom, conversion_factor, supply_charge_uom
            from farmjobs  
            join farmjobsupplies on farmjobs.id = farmjobsupplies.farmjob_id
            join supplies on farmjobsupplies.supply_id = supplies.id 
            where farmjobs.id = #{jobid}")
            
            supply_cost = 0.0
+           supply_billing = 0.0
            if !@farmjobsupplies.empty?
               @farmjobsupplies.each do |fjs|
                 cost = fjs.supply_cost_uom.to_f
+                charge = fjs.supply_charge_uom.to_f
                 conversion = fjs.conversion_factor.to_f
                 qty = fjs.actual_qty.to_f
                 supply_cost += (cost / conversion) * qty
+                supply_billing += (charge / conversion) * qty
               end
            else
              @job.supply_cost = 0
+             @job.supply_billing = 0
            end
            
            @job.supply_cost = supply_cost
+           @job.supply_billing = supply_billing
            
            #calculate labor cost
-           @farmjoblabors = Farmjob.find_by_sql(" Select farmjoblabors.id, task_hours, rate
+           @farmjoblabors = Farmjob.find_by_sql(" Select farmjoblabors.id, task_hours, rate, charge_hour
            from farmjobs  
            join farmjoblabors on farmjobs.id = farmjoblabors.farmjob_id
            join parties on farmjoblabors.party_id = parties.id 
            where farmjobs.id = #{jobid}")
            
            labor_cost = 0.0
+           labor_billing = 0.0
            if !@farmjoblabors.empty?
               @farmjoblabors.each do |fjl|
                 hours = fjl.task_hours.to_f
                 rate = fjl.rate.to_f
+                charge = fjl.charge_hour.to_f
                 labor_cost += hours * rate
+                labor_billing += hours * charge
               end
            else
              @job.labor_cost = 0
+             @job.labor_billing = 0
            end
            
            @job.labor_cost = labor_cost
+           @job.labor_billing = labor_billing
            
            #calculate equipment cost
            @farmjobequipments = Farmjob.find_by_sql(" Select farmjobequipments.id, qty_actual, 
@@ -92,25 +102,33 @@ class Farmjob < ActiveRecord::Base
            
            
            equipment_cost = 0
+           equipment_billing = 0
            if !@farmjobequipments.empty?
               @farmjobequipments.each do |fje|
                 cost = fje.cost_unit_hour.to_f
+                charge = fje.rate_hour.to_f
                 qty = fje.qty_actual.to_f
                 additional_cost = fje.additional_cost.to_f
                 equipment_cost += (cost * qty) + additional_cost
+                equipment_billing += (charge * qty) + additional_cost
               end
            else
              @job.equipment_cost = 0
+             @job.equipment_billing = 0
            end
            
            @job.equipment_cost = equipment_cost
-           @job.total_cost = supply_cost + labor_cost + equipment_cost
+           @job.equipment_billing = equipment_billing
+           @job.total_billing = supply_billing + labor_billing + equipment_billing
            
            @job.save
            
            
          end
-         
+ #-------------------------------------------------------------------------------------------------
+ #-------- farmjob cost report -------------------------------------------------------------------  
+ #-------------------------------------------------------------------------------------------------
+ 
          def self.farmjob_cost_by_field
            
            @farmjobs = Farmjob.find_by_sql("Select fieldname, sum(supply_cost) ,, sum(labor_cost), sum(equipment_cost), sum(total_cost)
@@ -259,7 +277,219 @@ class Farmjob < ActiveRecord::Base
            return sql_statement += sort_sequence
            
          end
+   #-------------------------------------------------------------------------------------------------
+   #-------- farmjob billing report -------------------------------------------------------------------  
+   #-------------------------------------------------------------------------------------------------
+         def self.farmjob_billing_cost_by_client
+
+           @farmjobs = Farmjob.find_by_sql("Select client_id, sum(supply_billing) , sum(labor_billing), sum(equipment_billing), sum(total_billing)
+           from farmjobs  
+           join cropplans on farmjobs.cropplan_id = cropplans.id
+           join crops on cropplans.crop_id = crops.id  
+           join fields on farmjobs.field_id = fields.id
+           join parties on fields.client_id = parties.id  
+           join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
+           where farmjobs.user_id = #{session[:s_user_id]  } 
+           group by client_id
+           order by client_id")
+
+         end
          
+         def self.farmjob_billing_cost_by_farm
+
+           @farmjobs = Farmjob.find_by_sql("Select farmname, sum(supply_billing) , sum(labor_billing), sum(equipment_billing), sum(total_billing)
+           from farmjobs  
+           join cropplans on farmjobs.cropplan_id = cropplans.id
+           join crops on cropplans.crop_id = crops.id  
+           join fields on farmjobs.field_id = fields.id
+           join parties on fields.client_id = parties.id 
+           join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
+           where farmjobs.user_id = #{session[:s_user_id]  } 
+           group by farmname
+           order by farmname")
+
+         end
+                 def self.farmjob_billing_cost_by_field
+
+                   @farmjobs = Farmjob.find_by_sql("Select fieldname, sum(supply_billing) , sum(labor_billing, sum(equipment_billing), sum(total_billing)
+                   from farmjobs  
+                   join cropplans on farmjobs.cropplan_id = cropplans.id
+                   join crops on cropplans.crop_id = crops.id  
+                   join fields on farmjobs.field_id = fields.id
+                   join parties on fields.client_id = parties.id  
+                   join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
+                   where farmjobs.user_id = #{session[:s_user_id]  } 
+                   group by fieldname
+                   order by fieldname")
+
+                 end
+
+                 def self.farmjob_billing_cost_by_cropplan
+
+                   @farmjobs = Farmjob.find_by_sql("Select cropplanfull, sum(supply_billing) , sum(labor_billing), sum(equipment_billing), sum(total_billing)
+                   from farmjobs  
+                   join cropplans on farmjobs.cropplan_id = cropplans.id
+                   join crops on cropplans.crop_id = crops.id  
+                   join fields on farmjobs.field_id = fields.id
+                   join parties on fields.client_id = parties.id  
+                   join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
+                   where farmjobs.user_id = #{session[:s_user_id]  } 
+                   group by cropplanfull
+                   order by cropplanfull")
+
+                 end
+
+                 def self.farmjob_billing_cost
+
+                   @farmjobs = Farmjob.find_by_sql("Select sum(supply_billing) , sum(labor_billing), sum(equipment_billing), sum(total_billing)
+                   from farmjobs  
+                   join cropplans on farmjobs.cropplan_id = cropplans.id
+                   join crops on cropplans.crop_id = crops.id  
+                   join fields on farmjobs.field_id = fields.id 
+                   join parties on fields.client_id = parties.id 
+                   left join parties on fields.client_id = parties.id 
+                   join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
+                   where farmjobs.user_id = #{session[:s_user_id]  }")
+
+                 end
+
+                 def self.farmjob_billing_items(user_id, client_id, farm_id, fieldtask_id, field_id, cropplan_id,  start_date, job_status, stop_date, sort_sequence)
+
+                   sql_statement = "Select partyname, farmname, taskdescription, fieldname, cropplanfull, area_size, start_date, job_status,
+                     total_hours,  total_billing, supply_billing, labor_billing, equipment_billing
+                    from farmjobs  
+                    join cropplans on farmjobs.cropplan_id = cropplans.id
+                    join crops on cropplans.crop_id = crops.id  
+                    join fields on farmjobs.field_id = fields.id 
+                    join parties on fields.client_id = parties.id 
+                    join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
+                    where farmjobs.user_id = #{user_id}
+                    and start_date >= '#{start_date}'  
+                    and start_date <= '#{stop_date}' "
+
+                   sql = build_billing_where_clause(sql_statement, client_id, farm_id, fieldtask_id, field_id, cropplan_id, start_date, job_status, stop_date, sort_sequence )
+
+                   return Farmjob.find_by_sql("#{sql}")
+
+                 end
+             #farmjob summary    
+                 def self.farmjob_billing_summary(user_id, client_id, farm_id, fieldtask_id, field_id, cropplan_id,  start_date, job_status, stop_date, sort_sequence)
+                   sql_statement = "Select sum(total_hours) as total_hours,  sum(total_billing) as total_billing, 
+                                    sum(supply_billing) as supply_billing, sum(labor_billing) as labor_billing, sum(equipment_billing) as equipment_billing
+                   from farmjobs 
+                   join fields   on farmjobs.field_id = fields.id 
+                   join parties on fields.client_id = parties.id 
+                   where farmjobs.user_id = #{user_id}
+                   and start_date >= '#{start_date}'  
+                   and start_date <= '#{stop_date}' "
+
+                   sql = build_billing_summary_where_clause(sql_statement, client_id, farm_id, fieldtask_id, field_id, cropplan_id,  start_date, job_status, stop_date, sort_sequence )
+
+                   return Farmjob.find_by_sql("#{sql}")           
+                 end
+
+                 def self.build_billing_where_clause(sql_statement, client_id, farm_id, fieldtask_id, field_id, cropplan_id, start_date, job_status, stop_date, sort_sequence )
+
+                   if !client_id.nil? and !client_id.blank?
+                     client_select =  "and client_id = #{client_id}"
+                     sql_statement += client_select
+                   end
+                   
+                   if !farm_id.nil? and !farm_id.blank?
+                     ffarm_select =  "and farm_id = #{farm_id}"
+                     sql_statement += farm_select
+                   end
+                   
+                   
+                    if !fieldtask_id.nil? and !fieldtask_id.blank?
+                      fieldtask_select =  "and fieldtask_id = #{fieldtask_id}"
+                      sql_statement += fieldtask_select
+                    end
+
+                   if !field_id.nil? and !field_id.blank?
+                     field_select =  " and field_id = #{field_id}"
+                     sql_statement += field_select
+                   end
+
+                   if !cropplan_id.nil? and !cropplan_id.blank?
+                     cropplan_select =  " and cropplan_id = #{cropplan_id}"
+                     sql_statement += cropplan_select
+                   end
+
+                   if !job_status.nil? and !job_status.blank?
+                     job_status_select =  " and job_status = '#{job_status}'"
+                     sql_statement += job_status_select
+                   end
+
+                   return sql_statement = sort_clauses(sql_statement, sort_sequence)
+
+
+                 end
+
+                 def self.build_billing_summary_where_clause(sql_statement, client_id, farm_id, fieldtask_id, field_id, cropplan_id, start_date, job_status, stop_date, sort_sequence )
+
+
+                   if !client_id.nil? and !client_id.blank?
+                     client_select =  "and client_id = #{client_id}"
+                     sql_statement += client_select
+                   end
+                   
+                   if !farm_id.nil? and !farm_id.blank?
+                     ffarm_select =  "and farm_id = #{farm_id}"
+                     sql_statement += farm_select
+                   end
+
+                    if !fieldtask_id.nil? and !fieldtask_id.blank?
+                      fieldtask_select =  "and fieldtask_id = #{fieldtask_id}"
+                      sql_statement += fieldtask_select
+                    end
+
+                   if !field_id.nil? and !field_id.blank?
+                     field_select =  " and field_id = #{field_id}"
+                     sql_statement += field_select
+                   end
+
+                   if !cropplan_id.nil? and !cropplan_id.blank?
+                     cropplan_select =  " and cropplan_id = #{cropplan_id}"
+                     sql_statement += cropplan_select
+                   end
+
+                   if !job_status.nil? and !job_status.blank?
+                     job_status_select =  " and job_status = '#{job_status}'"
+                     sql_statement += job_status_select
+                   end
+
+                   return sql_statement
+
+
+                 end
+
+                 def self.sort_clauses(sql_statement, sort_sequence)
+                   if !sort_sequence.nil? and !sort_sequence.blank?
+                     if sort_sequence == 'field'
+                       sort_sequence = 'fieldname'
+                     elsif sort_sequence == 'crop'
+                       sort_sequence = 'cropplanfull'
+                     elsif sort_sequence == 'task'
+                       sort_sequence = "taskdescription"
+                     elsif sort_sequence == 'job_status'
+                       sort_sequence = 'job_status'
+                     elsif sort_sequence == 'date'
+                       sort_sequence = 'start_date'
+                     end
+
+                     sort_sequence =  " order by  #{sort_sequence}"
+
+                   end
+
+                   return sql_statement += sort_sequence
+
+                 end
+         
+#-------------------------------------------------------------------------------------------------
+#-------- profitability report -------------------------------------------------------------------  
+#-------------------------------------------------------------------------------------------------
+       
          def self.profitability_cost_items(user_id, view, farm_id, year, start_date, stop_date, task_stage)
            
              sql_statement = "Select taskdescription, sum(total_hours/applied_area) as total_hours_acre,               

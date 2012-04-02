@@ -1,18 +1,18 @@
 
 <tr>
 	<td class="gravatar">		
-        <%= link_to gravatar_for(feed_item.user) , feed_item.user %>
+       <%= link_to gravatar_for(feed_item.user) , feed_item.user %>  
 	</td>
 	
 	
 	<td class="micropost">
 		<span class="user">
-			<%= link_to feed_item.user.name, feed_item.user %>
+			  <%= link_to feed_item.user.name, feed_item.user %> 
 		</span>
-		<span class="content"><%= feed_item.content %> </span>
+		<span class="content">	  <%= feed_item.content %> </span>
 		<span class="timestamp">
 			
-		Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
+		Posted <%= time_ago_in_words(feed_item.created_at) %> ago.</span>
 	</td>
 	<% if current_user?(feed_item.user) %>
 	<td>
@@ -21,4 +21,116 @@
 									     :title => feed_item.content %>
 	</td>
 	<% end %>
+	
 </tr>
+
+<tr>
+		<td ></td>
+		<td >
+			<% get_micropost(feed_item.id) %>
+			
+				<% if !@micropost.microphoto.url.blank? and  !@micropost.microphoto.url.nil? %>
+					<%= image_tag @micropost.microphoto.url(:small)%> 
+				<% end %>
+		
+		</td>
+		<td ></td>
+
+
+</tr>
+<% get_comments(feed_item.id)%>
+<tr>
+	<td></td>
+	<td>
+		<table class="comments">
+			<tr>
+				<td>				
+				   <% if !@comments.empty? %>
+						Comments
+				   	<% else %>
+					
+						<%= submit_tag "Add comment", :type => "button", :class => "button_clear", :onclick => "showContent('addcomment#{@micropost.id}')" %> 
+				    <% end %>
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+
+
+<% if !@comments.empty? %>
+<tr>
+	<td colspan="3">
+
+	  <table class="comments">
+	
+		<div class="unhidden" id="comments<%= @micropost.id %>">
+		<%= form_tag '/comments', :method=>'post', :remote => true   do |f| %>
+	
+		 	<%  @comments.each do |comment|%>
+ 	
+				<% get_user(comment.user_id)%>
+				<tr>
+		
+			 		<td>  <%= link_to gravatar_for(@user) , @user %>  </td>
+					<td >
+
+						<span class="user">
+			 		 		<%= link_to @user.name, "/users" %>   
+						</span>
+						<span class="content">	<%= comment.comment %></span>
+						<span class="timestamp">
+						Posted <%= time_ago_in_words(comment.created_at) %> ago.</span>
+
+					</td>
+				</tr>
+							
+
+			<% end %>
+			<tr>
+				<td colspan="2">
+
+						<input class="input_fill"  type="text" name="comment" value="Write a comment" onchange="submit()"     onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" />
+				    
+					<input type="hidden" name="micropost" value="<%= @micropost.id %>" />
+
+
+				</td>
+			</tr>
+			
+
+				</div>
+			   </table>
+			 </td>
+		<% end %>
+  
+	 
+</tr>
+
+				
+<% else %>	
+<tr>	  
+	 	<td></td>
+		<td>
+		     <div class="hidden" id= "addcomment<%= @micropost.id %>" >	
+			
+					<table class="comments">
+						<tr>
+							<td>
+								<%= form_tag '/comments' ,:method=>'post', :remote => true   do |f| %>
+									<input class="input_fill"  type="text" name="comment" value="Write a comment"    onchange="submit()"   onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"/>
+									<input type="hidden" name="micropost" value="<%= @micropost.id %>" />
+								<% end %>
+							</td>
+						</tr>
+					</table>
+
+		   </div>
+	    </td>
+
+	<% end %>	     
+
+	
+	
+</tr>
+

@@ -1,0 +1,11 @@
+<%= semantic_form_for @comment do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :micropost_id %>
+    <%= f.input :comment %>
+    <%= f.input :user_id %>
+  <% end %>
+
+  <%= f.buttons do %>
+    <%= f.commit_button %>
+  <% end %>
+<% end %>

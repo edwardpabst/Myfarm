@@ -1,3 +1,35 @@
+<script type="text/javascript"> 
+
+function showContent(topic) {
+	
+	var item = document.getElementById(topic);
+
+	if (item.className == 'hidden')	
+	 {
+		unhide(topic);
+		} 
+	else 	
+	  {
+			hide(topic);
+			}
+
+
+	
+}
+
+function hide(divID) {
+	 
+var item = document.getElementById(divID);
+item.className='hidden';
+}
+
+function unhide(divID) {
+ 
+var item = document.getElementById(divID);
+item.className='unhidden';
+
+}
+</script>
 <% set_current_user_data %>
 <table class="front_summary" ="For signed in users">
 	<tr>
@@ -9,6 +41,8 @@
 	</td>
 	<tr>
 		<td class="main">
+
+			<br>
 			<h1 class="micropost"> What's on your mind <%= @current_user.name %>  ? </h1> 
 			<%= render 'shared/micropost_form' %>
 			<%= render 'shared/feed' %>

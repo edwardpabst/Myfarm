@@ -111,7 +111,7 @@ class PodetailsController < ApplicationController
       @podetail = Podetail.find(params[:id])
     end
     
-    def receiveline
+    def receive_line
        @podetail = Podetail.find_by_sql("Select podetails.id, supplyname, podetails.supply_uom, qty_ordered, 
                    qty_received, receipt_amount 
       from podetails 

@@ -1,15 +1,29 @@
 
-<%= form_for  @micropost do |f| %> 
+<%= form_for  @micropost,  :html => { :name => "mp",  :multipart => true}  do |f| %> 
 	<%= render 'shared/error_messages', :object => f.object %>
+
 	
 	<div class="postarea">	
 		<%= f.text_area :content,
 		                :rows => "4",
 		                :cols => "60" ,
-		                :maxlength => "140" %>
+		                :maxlength => "255" %>
 	</div>
+
+	<div>
+  		<a href="#" onclick="showContent('media_upload')"> 	 
+       		Add photo
+  		</a> 
+	</div>
+	<div class="hidden" id="media_upload">	
+		<%= f.file_field :microphoto %>
+	</div>
+
 	<div class="actions">
 			<%= f.submit " Submit post ", :class => "button"  %>
 	</div>
+
 	
 <% end %>
+
+

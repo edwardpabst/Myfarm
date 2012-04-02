@@ -10,12 +10,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120321201648) do
+ActiveRecord::Schema.define(:version => 20120328202301) do
 
   create_table "capitalrecoveries", :force => true do |t|
     t.integer  "recovery_year"
     t.integer  "interest_rate"
     t.decimal  "recovery_factor"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "micropost_id"
+    t.string   "comment"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -242,6 +250,10 @@ ActiveRecord::Schema.define(:version => 20120321201648) do
     t.integer  "temperature"
     t.integer  "humidity"
     t.string   "sky_condition"
+    t.decimal  "total_billing",      :precision => 9, :scale => 2
+    t.decimal  "supply_billing",     :precision => 9, :scale => 2
+    t.decimal  "labor_billing",      :precision => 9, :scale => 2
+    t.decimal  "equipment_billing",  :precision => 9, :scale => 2
   end
 
   add_index "farmjobs", ["cropplan_id"], :name => "index_farmjobs_on_cropplan_id"
@@ -405,6 +417,11 @@ ActiveRecord::Schema.define(:version => 20120321201648) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "microphoto"
+    t.string   "microphoto_file_name"
+    t.string   "microphoto_content_type"
+    t.integer  "microphoto_file_size"
+    t.datetime "microphoto_updated_at"
   end
 
   add_index "microposts", ["user_id"], :name => "index_microposts_on_user_id"

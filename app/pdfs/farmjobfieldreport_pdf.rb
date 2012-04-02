@@ -16,7 +16,7 @@ class FarmjobfieldreportPdf < Prawn::Document
   end
   
   def farmjob_header
-    text "Farmjob Report", size: 14, style: :bold, :align => :center
+    text "Farmjob Cost Report", size: 14, style: :bold, :align => :center
     move_down 5
     text "for Date Range - (#{@start_date} - #{@stop_date})", size: 8, style: :bold, :align => :center
   end
@@ -31,7 +31,8 @@ class FarmjobfieldreportPdf < Prawn::Document
       columns(4).width = 50
       columns(5).width = 40
       columns(6).width = 35
-      columns(10).width = 55
+      columns(7..8).width = 40
+      columns(9..10).width = 45
       columns(6..10).align = :right
      
       
@@ -43,7 +44,7 @@ class FarmjobfieldreportPdf < Prawn::Document
   
   def farmjob_item_rows
 
-    [["Task Description", "Field", "Crop plan", "Area size", "Job date", "Status", "Total hours", "Job cost", "Supply cost", "Labor cost", "Equipment cost"]] +
+    [["Task Description", "Field", "Crop plan", "Area size", "Job date", "Status", "Total hours", "Job cost", "Supply cost", "Labor cost", "Equip. cost"]] +
     Farmjob.farmjob_field_items(@user_id, @fieldtask_id, @field_id, @cropplan_id,  @start_date, @job_status, @stop_date, @sort_sequence).map do |item|
       [item.taskdescription, item.fieldname, item.cropplanfull, item.area_size, item.start_date, item.job_status, item.total_hours, cost(item.total_cost), cost(item.supply_cost), cost(item.labor_cost), cost(item.equipment_cost)]
     end
@@ -74,7 +75,7 @@ class FarmjobfieldreportPdf < Prawn::Document
   end
   
   def cost(num)
-    @view.number_to_currency(num)
+    @view.number_to_currency(num, :precision => 0, :delimiter => ",")
   end
 end
 

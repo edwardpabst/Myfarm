@@ -78,7 +78,96 @@ section h1 {
 .hidden { visibility: hidden; }
 .unhidden { visibility: visible; }
 
+table.ifarmservice {
+	
+	width: 92%;
+	margin-bottom: 0;
+	font-family:"arial", Times, serif;
+	font-size: 100%;
+	font-family:arial;
+	text-align: left;
+	background-color: white;
+	border-color: white;
+   	border-width:1px;
+    border-style: solid;
+	margin-left: auto;
+	margin-right: auto;
 
+
+}
+
+table.ifarmservice td{
+	vertical-align:middle;
+}
+table.twocolumn {
+	
+	width: 92%;
+	margin-bottom: 0;
+	font-family:"arial", Times, serif;
+	font-size: 100%;
+	font-family:arial;
+	text-align: left;
+	background-color: #F5F5F5;
+	border-color: black;
+   	border-width:1px;
+    border-style: solid;
+	margin-left: auto;
+	margin-right: auto;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10pz;
+
+}
+
+table.twocolumn td{
+	vertical-align:middle;
+}
+
+
+table.contract{
+	
+	width: 70%;
+	margin-bottom: 0;
+	font-family:"arial", Times, serif;
+	font-size: 100%;
+	text-align: right;
+	background-color: #F5F5F5;
+	border-color: gray;
+   	border-width:1px;
+    border-style: solid;
+	margin-left: auto;
+	margin-right: auto;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10pz;
+}
+
+table.contract td.label {
+	width: 40%;
+	text-align: right;
+ 
+}
+
+table.comments {
+	
+	width: 60%;
+	margin-bottom: 0;
+	font-family:"arial", Times, serif;
+	font-size: 90%;
+	font-family:arial;
+	text-align: left;
+	background-color: #EDF2F7;
+
+
+}
+
+table.comments td{
+	vertical-align:middle;
+	border-bottom-style:groove;
+	border-width:3px;
+	border-color: #EDF2F7;
+	
+}
 #ifarmservice, #people, #farms, #fields, #crops, #cropplans, #supplies, #farmtasks, #equipment, #storageunits
 {
     position: absolute;
@@ -86,6 +175,12 @@ section h1 {
     
 }
 #farmjobs, #calendar, #cropinventory, #scaletickets, #salescontracts, #shipments, #createinvoices, #viewinvoices, #purchaseorders, #suppliesinventory
+{
+    position: absolute;
+    top: 0px;
+    
+}
+#reports, #socialnetwork, #weather, #news, #accountmanagement, #documentation,  #datatypes 
 {
     position: absolute;
     top: 0px;
@@ -100,6 +195,13 @@ section h1 {
 {
     top: 200px;
  	left: 500px;
+}
+
+#reports, #socialnetwork, #weather, #news, #accountmanagement,  #documentation, #datatypes 
+{
+    top: 200px;
+ 	left: 500px;
+    
 }
  
 #navcontainer { width: 200px; }
@@ -138,7 +240,19 @@ font-size: 90%;
 
 }
 
- 
+.hintbase {
+  font-size: 90%;
+  color:#666;
+  left-margin: 8em;
+  background-color:	#FEFFF1;
+  padding-left: 10px;
+  text-align: left;
+  font-style: italic;
+  border: solid 1px lightgray;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10pz;
+} 
 
 /*--------  #F0E68C ----------*/
 #form_header{
@@ -146,10 +260,10 @@ font-size: 90%;
 	width: 99%;
 	font-size:90%;
 	font-weight:normal;
-	font-style: italic;
-    color: slategray;
-	background-color:lemonchiffon;
-	border: solid 1px lightgray;
+	font-style: normal;
+    color: white;
+	background-color:#36648B;  /*--------   lemonchiffon #FEFFF1 slategray----------*/
+	border: solid 1px darkgray;
 	padding-left:4px;
 	padding-right:4px;
 	padding-top:8px;
@@ -265,12 +379,12 @@ font-size: 90%;
 }
  
 .menugroup {
-	background-color:#6495ED;
+	background-color:#6495ED;    /*--------  #6495ED-----#36648B-----*/
 	color: white;
 	list-style-type: none;
 	display: inline-block;
 	padding: 4px;
-	font-weight:bold;
+	font-weight:normal;
 }
 .fieldmap {
 	width: 50%;
@@ -294,18 +408,7 @@ font-size: 90%;
 	color:red;
 }
 
-.hintbase {
-  font-size: 90%;
-  color:#666;
-  left-margin: 8em;
-  background-color:	#FFF8C6;
-  padding-left: 10px;
-  text-align: left;
-  font-style: italic;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	border-radius: 10pz;
-}
+
 
 #spacer {
 	width:25%;
@@ -459,6 +562,14 @@ padding:2px 2px 2px 2px;
 
 }
 
+.postarea textarea{
+ 
+	height:40px;
+ 
+
+}
+
+
 #message {
  
 	font-size:100%;
@@ -562,17 +673,46 @@ input  {
 }
 
 
+.input_fill  {
+   
+	font-family: Arial, Sans-Serif;
+    font-size: 90%;
+    padding: 4px;
+    border: solid 1px white;
+    width:97%;
+    background-color: white;
+ 	border: solid 1px gray;
+	
+
+}
+
+.input_invisible  {
+
+    width: 0px;
+
+}
+.thinlabel {
+	font-style: normal;
+	font-size: 120%;
+}
+
+
 div.fileinputs {
 	position: relative;
+ 
 }
 
 div.fakefile {
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	top: 4px;
+	left: 220px;
 	z-index: 1;
+	font-style:normal;
+	font-size:80%;
+
 }
 
+ 
 input.file {
 	position: relative;
 	text-align: right;
@@ -720,6 +860,24 @@ button:onmousedown{
 .button_very_small:hover{
 	background-color:lightsteelblue;
 	border: solid 1px orange;
+}
+
+.button_clear {
+   
+	font-family: Arial, Sans-Serif;
+    font-size: 10px;
+    padding: 2px;
+    width: 70px;
+	height:20px;
+    background-color: #EDF2F7;
+	border: solid 1px #EDF2F7;
+	color: steelblue;
+	
+}
+
+.button_clear:hover{
+	color:blue;
+ 
 }
 
 /* Links #09c */
@@ -981,75 +1139,7 @@ ul.none  {
 	list-style-type:none
 }
 
-table.ifarmservice {
-	
-	width: 92%;
-	margin-bottom: 0;
-	font-family:"arial", Times, serif;
-	font-size: 100%;
-	font-family:arial;
-	text-align: left;
-	background-color: white;
-	border-color: white;
-   	border-width:1px;
-    border-style: solid;
-	margin-left: auto;
-	margin-right: auto;
 
-
-}
-
-table.ifarmservice td{
-	vertical-align:middle;
-}
-table.twocolumn {
-	
-	width: 92%;
-	margin-bottom: 0;
-	font-family:"arial", Times, serif;
-	font-size: 100%;
-	font-family:arial;
-	text-align: left;
-	background-color: #F7F7F7;
-	border-color: black;
-   	border-width:1px;
-    border-style: solid;
-	margin-left: auto;
-	margin-right: auto;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	border-radius: 10pz;
-
-}
-
-table.twocolumn td{
-	vertical-align:middle;
-}
-
-
-table.contract{
-	
-	width: 70%;
-	margin-bottom: 0;
-	font-family:"arial", Times, serif;
-	font-size: 100%;
-	text-align: right;
-	background-color: #F7F7F7;
-	border-color: gray;
-   	border-width:1px;
-    border-style: solid;
-	margin-left: auto;
-	margin-right: auto;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	border-radius: 10pz;
-}
-
-table.contract td.label {
-	width: 40%;
-	text-align: right;
- 
-}
 .main {
 	text-align:center;
 	 
@@ -1194,6 +1284,12 @@ div.field, div.actions {
 	font-size: 90%;
 }
 
+div.photo {
+	margin-bottom: 10px;
+	font-size: 80%;
+	font-style:normal;
+}
+
 .field_with_errors {
 	margin-top: 1px;
 	padding: 2px;
@@ -1277,7 +1373,7 @@ h1.micropost {
 
 table.microposts {
 	margin-top: 1em;
-	font-size: 90%;	
+	font-size: 80%;	
 }
 
 table.microposts tr {
@@ -1288,7 +1384,7 @@ table.microposts tr {
 table.microposts tr td.gravatar {
 	border-top: 1px  solid #ccc;
 	vertical-align: top;
-	width: 50px;
+	width: 40px;
 }
 
 table.microposts tr td.micropost {
@@ -1303,7 +1399,7 @@ table.microposts tr td.micropost span.timestamp {
 }
 
 div.user_info   {
-	font-size: 70%;
+	font-size: 60%;
 }
 
 div.user_info img {
@@ -1319,7 +1415,7 @@ div.user_info span.user_name {
 	
 }
 div.user_info span.microposts {
-	font-size: 80%;
+	font-size: 70%;
 }
 
 form.new_microposts {

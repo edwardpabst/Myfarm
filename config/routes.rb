@@ -4,6 +4,8 @@ Myfarm::Application.routes.draw do
 
 
 
+  resources :comments
+
   resources :cropplanfields
 
   resources :capitalrecoveries
@@ -130,6 +132,7 @@ Myfarm::Application.routes.draw do
   match '/delete', :to => 'microposts#destroy'
   match '/fieldtasks/fieldtask_supplies', :to => 'fieldtasks#fieldtask_supplies'
   match '/fieldtasksupplies', :to => 'fieldtasks#fieldtask_supplies'
+  match '/pageajax', :to => 'pages#page_ajax'
  
 
   
@@ -215,7 +218,7 @@ Myfarm::Application.routes.draw do
   match '/podetailview', :to => 'podetails#index_view'
   match '/podetaildata', :to => 'podetails#index_data'
   match '/podetailgridaction', :to => 'podetails#index_dbaction'
-  match '/podetails/:id/receiveline', :to => 'podetails#receiveline'
+  match '/podetails/:id/receiveline', :to => 'podetails#receive_line'
   #Sales contracts
   match '/contractview', :to => 'contracts#index_view'
   match '/contractdata', :to => 'contracts#index_data'
@@ -283,6 +286,8 @@ Myfarm::Application.routes.draw do
   #Reports
    match '/farmjobreportrequestor', :to => 'farmjobs#farmjob_report_requestor'
    match '/farmjobreport', :to => 'farmjobs#farmjobreport'
+   match '/farmjobbillingreportrequestor', :to => 'farmjobs#farmjob_billing_requestor'
+   match '/farmjobbillingreport', :to => 'farmjobs#farmjobbillingreport'
    match '/profitabilityreportrequestor', :to => 'farmjobs#profitability_report_requestor'
    match '/profitabilityjobreport', :to => 'farmjobs#profitabilityjobreport'
    match '/invoicerequestor', :to => 'invoices#invoice_requestor'

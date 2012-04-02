@@ -1,0 +1,11 @@
+
+
+<div id="comments"></div>
+
+
+<%= form_for :comment, :remote => true, :html => { :'data-type' => 'script', :id => 'create_comment_form' } do |f| %>
+
+  <%= f.text_area :comment %>
+  <div class="errors"></div>
+  <%= f.submit %>
+<% end %>

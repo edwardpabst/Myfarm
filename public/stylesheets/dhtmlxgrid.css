@@ -3,6 +3,7 @@ div.gridbox{
 	text-align:left;
 	margin-left: auto;
 	margin-right: auto;
+
 	
 }
 .dhx_sub_row
@@ -10,18 +11,19 @@ div.gridbox{
 	background-color:white;
 }
 div.gridbox .xhdr{
-	background-color:#D4D0C8;     /*  */
+	background-color:#D4D0C8;     /* #D4D0C8 */
 }
 
 div.gridbox table.obj{
 	height:1px;
-	background-color:#CAE1FF; 
+	background-color: #CAE1FF;  /* #CAE1FF*/
 }
+ 
 div.gridbox table.hdr td {
 	line-height:normal;
 	font-family:arial;
 	font-size:12px;
-	background-color:#FAF0E6;
+	background-color: #FAF0E6;  /* #FAF0E6; */
 	border: 1px solid;
 	border-color : white Gray Gray white;
 	text-align: center;
@@ -66,7 +68,7 @@ div.gridbox table.obj td span.space, div.gridbox table.obj td img.space{
 	width:18px;
 	}
 div.gridbox table.obj tr.rowselected td.cellselected, div.gridbox table.obj td.cellselected {
-	background-color:#FFFFE0;
+	background-color:#FFFFE0; /* #FFFFE0; */
 	color:black;
 	}
 div.gridbox table.obj tr.rowselected td{
@@ -77,7 +79,7 @@ div.gridbox table.obj td.editable{
     -moz-user-select:text;
     }
 div.gridbox table.obj td.group_row{
-    vertical-align:middle; font-family:Tahoma; font-size:10pt; font-weight:bold; height:30px;  border:0px;  border-bottom: 2px solid navy; 
+    vertical-align:middle; font-family:Tahoma; font-size:6pt; font-weight:bold; height:30px;  border:0px;  border-bottom: 2px solid navy; 
     }    
 
 .dragSpanDiv{ 	font-size : 12px; 	border: 1px gray solid; background-color:white; z-index:999; }

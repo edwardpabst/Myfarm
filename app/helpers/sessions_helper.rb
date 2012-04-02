@@ -368,6 +368,21 @@ module SessionsHelper
       @farms = Farm.where('user_id' => @current_user.id).all
     end
     
+    def get_micropost(id)
+      @micropost = Micropost.find(id)
+    end
+    
+    def get_comments(id)
+     @comments =  Comment.find_by_sql("Select * from comments
+                                       where micropost_id = #{id} ")
+  #    @comments = Comment.joins(:users).where("micropost_id = ?", id).all
+  #     logger.debug "COMMENTS EXTRACT ********************:- #{@comments} "
+    end
+    
+    def get_user(id)
+      @user = User.find(id)
+    end
+    
     def get_countries
       @countries = Country.order(:id).all
     end

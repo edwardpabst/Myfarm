@@ -12,17 +12,23 @@ before_filter :authorized_user, :only => :destroy
     @micropost = @current_user.microposts.build(params[:micropost])
     if @micropost.save
       flash[:success] = "Micropost created!"
-      redirect_to root_path
+      respond_to do |format|
+          format.html { redirect_to("/mynetwork") }
+      end
     else
       @feed_items = [ ]
-      render 'pages/home'
+      respond_to do |format|
+          format.html { redirect_to("/mynetwork") }
+      end
     end
   end
   
   def destroy
     @micropost.destroy
     flash[:success] = "Micropost deleted!"
-    redirect_to  root_path
+    respond_to do |format|
+        format.html { redirect_to("/mynetwork") }
+    end
   end
   
   private

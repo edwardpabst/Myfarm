@@ -38,4 +38,11 @@ class Field < ActiveRecord::Base
    
   end
   
+  def self.get_clientlist(user_id)
+    return Farmexpense.find_by_sql("Select client_id
+                             from fields
+                             where fields.user_id =  #{user_id}
+                             and client_id > 0 ")
+  end
+  
 end
