@@ -132,7 +132,7 @@ Myfarm::Application.routes.draw do
   match '/delete', :to => 'microposts#destroy'
   match '/fieldtasks/fieldtask_supplies', :to => 'fieldtasks#fieldtask_supplies'
   match '/fieldtasksupplies', :to => 'fieldtasks#fieldtask_supplies'
-  match '/pageajax', :to => 'pages#page_ajax'
+  match '/addcomment', :to => 'pages#addcomment'
  
 
   

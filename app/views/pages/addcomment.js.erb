@@ -1,0 +1,31 @@
+
+
+var el = $('#create_comment_form<%= @comment.micropost_id %>');
+
+<% if @comment.errors.any? %>
+
+ 
+  var errors = $('<ul />');
+
+  <% @comment.errors.full_messages.each do |error| %>
+    errors.append('<li><%= escape_javascript( error ) %></li>');
+  <% end %>
+
+  // Display errors on form
+  el.find('.errors').html(errors);
+
+<% else %>
+
+  
+      
+ 
+
+  $('#comments<%= escape_javascript( @comment.micropost_id.to_s )%>').append("<div class='addcomment'><tr><td rowspan='2'> <%= escape_javascript( link_to gravatar_for(@user) , @user )%></td><td> <span class='user'><%= escape_javascript( link_to @user.name, '/users') %></span><span class='content'><%= escape_javascript(@comment.comment) %></span><span class='timestamp'>Posted <%= escape_javascript( time_ago_in_words(@comment.created_at) )%> ago.</span></td></tr></div");
+
+  // Clear form
+  el.find('input:text').val('');
+  el.find('.errors').empty();
+ 
+
+
+<% end %>

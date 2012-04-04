@@ -168,6 +168,23 @@ table.comments td{
 	border-color: #EDF2F7;
 	
 }
+
+.addcomment{
+	width: 60%;
+	width: 100%;
+	margin-bottom: 0;
+	font-family:"arial", Times, serif;
+	font-size: 90%;
+	font-family:arial;
+	text-align: left;
+	background-color: #EDF2F7;
+	vertical-align:middle;
+	border-bottom-style:groove;
+	border-width:3px;
+	border-color: #EDF2F7;
+
+	
+}
 #ifarmservice, #people, #farms, #fields, #crops, #cropplans, #supplies, #farmtasks, #equipment, #storageunits
 {
     position: absolute;
@@ -679,7 +696,7 @@ input  {
     font-size: 90%;
     padding: 4px;
     border: solid 1px white;
-    width:97%;
+    width:85%;
     background-color: white;
  	border: solid 1px gray;
 	
@@ -1211,12 +1228,17 @@ table.profile {
 	text-align: left;
 }
 
-
+span.user{
+	vertical-align:top;
+	display: block;
+	
+}
 
 span.timestamp {
-	display: block;
+	
 	font-size: 95%;
 	color: #666;
+ 	display: block;
 }
 
 span.content  {
@@ -1224,6 +1246,7 @@ span.content  {
     font-size: 110%;
     padding: 4px;
 	color:darkslategray;
+	display: block;
 }
 
 td.homepageimage {
@@ -1414,6 +1437,8 @@ div.user_info span.user_name {
 	position: absolute;
 	
 }
+
+
 div.user_info span.microposts {
 	font-size: 70%;
 }

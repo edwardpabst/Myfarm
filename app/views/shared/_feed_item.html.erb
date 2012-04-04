@@ -64,9 +64,11 @@
 
 	  <table class="comments">
 	
-		<div class="unhidden" id="comments<%= @micropost.id %>">
-		<%= form_tag '/comments', :method=>'post', :remote => true   do |f| %>
-	
+		
+		<%= form_tag '/addcomment', :method=>'post', :remote => true, :html => { :'data-type' => 'script', :id => "create_comment_form#{@micropost.id}" }   do |f| %>
+		
+		  <div class="unhidden" id="comments<%= @micropost.id %>"> </div>
+			<div class="errors"></div>
 		 	<%  @comments.each do |comment|%>
  	
 				<% get_user(comment.user_id)%>
@@ -87,10 +89,14 @@
 							
 
 			<% end %>
+		
 			<tr>
 				<td colspan="2">
-
-						<input class="input_fill"  type="text" name="comment" value="Write a comment" onchange="submit()"     onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" />
+					<div class="unhidden" id="comments<%= @micropost.id %>"></div>
+						<input class="input_fill"  type="text" name="comment" value="Write a comment"       onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" />
+					   <%= submit_tag " Submit ", :class => "button_very_small", :id => "commit" %>	
+						
+					
 				    
 					<input type="hidden" name="micropost" value="<%= @micropost.id %>" />
 
@@ -99,7 +105,7 @@
 			</tr>
 			
 
-				</div>
+			
 			   </table>
 			 </td>
 		<% end %>
@@ -110,15 +116,19 @@
 				
 <% else %>	
 <tr>	  
-	 	<td></td>
-		<td>
-		     <div class="hidden" id= "addcomment<%= @micropost.id %>" >	
+	 	
+		<td colspan='2'>
+		    
 			
 					<table class="comments">
 						<tr>
 							<td>
-								<%= form_tag '/comments' ,:method=>'post', :remote => true   do |f| %>
-									<input class="input_fill"  type="text" name="comment" value="Write a comment"    onchange="submit()"   onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"/>
+										<%= form_tag '/addcomment', :method=>'post', :remote => true, :html => { :'data-type' => 'script', :id => "create_comment_form#{@micropost.id}" }   do |f| %>
+										
+							 <div class="hidden" id= "addcomment<%= @micropost.id %>" >	
+								
+								<input class="input_fill"  type="text" name="comment" value="Write a comment"       onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" />
+							   <%= submit_tag " Submit ", :class => "button_very_small", :id => "commit" %>
 									<input type="hidden" name="micropost" value="<%= @micropost.id %>" />
 								<% end %>
 							</td>

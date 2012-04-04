@@ -24,6 +24,7 @@ class Micropost < ActiveRecord::Base
     #followed_ids = user.following.map(&:id).join(", ")
     followed_ids = %(Select followed_id FROM relationships where follower_id = :user_id)
     where("user_id IN (#{followed_ids}) OR user_id = :user_id",  { :user_id => user })
+   
   end
 
 end

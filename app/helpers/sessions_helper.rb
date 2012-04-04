@@ -374,7 +374,8 @@ module SessionsHelper
     
     def get_comments(id)
      @comments =  Comment.find_by_sql("Select * from comments
-                                       where micropost_id = #{id} ")
+                                       where micropost_id = #{id} 
+                                       order by created_at desc")
   #    @comments = Comment.joins(:users).where("micropost_id = ?", id).all
   #     logger.debug "COMMENTS EXTRACT ********************:- #{@comments} "
     end
