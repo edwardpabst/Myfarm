@@ -1,0 +1,20 @@
+<table class="comments">
+	 
+	<div class="commentdiv<%= @micropost.id %>" id="comments<%= @micropost.id %>">
+		 	<%  @comments.each  do |comment| %>
+ 	
+				<% get_user(comment.user_id)%>
+				<tr>
+		
+			 		<td>  <%= link_to gravatar_for(@user) , @user %>  </td>
+					<td >
+
+						<span class="user"><%= link_to @user.name, "/users" %></span>
+						<span class="content">	<%= comment.comment %></span>
+						<span class="timestamp">Posted <%= time_ago_in_words(comment.created_at) %> ago.</span>
+
+					</td>
+				</tr>
+			<% end %>
+	</div>
+ </table>

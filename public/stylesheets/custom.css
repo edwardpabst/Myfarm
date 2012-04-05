@@ -169,6 +169,27 @@ table.comments td{
 	
 }
 
+table.firstcomment {
+	
+	width: 60%;
+	margin-bottom: 0;
+	font-family:"arial", Times, serif;
+	font-size: 90%;
+	font-family:arial;
+	text-align: left;
+	background-color: white;
+
+
+}
+
+table.firstcomment td{
+	vertical-align:middle;
+	border-bottom-style:groove;
+	border-width:3px;
+	border-color: #EDF2F7;
+	
+}
+
 .addcomment{
 	width: 60%;
 	width: 100%;
@@ -693,7 +714,7 @@ input  {
 .input_fill  {
    
 	font-family: Arial, Sans-Serif;
-    font-size: 90%;
+    font-size: 100%;
     padding: 4px;
     border: solid 1px white;
     width:85%;
@@ -1230,7 +1251,7 @@ table.profile {
 
 span.user{
 	vertical-align:top;
-	display: block;
+ 
 	
 }
 
@@ -1246,7 +1267,7 @@ span.content  {
     font-size: 110%;
     padding: 4px;
 	color:darkslategray;
-	display: block;
+	 
 }
 
 td.homepageimage {

@@ -17,22 +17,25 @@ class PagesController < ApplicationController
   end
   
   def addcomment
-     #logger.debug "ADD NEW COMMENT ********  ENTRY"
+     
     @comment = Comment.new
     @comment.comment = params[:comment]
     @comment.micropost_id = params[:micropost]
     @comment.user_id = session[:s_user_id] 
      
     if @comment.save   
-               
+          
+     # @comments = Comment.get_comments_by_micropost_id(@comment.micropost_id)  
+     #logger.debug "ADD NEW COMMENT ********  #{@comments.inspect}"   
       @micropost = Micropost.find(@comment.micropost_id)
       @user = User.find(@micropost.user_id)
-      flash[:notice] = "Comment successfully created"  
+      #flash[:notice] = "Comment successfully created"  
                    
-      respond_with( @comment, @user, :layout => !request.xhr? )
+      respond_with( @comment, :layout => !request.xhr? )
     end
     
   end
+  
   
   def contact
     @title = "Contact"

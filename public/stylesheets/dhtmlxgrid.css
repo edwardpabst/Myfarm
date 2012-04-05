@@ -79,7 +79,7 @@ div.gridbox table.obj td.editable{
     -moz-user-select:text;
     }
 div.gridbox table.obj td.group_row{
-    vertical-align:middle; font-family:Tahoma; font-size:6pt; font-weight:bold; height:30px;  border:0px;  border-bottom: 2px solid navy; 
+    vertical-align:middle; font-family:Tahoma; font-size:10pt; font-weight:bold; height:30px;  border:0px;  border-bottom: 2px solid navy; 
     }    
 
 .dragSpanDiv{ 	font-size : 12px; 	border: 1px gray solid; background-color:white; z-index:999; }

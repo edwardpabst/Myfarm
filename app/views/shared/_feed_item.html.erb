@@ -59,88 +59,77 @@
 
 
 <% if !@comments.empty? %>
-<tr>
-	<td colspan="3">
 
-	  <table class="comments">
-	
+
+		<tr>
+			<td colspan="3">
+
+			  
+
+
+				<%= form_tag '/addcomment', :method=>'post', :remote => true, :html => { :'data-type' => 'html', :id => "create_comment_form#{@micropost.id}" }   do |f| %>
+
 		
-		<%= form_tag '/addcomment', :method=>'post', :remote => true, :html => { :'data-type' => 'script', :id => "create_comment_form#{@micropost.id}" }   do |f| %>
-		
-		  <div class="unhidden" id="comments<%= @micropost.id %>"> </div>
-			<div class="errors"></div>
-		 	<%  @comments.each do |comment|%>
- 	
-				<% get_user(comment.user_id)%>
-				<tr>
-		
-			 		<td>  <%= link_to gravatar_for(@user) , @user %>  </td>
-					<td >
+ 						<%= render :partial => 'comments' %>
 
-						<span class="user">
-			 		 		<%= link_to @user.name, "/users" %>   
-						</span>
-						<span class="content">	<%= comment.comment %></span>
-						<span class="timestamp">
-						Posted <%= time_ago_in_words(comment.created_at) %> ago.</span>
-
-					</td>
-				</tr>
-							
-
-			<% end %>
-		
-			<tr>
-				<td colspan="2">
-					<div class="unhidden" id="comments<%= @micropost.id %>"></div>
-						<input class="input_fill"  type="text" name="comment" value="Write a comment"       onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" />
-					   <%= submit_tag " Submit ", :class => "button_very_small", :id => "commit" %>	
-						
-					
-				    
-					<input type="hidden" name="micropost" value="<%= @micropost.id %>" />
+				
+				 <table class="comments">
+					<tr>
+						<td colspan="2">
+							 
+								<input class="input_fill"  id="inputfill"  type="text" name="comment" value="Write a comment"  onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" onsubmit="clearInput(inputfill)" />
+							   <%= submit_tag " Submit ", :class => "button_very_small", :id => "commit" %>	
 
 
-				</td>
-			</tr>
-			
 
-			
-			   </table>
-			 </td>
-		<% end %>
-  
-	 
-</tr>
+							<input type="hidden" name="micropost" value="<%= @micropost.id %>" />
 
+
+						</td>
+					 </tr>
+					</table>
+
+
+				<% end %>
+
+
+		</tr>
 				
 <% else %>	
 <tr>	  
 	 	
-		<td colspan='2'>
+		<td colspan='3'>
 		    
 			
-					<table class="comments">
-						<tr>
-							<td>
-										<%= form_tag '/addcomment', :method=>'post', :remote => true, :html => { :'data-type' => 'script', :id => "create_comment_form#{@micropost.id}" }   do |f| %>
-										
-							 <div class="hidden" id= "addcomment<%= @micropost.id %>" >	
-								
-								<input class="input_fill"  type="text" name="comment" value="Write a comment"       onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" />
-							   <%= submit_tag " Submit ", :class => "button_very_small", :id => "commit" %>
-									<input type="hidden" name="micropost" value="<%= @micropost.id %>" />
-								<% end %>
-							</td>
-						</tr>
-					</table>
+			<%= form_tag '/addcomment', :method=>'post', :remote => true, :html => { :'data-type' => 'html', :id => "create_comment_form#{@micropost.id}" }   do |f| %>
+			
+			 <table class="firstcomment">
+			 
+				<div class="unhidden" id="comments<%= @micropost.id %>"></div>
+				
+					<tr>
+				 		
+						<td colspan="2">
+						<div class="hidden" id="addcomment<%= @micropost.id %>">
+								<input class="input_fill" id="inputfill" type="text" name="comment" value="Write a comment" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" onsubmit="clearInput(inputfill)" />
+							   <%= submit_tag " Submit ", :class => "button_very_small", :id => "submit_fill" %>	
 
-		   </div>
-	    </td>
+							<input type="hidden" name="micropost" value="<%= @micropost.id %>" />
 
-	<% end %>	     
+						</div>
+						</td>
+				 		
+					 </tr>
+				 
+				</table>
 
-	
-	
+
+			<% end %>		   
+	     </td>
 </tr>
+<% end %>	     
+
+	
+	
+
 
