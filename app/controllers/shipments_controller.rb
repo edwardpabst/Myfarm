@@ -188,19 +188,21 @@ class ShipmentsController < ApplicationController
     end
     
     if params[:shipment][:shipto_street].blank? || params[:shipment][:shipto_street].nil?
+      if !@shipment.customer_id.nil?
       @party = Party.find(@shipment.customer_id)
-      if @party.ship_address1.blank? || @party.ship_address1.nil?
-        #use mailing address
-        @shipment.shipto_street = @party.partyaddress1
-        @shipment.shipto_city = @party.partycity
-        @shipment.shipto_state = @party.partystate
-        @shipment.shipto_postalcode = @party.partypostalcode
-      else
-        #use shipping address
-        @shipment.shipto_street = @party.ship_address1
-        @shipment.shipto_city = @party.ship_city
-        @shipment.shipto_state = @party.ship_state
-        @shipment.shipto_postalcode = @party.ship_postalcode
+          if @party.ship_address1.blank? || @party.ship_address1.nil?
+            #use mailing address
+            @shipment.shipto_street = @party.partyaddress1
+            @shipment.shipto_city = @party.partycity
+            @shipment.shipto_state = @party.partystate
+            @shipment.shipto_postalcode = @party.partypostalcode
+          else
+            #use shipping address
+            @shipment.shipto_street = @party.ship_address1
+            @shipment.shipto_city = @party.ship_city
+            @shipment.shipto_state = @party.ship_state
+            @shipment.shipto_postalcode = @party.ship_postalcode
+          end
       end
     end
        

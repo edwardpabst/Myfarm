@@ -25,7 +25,7 @@ function loadFake() {
 			<%= f.label :description, "Description" %>  
 		 	</td>
 			<td  width="25%">
-			<%= f.text_field :description %> 
+			<%= f.text_field :description%> 
 
 		  </td>
 			<td width="25%">
@@ -91,13 +91,13 @@ function loadFake() {
 			 <%= f.label :purchase_price, "Purchase price" %>
 		 	</td>
 			<td>
-		 		<%= f.text_field :purchase_price %> 
+		 		<%= f.text_field :purchase_price  %> 
 		    </td>
 			<td>
 				<%= f.label :list_price, "List price" %>
 			</td>
 			<td>
-				<%= f.text_field :list_price%> 
+				<%= f.text_field :list_price  %> 
 			</td>
 		</tr>
 		<tr>
@@ -116,13 +116,13 @@ function loadFake() {
 		 	</td>
 			<td>
 		 			<% get_types_by_name("depreciation_years") %>
-		<%= collection_select("equipment", "life_years", @types, "type_value_integer", "type_value_integer", options = {:prompt => " "}) %> 
+		<%= collection_select("equipment", "life_years", @types, "type_value_integer", "type_value_integer") %> 
 		    </td>
 			<td>
 				<%= f.label :hours_usage_year, "Usage hours per year" %>
 			</td>
 			<td>
-				<%= f.text_field :hours_usage_year%> 
+				<%= f.text_field :hours_usage_year %> 
 			</td>
 		</tr>
 		
@@ -141,7 +141,7 @@ function loadFake() {
 				<%= f.label :salvage_value, "Salvage value" %>
 			</td>
 			<td>
-				<%= f.text_field :salvage_value %> 
+				<%= f.text_field :salvage_value  %> 
 			</td>
 		</tr>
 		
@@ -151,14 +151,14 @@ function loadFake() {
 			 <%= f.label :loan_amount, "Loan amount" %>
 		 	</td>
 			<td>
-		 		<%= f.text_field :loan_amount %> 
+		 		<%= f.text_field :loan_amount  %> 
 		    </td>
 			<td>
 				<%= f.label :interest_rate, "Interest rate" %>
 			</td>
 			<td>
 				<% get_types_by_name("interest_rate") %>
-		<%= collection_select("equipment", "interest_rate", @types, "type_value_integer", "type_value_integer", options = {:prompt => " "}) %>
+		<%= collection_select("equipment", "interest_rate", @types, "type_value_integer", "type_value_integer") %>
 			</td>
 		</tr>
 	 
@@ -169,13 +169,13 @@ function loadFake() {
 			 <%= f.label :tax_amount, "Property tax/year" %>
 		 	</td>
 			<td>
-		 		<%= f.text_field :tax_amount %> 
+		 		<%= f.text_field :tax_amount  %> 
 		    </td>
 			<td>
 				<%= f.label :insurance_amount, "Insurance cost/year" %>
 			</td>
 			<td>
-				<%= f.text_field :insurance_amount %> 
+				<%= f.text_field :insurance_amount  %> 
 			</td>
 		</tr>
 		<tr>
@@ -212,7 +212,7 @@ function loadFake() {
 
 		 	</td>
 			<td>
-		 		<%= f.text_field :housing_cost %>
+		 		<%= f.text_field :housing_cost  %>
 		 		 
 		    </td>
 		</tr>
@@ -303,7 +303,7 @@ function loadFake() {
 			 <%= f.label :rate_per_hour, "Usage rate/hour" %>
 		 	</td>
 			<td>
-		 		<%= f.text_field :rate_per_hour %> 
+		 		<%= f.text_field :rate_per_hour  %> 
 		    </td>
 			<td>
 				<%= f.label :width, "Width" %>
@@ -317,24 +317,14 @@ function loadFake() {
 			 <%= f.label :frequency_hours, "Service frequency/hours" %>
 		 	</td>
 			<td>
-		 		<%= f.text_field :frequency_hours %> 
+		 		<%= f.text_field :frequency_hours  %> 
 		    </td>
 			<td>
 				<%= f.label :photo, "Photo upload" %>
 			</td>
 			<td>
-				<div class="fileinputs">
+				<%= f.file_field :photo %>
 
-					<%= f.file_field :photo, :class => 'file', :onchange => 'loadFake()'  %>
-
-					<div class="fakefile">		 	
- 
-						<input id="fake_input" class="input_medium"/>
-					
-
-					</div>
-					
-				</div>
 			</td>
 			<tr>
 			    <td>
@@ -363,7 +353,7 @@ function loadFake() {
 			</td>
 			<td colspan="1"></td>
 			<td colspan="2">
-			<% if !@equipment.photo.url.blank?   %>
+			<% if !@equipment.photo_file_name.blank?   %>
 			<%= image_tag @equipment.photo.url(:medium) %> 
 			</td>
 		 <% end %>

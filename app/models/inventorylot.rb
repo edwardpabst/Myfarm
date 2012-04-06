@@ -4,7 +4,7 @@ class Inventorylot < ActiveRecord::Base
     :qty_out_transfer,  :qty_out_ship,  :transfer_amount, :qty_onhand, :cropreport, 
     :cropreport_file_name, :cropreport_content_type, :cropreport_file_size, :cropreport_updated_at
   
-
+  validates :transfer_amount, :numericality => true 
   has_many :cropplans
   has_many :scaletickets
   has_many :storages

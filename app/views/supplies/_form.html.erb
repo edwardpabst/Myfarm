@@ -62,8 +62,8 @@ item.className='unhidden';
     
  
 	
-    <%= f.input :supply_cost_uom , :label => "Purchase cost",  :required => true %>
-    <%= f.input :supply_charge_uom , :label => "Supply charge",  :required => false %>
+    <%= f.input :supply_cost_uom , :label => "Purchase cost",  :required => true, :input_html => {   :value => '0' } %>
+    <%= f.input :supply_charge_uom , :label => "Supply charge",  :required => false, :input_html => {   :value => '0' } %>
  <li class="string input optional stringish"> 
 	<% get_types_by_name("distribution_uom") %>
 	<label class=" label" for="distribution_uom">Distribution UOM<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
@@ -74,8 +74,8 @@ item.className='unhidden';
 	</li>	
    
  
-	<%= f.input :conversion_factor , :label => "Conversion factor",  :required => true, :hint => "used to develop supply cost in farm jobs.(Purchase cost / conversion factor)" %>
-    <%= f.input :rate_acre , :label => "Rate per acre",  :required => false, :hint => "of Distribution UOM." %>
+	<%= f.input :conversion_factor , :label => "Conversion factor",  :required => true, :hint => "used to develop supply cost in farm jobs.(Purchase cost / conversion factor)", :input_html => {   :value => '0' } %>
+    <%= f.input :rate_acre , :label => "Rate per acre",  :required => false, :hint => "of Distribution UOM.", :input_html => {   :value => '0' } %>
     <%= f.input :manufacturer , :label => "Manufacturer",  :required => false %>
 
 <div id="fertilizer_section" class="hidden">
@@ -83,12 +83,12 @@ item.className='unhidden';
 	<li class="string input optional stringish">
 	<div class="hintbase"> Fertilizer components </div>
 	</li>
-	<%= f.input :nitrogen_content , :label => "Nitrogen (N)%", :as => :number, :required => false %>
-	<%= f.input :phosphorous_content , :label => "Phosphorous (P2O5)%", :as => :number,  :required => false %>
-	<%= f.input :potassium_content , :label => "Postassium (K2O)%", :as => :number,  :required => false %>
-	<%= f.input :calcium_content , :label => "Calcium (C) %",  :as => :number, :required => false %>
-	<%= f.input :manganese_content , :label => "Managanese (MN)%",  :as => :number, :required => false %>
-	<%= f.input :magnesium_content , :label => "Mangesium (MG)%",  :as => :number, :required => false %>
+	<%= f.input :nitrogen_content , :label => "Nitrogen (N)%", :as => :number, :required => false, :input_html => {   :value => '0' } %>
+	<%= f.input :phosphorous_content , :label => "Phosphorous (P2O5)%", :as => :number,  :required => false, :input_html => {   :value => '0' } %>
+	<%= f.input :potassium_content , :label => "Postassium (K2O)%", :as => :number,  :required => false, :input_html => {   :value => '0' } %>
+	<%= f.input :calcium_content , :label => "Calcium (C) %",  :as => :number, :required => false, :input_html => {   :value => '0' } %>
+	<%= f.input :manganese_content , :label => "Managanese (MN)%",  :as => :number, :required => false, :input_html => {   :value => '0' } %>
+	<%= f.input :magnesium_content , :label => "Mangesium (MG)%",  :as => :number, :required => false, :input_html => {   :value => '0' } %>
 	<br>
 </div>
 
@@ -105,14 +105,14 @@ item.className='unhidden';
 	
 	<%= f.input :active_ingredient , :label => "Active ingredient",  :required => false %>
 	<%= f.input :formulation , :label => "Formulation",  :required => false %>
- 	<%= f.input :restricted_hours , :label => "Restricted hours",  :required => false %>
+ 	<%= f.input :restricted_hours , :label => "Restricted hours",  :required => false, :input_html => {   :value => '0' } %>
     
     
  <li class="string input optional stringish"> 
 	<% get_types_by_name("supply_carrier") %>
 	<label class=" label" for="carrier">Carrier<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
 	<%= collection_select("supply", "carrier", @types, "type_value_string", "type_value_string", options = {:prompt => " ", :include_blank => ' '}) %></li>	
-<%= f.input :carrier_rate_acre , :label => "Carrier rate per acre",  :required => false %>
+<%= f.input :carrier_rate_acre , :label => "Carrier rate per acre",  :required => false, :input_html => {   :value => '0' } %>
 <li class="string input optional stringish"> 
 	<% get_types_by_name("carrier_uom") %>
 	<label class=" label" for="carrier">Carrier UOM<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		

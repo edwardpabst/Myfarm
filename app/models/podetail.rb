@@ -11,5 +11,6 @@ class Podetail < ActiveRecord::Base
 
 
     validates_presence_of  :supply_id, :qty_ordered, :supply_uom, :order_price,  :detail_status 
-
+    validates :qty_ordered, :numericality => true 
+    validates :order_price, :numericality => true 
   end

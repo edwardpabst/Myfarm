@@ -185,6 +185,8 @@ class EquipmentController < ApplicationController
   def create
     @equipment = Equipment.new(params[:equipment])
     @equipment.user_id = session[:s_user_id]
+    @equipment.cost_unit_hour = 0
+    @equipment.cost_unit = 0
     calc_capitalrecovery
     respond_to do |format|
       if @equipment.save
@@ -193,6 +195,7 @@ class EquipmentController < ApplicationController
         
         format.xml  { render :xml => @equipment, :status => :created, :location => @equipment }
       else
+        @transaction = 'new'
         format.html { render :action => "new" }
         format.xml  { render :xml => @equipment.errors, :status => :unprocessable_entity }
       end
@@ -213,6 +216,7 @@ class EquipmentController < ApplicationController
         
         format.xml  { head :ok }
       else
+        @transaction = 'edit'
         format.html { render :action => "edit" }
         format.xml  { render :xml => @equipment.errors, :status => :unprocessable_entity }
       end
@@ -238,15 +242,23 @@ class EquipmentController < ApplicationController
         salvage_value = params[:equipment][:salvage_value].to_i
         total_depreciation =   purchase_price - salvage_value
         life_years = params[:equipment][:life_years].to_i
-        depreciation_year = total_depreciation /  life_years
+        if life_years != 0
+          depreciation_year = total_depreciation /  life_years
+        else
+          depreciation_year = 0
+        end
+        
         params[:equipment][:depreciation_year] = depreciation_year.to_s
         
     #Capital recovery = (total depreciation x capital recovery factor) + (salvage value x interest rate)
         
         interest_rate = params[:equipment][:interest_rate].to_i
         capitalrecovery_factor = Capitalrecovery.get_factor(params[:equipment][:life_years].to_i, params[:equipment][:interest_rate].to_i)
-        interest_float = interest_rate.to_f
-        capital_recovery = (total_depreciation * capitalrecovery_factor) + (salvage_value * (interest_float / 100))
+        if !capitalrecovery_factor.nil? and !capitalrecovery_factor.empty?
+          capital_recovery = (total_depreciation * capitalrecovery_factor) + (salvage_value * (interest_rate / 100))
+        else
+          capital_recovery = 0
+        end
         params[:equipment][:capital_recovery_year] = capital_recovery.to_s
         params[:equipment][:capital_recovery_factor] = capitalrecovery_factor.to_s
         

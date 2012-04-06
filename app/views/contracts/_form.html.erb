@@ -6,7 +6,7 @@ document.cn.contract_max_qty.value = (document.cn.contract_min_qty.value -0);
 </script>
 
 <%= form_for @contract, :html => { :name => "cn"} do |f| %>
- 
+<%= render "shared/error_messages", :object => f.object%>
   <table class="contract">
 	<tr>
 		<td colspan="4">

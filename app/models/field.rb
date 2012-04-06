@@ -11,6 +11,10 @@ class Field < ActiveRecord::Base
   :soilreport, :soilreport_file_name, :soilreport_content_type, :soilreport_file_size, :soilreport_updated_at
   
   validates_presence_of :farmname, :fieldname, :country_id, :number_acres, :holding_status
+  validates :number_acres, :numericality => true 
+  validates :percent_harvest_acre, :numericality => true
+  validates :fixed_amount_acre, :numericality => true
+  
   belongs_to :country
   has_many :farmjobs
   has_many :fieldmappings

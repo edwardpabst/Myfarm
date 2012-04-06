@@ -245,6 +245,10 @@ class ScaleticketsController < ApplicationController
         format.xml  { head :ok }
       else
         @transaction = "edit"
+      
+        @cropplan = Cropplan.find(@scaleticket.cropplan_id)
+        @storage = Storage.find(@scaleticket.storage_id)
+        @transaction = "edit"
         format.html { render :action => "edit" }
         format.xml  { render :xml => @scaleticket.errors, :status => :unprocessable_entity }
       end

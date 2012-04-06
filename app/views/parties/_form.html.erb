@@ -29,8 +29,8 @@
 	<%= form.input :partyweatherpostalcode, :label => "Postal Code for weather",  :required => false, :hint => "Defined for main system user only. Used in all weather links."    %>
 
 	<%= form.input :partytypes,  :as => :select,   :label => "Parties roles",  :required => true, :hint => "Roles determine someones availability to specific functions on the farm. A customer is the target of a shipment. A laborer can be added to a farm job as labor, a Supplier is defined for a purchase order, etc. One person can have multiple roles."  %>
-	<%= form.input :rate_hour, :as => :string, :label => "Rate per hour",  :required => false , :hint => "Amount paid for an employee role."  %>
-	<%= form.input :charge_hour, :as => :string, :label => "Charge per hour",  :required => false , :hint => "Used by Farm Management users to invoice labor amount."   %>
+	<%= form.input :rate_hour, :as => :string, :label => "Rate per hour",  :required => false ,  :hint => "Amount paid for an employee role." , :input_html => {  :value => '0' } %>
+	<%= form.input :charge_hour, :as => :string, :label => "Charge per hour",  :required => false , :hint => "Used by Farm Management users to invoice labor amount."  , :input_html => {   :value => '0' } %>
 <br>
 	<div class="hintbase">
 		Shipping information (Only if different than billing info)

@@ -12,7 +12,20 @@ class Supply < ActiveRecord::Base
  
   	      
   validates_presence_of :supplyname, :item_number, :supply_type, :supply_uom, :supply_cost_uom
+  validates :supply_cost_uom, :numericality => true 
+  validates :supply_charge_uom, :numericality => true 
+  validates :carrier_rate_acre, :numericality => true 
+  validates :rate_acre, :numericality => true 
+  validates :conversion_factor, :numericality => true
   
+  validates :nitrogen_content, :numericality => true
+  validates :phosphorous_content, :numericality => true 
+  validates :potassium_content, :numericality => true 
+  validates :calcium_content, :numericality => true 
+  validates :manganese_content, :numericality => true 
+  validates :magnesium_content, :numericality => true 
+  validates :chemical_rate_acre, :numericality => true 
+  validates :restricted_hours, :numericality => true  
   
           def supplyfull
             "#{self.supplyname}: #{self.supply_uom}"

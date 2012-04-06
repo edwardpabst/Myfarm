@@ -16,7 +16,8 @@ class Shipment < ActiveRecord::Base
  
   	      
   validates_presence_of  :customer_id, :ship_date, :cropplan_id, :farm_id  
-
+  validates :shipping_charge, :numericality => true 
+  validates :commission_amount, :numericality => true 
 
   def self.profitability_revenue(user_id, view, farm_id, year, start_date, stop_date)
     

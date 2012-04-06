@@ -7,6 +7,9 @@ class Crop < ActiveRecord::Base
   has_one :Farmjob
   belongs_to :Cropinventory
  
+ validates :price_per_uom, :numericality => true
+ validates :avg_yield_acre, :numericality => true
+  
   	     validates_presence_of :cropname, :croptype, :crop_uom, :crop_inventory_uom, :avg_yield_acre
           
   def cropfull

@@ -29,7 +29,7 @@
 		<td >
 			<% get_micropost(feed_item.id) %>
 			
-				<% if !@micropost.microphoto.url.blank? and  !@micropost.microphoto.url.nil? %>
+				<% if !@micropost.microphoto_file_name.nil? and @micropost.microphoto_file_name != '' %>
 					<%= image_tag @micropost.microphoto.url(:small)%> 
 				<% end %>
 		

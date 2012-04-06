@@ -8,6 +8,17 @@ class Equipment < ActiveRecord::Base
                   :hours_usage_year, :loan_amount, :interest_rate , :depreciation_year, :capital_recovery_year,
                   :capital_recovery_factor, :tax_amount, :insurance_amount , :housing_cost, :horsepower, :fuel_type
 
+  validates :rate_per_hour, :numericality => true
+  validates :list_price , :numericality => true
+  validates :purchase_price, :numericality => true 
+  validates :salvage_value, :numericality => true  
+  validates :hours_usage_year, :numericality => true 
+  validates :loan_amount, :numericality => true 
+  validates :interest_rate, :numericality => true  
+  validates :depreciation_year, :numericality => true 
+  validates :tax_amount, :numericality => true 
+  validates :insurance_amount, :numericality => true  
+  validates :housing_cost, :numericality => true  
   
   has_many :farmjobequipments
   

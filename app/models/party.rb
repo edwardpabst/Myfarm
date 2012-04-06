@@ -14,7 +14,8 @@ class Party < ActiveRecord::Base
   has_many :partyroles
   has_many :partytypes, :through => :partyroles 
   validates_presence_of  :partyphone, :partyemail 
-  
+  validates :rate_hour, :numericality => true
+  validates :charge_hour, :numericality => true
   
   def partyworkdescription
     "#{self.partyname}: #{self.partyjobtitle}"
