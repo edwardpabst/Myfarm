@@ -2,12 +2,13 @@
 .menu {
  	
 	background-color: #F6F9ED;
+ 
 }
 
 
 #globalNavDiv  
 {
-	font-size:90%;
+	font-size:100%;
     color: black;
 	background-color:whitesmoke;
 	border: solid 1px lightgray;
@@ -50,7 +51,7 @@
 {
     background-color: whitesmoke;
     border: 1px solid #a3a3a3;
-	font-size: 12px;
+	font-size: 11px;
 	opacity: .9;
     z-index: 1000;
 }

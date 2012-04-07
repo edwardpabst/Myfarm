@@ -1,11 +1,11 @@
 
 <tr>
-	<td class="gravatar">		
+	<td class="gravatar" width="6%">		
        <%= link_to gravatar_for(feed_item.user) , feed_item.user %>  
 	</td>
 	
 	
-	<td class="micropost">
+	<td class="micropost"  width="70%">
 		<span class="user">
 			  <%= link_to feed_item.user.name, feed_item.user %> 
 		</span>
@@ -15,7 +15,7 @@
 		Posted <%= time_ago_in_words(feed_item.created_at) %> ago.</span>
 	</td>
 	<% if current_user?(feed_item.user) %>
-	<td>
+	<td  width="44%">
 		<%= link_to "delete", feed_item, :method => :delete,
 									     :confirm => "Are you sure?",
 									     :title => feed_item.content %>

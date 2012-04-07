@@ -74,7 +74,7 @@
 		<%= collection_select("po", "payment_type", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
 		</td>
 		<td>
-			<%= f.label :payment_number, "Payment I.D." %> 
+			<%= f.label :payment_number, "Payment ID" %> 
 		</td>
 		<td>
 			<%= f.text_field :payment_number %>
@@ -97,7 +97,7 @@
 			<br> <br> 
 			</td>
 			<td>
-				<%= f.label :order_amount, "Order amount" %> 
+				<%= f.label :order_amount, "Order $" %> 
 			</td>
 			<td>
 				<div class="disabled">

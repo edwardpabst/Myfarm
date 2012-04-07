@@ -1,0 +1,241 @@
+<script type="text/javascript"> 
+
+function showContent(topic) {
+	
+	var item = document.getElementById(topic);
+
+	if (item.className == 'hidden')	
+	 {
+		unhide(topic);
+		} 
+	else 	
+	  {
+			hide(topic);
+			}
+
+
+	
+}
+
+function hide(divID) {
+	 
+var item = document.getElementById(divID);
+item.className='hidden';
+}
+
+function unhide(divID) {
+ 
+var item = document.getElementById(divID);
+item.className='unhidden';
+
+}
+
+</script>
+<table>
+
+	<tr>
+		<td>
+			 <p id="tutorial_point">	 	 
+		      <br>
+			  <a href="#" onclick="showContent('verticalmenu')">	 	 
+		       	 <b>iFarmService Menu</b>
+			  </a>
+			 </p>
+			<div  id="verticalmenu">
+			<div id="navcontainer">
+				<ul id="navlist">
+
+					 <li >
+					   	 
+				       	&nbsp;<u>Define your farm profile</u>
+					  	
+					 </li>
+
+					 <li  id="active">
+					  <a href="/partyview">	 
+				       	&nbsp;&nbsp;People and businesses
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="/farmview">		 
+				       	&nbsp;&nbsp;Farms
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="/fieldview">		 	 
+				       	&nbsp;&nbsp;Fields
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="/cropview">		 	 
+				       	&nbsp;&nbsp;Crops
+					  </a>	
+					 </li>
+					 <li  id="active">
+					 <a href="/cropplanview">		 	 
+				       	&nbsp;&nbsp;Crop plans
+					  </a>	
+					 </li>
+
+					 <li>	 	 
+				        &nbsp;
+					 </li>
+					
+					 <li >
+
+				       	&nbsp;<u>Define your farm assets</u>
+
+					 </li>
+
+					 <li  id="active">
+					 <a href="/supplyview">	 	 
+				       	&nbsp;&nbsp;Supplies
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="/fieldtaskview"> 	 
+				       	&nbsp;&nbsp;Field tasks
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="/equipmentview">	 	 
+				       	&nbsp;&nbsp;Equipment
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="/storageview">	 	 
+				       	&nbsp;&nbsp;Storage units
+					  </a>	
+					 </li>
+
+					 <li>	 	 
+				        &nbsp;
+					 </li>
+
+					 <li >
+
+				       	&nbsp;<u>Farm Operations</u>
+
+					 </li>
+
+					 <li  id="active">
+					  <a href="/farmjobview">	 	 
+				       	&nbsp;&nbsp;Farm jobs
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="/calendar">	 
+				       	&nbsp;&nbsp;Job Calendar
+					  </a>	
+					 </li>
+					 <li  id="active">
+					   <a href="/scaleticketview">	 	 
+				       	&nbsp;&nbsp;Scale tickets
+					  </a>	
+					 </li>
+					 <li  id="active">
+					   <a href="/inventoryview">	 	 
+				       	&nbsp;&nbsp;Crop inventory
+					  </a>	
+					 </li>
+					 <li  id="active">
+					   <a href="/contractview">	 	 
+				       	&nbsp;&nbsp;Sales contracts
+					  </a>	
+					 </li>
+					 <li  id="active">
+					   <a href="/shipmentview">	 	 
+				       	&nbsp;&nbsp;Customer shipments
+					  </a>	
+					 </li>
+					 <li  id="active">
+					   <a href="/invoice_generator">	 	 
+				       	&nbsp;&nbsp;Create invoices
+					  </a>	
+					 </li>
+					 <li  id="active">
+					   <a href="/invoiceview">	 	 
+				       	&nbsp;&nbsp;View invoices
+					  </a>	
+					 </li>
+					 <li  id="active">
+					   <a href="/poview">	 	 
+				       	&nbsp;&nbsp;Purchase orders
+					  </a>	
+					 </li>
+					 <li  id="active">
+					   <a href="/supplyinventoryview">	 	 
+				       	&nbsp;&nbsp;Supplies inventory
+					  </a>	
+					 </li>
+
+				       	&nbsp; 
+
+					 </li>
+					 <li >
+
+				       	&nbsp;<u>Utilities</u>
+
+					 </li>
+					 <li  id="active">
+					   <a href="/mynetwork">	 
+				       	&nbsp;&nbsp;Farmers Network
+					  </a>	
+					 </li>
+					 <li >
+					   <a href="/weatherview">	 
+				       	&nbsp;&nbsp;Weather
+					  </a>
+					 </li>
+					 <li >
+					   <%= link_to  "Account Management", edit_user_path(@current_user.id) %>
+
+					 </li>
+
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+				</ul>
+		 
+			</div>
+	 		</div>
+		</td>
+	</tr>
+</table>

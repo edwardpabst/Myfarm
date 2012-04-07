@@ -112,7 +112,8 @@ jQuery(document).ready(function($) {
 
  
 		<div class="thinseparator"></div>
- 		<br>
+ 		
+
 		
 		<section class="round">
 	
@@ -120,13 +121,39 @@ jQuery(document).ready(function($) {
 			<div class="flash <%= key %> "> <font color="blue"> <%= value %> </font> </div>
 			 
 		<% end %>
-
-	
-
-	
-		<%= yield %>
+			
+		</section>
 		
-	</section>
+	 <table>
+		<tr>
+			<td width="5%">
+
+			</td>
+			
+			
+			<td width="15%">
+				<%=render 'pages/vertical_menu'%>
+			</td>
+		 
+			
+			
+			<td   width="75%">
+				<div class="center">
+					<%= yield %>
+				</div>
+			</td>
+			
+			<td  width="5%">
+			</td>
+			
+		</tr>
+	</table>
+		
+
+	
+
+		
+		</section>
 	
 		<br>
 		<%= render 'layouts/footer' %>

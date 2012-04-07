@@ -13,7 +13,7 @@ This stylesheet forms part of the Formtastic Rails Plugin
 --------------------------------------------------------------------------------------------------*/
 .formtastic  {
   margin:;
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
   padding:1px;
