@@ -1,11 +1,12 @@
 ActionMailer::Base.smtp_settings = {
-  :address              => "smtp.gmail.com",
-  :port                 => 587,
-  :domain               => "gmail.com",
-  :user_name            => "edwardjpabst",
-  :password             => "Hellabor0u2",
+  :address              => "smtpout.secureserver.net",
+  :port                 => 465,
+  :domain               => "ifarmservice.com",
+  :user_name            => "customer.support",
+  :password             => "bubble2",
   :authentication       => "plain",
   :enable_starttls_auto => true
 }
 
 ActionMailer::Base.default_url_options[:host] = "localhost:3000"
+

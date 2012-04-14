@@ -390,7 +390,7 @@ class FarmjobsController < ApplicationController
             format.xml  { render :xml => @farmjob.errors, :status => :unprocessable_entity }
           end
       else     
-        format.html { redirect_to(:controller => :farmjobs, :action => :new) }
+        format.html { render(:action => :new) }
         format.xml  { head :ok }
       end
     end
@@ -735,6 +735,25 @@ class FarmjobsController < ApplicationController
     
     
   end 
+  
+  def jobsheetreport
+    
+   #logger.debug "FARMJOB REQUEST PARAMS- #{params[:job_status]}"
+    
+    respond_to do |format|
+      format.html
+      format.pdf do
+   
+        pdf = JobsheetreportPdf.new(session[:s_user_id], view_context, params[:farmjob_id])
+        send_data pdf.render, filename: "job_sheet_report",
+                                type: "application/pdf",
+                                disposition: "inline"
+        
+      end
+    end
+    
+    
+  end
   
   
 end

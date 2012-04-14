@@ -120,6 +120,7 @@ class Farmjob < ActiveRecord::Base
            @job.equipment_cost = equipment_cost
            @job.equipment_billing = equipment_billing
            @job.total_billing = supply_billing + labor_billing + equipment_billing
+           @job.total_cost = supply_cost + labor_cost + equipment_cost
            
            @job.save
            
@@ -691,6 +692,23 @@ class Farmjob < ActiveRecord::Base
           
            return @net_position
            
+         end
+         
+         def self.get_complete_job_data(id)
+
+            @farmjob = Farmjob.find_by_sql("Select taskdescription, farmname, fieldname, cropplanfull,
+                                        job_status, area_size, total_hours, start_date, notes
+                                     from farmjobs fjs
+                                     join fields fds on fjs.field_id = fds.id
+                                     join cropplans cps on fjs.cropplan_id = cps.id
+                                     join fieldtasks fts on fjs.fieldtask_id = fts.id
+                                     
+                                     where fjs.id =  #{id}")
+            @farmjob.each do |farmjob|
+              return farmjob
+            end
+  
+ 
          end
          
 

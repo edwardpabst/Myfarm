@@ -37,8 +37,9 @@ class FarmjobbillingreportPdf < Prawn::Document
   def build_report
     @party = Party.find(@client_id)
     @client_name = @party.partyname
+    move_down 10
     text "Client - (#{@client_name})", size: 8, style: :bold, :align => :left
-    move_down 2
+    move_down 4
     farmjob_items
     farmjob_summary
   end

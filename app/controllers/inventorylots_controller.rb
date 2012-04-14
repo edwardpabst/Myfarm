@@ -7,8 +7,9 @@ class InventorylotsController < ApplicationController
  
   #-------supplies index----------------------------------------------------------------------------
       def index_view
-
-
+          get_current_user
+          @total_onhand_value = Inventorylot.get_total_value(@current_user.id)
+          
       end
 
       def index_data

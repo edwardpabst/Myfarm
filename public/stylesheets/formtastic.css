@@ -22,7 +22,7 @@ This stylesheet forms part of the Formtastic Rails Plugin
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
-	border-color: gray;
+	border-color: lightgray;
    	border:1px;
     border-style: solid;
 }

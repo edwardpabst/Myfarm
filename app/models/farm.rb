@@ -5,7 +5,7 @@ class Farm < ActiveRecord::Base
   has_many :farmexpenses, :dependent => :destroy
    
    validates :total_acres, :numericality => true 
-   validates :land_expense_year, :numericality => true 
+   #validates :land_expense_year, :numericality => true 
    
   has_attached_file :logo, :styles => { :large=> "700x700>", :medium => "300x300>", :small => "200x200>", :thumb => "120x120>" }
                  

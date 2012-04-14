@@ -19,4 +19,20 @@ class Inventorylot < ActiveRecord::Base
      and il.storage_id = #{scaleticket.storage_id}")
   end
   
+  def self.get_total_value(user_id) 
+    
+      sql_statement = "Select sum(qty_onhand * price_per_uom) as onhand_value
+       from inventorylots il
+       join cropplans cp on il.cropplan_id = cp.id
+       join crops on cp.crop_id = crops.id
+       where il.user_id = #{user_id}
+       "            
+    @inventorylot = Inventorylot.find_by_sql("#{sql_statement}")
+    @onhand_value = 0
+    @inventorylot.each do |il|
+      @onhand_value += il.onhand_value.to_i
+    end
+    return @onhand_value
+  end
+  
 end

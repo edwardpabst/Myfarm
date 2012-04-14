@@ -5,6 +5,8 @@
 <button type="button" value="New", class="button", onclick="editSupplyinventory()">Update/Transfer</button>
 
 <br><br>
+<b>Total Inventory Value - <%= number_to_currency(@total_onhand_value, :precision => 2)  %></b>
+<br><br>
 <!-- Div for capture of grid output -->
  <div id="supplyinventory_grid" style="width:800px; height:500px;">
 

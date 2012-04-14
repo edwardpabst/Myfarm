@@ -144,7 +144,7 @@ class PartiesController < ApplicationController
     respond_to do |format|
       if @party.save
         if session[:s_is_new_user] == true
-          updateuser(@party.id)
+          #updateuser(@party.id) - deprecated
           session[:s_is_new_user] = false          
         end
  
@@ -204,9 +204,9 @@ class PartiesController < ApplicationController
   end
   
   def updateuser(id)
-    @user = User.find(session[:s_user_id].to_i)
-    @user.party_id = id
-    @user.save
+    @user_update = User.find(session[:s_user_id].to_i)
+    @user_update.party_id = id
+    @user_update.save
      
   end
   

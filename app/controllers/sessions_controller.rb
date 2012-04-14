@@ -17,7 +17,11 @@ class SessionsController < ApplicationController
       # sign the user in and redirect to the users show page
       
       sign_in user
+      if @needs_party == true
+       redirect_to("/parties/new")
+      else
        redirect_back_or("/")
+      end
        #redirect_to(User, :action => "show" :id => @current_user.id )
     end
   end

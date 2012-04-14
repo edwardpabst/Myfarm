@@ -19,7 +19,12 @@ function checkFarmjob() {
 
 <br>
 <h1>Editing Farm job</h1>
-
+ 
+<%= form_tag '/jobsheetreport.pdf', :method=>'post' do %>
+		<%= submit_tag "Print job sheet", :class => "button" %>
+	<input type="hidden" name="farmjob_id" value="<%= @farmjob.id %>" />
+<% end %>
+<br>
 <%= link_to 'Back', session[:return_to] %>
 <br>
 <%= render 'form' %>

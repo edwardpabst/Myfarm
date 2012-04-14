@@ -75,7 +75,7 @@
 					<span id="menu2">
 					<li><a href="#"
 					onmouseover="showhide('submenu2', true); return false;"
-					onmouseout="showhide('submenu2', false);">Farm Opertaions</a></li>
+					onmouseout="showhide('submenu2', false);">Farm Operations</a></li>
 					</span>
 			
 					<span id="menu3">
@@ -148,7 +148,7 @@
 			</div>
 			<div id="submenu3" class="round">
 				<div class="menugroup">
-					View your key indicators &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+					View your key indicators &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
 				</div>
 			     <a href="/farmjobreportrequestor">Farm job cost report</a>
 			 	<a href="/farmjobbillingreportrequestor">Farm job billing report</a>
@@ -165,30 +165,31 @@
 			<div id="submenu4" class="round">
 				<div class="menugroup">
 					Farm social network &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;  
 				</div>
 				 <a href="/users">Farm community </a>
 				 <%= link_to "My community", mynetwork_path %>
 
 				 <a href= "/users/<%= session[:s_user_id] %>">My farm posts </a>
 				<div class="menugroup">
-					Account Management &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-					&nbsp; &nbsp;  &nbsp;     
+					My Settings &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+					&nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+					&nbsp; &nbsp;  &nbsp;    
 				</div>
 				<%= link_to "Manage Settings and Subscription", edit_user_path(@current_user.id) %>
 			    <a href="/typeview">Maintain data types </a>
 				<div class="menugroup">
 					Weather &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;  
 					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;   
-					&nbsp; 
+				    &nbsp; &nbsp;
 				</div>
 				<a href="#" onclick="weatherpopup()">Current Weather</a>
 				<a href="/weatherview">Historical Weather</a>				
 
 				<div class="menugroup">
 					Documentation&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
-					&nbsp;   
+					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;
+				   &nbsp;  
 				</div>
 				<a href="/home">iFarmService Overview </a>
 				<a href="/Images/ifarmservice_documentation.docx">iFarmService Documentation</a>

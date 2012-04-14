@@ -30,22 +30,23 @@ function loadFake() {
 			This will establish the Billing source information for Invoicing.
 		</div>
 <br>
+ <li class="string input optional stringish">
+   <label class=" label" for="category">Logo (click field)<abbr title="required"> </abbr>  </label>
 	<div class="fileinputs">
 		
-		<%= f.file_field :logo, :class => 'file', :onchange => 'loadFake()'  %>
 	
-		<div class="fakefile">		 	
-			<label class=" label" for="category">Logo <abbr title="required"> </abbr>  </label>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				
+					
+					<%= f.file_field :logo, :class => 'file', :onchange => 'loadFake()'  %>	
+				 
+		<div class="fakefile">
+	
 			<input id="fake_input" class="input_medium"/>
 			
-
 			<%= image_tag "combo_select.gif" %>
 		 
 		</div>
 	</div>
+	</li>
   <% end %>
 <br />
  

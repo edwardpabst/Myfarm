@@ -286,6 +286,7 @@ Myfarm::Application.routes.draw do
   #Reports
    match '/farmjobreportrequestor', :to => 'farmjobs#farmjob_report_requestor'
    match '/farmjobreport', :to => 'farmjobs#farmjobreport'
+   match '/jobsheetreport', :to => 'farmjobs#jobsheetreport'
    match '/farmjobbillingreportrequestor', :to => 'farmjobs#farmjob_billing_requestor'
    match '/farmjobbillingreport', :to => 'farmjobs#farmjobbillingreport'
    match '/profitabilityreportrequestor', :to => 'farmjobs#profitability_report_requestor'

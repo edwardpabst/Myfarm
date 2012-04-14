@@ -114,7 +114,7 @@ class User < ActiveRecord::Base
     @user = User.find(id)
     return @user.stripe_customer_id
   end
-  
+
   
   
   private

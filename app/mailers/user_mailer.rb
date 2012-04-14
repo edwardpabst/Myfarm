@@ -1,10 +1,10 @@
 class UserMailer < ActionMailer::Base
-  default :from => "ed.pabst@yahoo.com"
+  default :from => "customer.support@ifarmservice.com"
   
   def registration_confirmation(user)
     @user = user
-     attachments["farming7.jpg"] = File.read("#{Rails.root}/public/images/farming7.jpg") 
-    mail(:to => "#{user.name} <#{user.email}>", :subject => "Registered on iFarmService")
+     attachments["seedling.jpg"] = File.read("#{Rails.root}/public/images/seedling.jpg") 
+    mail(:to => "#{user.name} <#{user.email}>", :subject => "You have been Registered on iFarmService")
 
   end
   
@@ -19,4 +19,11 @@ class UserMailer < ActionMailer::Base
   def support_message_confirmation(user)
     mail(:to => user.email, :subject => "We have received your support message at iFarmService")
   end
+  
+  
+  def user_email_confirmation(user)
+    mail(:to => user.email, :subject => "You have a message from another iFarmService farmer.")
+  end
 end
+
+ 

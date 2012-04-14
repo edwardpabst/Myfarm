@@ -7,7 +7,8 @@ class SupplyinventoriesController < ApplicationController
  
   #-------supplies index----------------------------------------------------------------------------
       def index_view
-
+        get_current_user
+        @total_onhand_value = Supplyinventory.get_total_value(@current_user.id)
 
       end
 
@@ -115,6 +116,7 @@ class SupplyinventoriesController < ApplicationController
     @supplyinventory.qty_onhand = 0
     @supplyinventory.onhand_value = 0
     @supplyinventory.avg_cost = 0
+    @supplyinventory.user_id = @current_user.id
     
 
     respond_to do |format|
@@ -186,8 +188,9 @@ class SupplyinventoriesController < ApplicationController
         SupplyinventoryTran.addtransaction("transfer_out", @supplyinventory.id, @supplyinventory.id, qty_onhand, @supplyinventory.avg_cost)
       
       #create new transferred inventory record
-       
+      get_current_user
       @supplyinventorynew = Supplyinventory.new 
+      @supplyinventorynew.user_id = @current_user.id
       @supplyinventorynew.supply_id = @supplyinventory.supply_id          
       @supplyinventorynew.supply_uom = @supplyinventory.supply_uom
       @supplyinventorynew.user_id = @supplyinventory.user_id

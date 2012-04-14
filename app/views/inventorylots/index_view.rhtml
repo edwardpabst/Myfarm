@@ -3,8 +3,10 @@
 
 
 <button type="button" value="New", class="button", onclick="editInventorylot()">Update/Transfer</button>
-
 <br><br>
+<b>Estimated Inventory Value - <%= number_to_currency(@total_onhand_value, :precision => 0)  %></b>
+<br><br>
+ 
 <!-- Div for capture of grid output -->
  <div id="inventorylot_grid" style="width:800px; height:500px;">
 

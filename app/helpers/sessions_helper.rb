@@ -8,9 +8,7 @@ module SessionsHelper
     @current_user = user 
     set_current_user_data
     #logger.debug "STEP 1 OF CURRENT USER VERIFY:- #{@current_user.id} - #{@current_user.name} "
-    
-    
-    
+    @needs_party = check_user_status   
   end
   
   #def current_user=(user)
@@ -97,22 +95,33 @@ module SessionsHelper
   def authenticate
      # logger.debug "AUTHENTICATE:- #{@current_user.inspect} -"
       deny_access unless signed_in?
-      if session[:s_is_new_user] != true
-        if !user_has_party?
-          session[:s_is_new_user] = true
-          flash[:notice] = 'Please supply your party information before we get started.'
-          redirect_to '/parties/new' 
-        end
+  end
+  
+  def check_user_status
+    @needs_party = false
+    if session[:s_is_new_user] != true
+      if !user_has_party?
+        session[:s_is_new_user] = true
+        #flash[:notice] = 'Please supply your party information before we get started.'
+        @needs_party = true
       end
+    end
+    
+    return @needs_party
+    
   end
   
   def user_has_party?
     get_current_user
-    @user_complete = Party.find_by_system_user_id(@current_user.id)
-    if @user_complete.nil?
-      return false
+    if !@current_user.nil?
+        @user_complete = Party.find_by_system_user_id(@current_user.id)
     else
-      return true
+        @user_complete = nil
+        if @user_complete.nil?
+          return false
+        else
+          return true
+        end
     end
   end
   

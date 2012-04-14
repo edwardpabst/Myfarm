@@ -6,7 +6,6 @@
 .container {
 	width: 90%;
 	height:110%;
-
 	text-align: center;
 	margin-left:auto;
 	margin-right:auto;
@@ -28,7 +27,7 @@ body{
 
 header {
 	padding-top: 0px;
-	width: 1080px;
+	width: 100%;
 	margin-left:auto;
 	margin-right:auto;
 	background-color:white;
@@ -55,7 +54,12 @@ section {
 }
 
 section h1 {
-	font-size: 110%;
+	font-size: 100%;
+	font-weight: bold;
+}
+
+.title{
+	font-size: 100%;
 	font-weight: bold;
 }
 
@@ -71,12 +75,29 @@ section h1 {
  
  
  h1 {
-	font-size: 110%;
+	font-size: 100%;
 	font-weight: bold;
 }
 
 .hidden { visibility: hidden; }
 .unhidden { visibility: visible; }
+
+
+
+.center{
+	text-align:center;
+	width: 95%;
+	margin-left:auto;
+	margin-right:auto;	
+	border-color: lightgray;
+   	border-width:1px;
+	border-style:solid;
+	padding: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10pz;	
+
+}
 
 table.ifarmservice {
 	
@@ -150,7 +171,7 @@ table.contract td.label {
 
 table.comments {
 	
-	width: 60%;
+	width: 70%;
 	margin-bottom: 0;
 	font-family:"arial", Times, serif;
 	font-size: 90%;
@@ -171,7 +192,7 @@ table.comments td{
 
 table.firstcomment {
 	
-	width: 60%;
+	width: 70%;
 	margin-bottom: 0;
 	font-family:"arial", Times, serif;
 	font-size: 90%;
@@ -397,12 +418,6 @@ font-size: 90%;
 }
 
 
-.center{
-	text-align:center;
-	margin-left:auto;
-	margin-right:auto;	
-
-}
 
 .align_left{
 	text-align:left;
@@ -478,7 +493,7 @@ font-size: 90%;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10pz;
-	border-color: black;
+	border-color: lightgray;
    	border-width:1px;
     border-style: solid;
 }
@@ -711,11 +726,25 @@ input  {
     border: solid 1px #85b1de;
     width: 50px;
     background-color: #EDF2F7;
-
 	
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 }
+
+.input_extrasmall  {
+   
+	font-family: Arial, Sans-Serif;
+    font-size: 13px;
+    padding: 4px;
+    border: solid 1px #85b1de;
+    width: 40px;
+    background-color: #EDF2F7;
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+
 
 
 .input_fill  {

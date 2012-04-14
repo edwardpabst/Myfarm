@@ -3,17 +3,18 @@
 <table   align="center">
 	<tr>
 		<td align="center">
-			<br>
-			 <div class="field_user">
-				 <h1> Sign up </hi>
-			 </div>
+
 				 
 
 
 			<%= form_for(@user) do |f| %>
 				<div id="form_header">			 	 
 				 	By signing up you are entitled to a free 30 day trial of the farm management software. No muss no fuss. 			 
-				</div>			 
+				</div>
+			<br>
+				 <div class="field_user">
+					 <h1> Sign up </hi>
+				 </div>			 
 			<br>
                 <%= render 'shared/error_messages', :object => f.object %>
 

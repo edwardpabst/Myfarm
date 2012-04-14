@@ -2121,6 +2121,7 @@ p {
   /*  position: absolute;*/ 
 
     background-color: #ffffff;
+	vertical-align:center;
 }
 #middlerow {
   /*  position: absolute;*/ 
@@ -2129,9 +2130,9 @@ p {
 }
 #presenter {
     position: absolute;
-    top: 330px;
-    left: 680px;
-    width: 400px;
+    top: 280px;  
+    left: 780px; 
+    width: 340px;
     height: 450px;
     border: 2px solid #ccc;
 }
@@ -2144,10 +2145,10 @@ p {
 }
 #map_canvas {
     position: absolute;
-    top: 330px;
-    left: 180px;
-    width: 500px;
-    height: 510px;
+    top: 280px;  
+    left: 320px; 
+    width: 460px;
+    height: 500px;
 
     background-color: #ffffff;
 }
@@ -2156,7 +2157,7 @@ p {
 	float: left;
 	text-align: left;
 	padding:6px;
-	width: 390px;
+	width: 330px;
 	height: 450px;
 	 
 }
@@ -2164,6 +2165,7 @@ p {
     /*  position: absolute;
 
     background-color: #ff0000;*/ 
+    
     color: #ffffff;
     visibility: hidden;
 }
@@ -2177,7 +2179,7 @@ p {
 	padding-left:6px;
 }
 h1 {
-    font-size:25px;
+    font-size:120%;
     font-weight: bold;
     color: white;
     padding-top: 4px;
@@ -2346,6 +2348,24 @@ h2 {
 	background-color:lightsteelblue;
 }
 
+.button_small {
+   
+	font-family: Arial, Sans-Serif;
+    font-size: 12px;
+    padding: 4px;
+    border: solid 1px #85b1de;
+    width: 80px;
+    background-color: #EDF2F7;
+ 
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+.button_small:hover{
+	background-color:lightsteelblue;
+}
+
 input  {
    
 	font-family: Arial, Sans-Serif;
@@ -2458,13 +2478,12 @@ input  {
 	        <option>LngLat mousemove</option>
 	        <option selected="selected">LatLng mousemove</option>
 	        </select>
-
-	        <input type="button" class="button" onclick="mapcenter();" value="Mapcenter"/>
+			 &nbsp;&nbsp; 
+	        <input type="button" class="button_small" onclick="mapcenter();" value="Mapcenter"/>
 	       
 	        <input type="text"  id="centerofmap" />
-	        &nbsp;&nbsp;&nbsp;&nbsp;
-	        <label id="label_reverse">Zoom level:</label>
-			<input id="myzoom" name="myzoom" class="input_verysmall" disabled="true" value="16">
+	        <label id="label_reverse">Zoom:</label>
+			<input id="myzoom" name="myzoom" class="input_extrasmall" disabled="true" value="16">
 	
 	<!--        <select id="myzoom" name="myzoom" class="selectsmall" disabled="true">
 		        <option value="1">1</option>
@@ -2499,7 +2518,6 @@ input  {
 
     <div class="topbutton"> &nbsp;
         <input type="button"  class="button" onclick="nextshape();" value="Next shape"/>
-
     </div>
     <div class="topbutton"> &nbsp;
         <input type="button"  class="button" onclick="clearMap();" value="Clear Map"/>
@@ -2514,10 +2532,22 @@ input  {
 		<input type="hidden"  class="input" name="newcoordinates5" id="newcoordinates5" /> 
 		<input type="hidden"  class="input" name="newcoordinates6" id="newcoordinates6" /> 
 	 &nbsp; 
-	 	<%= f.submit " Capture Boundaries ", :class => "button", :id => "fdsubmit" %>
+			<%= f.submit " Capture Boundaries ", :class => "button", :id => "fdsubmit" %>
 	<% end %>
 	
-	</div>
+</div>
+<div id="buttonrow">	  
+	 <form  action="#" onsubmit="showAddress(this.address.value); return false">
+	    &nbsp; &nbsp; &nbsp;   Field location -
+	 <input type="text"  class="inputlong" name="address" disabled="true" value="<%= @fieldmapping.location %>" />
+	 &nbsp;
+	<!--
+	 <input type="submit" class="button" value="Search" />
+	-->
+	 &nbsp; &nbsp; &nbsp;
+	 </form>
+	
+</div>
 <!--
     <div class="topbutton">
         <input type="button"  class="button" onclick="deleteLastPoint();" value="Delete Last Point"/>
@@ -2542,25 +2572,15 @@ input  {
         <input style="width:100px"  class="button" type="button" onclick="copyTextarea();" value="Select/copy text"/>
     </div>
 -->
-	<div class="topbutton">
-	 <form  action="#" onsubmit="showAddress(this.address.value); return false">
-	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Field location -
-	 <input type="text"  class="inputlong" name="address" disabled="true" value="<%= @fieldmapping.location %>" />
-	 &nbsp;
-	<!--
-	 <input type="submit" class="button" value="Search" />
-	-->
-	 &nbsp; &nbsp; &nbsp;
-	 </form>
-	</div>
+ 
 
 </div>
 
  
-
-
+ 
 <div id="map_canvas"></div>
 
+ 
 <div id="polygonstuff">
  
     <div>
@@ -2573,8 +2593,9 @@ input  {
         <input id="multipleholes" type="button" onclick="nexthole();" value="Next hole"/>
 
     </div>
-
 </div>
+ 
+
 <div id="presenter">
     <form style="margin-bottom:5px" action="#">
     &nbsp;&nbsp;&nbsp;Live code presentation in textarea (below):
@@ -2591,6 +2612,10 @@ to your field definition.
 </textarea>
     </form>
 </div>
+
+
+
+
 <div id="polylineoptions">
     <div style="padding-top:5px; margin-bottom:10px;">
 
