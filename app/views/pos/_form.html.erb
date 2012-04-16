@@ -12,17 +12,17 @@
 		</td>
 	</tr>
 	<tr>
-		<td>
+		<td  >
 			<%= f.label :ponumber, "P.O. number*" %> 
 		</td>
-		<td>
+		<td  >
 			<%= f.text_field :ponumber %>
 		</td>
 		<td class="label">
 			<% get_parties_by_type("Supplier") %>
 			<label class=" label" for="po">Supplier*<abbr title="required"> </abbr>  </label> 
 		</td>
-		<td>
+		<td  >
 			<% if !@party_types.nil? %>			
 				<%= collection_select("po", "supplier_id", @party_types, "id", "partyname", options = {:prompt => " ", :include_blank => ' '}) %>
 			<% end %> 
@@ -86,7 +86,7 @@
 			<td>
 				<%= f.label :notes, "Notes" %>  
 			</td>
-			<td>
+			<td colspan="2">
 				<%= f.text_area :notes %>
 			</td>
 		</tr>

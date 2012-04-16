@@ -4,7 +4,7 @@
 <b>Labor</b>  
 
 <!-- Div for capture of grid output -->
- <div id="labor_grid" style="width:250px; height:200px;">
+ <div id="labor_grid" style="width:230px; height:200px;">
 
  </div>
 
@@ -15,7 +15,7 @@
      var partygrid = new dhtmlXGridObject("labor_grid");
      partygrid.setImagePath("/images/");
      partygrid.setHeader("Name, Job, Hours , Rate");  
-     partygrid.setInitWidths("90,70,45,45");
+     partygrid.setInitWidths("90,55,45,40");
      partygrid.setSkin("dhx_web");
      partygrid.init();
 	 partygrid.load("/farmjoblabordata");  	
@@ -108,7 +108,7 @@
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  
-<button type="button" value="New", id="partyadd", onclick="newFarmjoblabor()">Add</button>
-<input type="button" value="Delete" id="partydelete",   class="button" onclick="removepartyRow()">
+<button type="button" value="New", class="buttonmedium" , id="partyadd", onclick="newFarmjoblabor()">Add</button>
+<input type="button" value="Delete" id="partydelete" class="buttonmedium"  onclick="removepartyRow()">
 <br><br> 
 

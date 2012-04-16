@@ -6,7 +6,7 @@
 <input type="button" value="Delete" class="button" onclick="removeRow()">
 <br><br>
 <!-- Div for capture of grid output -->
- <div id="Storage_grid" style="width:800px; height:500px;">
+ <div id="Storage_grid" style="width:95%; height:500px;">
 
  </div>
 
@@ -16,8 +16,8 @@
 	// data grid definition
      var grid = new dhtmlXGridObject("Storage_grid");
      grid.setImagePath("/images/");
-     grid.setHeader("Storage name, Storage type, Size , Size UOM, Location, Capacity,Capacity/UOM, Year/expense");  
-     grid.setInitWidths("130,100,80,90,130,90,90,90");
+     grid.setHeader("Storage name, Storage type, Size , Size UOM, Location, Capacity,Capacity/ UOM, Year/ expense");  
+     grid.setInitWidths("120,90,65,70,115,80,80,80");
      grid.setSkin("dhx_web");
      grid.init();
 	 grid.load("/storagedata");  	

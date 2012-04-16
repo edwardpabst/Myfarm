@@ -8,7 +8,7 @@
 <b>Total Inventory Value - <%= number_to_currency(@total_onhand_value, :precision => 2)  %></b>
 <br><br>
 <!-- Div for capture of grid output -->
- <div id="supplyinventory_grid" style="width:800px; height:500px;">
+ <div id="supplyinventory_grid" style="width:95%; height:500px;">
 
  </div>
 
@@ -19,7 +19,7 @@
      var grid = new dhtmlXGridObject("supplyinventory_grid");
      grid.setImagePath("/images/");
      grid.setHeader("Supply name, Storage,  Inv UOM  ,  Qty in , Qty out,  On hand , Inv value, Avg cost ");  
-     grid.setInitWidths("140,120,90,90,90,90,90,90");
+     grid.setInitWidths("130,110,80,70,70,70,80,80");
      grid.setSkin("dhx_web");
      grid.init();
 	 grid.load("/supplyinventorydata");  	

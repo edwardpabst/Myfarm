@@ -5,7 +5,7 @@
 <input type="button" value="Delete" class="button" onclick="removeRow()">
  <br> <br>
 <!-- Div for capture of grid output -->
- <div id="fieldtask_grid" style="width:800px; height:500px;">
+ <div id="fieldtask_grid" style="width:95%; height:500px;">
 
  </div>
 
@@ -16,7 +16,7 @@
      var grid = new dhtmlXGridObject("fieldtask_grid");
      grid.setImagePath("/images/");
      grid.setHeader("Task Stage, Task Description, Task Type, Frequency days, Duration days, Notes");  
-     grid.setInitWidths("140, 160,140,100,100,160");
+     grid.setInitWidths("100, 130,120,100,100,130");
      grid.setSkin("dhx_web");
      grid.init();
 	 grid.load("/fieldtaskdata");  	

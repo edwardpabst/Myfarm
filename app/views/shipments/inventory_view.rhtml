@@ -9,7 +9,7 @@
 
 <br><br>
 <!-- Div for capture of grid output -->
- <div id="inventory_grid" style="width:800px; height:500px;">
+ <div id="inventory_grid" style="width:95%; height:500px;">
 
  </div>
 
@@ -20,7 +20,7 @@
      var grid = new dhtmlXGridObject("inventory_grid");
      grid.setImagePath("/images/");
      grid.setHeader("Crop plan, Storage,  grade  , UOM , Qty Onhand ");  
-     grid.setInitWidths("170,170,160,160,140");
+     grid.setInitWidths("150,140,130,120,100");
      grid.setSkin("dhx_web");
      grid.init();
 	 grid.load("/inventorydata");  	

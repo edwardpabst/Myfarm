@@ -229,7 +229,13 @@ function checkStatus() {
 		
 		
 		<tr>
+			<td>
+				<%= f.label :notes, "Notes" %>  
+			</td>
 			<td colspan="2">
+				<%= f.text_area :notes %> 
+			</td>
+			<td>
 				<% if @transaction == 'new' %>
 		
 					<%= f.label :isreplicate, "Replicate?" %> 
@@ -239,12 +245,7 @@ function checkStatus() {
 					</div>
 				<% end %>
 			</td>
-			<td>
-				<%= f.label :notes, "Notes" %>  
-			</td>
-			<td>
-				<%= f.text_area :notes %> 
-			</td>
+
 
 		</tr>
 		

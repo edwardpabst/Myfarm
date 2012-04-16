@@ -3,6 +3,7 @@ div.gridbox{
 	text-align:left;
 	margin-left: auto;
 	margin-right: auto;
+	font-size: 90%;
  
 
 	
@@ -23,7 +24,7 @@ div.gridbox table.obj{
 div.gridbox table.hdr td {
 	line-height:normal;
 	font-family:arial;
-	font-size:12px;
+	font-size:10px;
 	background-color: #FAF0E6;  /* #FAF0E6; */
 	border: 1px solid;
 	border-color : white Gray Gray white;
@@ -43,7 +44,7 @@ div.gridbox table.obj td {
 	border: 1px solid;
 	border-color : white Gray Gray white;
 	font-family:Arial;
-	font-size:12px;
+	font-size:10px;
     -moz-user-select:none;
     -moz-user-select:-moz-none;   
     overflow:hidden;

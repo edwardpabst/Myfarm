@@ -5,7 +5,7 @@
 <input type="button" value="Delete" class="button" onclick="removeRow()">
  <br><br> 
 <!-- Div for capture of grid output -->
- <div id="farmexpense_grid" style="width:720px; height:460px;">
+ <div id="farmexpense_grid" style="width:95%; height:460px;">
 
  </div>
 
@@ -16,7 +16,7 @@
      var grid = new dhtmlXGridObject("farmexpense_grid");
      grid.setImagePath("/images/");
      grid.setHeader("Expense year, Expense Type, Expense Name, Yearly Expense Amount");  
-     grid.setInitWidths("180,180,180, 180");
+     grid.setInitWidths("140,180,180, 160");
      grid.setSkin("dhx_web");
      grid.init();
 	 grid.load("/farmexpensedata");  	

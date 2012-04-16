@@ -9,7 +9,6 @@ xml.tag!("rows") do
 			xml.tag!("cell", field.holding_status)
 			xml.tag!("cell", field.current_state)
 			xml.tag!("cell", field.area_mapped)
-			xml.tag!("cell", field.area_legal)
 			xml.tag!("cell", field.area_tillable)
  
 		end

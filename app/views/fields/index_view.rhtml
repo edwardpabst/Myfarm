@@ -5,7 +5,7 @@
 <input type="button" value="Delete" class="button" onclick="removeRow()">
  <br> <br>
 <!-- Div for capture of grid output -->
- <div id="field_grid" style="width:800px; height:500px;">
+ <div id="field_grid" style="width:95%; height:500px;">
 
  </div>
 
@@ -15,14 +15,14 @@
 	// data grid definition
      var grid = new dhtmlXGridObject("field_grid");
      grid.setImagePath("/images/");
-     grid.setHeader("<b>Field name</b>, <b>Farm name</b>, <b>Number acres</b> , <b>Map Location</b>, <b>Holding status</b>, <b>Field state</b>,<b>Area mapped</b>, <b>Area legal</b>, <b>Area tillable</b>");  
-     grid.setInitWidths("120,120,72,100,80,80,80,72,*");
+     grid.setHeader("Field name, Farm name, Number acres , Map Location, Holding status, Field state,Area mapped, Area tillable");  
+     grid.setInitWidths("110,110,70,90,75,75,75,65");
      grid.setSkin("dhx_web");
      grid.init();
 	 grid.load("/fielddata");  	
 	 grid.attachHeader("#text_filter,#text_filter");  
 	 grid.setColSorting("str,str");	 
-	 grid.setColTypes("ed,ed,ed,txt,ro,ro,ed,ed,ed");// ed-editable, ro-read only price-money , ch-checkbox, 
+	 grid.setColTypes("ed,ed,ed,txt,ro,ro,ed,ed");// ed-editable, ro-read only price-money , ch-checkbox, 
 													  // txt-text editor ra-radio button, coro-select box, img, dhxcalendar 
 													  //  subrow (ajax)	 
 	// data processor definition

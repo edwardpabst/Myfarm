@@ -4,7 +4,7 @@
 <input type="button" value="Delete" class="button" onclick="removeRow()">
  <br> <br>
 <!-- Div for capture of grid output -->
- <div id="invoice_grid" style="width:800px; height:500px;">
+ <div id="invoice_grid" style="width:95%; height:500px;">
 
  </div>
 
@@ -15,7 +15,7 @@
      var grid = new dhtmlXGridObject("invoice_grid");
      grid.setImagePath("/images/");
      grid.setHeader("Invoice number, Invoice date, Status, Customer, Item, Ship amount, Ship charge, Total amount");  
-     grid.setInitWidths("100, 80,80,100,140,100,100,100");
+     grid.setInitWidths("90, 70,70,100,130,80,80,80");
      grid.setSkin("dhx_web");
      grid.init();
 	 grid.load("/invoicedata");  	

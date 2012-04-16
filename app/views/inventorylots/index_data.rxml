@@ -9,7 +9,7 @@ xml.tag!("rows") do
 			xml.tag!("cell", inv.inventory_uom)
 			xml.tag!("cell", inv.qty_onhand)
 			xml.tag!("cell", inv.grade)
-			xml.tag!("cell", inv.lab_report)
+			xml.tag!("cell", inv.cropreport_file_name)
 
 		end
 	end

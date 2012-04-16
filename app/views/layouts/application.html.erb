@@ -128,18 +128,18 @@ jQuery(document).ready(function($) {
 			</td>
 			
 			<% if  request.request_uri != '/home' and request.request_uri != '/signin'  and request.request_uri != '/signup' %>	
-			<td width="10%">
+			<td  width="10%">
 		
-		
-				<%=render 'pages/vertical_menu'%>
-			
+				 
+					<%=render 'pages/vertical_menu'%>
+				 
 			</td>
 		   <% end %>
 			
 			
-			<td   width="80%">
+			<td  width="80%">
 				<br>
-				<div class="center">
+				<div class="centermain">
 					<%= yield %>
 				</div>
 			</td>

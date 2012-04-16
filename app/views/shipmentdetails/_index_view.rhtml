@@ -1,7 +1,7 @@
  
 
 <!-- Div for capture of grid output -->
- <div id="shipmentdetail_grid" style="width:800px; height:200px;">
+ <div id="shipmentdetail_grid" style="width:95%; height:200px;">
 
  </div>
 
@@ -12,7 +12,7 @@
      var grid = new dhtmlXGridObject("shipmentdetail_grid");
      grid.setImagePath("/images/");
      grid.setHeader("Crop plan, Storage,  Grade ,  Ship qty , Price ,  UOM , Ext Amount, Status, Notes");  
-     grid.setInitWidths("140,90,90,80,70,70,90,70,100");
+     grid.setInitWidths("120,80,70,65,65,70,80,70,90");
      grid.setSkin("dhx_web");
      grid.init();
 	 grid.load("/shipmentdetaildata");  	

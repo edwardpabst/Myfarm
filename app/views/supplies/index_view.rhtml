@@ -6,7 +6,7 @@
 <input type="button" value="Delete"  class="button" onclick="removeRow()">
 <br><br>
 <!-- Div for capture of grid output -->
- <div id="Supply_grid" style="width:800px; height:500px;">
+ <div id="Supply_grid" style="width:95%; height:500px;">
 
  </div>
 
@@ -17,7 +17,7 @@
      var grid = new dhtmlXGridObject("Supply_grid");
      grid.setImagePath("/images/");
      grid.setHeader("Supply name, Supply type, Item number , Manufacturer, Purch/UOM, Purch cost,Usage/UOM, Conversion");  
-     grid.setInitWidths("150,110,90,90,90,90,80,*");
+     grid.setInitWidths("130,100,80,80,80,80,80,70");
      grid.setSkin("dhx_web");
      grid.init();
 	 grid.load("/supplydata");  	

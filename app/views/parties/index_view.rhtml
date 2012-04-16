@@ -6,7 +6,7 @@
 <input type="button" value="Delete" class="button" onclick="removeRow()">
 <br><br>
 <!-- Div for capture of grid output -->
- <div id="party_grid" style="width:800px; height:500px;">
+ <div id="party_grid" style="width:95%; height:500px;">
 
  </div>
 
@@ -17,7 +17,7 @@
      var grid = new dhtmlXGridObject("party_grid");
      grid.setImagePath("/images/");
      grid.setHeader("Party name, Primary role,  City  ,  State ,  Phone ,  Email ,  Rate/hour ");  
-     grid.setInitWidths("140,160,80,100,100,120,100");
+     grid.setInitWidths("120,100,80,70,90,120,100");
      grid.setSkin("dhx_web");
      grid.init();
 	 grid.load("/partydata");  	

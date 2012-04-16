@@ -4,7 +4,7 @@
 <b>Supplies</b> 
 
 <!-- Div for capture of grid output -->
- <div id="supply_grid" style="width:250px; height:200px;">
+ <div id="supply_grid" style="width:230px; height:200px;">
 
  </div>
 
@@ -15,7 +15,7 @@
      var supplygrid = new dhtmlXGridObject("supply_grid");
      supplygrid.setImagePath("/images/");
      supplygrid.setHeader("Supply Name, Qty, UOM ");  
-     supplygrid.setInitWidths("120,60, 70");
+     supplygrid.setInitWidths("110,60, 60");
      supplygrid.setSkin("dhx_web");
      supplygrid.init();
 	 supplygrid.load("/farmjobsupplydata");  	
@@ -109,7 +109,7 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  
-<button type="button" value="New",  id="supplyadd", onclick="newFarmjobsupply()">Add</button>
-<input type="button" value="Delete"   id="supplydelete", class="button" onclick="removesupplyRow()">
+<button type="button" value="New", class="buttonmedium" ,  id="supplyadd", onclick="newFarmjobsupply()">Add</button>
+<input type="button" value="Delete"   id="supplydelete" class="buttonmedium"  onclick="removesupplyRow()">
 <br><br> 
 
