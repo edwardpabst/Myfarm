@@ -15,7 +15,7 @@ class ShipmentsController < ApplicationController
 
         get_current_user
          @shipments = Shipment.find_by_sql("Select shipments.id, p1.partyname as customername, cropplanfull, ship_date, 
-         p2.partyname as truckcompany,  manifest_id, commission_amount, shipping_charge, ship_status  
+         p2.partyname as truckcompany,  manifest_id, commission_amount, shipping_charge, ship_status, ship_amount  
         from shipments 
         join parties p1 on shipments.customer_id = p1.id 
         left join parties p2 on shipments.trucker_id = p2.id 

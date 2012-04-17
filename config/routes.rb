@@ -118,8 +118,9 @@ Myfarm::Application.routes.draw do
   
   match '/', :to => 'homes#validate_status'
   match '/home', :to => 'pages#home'
-  match '/mynetwork', :to => 'pages#mynetwork'
+  match '/mynetwork', :to => 'pages#_mynetwork'
   match '/home_new', :to => 'pages#home_new'
+  match '/overview', :to => 'pages#overview'
   match '/mapcanvas', :to => 'pages#mapcanvas'
   match '/contact', :to => 'pages#contact'
   match '/about', :to => 'pages#about'

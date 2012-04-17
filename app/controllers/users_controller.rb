@@ -123,27 +123,33 @@ class UsersController < ApplicationController
     if @user.nil?
       flash[:error] = "This is an invalid Email."
       
-    end
-    
-    if @user.security_question.downcase.strip != security_question.downcase.strip
-    #logger.debug "USERPROFILE STEP 1 #{@user.security_question.strip}, #{security_question.strip}"
-      #@user.security_question = ""
-      #@user.security_answer = ""
-      flash[:error] = "Incorrect question/answer "
-      
-    elsif  @user.security_answer.downcase.strip != security_answer.downcase.strip
-
-       #@user.security_question = ""
-       #@user.security_answer = ""
-      flash[:error] = "Incorrect question/answer "
-       
     else
-        # go change the password
+      if @user.security_question.nil?
+        flash[:error] = "No security question was defined for this user. "
+      else
+    
+        if @user.security_question.downcase.strip != security_question.downcase.strip
+        #logger.debug "USERPROFILE STEP 1 #{@user.security_question.strip}, #{security_question.strip}"
+          #@user.security_question = ""
+          #@user.security_answer = ""
+          flash[:error] = "Incorrect question/answer "
+      
+        elsif  @user.security_answer.downcase.strip != security_answer.downcase.strip
+
+           #@user.security_question = ""
+           #@user.security_answer = ""
+          flash[:error] = "Incorrect question/answer "
        
-        sign_in @user
-        @title = "Edit user"
-        redirect_to edit_user_path(@user.id)
+        else
+            # go change the password
+       
+            sign_in @user
+            @title = "Edit user"
+            redirect_to edit_user_path(@user.id)
   
+        end
+        
+      end
     end
   end
   

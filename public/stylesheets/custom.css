@@ -11,6 +11,7 @@
 	margin-right:auto;
 	background:white;
 	font-family:arial;
+	font-size:100%;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10pz;
@@ -264,22 +265,22 @@ table.firstcomment td{
 #ifarmservice, #people, #farms, #fields, #crops, #cropplans, #supplies, #farmtasks, #equipment, #storageunits
 {
     top: 200px;
- 	left: 500px;
+ 	left: 350px;
 }
 #farmjobs, #calendar, #cropinventory,  #scaletickets, #salescontracts, #shipments, #createinvoices, #viewinvoices, #purchaseorders, #suppliesinventory
 {
     top: 200px;
- 	left: 500px;
+ 	left: 350px;
 }
 
 #reports, #socialnetwork, #weather, #news, #accountmanagement,  #documentation, #datatypes 
 {
     top: 200px;
- 	left: 500px;
+ 	left: 350px;
     
 }
  
-#navcontainer { width: 200px; }
+#navcontainer { width: 160px; }
 
 #navcontainer ul
 {
@@ -690,7 +691,7 @@ input  {
 .input_medium  {
    
 	font-family: Arial, Sans-Serif;
-    font-size: 13px;
+    font-size: 100%;
     padding: 4px;
     border: solid 1px #85b1de;
     width: 180px;
@@ -707,7 +708,7 @@ input  {
 .input_medium_small  {
    
 	font-family: Arial, Sans-Serif;
-    font-size: 13px;
+    font-size: 100%;
     padding: 4px;
     border: solid 1px #85b1de;
     width: 165px;
@@ -723,7 +724,7 @@ input  {
 .input_small  {
    
 	font-family: Arial, Sans-Serif;
-    font-size: 13px;
+    font-size: 100%;
     padding: 4px;
     border: solid 1px #85b1de;
     width: 110px;
@@ -737,7 +738,7 @@ input  {
 .input_verysmall  {
    
 	font-family: Arial, Sans-Serif;
-    font-size: 13px;
+    font-size: 100%;
     padding: 4px;
     border: solid 1px #85b1de;
     width: 50px;
@@ -750,7 +751,7 @@ input  {
 .input_extrasmall  {
    
 	font-family: Arial, Sans-Serif;
-    font-size: 13px;
+    font-size: 100%;
     padding: 4px;
     border: solid 1px #85b1de;
     width: 40px;
@@ -815,7 +816,7 @@ input.file {
 label {
 	text-align:left;
 	font-weight:bold;
-	font-size:12px;
+	font-size: 90%;
 	font-family: Arial, Helvetica, sans-serif;
 	
 }
@@ -845,7 +846,7 @@ label {
 }
 
 select  {
-    font-size:12px;
+    font-size:90%;
 	width: 210px;
 	padding: 4px;
 	-webkit-border-radius: 3px;
@@ -856,7 +857,7 @@ select  {
 .button {
    
 	font-family: Arial, Sans-Serif;
-    font-size: 12px;
+    font-size: 90%;
     padding: 4px;
     border: solid 1px #85b1de;
     width: 100px;
@@ -878,7 +879,7 @@ select  {
 .buttonmedium {
    
 	font-family: Arial, Sans-Serif;
-    font-size: 12px;
+    font-size: 90%;
     padding: 4px;
     border: solid 1px #85b1de;
     width: 80px;
@@ -896,7 +897,7 @@ select  {
 .buttonlarge {
    
 	font-family: Arial, Sans-Serif;
-    font-size: 12px;
+    font-size: 90%;
     padding: 4px;
     border: solid 1px #85b1de;
     width: 200px;
@@ -914,7 +915,7 @@ select  {
 .button_center {
 
 	font-family: Arial, Sans-Serif;
-    font-size: 12px;
+    font-size: 90%;
     padding: 4px;
     border: solid 1px #85b1de;
     width: 210px;
@@ -933,7 +934,7 @@ select  {
 button {
    
 	font-family: Arial, Sans-Serif;
-    font-size: 12px;
+    font-size: 100%;
     padding: 4px;
     border: solid 1px #85b1de;
     width: 100px;
@@ -955,7 +956,7 @@ button:onmousedown{
 .button_very_small {
    
 	font-family: Arial, Sans-Serif;
-    font-size: 10px;
+    font-size: 85%;
     padding: 2px;
     border: solid 1px #85b1de;
     width: 50px;
@@ -973,7 +974,7 @@ button:onmousedown{
 .button_clear {
    
 	font-family: Arial, Sans-Serif;
-    font-size: 10px;
+    font-size: 90%;
     padding: 2px;
     width: 70px;
 	height:20px;
@@ -1053,7 +1054,7 @@ a.signup_button {
 	width: 190px;
 	color: orange;
 	background: #006400;
-	font-size: 130%;
+	font-size: 120%;
 	font-weight: bold;
 	padding: 20px;
 }
@@ -1159,7 +1160,7 @@ table.index_small {
 	width: 55%;
 	margin-bottom: 0;
 	font-family:"arial", Times, serif;
-	font-size: 110%;
+	font-size: 100%;
 	text-align: left;
 	background-color: white;
 	border-color: gray;

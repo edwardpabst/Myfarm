@@ -47,6 +47,10 @@ class InvoicereportPdf < Prawn::Document
       fill_color "404040"
 
       #Billing source info
+      fill_color "A7C6D6"
+      draw_text  "Remit to", size: 8, style: :normal,
+                              :at => [10, 660]
+      fill_color "404040"
       draw_text  "#{inv.billname}", size: 8, style: :normal,
                               :at => [10, 650] 
       draw_text  "#{inv.billaddress}", size: 8, style: :normal,

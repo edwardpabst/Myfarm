@@ -127,12 +127,16 @@ jQuery(document).ready(function($) {
 
 			</td>
 			
-			<% if  request.request_uri != '/home' and request.request_uri != '/signin'  and request.request_uri != '/signup' %>	
+			<% if   request.request_uri != '/signin'  and request.request_uri != '/signup'  and request.request_uri != '/overview' %>	
 			<td  width="10%">
 		
-				 
-					<%=render 'pages/vertical_menu'%>
-				 
+				 <% if request.request_uri == '/home' %>
+					<% if signed_in? %>
+						<%=render 'pages/vertical_menu'%>
+					<% end %>
+				 <% else %>
+						<%=render 'pages/vertical_menu'%>
+				 <% end %>
 			</td>
 		   <% end %>
 			
@@ -143,7 +147,7 @@ jQuery(document).ready(function($) {
 					<%= yield %>
 				</div>
 			</td>
-			
+		
 			<td  width="5%">
 			</td>
 			

@@ -95,7 +95,7 @@ This stylesheet forms part of the Formtastic Rails Plugin
 .formtastic input,
 .formtastic textarea {
   font-family:arial;
-  font-size: 13px;
+  font-size: 12px;
   font-weight:inherit;
 
 }
@@ -103,7 +103,7 @@ This stylesheet forms part of the Formtastic Rails Plugin
 .formtastic input,
 .formtastic textarea,
 .formtastic select {
-  font-size:13px;
+  font-size:12px;
   
    
 }

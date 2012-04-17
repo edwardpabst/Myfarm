@@ -52,7 +52,7 @@ class PosController < ApplicationController
 
        			when "updated"
        				@po = Po.find(@id)
-       				@po.manifest_id = manifest_id     	
+       				@po.notes = notes     	
 
 
        				if @po.save

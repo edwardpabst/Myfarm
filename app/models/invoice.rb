@@ -46,7 +46,7 @@ class Invoice < ActiveRecord::Base
                        join shipments sh on inv.shipment_id = sh.id 
                        join parties p1 on sh.customer_id = p1.id
                        join farms on sh.farm_id = farms.id
-                       join parties p2 on farms.party_id = p2.id
+                       left join parties p2 on farms.party_id = p2.id
                        left join parties p3 on sh.broker_id = p3.id
                        where inv.user_id = #{user_id} "
 

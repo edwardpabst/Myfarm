@@ -1,0 +1,835 @@
+<script type="text/javascript"> 
+
+function showContent(topic) {
+	 
+ 	initHome();
+	unhide(topic);
+
+
+}
+
+
+
+function hide(divID) {
+	 
+var item = document.getElementById(divID);
+item.className='hidden';
+}
+
+function unhide(divID) {
+ 
+var item = document.getElementById(divID);
+item.className='unhidden';
+
+}
+
+function initHome() {
+		hide('ifarmservice');
+		hide('people'); 
+		hide('farms'); 
+		hide('fields'); 
+		hide('crops'); 
+		hide('cropplans'); 
+		hide('supplies'); 
+		hide('farmtasks'); 
+		hide('equipment'); 
+		hide('storageunits'); 
+		hide('farmjobs');
+		hide('calendar'); 
+		hide('cropinventory'); 
+		hide('scaletickets'); 
+		hide('salescontracts'); 
+		hide('createinvoices');
+		hide('viewinvoices'); 
+		hide('shipments'); 
+		hide('purchaseorders'); 
+		hide('suppliesinventory'); 		
+		hide('reports');
+		hide('socialnetwork');
+		hide('weather'); 
+		hide('accountmanagement');
+		hide('documentation'); 
+		hide('news'); 
+		hide('datatypes');
+		
+
+}
+
+</script>
+ 
+ <table>
+
+	<tr>
+		<td width="25%">
+			<br>
+			 <p id="tutorial_point">	 	 
+		       <b>Introducing iFarmService</b>
+			 </p>
+			<div id="navcontainer">
+				<ul id="navlist">
+
+					 <li >
+					   	 
+				       	&nbsp;<u>Define your farm profile</u>
+					  	
+					 </li>
+
+					 <li  id="active">
+					  <a href="#" onclick="showContent('people')"> 	 	 
+				       	&nbsp;&nbsp;People and businesses
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="#" onclick="showContent('farms')"> 	 
+				       	&nbsp;&nbsp;Farms
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="#" onclick="showContent('fields')">	 	 
+				       	&nbsp;&nbsp;Fields
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="#" onclick="showContent('crops')">	 	 
+				       	&nbsp;&nbsp;Crops
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="#" onclick="showContent('cropplans')">	 	 
+				       	&nbsp;&nbsp;Crop plans
+					  </a>	
+					 </li>
+
+					 <li>	 	 
+				        &nbsp;
+					 </li>
+					
+					 <li >
+
+				       	&nbsp;<u>Define your farm assets</u>
+
+					 </li>
+
+					 <li  id="active">
+					  <a href="#" onclick="showContent('supplies')">	 	 
+				       	&nbsp;&nbsp;Supplies
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="#" onclick="showContent('farmtasks')"> 	 
+				       	&nbsp;&nbsp;Field tasks
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="#" onclick="showContent('equipment')">	 	 
+				       	&nbsp;&nbsp;Equipment
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="#" onclick="showContent('storageunits')">	 	 
+				       	&nbsp;&nbsp;Storage units
+					  </a>	
+					 </li>
+
+					 <li>	 	 
+				        &nbsp;
+					 </li>
+
+					 <li >
+
+				       	&nbsp;<u>Farm Operations</u>
+
+					 </li>
+
+					 <li  id="active">
+					  <a href="#" onclick="showContent('farmjobs')">	 	 
+				       	&nbsp;&nbsp;Farm jobs
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="#" onclick="showContent('calendar')"> 	 
+				       	&nbsp;&nbsp;Job Calendar
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="#" onclick="showContent('scaletickets')">	 	 
+				       	&nbsp;&nbsp;Scale tickets
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="#" onclick="showContent('cropinventory')">	 	 
+				       	&nbsp;&nbsp;Crop inventory
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="#" onclick="showContent('salescontracts')">	 	 
+				       	&nbsp;&nbsp;Sales contracts
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="#" onclick="showContent('shipments')">	 	 
+				       	&nbsp;&nbsp;Customer shipments
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="#" onclick="showContent('createinvoices')">	 	 
+				       	&nbsp;&nbsp;Create invoices
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="#" onclick="showContent('viewinvoices')">	 	 
+				       	&nbsp;&nbsp;View invoices
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="#" onclick="showContent('purchaseorders')">	 	 
+				       	&nbsp;&nbsp;Purchase orders
+					  </a>	
+					 </li>
+					 <li  id="active">
+					  <a href="#" onclick="showContent('suppliesinventory')">	 	 
+				       	&nbsp;&nbsp;Supplies inventory
+					  </a>	
+					 </li>
+
+					 <li  id="active">
+					  <a href="#" onclick="showContent('reports')">	 	 
+				       	&nbsp;&nbsp;Reports
+					  </a>	
+					 </li>					
+					
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+					 <li >
+
+				       	&nbsp;<u>Utilities</u>
+
+					 </li>
+					 <li  id="active">
+					  <a href="#" onclick="showContent('socialnetwork')"> 	 
+				       	&nbsp;&nbsp;Farmers Network
+					  </a>	
+					 </li>
+					 <li >
+					  <a href="#" onclick="showContent('weather')"> 	 
+				       	&nbsp;&nbsp;Weather
+					  </a>
+					 </li>
+					 <li >
+					  <a href="#" onclick="showContent('news')"> 	 
+				       	&nbsp;&nbsp;News
+					  </a>
+					 </li>
+					 <li >
+					  <a href="#" onclick="showContent('accountmanagement')"> 	 
+				       	&nbsp;&nbsp;Account Management
+					  </a>
+					 </li>
+					 <li >
+					  <a href="#" onclick="showContent('documentation')"> 	 
+				       	&nbsp;&nbsp;Documentation
+					  </a>
+					 </li>
+					 <li >
+					  <a href="#" onclick="showContent('datatypes')"> 	 
+				       	&nbsp;&nbsp;Data Types
+					  </a>
+					 </li>
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+					 <li >
+
+				       	&nbsp; 
+
+					 </li>
+				</ul>
+		 
+			</div>
+		</td>
+		
+		<td width="75%">
+			<div id="ifarmservice" class="hidden">
+				<div id="homepageh0">
+					<img src="/Images/seedling.jpg" width="60" height="50"></img>
+					<span>iFarmService</span>
+  				</div>
+				<p id="tutorial_point">
+				
+				<br><br>iFarmService is an easy to use job scheduling, costing and management system that was
+				<br> designed for the small and medium size farmer.  It is rich in functionality and very reasonably
+				<br> priced..  The system was designed to accommodate the individual farmer, farm management
+				<br> companies and community based farmers.
+
+				<br><br>The system is an internet based (Cloud computing) application that can be used anywhere you
+				<br> have an internet connection. No software to install no data to manage. With the new lines of
+				<br> tablet computers you can enter field records in the field or view your profitability from the
+				<br> beach in some tropical paradise.
+
+				<br><br>iFarmService provides a great starting point for anyone looking to improve their field
+				<br> records, crop yield and financial performance and gain a detailed understanding of their
+				<br> business. It's easy and powerful
+
+				<br><br>With iFarmService you first define your farm profile and the people and companies that
+				<br> you do business with. Next you define your assets which include equipment, supplies, buildings 
+				<br> and storage and defined work tasks. 
+				<br> From there you create farmjobs which identify the specific work tasks and associated costs.
+				<br> iFarmService provides all the operating tools you will need to run the farm including: Crop and  
+				<br> supplies inventory, Scale tickets, Customer shipments, Sales contracts, Invoicing, Purchase orders, 
+				<br> Job calendar and extensive reporting. In addition we provide various other tools to assist in
+				<br> running the farm. They include: Equipment depreciation and cost of ownership schedules, field  
+				<br> mapping through Google maps, Automated historical weather gathering from the National Weather
+				<br> Service (NOAA) and Agriculture news consolidation.
+				
+
+				<br><br>iFarmService provides a farm based social network infrastructure. Aside from managing your own
+				<br> business the network will allow you to share ideas and thoughts with other farmers. As the
+				<br> network grows your access to information will grow.  As you build relationships your ability to
+				<br> sell, share and exchange equipment, supplies, services and techniques will be enhanced. 
+
+				<br><br>Easy Documentation - We call the documentation “easy documentation” because it’s easy to read.
+				<br> Lot’s of pictures, not too many words and easy to understand.  Not everything requires detail
+				<br> explanation. While rich in functionality the software is simple, elegant and easy to use. 
+				<br><br>
+				
+				<b>Check out the rich functionality by clicking on any topics on the left.</b>
+				<br><br>&nbsp;
+				</p>
+				
+
+ 
+					 	  			 
+			</div>
+			<div id="people" class="hidden">
+				<p id="tutorial_stage">
+				 	Parties
+				</p>
+				<p id="tutorial_point">
+				   Parties refer to people and organizations. Parties have several different types of roles.
+				</p>
+				<p id="tutorial_bullet">
+					<br><b>User </b>-            owner/user of the iFarm Service account 
+					<br><b>Employee</b> -        people who are employed by the farm. (supervisor/foreman) 
+					<br><b>Labor machine</b> -   people who operate farm machinery 
+					<br><b>Labor non machine</b>-people who perform basic work on the farm 
+					<br><b>Supplier</b> -        business/person who supplies are purchased from on a purchase order.
+					<br><b>Broker</b> -          Sales agent recorded on shipments for commission purposes.
+					<br><b>Customer</b> -        Business who harvested crops are sold and shipped to 
+					<br><b>Landlord</b> -        Land owner if fields are leased
+					<br><b>Client</b> -          Farmers that a farm management enterprise provides service to 
+					<br><b>Billing source</b> -  Assigned to each farm for invoice remittance/billing information
+					<br><b>Test labs</b> -       organizations that perform soil tests and crop quality tests.
+				</p>
+				<p id="tutorial_point">
+				   A party can have multiple role definitions. Roles dictate which transactions the party will be
+				   exposed in. 
+				  <br>
+				   (ex. A customer role will be available in shipping and invoicing transactions.)
+				<br>
+				   (ex. A supplier role will be available in purchase order transactions.)
+				</p>			 	  			 
+			</div>
+			<div id="farms" class="hidden">
+				<p id="tutorial_stage">
+				 	Farms
+				</p>
+				<p id="tutorial_point">
+				   Farm definition sets total acreage. Generally, people will define a single farm. 
+				   <br>
+				   However, multiple farms can be defined usually by farm management companies.
+				   <br>
+				   You can also define various overhead expenses which will be presented in your 
+				  <br> profitability statements for the farm.
+
+				</p>		 	  			 
+			</div>
+			<div id="fields" class="hidden">
+				<p id="tutorial_stage">
+				 	Fields
+				</p>
+				<p id="tutorial_point">
+				   Fields define the specific characteristic's of the land being farmed. 
+				   <br>You can define unlimited fields for a farm.
+				   <br>Farm jobs are performed on fields. Crops are assigned to fields. 
+				   <br>Fields are mapped through google maps which allows specific visual boundary definition. 
+				   <br>Field properties include:
+				</p>
+				<p id="tutorial_bullet">
+					Field name
+					<br>Farm that the field belongs to
+					<br>Number of acres
+					<br>Holding status - (owned, leased, sharecrop, managed)
+					<br>Map location - (which is geocoded for boundary definition)
+					<br>Landlord - field owner
+					<br>Client - of farm management company
+					<br>Yearly land expense  - (rent, % of harvest, fixed amount per acre)
+					<br>Soil test labs
+					<br>Soil test results
+					<br>Row definition - if desired 
+					
+					<br><br>
+					 <img src="/Images/fieldmap.png" width="540" height="380"></img>
+				</p>
+						 	  			 
+			</div>
+			<div id="crops" class="hidden">
+				<p id="tutorial_stage">
+				 	Crops
+				</p>
+				<p id="tutorial_point">
+				   Multiple crops can be defined.  You can have multiple crops in a field.
+				   <br>Crops are selected from a global list and then specific crop information is entered.  
+				   <br>Crop properties include:
+				</p>
+				<p id="tutorial_bullet">
+					General crop name (ex. Soybeans)
+					<br>Specific crop name (ex. low linolenic)
+					<br>Harvest unit of measure (ex. lbs., tons)
+					<br>Inventory unit of measure (ex.tons, lbs, bushels)
+					<br>Harvested crop price - (can be defined also in a contract)
+					<br>Average yield per acre - (overall for crop. Compared to actual yield.)
+					<br>Seed supplier
+					<br>Seed variety
+					<br>Seed rate per acre
+					<br>Planting depth
+					<br>Moisture content
+				</p>			 	  			 
+			</div>
+			<div id="cropplans" class="hidden">
+				<p id="tutorial_stage">
+				 	Crop plans
+				</p>
+				<p id="tutorial_point">
+				   Crop plans define a yearly or seasonal growing initiative. 
+				   <br> They identify the specific fields and acreage that is alloted to the initiative.
+				   <br> Additionally, you can establish a planned yield per field
+				   <br><br>
+				 <img src="/Images/cropplan.png" width="480" height="420"></img>
+				</p>
+			 	  			 
+			</div>
+
+			
+			<div id="supplies" class="hidden">
+				<p id="tutorial_stage">
+				 	Supplies
+				</p>
+				<p id="tutorial_point">
+				   Supplies are all of the products that are used while executing a farm job.
+				   <br> Certain supply types capture extended information. These include fertilizers and restricted use chemicals. 
+					<br>This information is useful in calculating effective pricing for fertilizers
+					<br>and EPA compliance reporting for restricted chemical usage.
+				   <br>Supply properties include:
+				</p>
+				<p id="tutorial_bullet">
+					Supply name
+					<br>Item ID
+					<br>Purchase unit of measure (ex. tons)
+					<br>Purchase cost
+					<br>Usage unit of measure  (ex lbs)
+					<br>Purchase/Usage UOM conversion factor (ex 2000)
+					<br>Rate of usage per acre
+					<br>E.P.A. id for restricted use supplies
+					<br>Active ingredient
+					<br>Manufacturer
+					<br>Formulation
+					<br>Problem targeted
+					<br>Fertilizer content (nitrogen, potassium, phosphorous etc)
+				</p>			 	  			 
+			</div>
+			<div id="farmtasks" class="hidden">
+				<p id="tutorial_stage">
+				 	Field tasks
+				</p>
+				<p id="tutorial_point">
+				   Field tasks define the work items to be performed on the farm.
+				   <br>When you create an account in iFarmService a pre defined group of tasks is provided.
+				   <br>You can use them, change them or remove them. In addition, you can pre define supplies that
+				   <br>will be used by the farm task. They will be carried into the farm job when the task is selected.
+				   <br>Field task properties include:
+				</p>
+				<p id="tutorial_bullet">
+					Task name
+					<br>Task type  - method to group tasks logically for your farm
+					<br>Task stage - (pre-plant, plant, grow, harvest, post-harvest) used in profitability reports.
+					<br>Task notes - (will be carried into the farm job)
+					<br>Task frequency and duration - used to auto generate tasks over a period.
+
+				</p>		 	  			 
+			</div>
+			<div id="equipment" class="hidden">
+				<p id="tutorial_stage">
+				 	Equipment
+				</p>
+				<p id="tutorial_point">
+				   Equipment are the major capital assets that are used in farm jobs. 
+				   <br>You can track equipment usage and maintenance activities and maintain a counter of
+				   <br>hours until next service.
+				   <br>You can maintain a depreciation schedule that is used in calculating total cost
+				   <br>of ownership. By estimating usage hours for the year you can develop a cost per hour
+				   <br> which is used as the equipment cost in farm jobs. 
+				   <br>Equipment properties include:
+				</p>
+				<p id="tutorial_bullet">
+					Ability to track equipment usage against service frequencies.
+					<br>Equipment description
+					<br>Year/model
+					<br>Manufacturer
+					<br>Serial number
+					<br>Date of purchase
+					<br>Purchase price
+					<br>Purchase year
+					<br>Depreciation life
+					<br>Salvage value
+					<br>Cost recovery
+					<br>Cost of ownership
+					<br>Yearly usage hours
+					<br>Usage cost  (per hour)
+					<br>Usage charge (farm management)
+					<br>Equipment width
+					<br>Ability to attach photos of the equipment
+				</p>			 	  			 
+			</div>
+			<div id="storageunits" class="hidden">
+				<p id="tutorial_stage">
+				 	Storage units
+				</p>
+				<p id="tutorial_point">
+				   Storage units are defined for tracking of Crop and Supply inventory by location. They include location
+				   <br>and size related information. When crops are harvested they are directed to storage locations.
+				   <br>When supplies are received from a purchase order they are directed to storage locations.
+				   <br>Inventory is maintained by storage location.
+				</p>			 	  			 
+			</div>
+ 
+
+			
+			<div id="farmjobs" class="hidden">
+				<p id="tutorial_stage">
+				 	Farm jobs
+				</p>
+				<p id="tutorial_point">
+				 		Farm jobs stand at the core of farm management. They identify the work performed and 
+				<br>the various costs associated with the work. Farm jobs represent a job scheduling 
+				<br> and costing feature of farm management. Farm jobs can be used to plan a season and 
+				<br> to track actual work performed along with all relevant costs. Farm jobs establish the
+				<br> cost basis for profitability reporting. You can assign supplies, labor and equipment to
+				<br> the jobs. They are easy to define and maintain. They use all the assets that were previously defined.
+				<br><br>( an example of farm job costs )
+				<br>
+				 <img src="/Images/farmjobcosts.png" width="580" height="300"></img>
+				   <br> <br> 
+				   Farm job properties include:
+				</p>
+				<p id="tutorial_bullet">
+					Field task -(defines the work)
+					<br>Field - (where work is to be performed)
+					<br>Crop plan - (which crop initiative will receive the costs)
+					<br>Total acres - (number of acres for the job)
+					<br>Calendar based scheduling
+					<br>Start and stop dates
+					<br>Total hours for job
+					<br>Job status (plan, in-process, completed)
+					<br>Notes
+					<br>Weather conditions
+					<br>Simple task replication based on task defined frequencies
+					<br>Assignment of supplies, labor and equipment 
+					<br>Supplies assigned to the task will be imported
+					<br>Costs for total job, supplies, labor and equipment
+					 <br><br>
+					 &nbsp;
+					
+				 
+
+				</p>			 	  			 
+			</div>
+			<div id="calendar" class="hidden">
+				<p id="tutorial_stage">
+				 	Job Calendar
+				</p>
+				<p id="tutorial_point">
+				   The job calendar presents all farm jobs in clear and concise calendar view. Jobs can be
+				   <br>selected from the calendar and changes made that are immediately reflected in the calendar.
+				   <br>
+				 <img src="/Images/jobcalendar.png" width="480" height="420"></img>
+				</p>		 	  			 
+			</div>
+ 
+
+
+			
+			<div id="scaletickets" class="hidden">
+				<p id="tutorial_stage">
+				 	Scale Tickets
+				</p>
+				<p id="tutorial_point">
+				Scale tickets register the gross, tare and net weight of harvested crops, convert them to 
+				<br>their inventory unit of measure and assign the inventory to a storage location.
+				<br>Crop grade can also be defined at this point or later within inventory functions.
+				<br>Moisture percent can be established to determine dry weight. The fields that the harvest
+				<br>originated from are defined. 
+				<br>Inventory can be maintained by the scale ticket or can be consolidated by grade.  
+				<br><br>Scale tickets was designed as a quick entry function that allows for continuous and
+				<br> rapid entry of weights with minimal effort. 
+				
+				<br><br>
+				 <img src="/Images/scaleticket.png" width="560" height="380"></img>
+				
+				</p>			 	  			 
+			</div>
+			<div id="cropinventory" class="hidden">
+				<p id="tutorial_stage">
+				 	Crop Inventory
+				</p>
+				<p id="tutorial_point">
+				Crop inventory is recorded by location and grade. It can additionally, be maintained by scale ticket.
+				<br>Inventory functions allow you to see the inputs and output and transfer inventory between 
+				<br>locations and grades. You can store a lab report document along with the inventory.
+			
+				<br> 
+					<img src="/Images/cropinventory.png" width="520" height="380"></img>
+				
+				</p>
+		 	  			 
+			</div>
+
+			
+			<div id="salescontracts" class="hidden">
+				<p id="tutorial_stage">
+				 	Sales Contracts
+				</p>
+				<p id="tutorial_point">
+				A sales contract is an agreement with a customer to reserve crop inventory and sell it in the future    	  
+				<br>(at harvest) at a specific price. When a shipment is made, the contract can be referenced 
+				<br>and the contract price will be used on the shipment and for invoicing
+			
+				<br> <br> 
+					<img src="/Images/salescontract.png" width="460" height="380"></img>
+				
+				</p>			 	  			 
+			</div>
+			<div id="shipments" class="hidden">
+				<p id="tutorial_stage">
+				 	Customer Shipments
+				</p>
+				<p id="tutorial_point">
+				A shipment is a sale of inventory to a customer. It can originate from a sales contract or 
+				<br>just be direct to a customer. Pricing is taken from either a sales contract or the crop price.
+				<br>Inventory is selected to add to the shipment. When the shipment status is set to 'shipped'
+				<br> inventory is relieved at the storage location.
+			
+				<br> <br> 
+					<img src="/Images/shipment.png" width="500" height="380"></img>
+				
+				</p>			 	  			 
+			</div>
+			<div id="createinvoices" class="hidden">
+				<p id="tutorial_stage">
+				 	Create Invoices
+				</p>
+				<p id="tutorial_point">
+				Invoices are generated from shipments that have been set to a 'shipped' status. There is one invoice 
+				<br>per shipment. Invoices can be viewed and updated for status change and payment information.
+				<br>When invoices have been created they can then be printed. 
+
+			
+				<br> <br> 
+					<img src="/Images/invoice.png" width="580" height="360"></img>
+				
+				</p>			 	  			 
+			</div>
+			<div id="viewinvoices" class="hidden">
+				<p id="tutorial_stage">
+				 	View Invoices
+				</p>
+				<p id="tutorial_point">
+				With the view invoice function, invoices can be viewed, filtered and sorted. You can select an 
+				<br>invoice to edit.
+			 
+
+			
+				<br> <br> 
+					<img src="/Images/viewinvoice.png" width="600" height="340"></img>
+				
+				</p>			 	  			 
+			</div>
+
+
+			<div id="purchaseorders" class="hidden">
+				<p id="tutorial_stage">
+				 	Purchase Orders
+				</p>
+				<p id="tutorial_point">
+				Purchase orders are used to acquire your supplies inventory. They are written to a defined supplier
+				<br> (from party definition).  For the line items, the supply cost  and unit of measure is taken 
+				<br>from the supply definition but can be overridden when the PO line is created. When you receive
+				<br>a purchase order item it is added to supplies inventory.
+							<br> <br> 
+								<img src="/Images/purchaseorder.png" width="500" height="380"></img>
+				
+				</p>			 	  			 
+			</div>
+			
+			<div id="suppliesinventory" class="hidden">
+				<p id="tutorial_stage">
+				 	Supplies Inventory
+				</p>
+				<p id="tutorial_point">
+				Supply inventory records are created when you receive a purchase order line.  The lines are received
+				<br> into storage locations.  For each supply/storage location, we maintain an inventory value 
+				<br> and an average cost for the supply. You can transfer and adjust your supply inventory . 
+				<br> Inventory is relieved when a farm job status is set to 'Complete' and that supply is used on the job.
+							<br> <br> 
+								<img src="/Images/supplyinventory.png" width="580" height="360"></img>
+				
+				</p>			 	  			 
+			</div>
+			<div id="reports" class="hidden">
+				<p id="tutorial_stage">
+				 	Reports
+				</p>
+				<p id="tutorial_point">	
+					iFarmService contains extensive reporting. New reports will be added based on requests from
+					<br>the farm community. The current report list contains:
+					<br> Farm Cost Analysis 
+					<br> Farm Billing Analysis  - for farm management companies
+					<br> Farm Profitability Analysis 
+					<br> Harvest Yield Report 
+					<br> Scale ticket report
+					<br> Invoice printing 
+					<br> Invoice detail report 
+					<br> Fertilizer usage report 
+					<br> Restricted use chemical report 
+					<br> Depreciation and Cost of ownership report
+					<br> Job Sheet - input form for work performed
+					<br> Purchase order report
+					<br> Inventory report
+										  			
+				</p>			 	  			 
+			</div>
+			
+			
+			
+			<div id="socialnetwork" class="hidden">
+				<p id="tutorial_stage">
+				 	Farmers Network
+				</p>
+				<p id="tutorial_point">
+				The iFarmService social network allows all registered users (farmers) to exchange thoughts, ideas,
+				<br> inspiration and business information with others.  Each farmer can post any information they wish and 
+				<br>it becomes visible to other farmers. A farmer can then select specific farmers to join their community 
+				<br>which will weave a continuous idea and information flow for your personal community.
+				<br><br>When you view the farm community you can select an individual farmer, click on their name, and 
+				<br>view all of there comments.  If you like what they have to say you  click the “Follow” button and they 	
+				<br>will be come part of your personal community. You have a personal community page. Here you can post 	
+				<br>your personal comments, reply to others,  and you can see all of your comments interwoven by date and 
+				<br>time with the comments of other farmers that you “Follow”. 
+				<br>A statistics panel contains your community statistics.  Number of farmers that are following you and 
+				<br>number of farmers that you are following. You can click on the statistics to view the individual 
+				<br>farmers. From there you can choose to “Follow” or “Unfollow” any given farmer.
+				</p>			 	  			 
+			</div>
+			<div id="weather" class="hidden">
+				<p id="tutorial_stage">
+				 	Weather
+				</p>
+				<p id="tutorial_point">	
+					The user of iFarmService defines a weather postal code. That postal code is used to manage weather. We 
+					<br>offer links to current weather conditions and maintain a daily weather history for the postal code. 
+					<br>We automatically gather the information from the National Weather Service (NOAA).  Historical 
+					<br>weather can be retrieved at any time for assistance in your farm decisions.				
+				</p>
+				<br> <br> 
+					<img src="/Images/weather.png" width="580" height="380"></img>
+					 	  			 
+			</div>
+			<div id="news" class="hidden">
+				<p id="tutorial_stage">
+				 	News
+				</p>
+				<p id="tutorial_point">	
+					We maintain a consolidated point of entry for Agricultural news. As we encounter web sites that
+					<br>contain relevant and effective information for the farmer we add them to our list. 					  			
+				</p>		 	  			 
+			</div>
+			<div id="accountmanagement" class="hidden">
+				<p id="tutorial_stage">
+				 	Account Management
+				</p>
+				<p id="tutorial_point">	
+					Account Management allows you to manage your personal information which include your subscription,
+					<br>email address, password and security questions.  					  			
+				</p>			 	  			 
+			</div>
+			<div id="documentation" class="hidden">
+				<p id="tutorial_stage">
+				 	Documentation
+				</p>
+				<p id="tutorial_point">	
+					Once you have signed up on iFarmService you have access to our complete documentation manual  
+					<br>which can be downloaded as a PDF.  			
+				</p>			 	  			 
+			</div>
+			<div id="datatypes" class="hidden">
+				<p id="tutorial_stage">
+				 	Data Types
+				</p>
+				
+				<p id="tutorial_point">	
+					Much of the information you will use is predefined in the “datatype”  table.
+					<br>When you sign up as a user, a new datatype table is created for you.    
+					<br>It can be viewed on the “Utility Menu” under data types.
+					<br>Some information in “datatype” can NOT be changed because it is used for decision making in 		
+					<br>iFarmService. These items are flagged as “is protected”. 
+					<br>All Other items can be customized by you to adapt to your situation. 
+					<br>For a list of Datatypes see Appendix A at end of the iFarmService documentation manual.
+					 			
+				</p>			 	  			 
+			</div>
+
+ 
+
+
+		</td>
+	</tr>
+</table>
