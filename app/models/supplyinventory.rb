@@ -16,7 +16,7 @@ class Supplyinventory < ActiveRecord::Base
     @supplyinventory = Supplyinventory.find_by_sql("#{sql_statement}")
     @onhand_value = 0
     @supplyinventory.each do |s|
-      @onhand_value += s.onhand_value
+      @onhand_value += s.onhand_value.to_f
     end
     return @onhand_value
   end

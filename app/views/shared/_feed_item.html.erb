@@ -78,7 +78,7 @@
 						<td colspan="2">
 							 
 								<input class="input_fill"  id="inputfill"  type="text" name="comment" value="Write a comment"  onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" onsubmit="clearInput(inputfill)" />
-							   <%= submit_tag " Submit ", :class => "button_very_small", :id => "commit" %>	
+							   <%= submit_tag " Submit ", :class => "hidden", :id => "commit" %>	
 
 
 
@@ -112,7 +112,7 @@
 						<td colspan="2">
 						<div class="hidden" id="addcomment<%= @micropost.id %>">
 								<input class="input_fill" id="inputfill" type="text" name="comment" value="Write a comment" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" onsubmit="clearInput(inputfill)" />
-							   <%= submit_tag " Submit ", :class => "button_very_small", :id => "submit_fill" %>	
+							   <%= submit_tag " Submit ", :class => "hidden", :id => "submit_fill" %>	
 
 							<input type="hidden" name="micropost" value="<%= @micropost.id %>" />
 

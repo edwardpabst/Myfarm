@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120328202301) do
+ActiveRecord::Schema.define(:version => 20120418221253) do
 
   create_table "capitalrecoveries", :force => true do |t|
     t.integer  "recovery_year"
@@ -27,6 +27,9 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "comments", ["micropost_id"], :name => "index_comments_on_micropost_id"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "contracts", :force => true do |t|
     t.integer  "party_id"
@@ -71,6 +74,10 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.integer  "user_id"
   end
 
+  add_index "cropplanfields", ["cropplan_id"], :name => "index_cropplanfields_on_cropplan_id"
+  add_index "cropplanfields", ["field_id"], :name => "index_cropplanfields_on_field_id"
+  add_index "cropplanfields", ["user_id"], :name => "index_cropplanfields_on_user_id"
+
   create_table "cropplans", :force => true do |t|
     t.integer  "crop_id"
     t.string   "plan_year"
@@ -80,6 +87,9 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.integer  "user_id"
     t.string   "cropplanfull"
   end
+
+  add_index "cropplans", ["crop_id"], :name => "index_cropplans_on_crop_id"
+  add_index "cropplans", ["user_id"], :name => "index_cropplans_on_user_id"
 
   create_table "crops", :force => true do |t|
     t.string   "cropname"
@@ -146,6 +156,8 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.integer  "interest_rate"
   end
 
+  add_index "equipment", ["user_id"], :name => "index_equipment_on_user_id"
+
   create_table "equipmentactivities", :force => true do |t|
     t.integer  "equipment_id"
     t.integer  "user_id"
@@ -158,6 +170,9 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.boolean  "is_fullservice"
     t.string   "activity_type"
   end
+
+  add_index "equipmentactivities", ["equipment_id"], :name => "index_equipmentactivities_on_equipment_id"
+  add_index "equipmentactivities", ["user_id"], :name => "index_equipmentactivities_on_user_id"
 
   create_table "events", :force => true do |t|
     t.integer  "user_id"
@@ -186,6 +201,7 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.integer  "user_id"
   end
 
+  add_index "farmexpenses", ["farm_id"], :name => "index_farmexpenses_on_farm_id"
   add_index "farmexpenses", ["user_id"], :name => "index_farmexpenses_on_user_id"
 
   create_table "farmjobequipments", :force => true do |t|
@@ -201,6 +217,9 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.decimal  "rate_hour"
   end
 
+  add_index "farmjobequipments", ["farmjob_id"], :name => "index_farmjobequipments_on_farmjob_id"
+  add_index "farmjobequipments", ["user_id"], :name => "index_farmjobequipments_on_user_id"
+
   create_table "farmjoblabors", :force => true do |t|
     t.integer  "user_id"
     t.integer  "farmjob_id"
@@ -210,6 +229,9 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.datetime "updated_at"
     t.decimal  "rate"
   end
+
+  add_index "farmjoblabors", ["farmjob_id"], :name => "index_farmjoblabors_on_farmjob_id"
+  add_index "farmjoblabors", ["user_id"], :name => "index_farmjoblabors_on_user_id"
 
   create_table "farmjobs", :force => true do |t|
     t.integer  "user_id"
@@ -257,6 +279,8 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
   end
 
   add_index "farmjobs", ["cropplan_id"], :name => "index_farmjobs_on_cropplan_id"
+  add_index "farmjobs", ["field_id"], :name => "index_farmjobs_on_field_id"
+  add_index "farmjobs", ["fieldtask_id"], :name => "index_farmjobs_on_fieldtask_id"
   add_index "farmjobs", ["user_id"], :name => "index_farmjobs_on_user_id"
 
   create_table "farmjobsupplies", :force => true do |t|
@@ -268,6 +292,9 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.datetime "updated_at"
     t.string   "usage_uom"
   end
+
+  add_index "farmjobsupplies", ["farmjob_id"], :name => "index_farmjobsupplies_on_farmjob_id"
+  add_index "farmjobsupplies", ["user_id"], :name => "index_farmjobsupplies_on_user_id"
 
   create_table "farms", :force => true do |t|
     t.string   "farmname"
@@ -296,6 +323,9 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "fieldmappings", ["field_id"], :name => "index_fieldmappings_on_field_id"
+  add_index "fieldmappings", ["user_id"], :name => "index_fieldmappings_on_user_id"
 
   create_table "fields", :force => true do |t|
     t.integer  "user_id"
@@ -347,6 +377,8 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.string   "task_stage"
   end
 
+  add_index "fieldtasks", ["user_id"], :name => "index_fieldtasks_on_user_id"
+
   create_table "fieldtasksupplies", :force => true do |t|
     t.integer  "user_id"
     t.integer  "fieldtask_id"
@@ -356,6 +388,9 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.string   "usage_uom"
     t.decimal  "qty_required"
   end
+
+  add_index "fieldtasksupplies", ["fieldtask_id"], :name => "index_fieldtasksupplies_on_fieldtask_id"
+  add_index "fieldtasksupplies", ["user_id"], :name => "index_fieldtasksupplies_on_user_id"
 
   create_table "inventorylots", :force => true do |t|
     t.integer  "scaleticket_id"
@@ -411,6 +446,10 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.datetime "updated_at"
     t.integer  "user_id"
   end
+
+  add_index "invoices", ["invoice_number"], :name => "index_invoices_on_invoice_number"
+  add_index "invoices", ["shipment_id"], :name => "index_invoices_on_shipment_id"
+  add_index "invoices", ["user_id"], :name => "index_invoices_on_user_id"
 
   create_table "microposts", :force => true do |t|
     t.string   "content"
@@ -494,6 +533,10 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.string   "supply_uom"
   end
 
+  add_index "podetails", ["po_id"], :name => "index_podetails_on_po_id"
+  add_index "podetails", ["storage_id"], :name => "index_podetails_on_storage_id"
+  add_index "podetails", ["user_id"], :name => "index_podetails_on_user_id"
+
   create_table "pos", :force => true do |t|
     t.string   "ponumber"
     t.integer  "user_id"
@@ -509,6 +552,9 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "pos", ["supplier_id"], :name => "index_pos_on_supplier_id"
+  add_index "pos", ["user_id"], :name => "index_pos_on_user_id"
 
   create_table "relationships", :force => true do |t|
     t.integer  "follower_id"
@@ -549,6 +595,7 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.string   "grade"
   end
 
+  add_index "scaletickets", ["cropplan_id"], :name => "index_scaletickets_on_cropplan_id"
   add_index "scaletickets", ["user_id"], :name => "index_scaletickets_on_user_id"
 
   create_table "shipmentdetails", :force => true do |t|
@@ -566,6 +613,11 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.integer  "user_id"
     t.decimal  "original_inv_amount"
   end
+
+  add_index "shipmentdetails", ["cropplan_id"], :name => "index_shipmentdetails_on_cropplan_id"
+  add_index "shipmentdetails", ["inventorylot_id"], :name => "index_shipmentdetails_on_inventorylot_id"
+  add_index "shipmentdetails", ["shipment_id"], :name => "index_shipmentdetails_on_shipment_id"
+  add_index "shipmentdetails", ["user_id"], :name => "index_shipmentdetails_on_user_id"
 
   create_table "shipments", :force => true do |t|
     t.integer  "user_id"
@@ -590,6 +642,9 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.integer  "farm_id"
   end
 
+  add_index "shipments", ["cropplan_id"], :name => "index_shipments_on_cropplan_id"
+  add_index "shipments", ["user_id"], :name => "index_shipments_on_user_id"
+
   create_table "storages", :force => true do |t|
     t.string   "name"
     t.float    "size"
@@ -604,6 +659,8 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.decimal  "yearly_cost"
     t.boolean  "is_supply_default"
   end
+
+  add_index "storages", ["user_id"], :name => "index_storages_on_user_id"
 
   create_table "subscriptions", :force => true do |t|
     t.integer  "user_id"
@@ -620,6 +677,8 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.string   "address_line_1"
     t.string   "address_zip"
   end
+
+  add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id"
 
   create_table "supplies", :force => true do |t|
     t.integer  "user_id"
@@ -654,6 +713,9 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.decimal  "restricted_hours",    :precision => 9, :scale => 2
   end
 
+  add_index "supplies", ["supplyname"], :name => "index_supplies_on_supplyname"
+  add_index "supplies", ["user_id"], :name => "index_supplies_on_user_id"
+
   create_table "supplyinventories", :force => true do |t|
     t.integer  "supply_id"
     t.string   "supply_uom"
@@ -668,6 +730,10 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.decimal  "avg_cost"
   end
 
+  add_index "supplyinventories", ["storage_id"], :name => "index_supplyinventories_on_storage_id"
+  add_index "supplyinventories", ["supply_id"], :name => "index_supplyinventories_on_supply_id"
+  add_index "supplyinventories", ["user_id"], :name => "index_supplyinventories_on_user_id"
+
   create_table "supplyinventory_trans", :force => true do |t|
     t.integer  "supplyinventory_id"
     t.string   "supply_tran_type"
@@ -677,6 +743,8 @@ ActiveRecord::Schema.define(:version => 20120328202301) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "supplyinventory_trans", ["supplyinventory_id"], :name => "index_supplyinventory_trans_on_supplyinventory_id"
 
   create_table "types", :force => true do |t|
     t.string   "typename"

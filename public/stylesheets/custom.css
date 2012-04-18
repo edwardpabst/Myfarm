@@ -266,17 +266,20 @@ table.firstcomment td{
 {
     top: 200px;
  	left: 350px;
+    width: 600px;
 }
 #farmjobs, #calendar, #cropinventory,  #scaletickets, #salescontracts, #shipments, #createinvoices, #viewinvoices, #purchaseorders, #suppliesinventory
 {
     top: 200px;
  	left: 350px;
+    width: 600px;
 }
 
 #reports, #socialnetwork, #weather, #news, #accountmanagement,  #documentation, #datatypes 
 {
     top: 200px;
  	left: 350px;
+    width: 600px;
     
 }
  
@@ -353,7 +356,7 @@ font-size: 90%;
 #tutorial_stage{
 	font-size:140%;
 	font-style:bold;
-    color: black;
+    color: #A7C6D6;
 	background-color:white;
 	padding:5px;
 	text-align:left;
@@ -767,7 +770,7 @@ input  {
 .input_fill  {
    
 	font-family: Arial, Sans-Serif;
-    font-size: 100%;
+    font-size: 85%;
     padding: 4px;
     border: solid 1px white;
     width:85%;
@@ -1290,11 +1293,43 @@ ul.none  {
 }
 
  
-
-
 .flash {
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.flashnotice {
+	margin-left: auto;
+	margin-right: auto;
+	font-size:90%;
+	border-style:solid;
+	border-width: 1px;
+	border-color: #A7C6D6;
+	background-color:lemonchiffon;
+	padding: 10px;
+}
+
+.flashsuccess {
+	margin-left: auto;
+	margin-right: auto;
+	font-size:90%;
+	border-style:solid;
+	border-width: 1px;
+	border-color: #A7C6D6;
+	background-color:ghostwhite;
+	padding: 10px;
+}
+
+.flasherror {
+	margin-left: auto;
+	margin-right: auto;
+	font-size:90%;
+	border-style:solid;
+	border-width: 1px;
+	border-color: red;
+	background-color:black;
+	padding: 10px;
+	color:white;
 }
 
 div.field{

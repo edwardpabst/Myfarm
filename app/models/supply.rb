@@ -14,19 +14,42 @@ class Supply < ActiveRecord::Base
   validates_presence_of :supplyname, :item_number, :supply_type, :supply_uom, :supply_cost_uom
   validates :supply_cost_uom, :numericality => true 
   validates :supply_charge_uom, :numericality => true 
-  validates :carrier_rate_acre, :numericality => true 
+ 
   validates :rate_acre, :numericality => true 
   validates :conversion_factor, :numericality => true
   
-  validates :nitrogen_content, :numericality => true
-  validates :phosphorous_content, :numericality => true 
-  validates :potassium_content, :numericality => true 
-  validates :calcium_content, :numericality => true 
-  validates :manganese_content, :numericality => true 
-  validates :magnesium_content, :numericality => true 
-  validates :chemical_rate_acre, :numericality => true 
-  validates :restricted_hours, :numericality => true  
+
+  before_save :check_numericality
   
+  def check_numericality
+    if self.carrier_rate_acre.nil?
+      self.carrier_rate_acre = 0
+    end
+    if self.nitrogen_content.nil?
+      self.nitrogen_content = 0
+    end
+    if self.phosphorous_content.nil?
+      self.phosphorous_content = 0
+    end
+    if self.potassium_content.nil?
+      self.potassium_content = 0
+    end
+    if self.calcium_content.nil?
+      self.calcium_content = 0
+    end
+    if self.manganese_content.nil?
+      self.manganese_content = 0
+    end
+    if self.magnesium_content.nil?
+      self.magnesium_content = 0
+    end
+    if self.restricted_hours.nil?
+      self.restricted_hours = 0
+    end
+    if self.chemical_rate_acre.nil?
+      self.chemical_rate_acre = 0
+    end
+  end
           def supplyfull
             "#{self.supplyname}: #{self.supply_uom}"
           end
