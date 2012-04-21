@@ -204,7 +204,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        
+        logger.debug "INVOICE SELECTION BY CUSTOMER ************-#{params[:customer_id]}" 
         pdf = InvoicereportPdf.new(session[:s_user_id], view_context, params[:customer_id],params[:start_date], 
         params[:stop_date], params[:invoice_number], params[:reprint], params[:invoice_sort_sequence])
         send_data pdf.render, filename: "invoice_report",

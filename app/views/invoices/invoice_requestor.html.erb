@@ -29,7 +29,7 @@
 			</td>
 			<td>
 				<% if !@party_types.nil? %>			
-					<%= collection_select("shipment", "customer_id", @party_types, "id", "partyname", options = {:prompt => " ", :include_blank => ' '}) %>
+					<%= collection_select("", "customer_id", @party_types, "id", "partyname", options = {:prompt => " ", :include_blank => ' '}) %>
 				<% end %>  
 		 	</td>
 		</tr>

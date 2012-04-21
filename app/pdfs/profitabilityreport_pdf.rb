@@ -1049,7 +1049,7 @@ class ProfitabilityreportPdf < Prawn::Document
   #-------------------------------------------------------------------------------------------------------------
   
   def cost(num)
-    @view.number_to_currency(num)
+    @view.number_to_currency(num, :precision => 2)
   end
   
   def precision(num)

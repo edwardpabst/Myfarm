@@ -4,7 +4,7 @@ class Crop < ActiveRecord::Base
   :avg_yield_acre, :avg_moisture_percent , :avg_weight_uom, :seed_company_id,  :variety_hybrid,  :lot_id,  
   :seed_rate_uom,   :seed_rate_land,  :seed_rate,  :plant_depth, :crop_purpose
     
-  has_one :Farmjob
+  has_many :cropplans
   belongs_to :Cropinventory
  
  validates :price_per_uom, :numericality => true

@@ -49,16 +49,17 @@ Define your Crops. Crop definition establishes what you will be growing. It also
     
  
 	
-	<%= form.input :price_per_uom, :as => :number, :label => "Price/Inventory UOM",  :required => false    %> 
+	<%= form.input :price_per_uom, :as => :string, :label => "Price/Inventory UOM",  :required => true    %> 
 	
-	<%= form.input :avg_yield_acre,  :as => :number, :label => "Avg yield per acre",  :required => false    %>
+	<%= form.input :avg_yield_acre,  :as => :number, :label => "Avg yield per acre",  :required => true    %>
 	
 		<% get_parties_by_type("Supplier") %>
 	 <li class="string input optional stringish"> 
-		<label class=" label" for="crop">Seed supplier*<abbr title="required"> </abbr>  </label> 
+		<label class=" label" for="crop">Seed supplier<abbr title="required"> </abbr>  </label> 
 		<% if !@party_types.nil? %>			
 			<%= collection_select("crop", "seed_company_id", @party_types, "id", "partyname", options = {:prompt => " ", :include_blank => ' '}) %>
-		<% end %></li>
+		<% end %>
+	</li>
 	
 
 

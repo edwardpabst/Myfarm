@@ -9,7 +9,7 @@
  
 
 <!-- Div for capture of grid output -->
- <div id="type_grid" style="width:800px; height:500px;">
+ <div id="type_grid" style="width:95%; height:500px;">
 
  </div>
 
@@ -20,7 +20,7 @@
      var grid = new dhtmlXGridObject("type_grid");
      grid.setImagePath("/images/");
      grid.setHeader("Type name, Type string value, Type integer value , Type boolean, is Protected");  
-     grid.setInitWidths("160,160,160,160,160");
+     grid.setInitWidths("160,140,140,120,*");
      grid.setSkin("dhx_web");
      grid.init();
 	 grid.load("/typedata");  	

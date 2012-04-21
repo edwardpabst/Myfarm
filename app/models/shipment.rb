@@ -42,8 +42,29 @@ class Shipment < ActiveRecord::Base
        group by cropplanfull, qty_uom, price
        "            
 
-    return Shipment.find_by_sql("#{sql_statement}")
+  
+    @shipments = Shipment.find_by_sql("#{sql_statement}")
+    if @shipment.nil? || @shipments.empty?
+      sql_statement = "Select cropplanfull, 
+         avg_yield_acre as qty_per_acre,               
+         crop_inventory_uom as qty_uom,
+         avg(price_per_uom) as price_per_unit, 
+         sum((price_per_uom * avg_yield_acre)) as value_per_acre
+       from cropplans cp
+        left join cropplanfields cpf on cp.id = cpf.cropplan_id
+        left join fields on fields.id = cpf.field_id
+        left join farms on fields.farm_id = farms.id
+        join crops on crops.id =  cp.crop_id
+       where cp.user_id = #{user_id}
+       and fields.farm_id = #{farm_id}
+       and plan_year = '#{year}'
+       group by cropplanfull, crop_inventory_uom, price_per_uom
+       "
+       
+       @shipments = Shipment.find_by_sql("#{sql_statement}")
+    end
 
+    return @shipments
   end
   
   def self.profitability_revenue_summary(user_id, view, farm_id, year, start_date, stop_date)
