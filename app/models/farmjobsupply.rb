@@ -44,8 +44,8 @@ class Farmjobsupply < ActiveRecord::Base
            
              sql_statement = "Select supplyname, sum(actual_qty/applied_area) as qty_per_acre,               
                 usage_uom,
-                supply_cost_uom / conversion_factor as cost_per_unit, 
-                (supply_cost_uom / conversion_factor) * (actual_qty/applied_area )  as cost_per_acre 
+                sum(supply_cost_uom / conversion_factor) as cost_per_unit, 
+                sum((supply_cost_uom / conversion_factor) * (actual_qty/applied_area ))  as cost_per_acre              
               from farmjobs  
               join fields on farmjobs.field_id = fields.id
               join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 

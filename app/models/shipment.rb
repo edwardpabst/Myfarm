@@ -58,7 +58,7 @@ class Shipment < ActiveRecord::Base
        where cp.user_id = #{user_id}
        and fields.farm_id = #{farm_id}
        and plan_year = '#{year}'
-       group by cropplanfull, crop_inventory_uom, price_per_uom
+       group by cropplanfull, crop_inventory_uom, price_per_uom, avg_yield_acre
        "
        
        @shipments = Shipment.find_by_sql("#{sql_statement}")
