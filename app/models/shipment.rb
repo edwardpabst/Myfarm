@@ -49,7 +49,7 @@ class Shipment < ActiveRecord::Base
          avg_yield_acre as qty_per_acre,               
          crop_inventory_uom as qty_uom,
          avg(price_per_uom) as price_per_unit, 
-         sum((price_per_uom * avg_yield_acre)) as value_per_acre
+         avg((price_per_uom * avg_yield_acre)) as value_per_acre
        from cropplans cp
         left join cropplanfields cpf on cp.id = cpf.cropplan_id
         left join fields on fields.id = cpf.field_id
@@ -101,6 +101,7 @@ class Shipment < ActiveRecord::Base
        where cp.user_id = #{user_id}
        and fields.farm_id = #{farm_id}
        and plan_year = '#{year}'
+       
        "
        
        @shipments = Shipment.find_by_sql("#{sql_statement}")
