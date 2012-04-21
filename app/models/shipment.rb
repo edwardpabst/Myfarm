@@ -87,7 +87,26 @@ class Shipment < ActiveRecord::Base
        and plan_year = '#{year}'
        "            
 
-    return Shipment.find_by_sql("#{sql_statement}")
+    
+    @shipments = Shipment.find_by_sql("#{sql_statement}")
+    if @shipment.nil? || @shipments.empty?
+      sql_statement = "Select avg(avg_yield_acre) as qty_per_acre,               
+         avg(price_per_uom) as price_per_unit,  
+         avg(avg_yield_acre * price_per_uom) as value_per_acre
+       from cropplans cp
+        left join cropplanfields cpf on cp.id = cpf.cropplan_id
+        left join fields on fields.id = cpf.field_id
+        left join farms on fields.farm_id = farms.id
+        join crops on crops.id =  cp.crop_id
+       where cp.user_id = #{user_id}
+       and fields.farm_id = #{farm_id}
+       and plan_year = '#{year}'
+       "
+       
+       @shipments = Shipment.find_by_sql("#{sql_statement}")
+    end
+
+    return @shipments
 
   end
 end
