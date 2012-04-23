@@ -32,6 +32,11 @@ module SessionsHelper
     create_base_data(@current_user.id)
   end
   
+  def set_new_farm_expenses
+    get_current_user
+    create_expense_data(@current_user.id)
+  end
+  
   def set_current_user_data
     get_current_user
     set_current_parms
@@ -51,20 +56,22 @@ module SessionsHelper
       @newtype.type_isprotected = t.type_isprotected
       @newtype.save
     end
+  end
     
-    #replicate fieldtasks table with new user id
-    @fieldtasks = Fieldtask.find_by_sql("select * from fieldtasks where user_id = 1")
-    @fieldtasks.each do |t|
-      @newfieldtask = Fieldtask.new
-      @newfieldtask.user_id = user_id 
-      @newfieldtask.taskdescription = t.taskdescription
-      @newfieldtask.task_type = t.task_type
-      @newfieldtask.task_stage = t.task_stage
-      @newfieldtask.task_notes = t.task_notes
-      @newfieldtask.task_frequency_days = t.task_frequency_days
-      @newfieldtask.task_duration_days = t.task_duration_days
-      @newfieldtask.save
+  def create_expense_data(user_id)
+    #replicate farm expenses
+    @farmexpenses = Farmexpense.find_by_sql("select * from farmexpenses where user_id = 1")
+    @farmexpenses.each do |t|
+      @newfarmexpense = Farmexpense.new
+      @newfarmexpense.user_id = user_id 
+      @newfarmexpense.farm_id = session[:s_farm_id]
+      @newfarmexpense.expense_type = t.expense_type
+      @newfarmexpense.expense_name = t.expense_name
+      @newfarmexpense.expense_amount = 0
+      @newfarmexpense.expense_year = Date.today.year.to_s
+      @newfarmexpense.save
     end
+    
     
   end
   

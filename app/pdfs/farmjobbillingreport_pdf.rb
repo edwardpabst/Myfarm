@@ -45,6 +45,9 @@ class FarmjobbillingreportPdf < Prawn::Document
   end
   
   def farmjob_header
+    fill_color "FF9900"
+    text "iFarmService", size: 18, style: :normal, :align => :left, :color =>  [ "RED"]
+    fill_color "404040"
     text "Farmjob Billing Report", size: 14, style: :bold, :align => :center
     move_down 5
     text "for Date Range - (#{@start_date} - #{@stop_date})", size: 8, style: :bold, :align => :center

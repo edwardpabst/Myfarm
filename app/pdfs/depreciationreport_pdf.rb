@@ -43,6 +43,10 @@ class DepreciationreportPdf < Prawn::Document
 
   
   def depreciation_header
+    fill_color "FF9900"
+    text "iFarmService", size: 18, style: :normal, :align => :left, :color =>  [ "RED"]
+    fill_color "404040"
+    
     text "Depreciation and Cost of ownership Report", size: 10, style: :bold, :align => :center
     move_down 5
 

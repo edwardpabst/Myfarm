@@ -74,6 +74,10 @@ class YieldreportPdf < Prawn::Document
 
   
   def yield_header
+    fill_color "FF9900"
+    text "iFarmService", size: 18, style: :normal, :align => :left, :color =>  [ "RED"]
+    fill_color "404040"
+    
     text "Harvest Yield Report", size: 14, style: :bold, :align => :center
     move_down 5
 

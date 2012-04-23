@@ -102,7 +102,9 @@ class ScaleticketreportPdf < Prawn::Document
   
   def scaleticket_header
     #repeat :all do
-       
+       fill_color "FF9900"
+       text "iFarmService", size: 18, style: :normal, :align => :left, :color =>  [ "RED"]
+       fill_color "404040"
     
         text "Scale Ticket Report", size: 14, style: :bold, :align => :center 
         move_down 5
