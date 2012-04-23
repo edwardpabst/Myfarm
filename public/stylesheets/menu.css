@@ -39,7 +39,7 @@
 #menu1, #menu2, #menu3, #menu4, #menu5
 {
     position: absolute;
-    top: 70px;
+    top: 0px;
     
 
 }
@@ -147,7 +147,7 @@
 
 #menu1, #menu2, #menu3, #menu4, #menu5
 {
-    top: 105px;
+    top: 100px;
 }
 
 #submenu1, #submenu2, #submenu3, #submenu4, #submenu5

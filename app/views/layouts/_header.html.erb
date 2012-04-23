@@ -7,22 +7,19 @@
 			<td align="left" valign="top">
 				
 				<div id="homepageh0">
-				<span>	<img src="/Images/seedling.jpg" width="50" height="50"></img>
-					iFarmService</span>
+					<img src="/Images/seedling.jpg" width="45" height="45"></img>
+				<span>	iFarmService</span>
   				</div>
 			 
 				 
 			</td>
 			<td align="right" valign="top">
 				<nav class="round">
+ 
+						
 					<ul>
 
-						<li><font color="slategrey">
-						<% if signed_in?  %>
-								Welcome - <%= @current_user.name %> 
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<% end %>	
-							</font> </li>
+
 						<li> <%= link_to "Home", root_path %></li>
 						<li> <%= link_to "Overview", "/overview" %></li>
 						<li> <div id="wx_module_1759">
@@ -50,8 +47,16 @@
 
 
 					</ul>
+				    <font color="#A7C6D6">
+					<% if signed_in?  %>
+
+						&nbsp; Welcome - <%= @current_user.name %> 
+					<br>	
+					<% end %>	
+					</font>					
+
 				</nav>
-			 
+
 			 
 			
 			</td>
