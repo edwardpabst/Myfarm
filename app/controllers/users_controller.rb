@@ -38,18 +38,54 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
-
-    if @user.save
-      UserMailer.registration_confirmation(@user).deliver
-      sign_in @user
-      flash[:success] = "Welcome to the iFarmService app. Please take a moment to complete your profile info before we begin to define your farm."
-      set_new_user_data
-      redirect_to new_party_path
-    else
-      flash[:success] = "Invalid email/password combination"
-      @title = "Sign up"
-      render 'new'
+    @coupon_code = true
+    
+    
+    if !params[:coupon_code].nil? and !params[:coupon_code].blank?
+       
+      @coupon = Coupon.find_by_coupon_code(params[:coupon_code])
+      if @coupon.nil?     
+        @coupon_code = false
+      else          
+        @has_coupon = true
+      end
+    else        
+      @has_coupon = false
+    end 
+    
+    respond_to do |format|
+    
+      if @coupon_code == false          
+         flash[:error] = "You have entered an invalid coupon code."             
+      else
+ 
+          if @user.save
+            UserMailer.registration_confirmation(@user).deliver
+            sign_in @user
+            flash[:success] = "Welcome to the iFarmService app. Please take a moment to complete your profile info before we begin to define your farm."
+ 
+            if @has_coupon == true 
+                           
+              set_subscription       
+            end
+                  
+            set_new_user_data
+            
+            format.html { redirect_to new_party_path }
+          else
+            @coupon_code = false
+            @title = "Sign up"         
+          end
+    
+      end
+      
+      format.html { render :action => "new" }
+       
     end
+    
+    
+     
+
   end
   
   def update
@@ -196,7 +232,28 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
   
-  
+  def set_subscription 
+    
+    @subscription = Subscription.new
+    @subscription.user_id = @user.id
+    @subscription.start_date = Date.today
+    @subscription.status = "coupon"
+    @subscription.card_exp_month = nil
+    @subscription.card_exp_year = nil
+    @subscription.stripe_card_token = nil
+    @subscription.card_last4 = nil
+    @subscription.subscription_amount = (199 - @coupon.discount_amount)
+    @subscription.coupon_code = params[:coupon_code]
+    @subscription.expiration_date = Date.today + 1.years
+    @subscription.name_on_card = "coupon"
+    @subscription.card_exp_month = "coupon"
+    @subscription.card_exp_year = "coupon"
+    @subscription.stripe_card_token = "coupon"
+    @subscription.address_line_1 = "coupon"
+    @subscription.address_zip = "coupon"
+    @subscription.save
+
+  end
   
 
   

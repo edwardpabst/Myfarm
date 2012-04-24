@@ -4,6 +4,8 @@ Myfarm::Application.routes.draw do
 
 
 
+  resources :coupons
+
   resources :comments
 
   resources :cropplanfields

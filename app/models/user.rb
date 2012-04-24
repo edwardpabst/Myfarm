@@ -35,11 +35,7 @@ class User < ActiveRecord::Base
   has_one :party
   belongs_to :Comment
   
-
-  
- 
-  
-                           
+                          
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates(:name, :presence => true)
@@ -83,6 +79,10 @@ class User < ActiveRecord::Base
     (user && user.salt == cookie_salt) ? user : nil
     #return nil if user.nil?
     #return user if user.salt == cookie_salt
+  end
+  
+  def self.error_add(message)
+    self.errors.add(:base, message)
   end
   
   def feed

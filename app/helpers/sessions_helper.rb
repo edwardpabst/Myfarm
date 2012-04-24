@@ -256,7 +256,10 @@ module SessionsHelper
    join parties on contracts.party_id = parties.id
    join cropplans on contracts.cropplan_id = cropplans.id
    where contracts.user_id = #{@current_user.id } ")
-   end   
+   end 
+   
+ 
+   
    def get_subscription_status()
       @subscription_status = Subscription.where('user_id' => @current_user.id)
    end

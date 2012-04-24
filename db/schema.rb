@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120418221253) do
+ActiveRecord::Schema.define(:version => 20120423222243) do
 
   create_table "capitalrecoveries", :force => true do |t|
     t.integer  "recovery_year"
@@ -61,6 +61,16 @@ ActiveRecord::Schema.define(:version => 20120418221253) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "country_id"
+  end
+
+  create_table "coupons", :force => true do |t|
+    t.string   "coupon_code"
+    t.decimal  "discount_amount"
+    t.datetime "begin_date"
+    t.datetime "end_date"
+    t.decimal  "discount_percent"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "cropplanfields", :force => true do |t|
@@ -676,6 +686,9 @@ ActiveRecord::Schema.define(:version => 20120418221253) do
     t.string   "stripe_customer_token"
     t.string   "address_line_1"
     t.string   "address_zip"
+    t.datetime "expiration_date"
+    t.string   "coupon_code"
+    t.decimal  "subscription_amount"
   end
 
   add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id"

@@ -1,0 +1,13 @@
+<%= semantic_form_for @coupon do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :coupon_code %>
+    <%= f.input :discount_amount %>
+    <%= f.input :begin_date %>
+    <%= f.input :end_date %>
+    <%= f.input :discount_percent %>
+  <% end %>
+
+  <%= f.buttons do %>
+    <%= f.commit_button %>
+  <% end %>
+<% end %>

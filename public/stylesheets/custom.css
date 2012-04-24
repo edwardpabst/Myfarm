@@ -333,6 +333,22 @@ font-size: 90%;
 	border-radius: 10pz;
 } 
 
+.hintbase_center {
+  font-size: 90%;
+  color:#666;
+  width: 80%;
+  margin-left:auto;
+  margin-right:auto;
+  background-color:	#FEFFF1;
+  padding-left: 10px;
+  text-align: center;
+  font-style: italic;
+  border: solid 1px lightgray;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10pz;
+}
+
 /*--------  #F0E68C ----------*/
 #form_header{
 	
