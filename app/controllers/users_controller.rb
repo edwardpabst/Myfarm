@@ -64,8 +64,7 @@ class UsersController < ApplicationController
             sign_in @user
             flash[:success] = "Welcome to the iFarmService app. Please take a moment to complete your profile info before we begin to define your farm."
  
-            if @has_coupon == true 
-                           
+            if @has_coupon == true                          
               set_subscription       
             end
                   

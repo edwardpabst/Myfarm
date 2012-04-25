@@ -29,12 +29,13 @@ module SessionsHelper
     get_current_user
     set_current_parms
     session[:s_is_new_user] = true
-    create_base_data(@current_user.id)
+    create_types_data(@current_user.id)
+    create_fieldtasks_data(@current_user.id)
   end
   
   def set_new_farm_expenses
     get_current_user
-    create_expense_data(@current_user.id)
+    create_farmexpenses_data(@current_user.id)
   end
   
   def set_current_user_data
@@ -43,7 +44,7 @@ module SessionsHelper
     session[:s_is_new_user] = false
   end
   
-  def create_base_data(user_id)
+  def create_types_data(user_id)
     #replicate types table with new user id
     @types = Type.find_by_sql("select * from types where user_id = 1")
     @types.each do |t|
@@ -57,8 +58,26 @@ module SessionsHelper
       @newtype.save
     end
   end
+  
+  def create_fieldtasks_data(user_id)
+    #replicate farm expenses
+    @fieldtasks = Fieldtask.find_by_sql("select * from fieldtasks where user_id = 1")
+    @fieldtasks.each do |t|
+      @newfieldtask = Fieldtask.new
+      @newfieldtask.user_id = user_id 
+      @newfieldtask.task_type = t.task_type
+      @newfieldtask.taskdescription = t.taskdescription
+      @newfieldtask.task_notes = t.task_notes
+      @newfieldtask.task_stage = t.task_stage
+      @newfieldtask.task_frequency_days = t.task_frequency_days
+      @newfieldtask.task_duration_days = t.task_duration_days
+      @newfieldtask.save
+    end
     
-  def create_expense_data(user_id)
+    
+  end
+    
+  def create_farmexpenses_data(user_id)
     #replicate farm expenses
     @farmexpenses = Farmexpense.find_by_sql("select * from farmexpenses where user_id = 1")
     @farmexpenses.each do |t|
