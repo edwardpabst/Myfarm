@@ -117,6 +117,7 @@ class CropsController < ApplicationController
   # GET /crops/1/edit
   def edit
     @crop = Crop.find(params[:id])
+    @onload = 'setUom()'
   end
 
   # POST /crops

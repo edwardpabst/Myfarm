@@ -1,7 +1,18 @@
 <script type="text/javascript"> 
 
+function setUom() {
+	 
+	document.su.puom.value = document.su.supply_supply_uom.value;
+	document.su.duom.value = document.su.supply_distribution_uom.value;
+	document.su.conv.value = document.su.supply_conversion_factor.value;
+}
+
 function checkType() {
 	 
+   	document.su.puom.value = document.su.supply_supply_uom.value;
+	document.su.duom.value = document.su.supply_distribution_uom.value;
+	document.su.conv.value = document.su.supply_conversion_factor.value;
+	
 	if (document.su.supply_supply_type.value != 'fertilizer')
 	{
 	hide('fertilizer_section'); 
@@ -58,7 +69,7 @@ item.className='unhidden';
   <li class="string input optional stringish"> 
 	<% get_types_by_name("supply_uom") %>
 	<label class=" label" for="supply_uom">Purch/Inventory UOM<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
-	<%= collection_select("supply", "supply_uom", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	</li>
+	<%= collection_select("supply", "supply_uom", @types, "type_value_string", "type_value_string", options = {:prompt => " "}, {:onchange => "setUom()"}) %>	</li>
     
  
 	
@@ -67,15 +78,25 @@ item.className='unhidden';
  <li class="string input optional stringish"> 
 	<% get_types_by_name("distribution_uom") %>
 	<label class=" label" for="distribution_uom">Distribution UOM<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
-	<%= collection_select("supply", "distribution_uom", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %></li>
+	<%= collection_select("supply", "distribution_uom", @types, "type_value_string", "type_value_string", options = {:prompt => " "}, {:onchange => "setUom()"}) %></li>
 	
 	<li class="string input optional stringish">
 	<div class="hintbase"> UOM assigned to farm jobs. </div>
 	</li>	
    
  
-	<%= f.input :conversion_factor , :label => "Conversion factor",  :required => true, :hint => "used to develop supply cost in farm jobs.(Purchase cost / conversion factor)" %>
-    <%= f.input :rate_acre , :label => "Rate per acre",  :required => false, :hint => "of Distribution UOM." %>
+	<%= f.input :conversion_factor , :label => "Conversion factor",  :required => true, :onchange => "setUom()" %>
+
+	<%= text_field_tag 'puom', nil, :class => "inputlabel", :disabled => true %>
+	/ <%= text_field_tag 'conv', nil, :class => "inputlabel", :disabled => true %> = 
+	<%= text_field_tag 'duom', nil, :class => "inputlabel", :disabled => true %>
+ 	<li class="string input optional stringish">
+	<div class="hintbase"> Also used to develop supply cost in farm jobs.(Purchase cost / conversion factor = distribution cost). 
+ 	</div>
+	</li>
+
+    <%= f.input :rate_acre , :label => "Rate per acre",  :required => false, :hint => "Based on Distribution UOM." %>
+
     <%= f.input :manufacturer , :label => "Manufacturer",  :required => false %>
 
 <div id="fertilizer_section" class="hidden">

@@ -797,6 +797,20 @@ input  {
 
 }
 
+.inputlabel  {
+   
+	font-family: Arial, Sans-Serif;
+    font-size: 100%;
+    padding: 1px;
+    border: solid 1px #F5F5F5;
+    width: 100px;
+    background-color: gray;
+
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
 .input_invisible  {
 
     width: 0px;
