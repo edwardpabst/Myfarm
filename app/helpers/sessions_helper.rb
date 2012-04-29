@@ -33,9 +33,9 @@ module SessionsHelper
     create_fieldtasks_data(@current_user.id)
   end
   
-  def set_new_farm_expenses
+  def set_new_farm_expenses(year)
     get_current_user
-    create_farmexpenses_data(@current_user.id)
+    create_farmexpenses_data(@current_user.id, year)
   end
   
   def set_current_user_data
@@ -77,17 +77,19 @@ module SessionsHelper
     
   end
     
-  def create_farmexpenses_data(user_id)
+  def create_farmexpenses_data(user_id, year)
     #replicate farm expenses
-    @farmexpenses = Farmexpense.find_by_sql("select * from farmexpenses where user_id = 1")
+
+    @farmexpenses = Farmexpense.find_by_sql("select * from farmexpenses where user_id = 1 and expense_year = '2011' ")
     @farmexpenses.each do |t|
+    
       @newfarmexpense = Farmexpense.new
       @newfarmexpense.user_id = user_id 
       @newfarmexpense.farm_id = session[:s_farm_id]
       @newfarmexpense.expense_type = t.expense_type
       @newfarmexpense.expense_name = t.expense_name
       @newfarmexpense.expense_amount = 0
-      @newfarmexpense.expense_year = Date.today.year.to_s
+      @newfarmexpense.expense_year = year
       @newfarmexpense.save
     end
     
@@ -242,7 +244,7 @@ module SessionsHelper
       join partyroles on partytypes.id = partyroles.partytype_id
       join parties on partyroles.party_id = parties.id
       where parties.user_id = #{@current_user.id } 
-      and partytypes.typecode in ('EMPL', 'LBRMACH', 'LBRNON')")
+      and partytypes.typecode in ('EMPL', 'LBRMACH', 'LBRNON', 'CONTRACT')")
   end
 
   def get_current_shipment()

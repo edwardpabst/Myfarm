@@ -107,9 +107,8 @@ class FarmsController < ApplicationController
     respond_to do |format|
       if @farm.save
         session[:s_farm_id] = @farm.id
-        set_new_farm_expenses
         flash[:notice] = 'Farm was successfully created. You can now add and manage expenses.'
-        format.html { redirect_to(:controller => :farms, :action => :edit, :id => @farm.id, 	:notice => 'Farm was successfully created. You can now add supplies, labor and equipment.') }
+        format.html { redirect_to(:controller => :farms, :action => :edit, :id => @farm.id, 	:notice => 'Farm was successfully created. You can now add expenses.') }
         format.xml  { render :xml => @farm, :status => :created, :location => @farm }
       else
         format.html { render :action => "new" }

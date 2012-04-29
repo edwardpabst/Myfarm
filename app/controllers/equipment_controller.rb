@@ -254,7 +254,7 @@ class EquipmentController < ApplicationController
         
         interest_rate = params[:equipment][:interest_rate].to_i
         capitalrecovery_factor = Capitalrecovery.get_factor(params[:equipment][:life_years].to_i, params[:equipment][:interest_rate].to_i)
-        if !capitalrecovery_factor.nil? and !capitalrecovery_factor.empty?
+        if !capitalrecovery_factor.nil? 
           capital_recovery = (total_depreciation * capitalrecovery_factor) + (salvage_value * (interest_rate / 100))
         else
           capital_recovery = 0

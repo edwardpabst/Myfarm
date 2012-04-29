@@ -54,7 +54,7 @@ Define your Crops. Crop definition establishes what you will be growing. It also
 		
 		  
 	
-	<%= form.input :avg_weight_uom, :as => :number, :label => "Weight conversion",  :required => true    %> 
+	<%= form.input :avg_weight_uom, :as => :number, :label => "Weight conversion",  :required => true, :input_html => { :onchange => "setUom()"  }    %> 
 
 	<%= text_field_tag 'cuom', nil, :class => "inputlabel", :disabled => true %>
 	/ <%= text_field_tag 'conv', nil, :class => "inputlabel", :disabled => true %> = 

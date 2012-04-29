@@ -6,6 +6,11 @@ class FarmexpensesController < ApplicationController
 
 
       end
+      
+      def index_initialize
+        set_new_farm_expenses(params[:farmexpense][:plan_year])
+        redirect_to(:controller => "farms",  :action => "edit", :id => session[:s_farm_id], :notice => 'farm expense was successfully updated.')
+      end
 
       def index_data
 
@@ -13,7 +18,7 @@ class FarmexpensesController < ApplicationController
         @farmexpenses = Farmexpense.find_by_sql("Select farmexpenses.id, expense_year, expense_type, expense_name, expense_amount
         from farmexpenses
         where farm_id = #{session[:s_farm_id]}
-        order by expense_type, expense_name ")
+        order by expense_year, expense_type, expense_name ")
         
        # logger.debug "**** farmexpenseS FILE ****** #{@farmexpenses.size}" 
       end

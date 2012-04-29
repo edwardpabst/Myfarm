@@ -49,7 +49,7 @@ class ProfitabilityreportPdf < Prawn::Document
          profitability_interest(@user_id, @view, @farm_id, @year, @start_date, @stop_date, '')
          profitability_operating_cost(@user_id, @view, @farm_id, @year, @start_date, @stop_date, '')
          profitability_cash_overhead(@user_id, @view, @farm_id, @year, @start_date, @stop_date, '') 
-         profitability_non_cash_overhead(@user_id, @view, @farm_id, @year, @start_date, @stop_date, '')   
+         profitability_non_cash_overhead(@user_id, @view, @farm_id, @year, @start_date, @stop_date, '')    
          profitability_total_cost_summary(@user_id, @view, @farm_id, @year, @start_date, @stop_date, '')
            
     elsif @report_version == "2"    #profitability analysis
@@ -78,7 +78,7 @@ class ProfitabilityreportPdf < Prawn::Document
            end
            
          profitability_revenue(@user_id, @view, @farm_id, @year, @start_date, @stop_date)
-         
+         profitability_sales_expense(@user_id, @view, @farm_id, @year, @start_date, @stop_date)
          
          move_down 10
          text "<u>Supply costs per acre</u>", size: 8, style: :bold, :align => :left, :inline_format => true
@@ -110,6 +110,7 @@ class ProfitabilityreportPdf < Prawn::Document
          profitability_operating_cost2(@user_id, @view, @farm_id, @year, @start_date, @stop_date, '')
          profitability_cash_overhead2(@user_id, @view, @farm_id, @year, @start_date, @stop_date, '') 
          profitability_non_cash_overhead2(@user_id, @view, @farm_id, @year, @start_date, @stop_date, '')
+        
          
          move_down 20
          text "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------", 
@@ -295,6 +296,81 @@ class ProfitabilityreportPdf < Prawn::Document
     [[" " ," " ," " ," ", " "]] +
     Shipment.profitability_revenue_summary(user_id, view, farm_id, year, start_date, stop_date).map do |item|
          ["Total Revenue/acre", precision(item.qty_per_acre),  " ", cost(item.price_per_unit), cost(item.value_per_acre)]
+       end      
+
+
+  end
+  
+  #---------Commission per acre ----------------------------------------------------------------------------
+  
+  def profitability_sales_expense(user_id, view, farm_id, year, start_date, stop_date)
+    move_down 5
+    text "<u>Sales commission per acre</u>", size: 8, style: :bold, :align => :left, :inline_format => true
+    rowcount = 0
+    table profitability_sales_expense_rows(user_id, view, farm_id, year, start_date, stop_date), :row_colors => [ "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
+      row(0).height = 0
+      columns(0).font_style = :normal
+      columns(0).width = 130
+      columns(1).width = 80
+      columns(2).width = 80
+      columns(3..4).width = 100
+      columns(0).align = :left
+      columns(1).align = :right
+      columns(2).align = :left
+      columns(3..4).align = :right
+      
+
+      
+      self.header = false
+      rowcount += 1
+    end
+    
+    profitability_sales_expense_summary(user_id, view, farm_id, year, start_date, stop_date)
+    
+  end
+  
+  
+  def profitability_sales_expense_rows(user_id, view, farm_id, year, start_date, stop_date)
+    [[" " ," " ," " ," ", " "]] +
+    Shipment.profitability_sales_expense(user_id, view, farm_id, year, start_date, stop_date).map do |item|
+         [item.cropplanfull, precision(item.qty_per_acre), '', cost(item.price_per_unit), cost(item.value_per_acre)]
+       end      
+
+
+  end
+  
+  #-------revenue summary----------
+  def profitability_sales_expense_summary(user_id, view, farm_id, year, start_date, stop_date)
+
+    rowcount = 0
+    table profitability_sales_expense_summary_rows(user_id, view, farm_id, year, start_date, stop_date), :row_colors => [ "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
+      row(0).height = 0
+      columns(0).font_style = :bold
+      columns(0).size = 9
+      columns(4).font_style = :bold
+      columns(0).width = 130
+      columns(1).width = 80
+      columns(2).width = 80
+      columns(3..4).width = 100
+      columns(0).align = :left
+      columns(1).align = :right
+      columns(2).align = :left
+      columns(3..4).align = :right
+      
+
+      
+      self.header = false
+      rowcount += 1
+    end
+    
+    
+  end
+  
+  
+  def profitability_sales_expense_summary_rows(user_id, view, farm_id, year, start_date, stop_date)
+    [[" " ," " ," " ," ", " "]] +
+    Shipment.profitability_sales_expense_summary(user_id, view, farm_id, year, start_date, stop_date).map do |item|
+         ["Total Commission/acre", precision(item.qty_per_acre),  " ", cost(item.price_per_unit), cost(item.value_per_acre)]
        end      
 
 
@@ -706,6 +782,9 @@ class ProfitabilityreportPdf < Prawn::Document
 
 
   end
+  
+
+  
   #-------Total cost per acre-------------------------------------------------------------------
  
   def profitability_total_cost_summary(user_id, view, farm_id, year, start_date, stop_date, task_stage)

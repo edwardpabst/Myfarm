@@ -1,7 +1,7 @@
 module ApplicationHelper
   #return a title on a per page basis
   def title
-    base_title = "iFarmService - farm mgt"
+    base_title = "iFarmService - farm mgmt services"
     if @title.nil?
       base_title
     else

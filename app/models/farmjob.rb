@@ -643,6 +643,8 @@ class Farmjob < ActiveRecord::Base
                                    and farmexpenses.user_id =  #{user_id}")
          end
          
+
+         
          def self.profitability_total_cost_acre(user_id, view, farm_id, year, start_date, stop_date, task_stage)
            
            @cashoverhead_acre = 0

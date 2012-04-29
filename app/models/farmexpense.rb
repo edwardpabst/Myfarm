@@ -7,4 +7,5 @@ class Farmexpense < ActiveRecord::Base
     
                   
   validates_presence_of :expense_name, :expense_type,  :expense_year
+ 
 end

@@ -44,7 +44,7 @@ class Shipment < ActiveRecord::Base
 
   
     @shipments = Shipment.find_by_sql("#{sql_statement}")
-    if @shipment.nil? || @shipments.empty?
+    if @shipments.empty?
       sql_statement = "Select cropplanfull, 
          avg_yield_acre as qty_per_acre,               
          crop_inventory_uom as qty_uom,
@@ -89,7 +89,7 @@ class Shipment < ActiveRecord::Base
 
     
     @shipments = Shipment.find_by_sql("#{sql_statement}")
-    if @shipment.nil? || @shipments.empty?
+    if @shipments.empty?
       sql_statement = "Select avg(avg_yield_acre) as qty_per_acre,               
          avg(price_per_uom) as price_per_unit,  
          avg(avg_yield_acre * price_per_uom) as value_per_acre
@@ -106,6 +106,64 @@ class Shipment < ActiveRecord::Base
        
        @shipments = Shipment.find_by_sql("#{sql_statement}")
     end
+
+    return @shipments
+
+  end
+  
+  def self.profitability_sales_expense(user_id, view, farm_id, year, start_date, stop_date)
+    
+
+      sql_statement = "Select cropplanfull, 
+         sum(qty/number_acres) as qty_per_acre,               
+         'Commission',
+         avg(price) as price_per_unit, 
+         sum(((price * qty) /number_acres) * (commission_amount / 100)) as value_per_acre
+       from shipmentdetails sd
+        join shipments sh on sd.shipment_id = sh.id
+        join inventorylots il on sd.inventorylot_id = il.id
+        join scaletickets st on il.scaleticket_id  = st.id
+        left join fields on fields.id = st.field_id_1
+        left join farms on fields.farm_id = farms.id
+        join cropplans cp on sh.cropplan_id =  cp.id
+       where sd.user_id = #{user_id}
+       and fields.farm_id = #{farm_id}
+       and ship_date >= '#{start_date}'  
+       and ship_date <= '#{stop_date}' 
+       and plan_year = '#{year}'
+       group by cropplanfull, qty_uom, price
+       "            
+
+  
+    @shipments = Shipment.find_by_sql("#{sql_statement}")
+
+
+    return @shipments
+  end
+  
+  def self.profitability_sales_expense_summary(user_id, view, farm_id, year, start_date, stop_date)
+    
+
+      sql_statement = "Select  sum(qty/number_acres) as qty_per_acre,               
+         (sum((price * qty) /number_acres)) / (sum(qty/number_acres))   as price_per_unit, 
+         sum(((price * qty) /number_acres)  * (commission_amount / 100)) as value_per_acre
+       from shipmentdetails sd
+       join shipments sh on sd.shipment_id = sh.id
+       join inventorylots il on sd.inventorylot_id = il.id
+       join scaletickets st on il.scaleticket_id  = st.id
+       join fields on fields.id = st.field_id_1
+       join farms on fields.farm_id = farms.id
+       join cropplans cp on sh.cropplan_id =  cp.id
+       where sd.user_id = #{user_id}
+       and fields.farm_id = #{farm_id}
+       and ship_date >= '#{start_date}'  
+       and ship_date <= '#{stop_date}' 
+       and plan_year = '#{year}'
+       "            
+
+    
+    @shipments = Shipment.find_by_sql("#{sql_statement}")
+
 
     return @shipments
 

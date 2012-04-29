@@ -83,9 +83,9 @@ item.className='unhidden';
 	<li class="string input optional stringish">
 	<div class="hintbase"> UOM assigned to farm jobs. </div>
 	</li>	
-   
+  
  
-	<%= f.input :conversion_factor , :label => "Conversion factor",  :required => true, :onchange => "setUom()" %>
+	<%= f.input :conversion_factor , :label => "Conversion factor",  :required => true , :input_html => { :onchange => "setUom()"  } %>
 
 	<%= text_field_tag 'puom', nil, :class => "inputlabel", :disabled => true %>
 	/ <%= text_field_tag 'conv', nil, :class => "inputlabel", :disabled => true %> = 

@@ -1,7 +1,21 @@
 <br>
  <h1> Farm Overhead Expenses </h1>
+ 	
+	<%= form_tag '/farmexpenseinitialize', :method=>'post'  do  %>
+	<div >
+ 
+			<% get_types_by_name("plan_year") %>
+
+			(Initialize expenses for year/season)
+<br>		
+			<%= collection_select("farmexpense", "plan_year", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>	 
+			<%= submit_tag "Initialize", :class => "button_very_small", :id => "jcsubmit" %>
+
+	</div>
+	<% end %>
+<br>
 <button type="button" value="New", onclick="newFarmexpense()">New Expense</button>
-<button type="button" value="New", onclick="editFarmexpense()">Edit Expense</button>
+<button type="button" value="Edit", onclick="editFarmexpense()">Edit Expense</button>
 <input type="button" value="Delete" class="button" onclick="removeRow()">
  <br><br> 
 <!-- Div for capture of grid output -->

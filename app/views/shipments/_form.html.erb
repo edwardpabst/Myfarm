@@ -32,7 +32,7 @@
 			<% if !@party_types.nil? %>			
 				<%= collection_select("shipment", "customer_id", @party_types, "id", "partyname", options = {:prompt => " ", :include_blank => ' '}) %>
 			<% end %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 			<b>OR</b>
 	 	</td>
 
