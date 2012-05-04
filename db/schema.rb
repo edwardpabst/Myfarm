@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120423222243) do
+ActiveRecord::Schema.define(:version => 20120429234407) do
 
   create_table "capitalrecoveries", :force => true do |t|
     t.integer  "recovery_year"
@@ -164,6 +164,8 @@ ActiveRecord::Schema.define(:version => 20120423222243) do
     t.integer  "horsepower"
     t.string   "fuel_type"
     t.integer  "interest_rate"
+    t.decimal  "usage_qty_hour"
+    t.integer  "supply_id"
   end
 
   add_index "equipment", ["user_id"], :name => "index_equipment_on_user_id"
@@ -225,6 +227,7 @@ ActiveRecord::Schema.define(:version => 20120423222243) do
     t.decimal  "qty_actual"
     t.decimal  "cost_unit_hour"
     t.decimal  "rate_hour"
+    t.integer  "farmjobsupply_id"
   end
 
   add_index "farmjobequipments", ["farmjob_id"], :name => "index_farmjobequipments_on_farmjob_id"

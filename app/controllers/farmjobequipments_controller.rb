@@ -60,6 +60,13 @@ class FarmjobequipmentsController < ApplicationController
     end
     respond_to do |format|
       if @farmjobequipment.save
+        if !@equipment.supply_id.nil? and !@equipment.supply_id.blank?
+          @usage_qty = @equipment.usage_qty_hour *  @farmjobequipment.qty_required
+         @farmjobsupply_id = Farmjobsupply.add_fuel_supply(@equipment.user_id, @farmjobequipment.farmjob_id, @equipment.supply_id, @usage_qty)
+         @farmjobequipment = Farmjobequipment.find(@farmjobequipment.id)
+         @farmjobequipment.farmjobsupply_id = @farmjobsupply_id 
+         @farmjobequipment.save
+        end
        format.html  { redirect_to(:controller => "farmjobs",  :action => "edit", :id => session[:s_farmjob_id] ) }
         format.xml  { render :xml => @farmjobsupply, :status => :created, :location => @farmjobsupply }
       else

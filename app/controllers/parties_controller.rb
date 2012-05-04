@@ -131,6 +131,13 @@ class PartiesController < ApplicationController
       @party.ship_postalcode = @party.partypostalcode
       @party.ship_phone = @party.partyphone
     end
+    
+    if @party.rate_hour.nil?
+      @party.rate_hour = 0
+    end
+    if @party.charge_hour.nil?
+      @party.charge_hour = 0
+    end
        
         @party.user_id = session[:s_user_id]
   	    session[:s_user_email] = nil

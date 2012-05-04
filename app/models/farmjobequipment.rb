@@ -1,6 +1,9 @@
 class Farmjobequipment < ActiveRecord::Base
 #acts_as_reportable
 
+attr_accessible :farmjob_id, :equipment_id, :user_id,  :qty_required, :qty_actual, :additional_cost, 
+                :cost_unit_hour, :rate_hour, :farmjobsupply_id
+
       def self.profitability_equipment_items(user_id, view, farm_id, year, start_date, stop_date, task_stage)
         
           sql_statement = "Select description, make, model, year, 

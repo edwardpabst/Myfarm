@@ -6,7 +6,8 @@ class Equipment < ActiveRecord::Base
                   :cost_unit, :cost_unit_hour ,
                   :list_price, :purchase_price, :salvage_value , :life_years, :model_year, :purchase_year,
                   :hours_usage_year, :loan_amount, :interest_rate , :depreciation_year, :capital_recovery_year,
-                  :capital_recovery_factor, :tax_amount, :insurance_amount , :housing_cost, :horsepower, :fuel_type
+                  :capital_recovery_factor, :tax_amount, :insurance_amount , :housing_cost, :horsepower, :fuel_type,
+                  :supply_id, :usage_qty_hour
 
   validates :rate_per_hour, :numericality => true
   validates :list_price , :numericality => true
@@ -19,6 +20,7 @@ class Equipment < ActiveRecord::Base
   validates :tax_amount, :numericality => true 
   validates :insurance_amount, :numericality => true  
   validates :housing_cost, :numericality => true  
+  validates :usage_qty_hour, :numericality => true 
   
   has_many :farmjobequipments
   

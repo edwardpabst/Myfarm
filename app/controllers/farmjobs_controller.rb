@@ -209,7 +209,13 @@ class FarmjobsController < ApplicationController
 
           			when "deleted"
           				@farmjobequipment = Farmjobequipment.find(@id)
+          				@farmjobsupply_id = @farmjobequipment.farmjobsupply_id
           				@farmjobequipment.destroy
+          				
+          				if !@farmjobsupply_id.nil? and !@farmjobsupply_id.blank? and @farmjobsupply_id != 0
+          				  @farmjobsupply = Farmjobsupply.find(@farmjobsupply_id)
+          				  @farmjobsupply.destroy
+          				end
 
 
           				@tid = @id

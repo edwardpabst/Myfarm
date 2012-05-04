@@ -70,6 +70,8 @@ function loadFake() {
 			</td>
 		</tr>
 		
+
+		
 		<tr>
 		    <td>
 			 <%= f.label :horsepower, "Horsepower" %>
@@ -77,13 +79,6 @@ function loadFake() {
 			<td>
 		 		<%= f.text_field :horsepower %> 
 		    </td>
-			<td>
-				<%= f.label :fuel_type, "Fuel type" %>
-			</td>
-			<td>
-							<% get_types_by_name("fuel_type") %>
-				<%= collection_select("equipment", "fuel_type", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
-			</td>
 		</tr>
 		
 		<tr>
@@ -99,6 +94,27 @@ function loadFake() {
 			<td>
 				<%= f.text_field :list_price  %> 
 			</td>
+		</tr>
+		
+		<tr>
+
+			<td>
+				<%= f.label :supply_id, "Fuel type" %>
+			</td>
+			<td>
+				   <% get_supplies_by_type("fuel") %>
+
+					<% if !@supplies.nil? %>
+
+				<%= collection_select("equipment", "supply_id", @supplies, "id", "supplyname", options = {:prompt => " "}) %>
+				     <% end %>
+			</td>
+			<td>
+			 <%= f.label :usage_qty_hour, "Fuel usage/hour" %>
+		 	</td>
+		    <td>
+			 	<%= f.text_field :usage_qty_hour %> 
+		 	</td>
 		</tr>
 		<tr>
 		    <td colspan="4">
@@ -276,14 +292,7 @@ function loadFake() {
 				<%= f.label :cost_unit_hour, "Equipment cost per hour" %>
 			</td>
 			<td>
-			 <div class="disabled">
-				    <% if @equipment.cost_unit_hour.nil? %>			
-						0
-					<% else %>
-						<%= number_to_currency(@equipment.cost_unit_hour, :precision => 2)  %>
-					<% end %>
-
-			  </div> 
+				<%= f.text_field :cost_unit_hour  %>
 			</td>
 		</tr>
 		<tr>

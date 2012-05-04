@@ -40,6 +40,19 @@ class Farmjobsupply < ActiveRecord::Base
   end
   
          
+   def self.add_fuel_supply(user_id, id, supply_id, usage_qty)
+     @supply = Supply.find(supply_id)
+     @farmjobsupply = Farmjobsupply.new
+     @farmjobsupply.user_id = user_id
+     @farmjobsupply.farmjob_id = id
+     @farmjobsupply.supply_id = supply_id
+     @farmjobsupply.actual_qty = usage_qty
+     @farmjobsupply.usage_uom = @supply.distribution_uom
+     @farmjobsupply.save
+     return @farmjobsupply.id
+   end  
+   
+        
          def self.profitability_supply_items(user_id, view, farm_id, year, start_date, stop_date, task_stage)
            
              sql_statement = "Select supplyname, sum(actual_qty/applied_area) as qty_per_acre,               
@@ -84,4 +97,5 @@ class Farmjobsupply < ActiveRecord::Base
            return Farmjobsupply.find_by_sql("#{sql_statement}")
 
          end
+
 end

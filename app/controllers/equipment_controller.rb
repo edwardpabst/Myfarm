@@ -185,12 +185,55 @@ class EquipmentController < ApplicationController
   def create
     @equipment = Equipment.new(params[:equipment])
     @equipment.user_id = session[:s_user_id]
-    @equipment.cost_unit_hour = 0
-    @equipment.cost_unit = 0
+    if @equipment.cost_unit_hour.nil?
+      @equipment.cost_unit_hour = 0
+    end
+    if @equipment.list_price.nil?
+      @equipment.list_price = 0
+    end
+    if @equipment.purchase_price.nil?
+      @equipment.purchase_price = 0
+    end
+    if @equipment.salvage_value.nil?
+      @equipment.salvage_value = 0
+    end
+    if @equipment.hours_usage_year.nil?
+      @equipment.hours_usage_year = 0
+    end
+    if @equipment.loan_amount.nil?
+      @equipment.loan_amount = 0
+    end
+    if @equipment.interest_rate.nil?
+      @equipment.interest_rate = 0
+    end
+    if @equipment.depreciation_year.nil?
+      @equipment.depreciation_year = 0
+    end
+    if @equipment.capital_recovery_year.nil?
+      @equipment.capital_recovery_year = 0
+    end
+    if @equipment.capital_recovery_factor.nil?
+      @equipment.capital_recovery_factor = 0
+    end
+    if @equipment.tax_amount.nil?
+      @equipment.tax_amount = 0
+    end
+    if @equipment.insurance_amount.nil?
+      @equipment.insurance_amount = 0
+    end
+    if @equipment.housing_cost.nil?
+      @equipment.housing_cost = 0
+    end
+    if @equipment.usage_qty_hour.nil?
+      @equipment.usage_qty_hour = 0
+    end
+    if @equipment.rate_per_hour.nil?
+      @equipment.rate_per_hour = 0
+    end
+
     calc_capitalrecovery
     respond_to do |format|
       if @equipment.save
-
         format.html { redirect_to(:controller => :equipment, :action => :edit, :id => @equipment.id, 	:notice => 'Equipment was successfully created.') }
         
         format.xml  { render :xml => @equipment, :status => :created, :location => @equipment }
@@ -238,6 +281,15 @@ class EquipmentController < ApplicationController
   def calc_capitalrecovery
     #logger.debug "DEPRECIATION PARAMETERS #{params[:equipment].inspect}"
     #Total depreciation = purchase price - salvage value
+    if params[:equipment][:purchase_price].nil?
+       params[:equipment][:purchase_price] = 0
+    end
+    if params[:equipment][:salvage_value].nil?
+       params[:equipment][:salvage_value] = 0
+    end
+    if params[:equipment][:life_years].nil?
+       params[:equipment][:life_years] = 10
+    end
         purchase_price =  params[:equipment][:purchase_price].to_i
         salvage_value = params[:equipment][:salvage_value].to_i
         total_depreciation =   purchase_price - salvage_value
@@ -251,10 +303,15 @@ class EquipmentController < ApplicationController
         params[:equipment][:depreciation_year] = depreciation_year.to_s
         
     #Capital recovery = (total depreciation x capital recovery factor) + (salvage value x interest rate)
-        
+        if params[:equipment][:life_years].nil?
+          params[:equipment][:life_years] = 1
+        end
+        if params[:equipment][:interest_rate].nil?
+           params[:equipment][:interest_rate] = 1
+        end
         interest_rate = params[:equipment][:interest_rate].to_i
         capitalrecovery_factor = Capitalrecovery.get_factor(params[:equipment][:life_years].to_i, params[:equipment][:interest_rate].to_i)
-        if !capitalrecovery_factor.nil? 
+        if !capitalrecovery_factor.nil? and !capitalrecovery_factor.empty?
           capital_recovery = (total_depreciation * capitalrecovery_factor) + (salvage_value * (interest_rate / 100))
         else
           capital_recovery = 0
@@ -293,8 +350,11 @@ class EquipmentController < ApplicationController
        tco = capital_recovery + tih
        params[:equipment][:cost_unit] = tco.to_s
        hours = params[:equipment][:hours_usage_year].to_i
-       cost_hour = tco / hours
-       params[:equipment][:cost_unit_hour] = cost_hour
+       
+       if hours != 0
+         cost_hour = tco / hours
+        params[:equipment][:cost_unit_hour] = cost_hour
+       end
    
     
   end

@@ -214,7 +214,16 @@ class FieldsController < ApplicationController
       @farm = Farm.find(@field.farm_id)
       @field.farmname = @farm.farmname
     end
-    
+    if @field.land_expense_year.nil?
+      @field.land_expense_year = 0
+    end
+    if @field.percent_harvest_acre.nil?
+      @field.percent_harvest_acre = 0
+    end
+    if @field.fixed_amount_acre.nil?
+      @field.fixed_amount_acre = 0
+    end
+  
     
     respond_to do |format|
       if @field.save
