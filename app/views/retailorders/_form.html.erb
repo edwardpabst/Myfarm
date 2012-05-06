@@ -1,0 +1,237 @@
+
+<%= form_for @retailorder, :html => { :name => "ro", :class => "form_for"} do |f| %>
+
+<%= render "shared/error_messages", :object => f.object%>
+
+<table class="twocolumn">
+	<tr>		
+		<td width="20%"></td>
+		<td width="30%"></td>
+		<td width="20%"></td>
+		<td width="30%"></td>
+	</tr>
+	<tr>
+		<td colspan="4">
+			<div id="form_header">			 	 
+		Orders request products from farmers for retail customers such as restaurants, community stores and farmers markets. 			 
+			</div>
+		</td>
+	</tr>
+    <% get_farms %>
+	<tr>
+		<td class="label">
+			<label class=" label" for="shipment">Farm*<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+		 		
+			<%= collection_select("retailorder", "farm_id", @farms, "id", "farmname", options = {:prompt => " "}) %>  
+
+	 	</td>
+		<td class="label">
+			<label class=" label" for="retailorder">Customer name<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+		    <%= f.text_field :customername %>
+	 	</td>
+
+	</tr>
+	
+	<tr> 
+		<td colspan="4">
+			<br>
+			<div class='hintbase'>
+				Billing Information
+			</div>
+		</td>
+	</tr>
+	
+		 
+ 	
+	 
+	<tr>
+		<td class="label">
+			<label class=" label" for="retailorder">Address 1<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+
+		 	<%= f.text_field :bill_address1 %>
+	 	</td>
+		<td class="label">
+			<label class=" label" for="retailorder">Address 2<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+
+				<%= f.text_field :bill_address2 %>
+			
+	 	</td>
+
+	</tr>
+	
+	<tr>
+		<td class="label">
+			<label class=" label" for="retailorder">City<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+
+			<%= f.text_field :bill_city %>
+	 	</td>
+		<td class="label">
+			<label class=" label" for="retailorder">State/Postal code<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+
+		 	<%= f.text_field :bill_state, :class => 'input_verysmall' %>, <%= f.text_field :bill_postalcode, :class => 'input_small' %>
+	 	</td>
+
+	</tr>
+	
+	<tr>
+		<td class="label">
+			<label class=" label" for="retailorder">Phone<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+			<%= f.text_field :bill_phone %>
+	 	</td>
+		<td class="label">
+			<label class=" label" for="retailorder">Email<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+
+		 	<%= f.text_field :bill_email %>
+	 	</td>
+
+	</tr>
+	
+	<tr> 
+		<td colspan="4">
+			<br>
+			<div class='hintbase'>
+				Shipping Information (if different than billing info)
+			</div>
+		</td>
+	</tr>
+	
+	<tr>
+		<td class="label">
+			<label class=" label" for="retailorder">Address 1<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+
+		 	<%= f.text_field :ship_address1%>
+	 	</td>
+		<td class="label">
+			<label class=" label" for="retailorder">Address 2<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+				<%= f.text_field :ship_address2%>
+	 	</td>
+
+	</tr>
+	
+	<tr>
+		<td class="label">
+			<label class=" label" for="retailorder">City<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+
+		 			<%= f.text_field :ship_city%>
+	 	</td>
+		<td class="label">
+			<label class=" label" for="retailorder">State/Postal code<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+
+		 		<%= f.text_field :ship_state, :class => 'input_verysmall'%>, <%= f.text_field :ship_postalcode , :class => 'input_small'%>
+	 	</td>
+
+	</tr>
+	
+ 
+
+	<tr> 
+		<td colspan="4" class="thinline">
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<%= f.label :order_date, "Order Date*" %> 
+		</td>
+		<td>
+			<%= f.text_field :order_date %>
+		</td>
+
+			<td>
+				<%= f.label :need_by_date, "Need by Date*" %> 
+			</td>
+			<td>
+				<%= f.text_field :need_by_date %>
+			</td>
+	</tr>
+	<tr>
+		<td>
+			<% get_types_by_name("order_status") %>
+			<label class=" label" for="order_status">Order status<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>
+		</td>
+		<td>
+			<%= collection_select("retailorder", "order_status", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
+
+		</td>
+		
+		<td class="label">
+			<label class=" label" for="retailorder">Coupon code<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+			<%= f.text_field :coupon_code %>
+	 	</td>
+
+	</tr>
+	
+ 
+
+	
+	<tr>
+		<td>
+			<% get_types_by_name("payment_type") %>
+			<label class=" label" for="payment_type">Payment type<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>
+		</td>
+		<td>
+			<%= collection_select("retailorder", "payment_method", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %>
+
+		</td>
+		<td>
+			<%= f.label :payment_id, "Payment ID" %> 
+		</td>
+		<td>
+			<%= f.text_field :payment_id  %>
+		</td>
+	</tr>
+	
+ 
+ 
+		<tr>
+			<td colspan="2">
+			<br>	&nbsp;&nbsp;&nbsp;&nbsp;
+			 	<%= f.submit "Update Order ", :class => "button", :id => "ro_submit" %>
+			<br> <br> 
+			</td>
+			<td>
+				<%= f.label :order_total, "Order amount" %>
+			</td>
+			<td>
+			  <div class="disabled">
+				<%= number_to_currency(@retailorder.order_total, :precision => 2)  %>
+			  </div>
+			</td>
+		</tr>	
+	 </table>
+
+	<br>
+	<h1> Order Items </h1>
+	<div>
+	<button type="button" value="View", id="selectbutton", class="buttonlarge", onclick="viewRetailcrops()">Add items to order</button> 
+	<button type="button" value="Delete", id="deletebutton", onclick="removeRow()">Delete line</button>
+	</div>
+	<br>
+
+	<% end %>

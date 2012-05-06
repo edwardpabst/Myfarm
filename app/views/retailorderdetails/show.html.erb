@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @retailorderdetail.user_id %>
+</p>
+
+<p>
+  <b>Retailcrop:</b>
+  <%= @retailorderdetail.retailcrop_id %>
+</p>
+
+<p>
+  <b>Cropplan:</b>
+  <%= @retailorderdetail.cropplan_id %>
+</p>
+
+<p>
+  <b>Detail uom:</b>
+  <%= @retailorderdetail.detail_uom %>
+</p>
+
+<p>
+  <b>Detail price:</b>
+  <%= @retailorderdetail.detail_price %>
+</p>
+
+<p>
+  <b>Detail qty:</b>
+  <%= @retailorderdetail.detail_qty %>
+</p>
+
+<p>
+  <b>Detail ext amount:</b>
+  <%= @retailorderdetail.detail_ext_amount %>
+</p>
+
+<p>
+  <b>Detail shipcharge:</b>
+  <%= @retailorderdetail.detail_shipcharge %>
+</p>
+
+<p>
+  <b>Detail status:</b>
+  <%= @retailorderdetail.detail_status %>
+</p>
+
+
+<%= link_to 'Edit', edit_retailorderdetail_path(@retailorderdetail) %> |
+<%= link_to 'Back', retailorderdetails_path %>

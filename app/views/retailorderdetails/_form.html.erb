@@ -1,0 +1,17 @@
+<%= semantic_form_for @retailorderdetail do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :user_id %>
+    <%= f.input :retailcrop_id %>
+    <%= f.input :cropplan_id %>
+    <%= f.input :detail_uom %>
+    <%= f.input :detail_price %>
+    <%= f.input :detail_qty %>
+    <%= f.input :detail_ext_amount %>
+    <%= f.input :detail_shipcharge %>
+    <%= f.input :detail_status %>
+  <% end %>
+
+  <%= f.buttons do %>
+    <%= f.commit_button %>
+  <% end %>
+<% end %>

@@ -1,0 +1,118 @@
+<br> 
+<h1><p>Order outbox</p></h1>
+
+<button type="button" value="New", onclick="neworder()">New order</button>
+<button type="button" value="New", onclick="editorder()">Change order</button>
+<input type="button" value="Delete" class="button" onclick="removeRow()">
+<br><br>
+<!-- Div for capture of grid output -->
+ <div id="order_grid" style="width:95%; height:500px;">
+
+ </div>
+
+<!-- script for dhtmlxgrid -->
+ <script type="text/javascript" charset="utf-8">
+
+	// data grid definition
+     var grid = new dhtmlXGridObject("order_grid");
+     grid.setImagePath("/images/");
+     grid.setHeader("Farm, Customer, City, State, Phone, Order date, Due date, Status, Amount, Pay method");  
+     grid.setInitWidths("100,100,80,80,60,80, 70, 70, 70, 90");
+     grid.setSkin("dhx_web"); // dhx_web
+     grid.init();
+	 grid.load("/ordersfrommedata");  	
+	 grid.attachHeader("#text_filter,,#text_filter,,,,#text_filter,,#text_filter,,");  
+	 grid.setColSorting("str,str,str,str,,str,,str");	 
+	 grid.setColTypes("ro,ro,ro,ro,ro,ro,ro,ro,ro,ro");// ed-editable, ro-read only price-money , ch-checkbox, 
+													  // txt-text editor ra-radio button, coro-select box, img, dhxcalendar 
+													  //  subrow (ajax)	 
+	// data processor definition
+	dp = new dataProcessor("/orderfrommegridaction/");
+	//dp.setTransactionMode("POST", true);
+	//set mode as send-all-by-post;
+	//dp.setUpdateMode("on");
+	dp.init(grid);
+		// in grid validations
+	//	dp.setVerificator(0, not_empty);
+	//	dp.setVerificator(1, not_empty);
+	//	dp.setVerificator(2, not_empty);
+
+	
+	// handle XML errors	
+	function myErrorHandler(type,name,p){
+		alert('Error. The record was not updated. Click OK to view the error.')
+		//	window.location = "/cropview"
+	}
+	
+	// add row in the grid and database (in conflict with validation)
+	function addRow(){
+        var newId = (new Date()).valueOf()
+        grid.addRow(newId,"",grid.getRowsNum())
+        grid.selectRow(grid.getRowIndex(newId),false,false,true);
+    }
+
+	// remove row from grid and database
+    function removeRow(){
+	
+		var selId = grid.getSelectedId()
+	
+		if (selId < 1)
+			{
+			 alert("No record was selected for deletion");	
+			}
+		else
+			{
+		var r=confirm("Are you sure you want to delete this record?");
+		if (r==true)
+		  {
+			
+	        grid.deleteRow(selId);
+		  	alert("Record deleted");
+		  }
+		else
+		  {
+		  alert("Delete cancelled");
+		  }
+		}
+	  }
+
+	// in grid validation for required string
+	function not_empty(value) {
+	    return value != "";
+	}
+	// in grid validation for required integer
+	function greater_0(value) {
+	    return value > 0;
+	}
+	
+	// branch to rails for record addition
+	function neworder() {
+	// branch to add new supply
+	    window.location = "retailorders/new";
+	}
+	// branch to rails for edit record
+	function editorder() {
+	// edit selected supply
+	var selId = grid.getSelectedId()
+	if (selId < 1)
+		{
+		 alert("No record was selected for full edit");	
+		}
+	else {
+	    window.location = "retailorders/"+selId+"/edit";
+		}
+	}
+	
+
+ 	
+ </script>
+
+<br>
+
+<button type="button" value="New", onclick="neworder()">New order</button>
+<button type="button" value="New", onclick="editorder()">Change order</button>
+<input type="button" value="Delete"  class="button" onclick="removeRow()">
+<br>
+ 	
+ 
+ 

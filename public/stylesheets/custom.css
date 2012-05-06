@@ -686,8 +686,8 @@ padding:2px 2px 2px 2px;
 	padding-top: 2px;
 	padding-bottom: 2px;
 	border: solid 1px #85b1de;
-	background-color: #E0E0E0 ;
-	width:80%;
+	background-color: floralwhite ;
+	width:90%;
 
 }
 
@@ -896,6 +896,7 @@ select  {
     border: solid 1px #85b1de;
     width: 100px;
     background-color: #EDF2F7;
+    text-align: center;
 	
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -973,6 +974,7 @@ button {
     border: solid 1px #85b1de;
     width: 100px;
     background-color: #EDF2F7;
+    text-align: center;
 	
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;

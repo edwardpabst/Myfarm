@@ -1,0 +1,100 @@
+
+
+<script type="text/javascript"> 
+
+function setUom() {
+	 
+	document.cr.cuom.value = document.cr.crop_crop_uom.value;
+	document.cr.iuom.value = document.cr.crop_crop_inventory_uom.value;
+	document.cr.conv.value = document.cr.crop_avg_weight_uom.value;
+}
+
+</script>
+
+<%= render "shared/error_messages", :object => @retailcrop%>
+
+<%= semantic_form_for @retailcrop, :html => { :name => "cr"} do |form| %>
+
+	<div id="form_header">			 	 
+Define your Retail crops. The crops define here will be visible in the retail order process if the status is set to active. 		 
+	</div>
+
+  <%= form.inputs do %>
+
+	<br>
+ <li class="string input optional stringish">
+	<% get_farms %>
+ 	<label class=" label" for="cropname">Farm*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label> 			
+	<%= collection_select("retailcrop", "farm_id", @farms, "id", "farmname", options = {:prompt => " "}) %>
+	</li> 
+    
+ 
+
+<!-- Select box for crop type -->
+ 
+<li class="string input optional stringish">	
+   <% get_cropplans_by_year %>
+	<label class=" label" for="cropplans">Crop plan*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<%= collection_select("retailcrop", "cropplan_id", @cropplans, "id", "cropplanfull", options = {:prompt => " "}) %></li> 
+    
+	<li class="string input optional stringish">
+	<label class=" label" for="retailcrops">Date available*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label> 
+	<%= form.text_field :available_date  %>&nbsp;  &nbsp;&nbsp;  &nbsp;
+	</li>
+	
+	
+	 <li class="string input optional stringish"> 
+		<% get_types_by_name("retailcrop_status") %>
+		<label class=" label" for="retailcrop_status">Status<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+		<%= collection_select("retailcrop", "status", @types, "type_value_string", "type_value_string", options = {:prompt => " "} ) %></li>
+		
+	 <li class="string input optional stringish"> 
+		<% get_types_by_name("retailcrop_uom") %>
+		<label class=" label" for="retailcrop_uom">Sales UOM<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+		<%= collection_select("retailcrop", "sales_uom", @types, "type_value_string", "type_value_string", options = {:prompt => " "} ) %></li>
+		
+		<li class="string input optional stringish">
+		<label class=" label" for="retailcrops">Sales price*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label> 
+		<%= form.text_field :sales_price  %>&nbsp;  &nbsp;&nbsp;  &nbsp;
+		</li> 
+		<li class="string input optional stringish">
+		<label class=" label" for="retailcrops">Shipping charge*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label> 
+		<%= form.text_field :ship_charge  %>&nbsp;  &nbsp;&nbsp;  &nbsp;
+		</li> 
+		<%= form.input :sales_notes, :as => :text, :label => "Sales notes",  :required => false  %> 
+	
+	
+	<div class='hintbase'>
+		Shipping days of the week
+	</div>	
+ 	    <%= form.input :shipday1, :label => "Sun" %>
+	    <%= form.input :shipday2, :label => "Mon" %>
+	    <%= form.input :shipday3, :label => "Tue" %>
+	    <%= form.input :shipday4, :label => "Wed" %>
+	    <%= form.input :shipday5, :label => "Thu" %>
+	    <%= form.input :shipday6, :label => "Fri" %>
+	    <%= form.input :shipday7, :label => "Sat" %>
+	
+	<div class='hintbase'>
+		Pickup days of the week
+	</div>
+	    <%= form.input :pickupday1, :label => "Sun" %>
+	    <%= form.input :pickupday2, :label => "Mon" %>
+	    <%= form.input :pickupday3, :label => "Tue" %>
+	    <%= form.input :pickupday4, :label => "Wed" %>
+	    <%= form.input :pickupday5, :label => "Thu" %>
+	    <%= form.input :pickupday6, :label => "Fri" %>
+	    <%= form.input :pickupday7, :label => "Sat" %>
+
+  
+
+  <%= form.buttons do %>
+      <%= form.commit_button :label => "Update Crop", :button_html => { :class => "button" } %>
+  <% end %>
+<br>
+<% end %>
+
+<% end %>
+ 
+
+

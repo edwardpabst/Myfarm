@@ -1,0 +1,110 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Source user:</b>
+  <%= @retailorder.source_user_id %>
+</p>
+
+<p>
+  <b>Order user:</b>
+  <%= @retailorder.order_user_id %>
+</p>
+
+<p>
+  <b>Order date:</b>
+  <%= @retailorder.order_date %>
+</p>
+
+<p>
+  <b>Need by date:</b>
+  <%= @retailorder.need_by_date %>
+</p>
+
+<p>
+  <b>Coupon code:</b>
+  <%= @retailorder.coupon_code %>
+</p>
+
+<p>
+  <b>Bill address1:</b>
+  <%= @retailorder.bill_address1 %>
+</p>
+
+<p>
+  <b>Bill address2:</b>
+  <%= @retailorder.bill_address2 %>
+</p>
+
+<p>
+  <b>Bill city:</b>
+  <%= @retailorder.bill_city %>
+</p>
+
+<p>
+  <b>Bill state:</b>
+  <%= @retailorder.bill_state %>
+</p>
+
+<p>
+  <b>Bill postalcode:</b>
+  <%= @retailorder.bill_postalcode %>
+</p>
+
+<p>
+  <b>Bill email:</b>
+  <%= @retailorder.bill_email %>
+</p>
+
+<p>
+  <b>Bill phone:</b>
+  <%= @retailorder.bill_phone %>
+</p>
+
+<p>
+  <b>Ship address1:</b>
+  <%= @retailorder.ship_address1 %>
+</p>
+
+<p>
+  <b>Ship address2:</b>
+  <%= @retailorder.ship_address2 %>
+</p>
+
+<p>
+  <b>Ship city:</b>
+  <%= @retailorder.ship_city %>
+</p>
+
+<p>
+  <b>Ship state:</b>
+  <%= @retailorder.ship_state %>
+</p>
+
+<p>
+  <b>Ship postalcode:</b>
+  <%= @retailorder.ship_postalcode %>
+</p>
+
+<p>
+  <b>Order status:</b>
+  <%= @retailorder.order_status %>
+</p>
+
+<p>
+  <b>Order total:</b>
+  <%= @retailorder.order_total %>
+</p>
+
+<p>
+  <b>Payment method:</b>
+  <%= @retailorder.payment_method %>
+</p>
+
+<p>
+  <b>Payment:</b>
+  <%= @retailorder.payment_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_retailorder_path(@retailorder) %> |
+<%= link_to 'Back', retailorders_path %>

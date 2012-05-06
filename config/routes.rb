@@ -4,6 +4,12 @@ Myfarm::Application.routes.draw do
 
 
 
+  resources :retailorderdetails
+
+  resources :retailorders
+
+  resources :retailcrops
+
   resources :coupons
 
   resources :comments
@@ -286,6 +292,30 @@ Myfarm::Application.routes.draw do
   match '/weatherview', :to => 'weathers#index_view'
   match '/weatherdata', :to => 'weathers#index_data'
   match '/weathergridaction', :to => 'weathers#index_dbaction'
+  
+  #Retail crops
+  match '/retailcropview', :to => 'retailcrops#index_view'
+  match '/retailcropdata', :to => 'retailcrops#index_data'
+  match '/retailcropgridaction', :to => 'retailcrops#index_dbaction'
+  
+  match '/retailcropaddview', :to => 'retailorders#retailcropadd_view'
+  match '/retailcropadddata', :to => 'retailorders#retailcropadd_data'
+  match '/retailcropaddgridaction', :to => 'retailorders#retailcropadd_dbaction'
+  
+  #Retail orders
+  match '/ordersfrommeview', :to => 'retailorders#ordersfromme_view'
+  match '/ordersfrommedata', :to => 'retailorders#ordersfromme_data'
+  match '/ordersfrommegridaction', :to => 'retailorders#ordersfromme_dbaction'
+  
+  match '/orderstomeview', :to => 'retailorders#orderstome_view'
+  match '/orderstomedata', :to => 'retailorders#orderstome_data'
+  match '/orderstomegridaction', :to => 'retailorders#orderstome_dbaction'
+  
+  #Retail order detail
+  match '/retailorderdetailview', :to => 'retailorderdetails#index_view'
+  match '/retailorderdetaildata', :to => 'retailorderdetails#index_data'
+  match '/retailorderdetailgridaction', :to => 'retailorderdetails#index_dbaction'
+  match 'retailorderdetails/:id/additem', :to => 'retailorderdetails#additem'
   
   #Reports
    match '/farmjobreportrequestor', :to => 'farmjobs#farmjob_report_requestor'

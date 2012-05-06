@@ -1,0 +1,63 @@
+<h1>Listing retailorders</h1>
+
+<table>
+  <tr>
+    <th>Source user</th>
+    <th>Order user</th>
+    <th>Order date</th>
+    <th>Need by date</th>
+    <th>Coupon code</th>
+    <th>Bill address1</th>
+    <th>Bill address2</th>
+    <th>Bill city</th>
+    <th>Bill state</th>
+    <th>Bill postalcode</th>
+    <th>Bill email</th>
+    <th>Bill phone</th>
+    <th>Ship address1</th>
+    <th>Ship address2</th>
+    <th>Ship city</th>
+    <th>Ship state</th>
+    <th>Ship postalcode</th>
+    <th>Order status</th>
+    <th>Order total</th>
+    <th>Payment method</th>
+    <th>Payment</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @retailorders.each do |retailorder| %>
+  <tr>
+    <td><%= retailorder.source_user_id %></td>
+    <td><%= retailorder.order_user_id %></td>
+    <td><%= retailorder.order_date %></td>
+    <td><%= retailorder.need_by_date %></td>
+    <td><%= retailorder.coupon_code %></td>
+    <td><%= retailorder.bill_address1 %></td>
+    <td><%= retailorder.bill_address2 %></td>
+    <td><%= retailorder.bill_city %></td>
+    <td><%= retailorder.bill_state %></td>
+    <td><%= retailorder.bill_postalcode %></td>
+    <td><%= retailorder.bill_email %></td>
+    <td><%= retailorder.bill_phone %></td>
+    <td><%= retailorder.ship_address1 %></td>
+    <td><%= retailorder.ship_address2 %></td>
+    <td><%= retailorder.ship_city %></td>
+    <td><%= retailorder.ship_state %></td>
+    <td><%= retailorder.ship_postalcode %></td>
+    <td><%= retailorder.order_status %></td>
+    <td><%= retailorder.order_total %></td>
+    <td><%= retailorder.payment_method %></td>
+    <td><%= retailorder.payment_id %></td>
+    <td><%= link_to 'Show', retailorder %></td>
+    <td><%= link_to 'Edit', edit_retailorder_path(retailorder) %></td>
+    <td><%= link_to 'Destroy', retailorder, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Retailorder', new_retailorder_path %>

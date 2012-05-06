@@ -1,0 +1,67 @@
+<h1>Listing retailcrops</h1>
+
+<table>
+  <tr>
+    <th>Cropplan</th>
+    <th>User</th>
+    <th>Farm</th>
+    <th>Available date</th>
+    <th>Status</th>
+    <th>Shipday1</th>
+    <th>Shipday2</th>
+    <th>Shipday3</th>
+    <th>Shipday4</th>
+    <th>Shipday5</th>
+    <th>Shipday6</th>
+    <th>Shipday7</th>
+    <th>Pickupday1</th>
+    <th>Pickupday2</th>
+    <th>Pickupday3</th>
+    <th>Pickupday4</th>
+    <th>Pickupday5</th>
+    <th>Pickupday6</th>
+    <th>Pickupday7</th>
+    <th>Sales uom</th>
+    <th>Sales price</th>
+    <th>Sales notes</th>
+    <th>Ship charge</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @retailcrops.each do |retailcrop| %>
+  <tr>
+    <td><%= retailcrop.cropplan_id %></td>
+    <td><%= retailcrop.user_id %></td>
+    <td><%= retailcrop.farm_id %></td>
+    <td><%= retailcrop.available_date %></td>
+    <td><%= retailcrop.status %></td>
+    <td><%= retailcrop.shipday1 %></td>
+    <td><%= retailcrop.shipday2 %></td>
+    <td><%= retailcrop.shipday3 %></td>
+    <td><%= retailcrop.shipday4 %></td>
+    <td><%= retailcrop.shipday5 %></td>
+    <td><%= retailcrop.shipday6 %></td>
+    <td><%= retailcrop.shipday7 %></td>
+    <td><%= retailcrop.pickupday1 %></td>
+    <td><%= retailcrop.pickupday2 %></td>
+    <td><%= retailcrop.pickupday3 %></td>
+    <td><%= retailcrop.pickupday4 %></td>
+    <td><%= retailcrop.pickupday5 %></td>
+    <td><%= retailcrop.pickupday6 %></td>
+    <td><%= retailcrop.pickupday7 %></td>
+    <td><%= retailcrop.sales_uom %></td>
+    <td><%= retailcrop.sales_price %></td>
+    <td><%= retailcrop.sales_notes %></td>
+    <td><%= retailcrop.ship_charge %></td>
+    <td><%= link_to 'Show', retailcrop %></td>
+    <td><%= link_to 'Edit', edit_retailcrop_path(retailcrop) %></td>
+    <td><%= link_to 'Destroy', retailcrop, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Retailcrop', new_retailcrop_path %>

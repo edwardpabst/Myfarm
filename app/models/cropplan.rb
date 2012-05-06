@@ -15,7 +15,8 @@ class Cropplan < ActiveRecord::Base
            
            return @cropplans = Cropplan.find_by_sql("Select cropplans.id, cropplanfull, crop_id, plan_year, plan_status
            from cropplans
-           where cropplans.user_id = #{current_user_id} 
+           where cropplans.user_id = #{current_user_id}
+           and plan_status <> 'complete' 
            order by plan_year")
          end
          

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120429234407) do
+ActiveRecord::Schema.define(:version => 20120505175805) do
 
   create_table "capitalrecoveries", :force => true do |t|
     t.integer  "recovery_year"
@@ -578,6 +578,78 @@ ActiveRecord::Schema.define(:version => 20120429234407) do
 
   add_index "relationships", ["followed_id"], :name => "index_relationships_on_followed_id"
   add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
+
+  create_table "retailcrops", :force => true do |t|
+    t.integer  "cropplan_id"
+    t.integer  "user_id"
+    t.integer  "farm_id"
+    t.date     "available_date"
+    t.string   "status"
+    t.boolean  "shipday1"
+    t.boolean  "shipday2"
+    t.boolean  "shipday3"
+    t.boolean  "shipday4"
+    t.boolean  "shipday5"
+    t.boolean  "shipday6"
+    t.boolean  "shipday7"
+    t.boolean  "pickupday1"
+    t.boolean  "pickupday2"
+    t.boolean  "pickupday3"
+    t.boolean  "pickupday4"
+    t.boolean  "pickupday5"
+    t.boolean  "pickupday6"
+    t.boolean  "pickupday7"
+    t.string   "sales_uom"
+    t.decimal  "sales_price"
+    t.string   "sales_notes"
+    t.decimal  "ship_charge"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "retailorderdetails", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "retailcrop_id"
+    t.integer  "cropplan_id"
+    t.string   "detail_uom"
+    t.decimal  "detail_price"
+    t.decimal  "detail_qty"
+    t.decimal  "detail_ext_amount"
+    t.decimal  "detail_shipcharge"
+    t.string   "detail_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "detail_notes"
+    t.integer  "retailorder_id"
+  end
+
+  create_table "retailorders", :force => true do |t|
+    t.integer  "source_user_id"
+    t.integer  "order_user_id"
+    t.datetime "order_date"
+    t.date     "need_by_date"
+    t.string   "coupon_code"
+    t.string   "bill_address1"
+    t.string   "bill_address2"
+    t.string   "bill_city"
+    t.string   "bill_state"
+    t.string   "bill_postalcode"
+    t.string   "bill_email"
+    t.string   "bill_phone"
+    t.string   "ship_address1"
+    t.string   "ship_address2"
+    t.string   "ship_city"
+    t.string   "ship_state"
+    t.string   "ship_postalcode"
+    t.string   "order_status"
+    t.decimal  "order_total"
+    t.string   "payment_method"
+    t.string   "payment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "farm_id"
+    t.string   "customername"
+  end
 
   create_table "scaletickets", :force => true do |t|
     t.integer  "cropplan_id"

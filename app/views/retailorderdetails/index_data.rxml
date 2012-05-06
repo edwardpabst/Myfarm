@@ -1,0 +1,18 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@retailorderdetails.each do |retailorderdetail|
+		xml.tag!("row",{ "id" => retailorderdetail.id }) do
+			
+			xml.tag!("cell", retailorderdetail.cropplanfull)
+			xml.tag!("cell", retailorderdetail.detail_qty)
+			xml.tag!("cell", retailorderdetail.detail_price)
+			xml.tag!("cell", retailorderdetail.detail_uom)
+			xml.tag!("cell", retailorderdetail.detail_ext_amount)
+			xml.tag!("cell", retailorderdetail.detail_shipcharge)
+			xml.tag!("cell", retailorderdetail.detail_status)
+			xml.tag!("cell", retailorderdetail.detail_notes)
+	
+
+		end
+	end
+end

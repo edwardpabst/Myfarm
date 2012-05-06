@@ -1,0 +1,133 @@
+<h1>Add item to order</h1>
+
+<%= link_to 'Back', "/retailcropaddview" %> 
+
+<%= form_for @retailorderdetail, :html => { :name => "ro", :class => "form_for"} do |f| %>
+
+<%= render "shared/error_messages", :object => f.object%>
+
+<%= f.text_field :user_id, :hidden => true  %>
+<%= f.text_field :retailorder_id, :hidden => true  %>
+<%= f.text_field :retailcrop_id, :hidden => true  %>
+<%= f.text_field :cropplan_id, :hidden => true  %>
+<%= f.text_field :detail_price, :hidden => true  %>
+<%= f.text_field :detail_uom, :hidden => true  %>
+<%= f.text_field :detail_shipcharge, :hidden => true  %>
+<%= f.text_field :detail_ext_amount, :hidden => true  %>
+<%= f.text_field :detail_status, :hidden => true  %>
+
+
+
+<table class="twocolumn">
+	<tr>		
+		<td width="25%"></td>
+		<td width="25%"></td>
+		<td width="25%"></td>
+		<td width="25%"></td>
+ 
+	</tr>
+	<tr>
+		<td colspan="4">
+			<div id="form_header">			 	 
+		Add this item to your order. Enter a qty desired. 		 
+			</div>
+		</td>
+	</tr>
+	<tr>		
+		<td width="25%">&nbsp;</td>
+		<td width="25%"></td>
+		<td width="25%"></td>
+		<td width="25%"></td>
+ 
+	</tr>
+   
+	<tr>
+		<td></td>
+		<td class="label">
+			<label class=" label" for="retailorderdetail">Crop<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+			<div id="datadisplay">
+				<%= @cropplan.cropplanfull%>
+			</div>
+	 	</td>
+ 
+
+	</tr>
+	<tr>
+		<td></td>
+		<td class="label">
+			<label class=" label" for="retailorderdetail">Price<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+			<div id="datadisplay">
+				<%= @retailorderdetail.detail_price%>
+			</div>
+	 	</td>
+ 
+
+	</tr>
+	<tr>
+		<td></td>
+		<td class="label">
+			<label class=" label" for="retailorderdetail">UOM<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+			<div id="datadisplay">
+				<%= @retailorderdetail.detail_uom%>
+			</div>
+	 	</td>
+ 
+
+	</tr>
+	<tr>
+		<td></td>
+		<td class="label">
+			<label class=" label" for="retailorderdetail">Shipping Charge<abbr title="required"> </abbr>  </label> 
+		</td>
+		<td>
+			<div id="datadisplay">
+				<%= @retailorderdetail.detail_shipcharge%>
+			</div>
+	 	</td>
+ 
+
+	</tr>
+	<tr>
+		<td></td>
+	 	<td>
+			<%= f.label :detail_qty, "Order Qty" %> 
+		</td>
+		<td>
+			<%= f.text_field :detail_qty  %>
+		</td>
+ 	</tr>
+
+	<tr>
+		<td></td>
+	 	<td>
+			<%= f.label :detail_notes, "Notes" %> 
+		</td>
+		<td>
+			<%= f.text_field :detail_notes  %>
+		</td>
+ 	</tr>
+
+ 
+		<tr>
+			<td></td>
+			<td colspan="2">
+			<br>	&nbsp;&nbsp;&nbsp;&nbsp;
+			 	<%= f.submit "Add item ", :class => "button", :id => "sh_submit" %>
+			<br> <br> 
+			</td>
+
+		</tr>	
+	 </table>
+
+
+
+<% end %>
+<br>
+<%= link_to 'Back', "/retailcropaddview" %>
+<br>

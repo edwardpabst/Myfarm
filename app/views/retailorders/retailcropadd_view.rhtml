@@ -1,0 +1,87 @@
+<br> 
+<h1><p>Current Retail Crops</p></h1>
+
+<%= link_to 'Back', :controller => :retailorders, :action => :edit, :id => session[:s_retailorder_id] %>
+
+<br>
+<button type="button" value="New", onclick="addCrop()">Add to Order</button>
+
+<br><br>
+<!-- Div for capture of grid output -->
+ <div id="retailcropadd_grid" style="width:95%; height:500px;">
+
+ </div>
+
+<!-- script for dhtmlxgrid -->
+ <script type="text/javascript" charset="utf-8">
+
+	// data grid definition
+     var grid = new dhtmlXGridObject("retailcropadd_grid");
+     grid.setImagePath("/images/");
+     grid.setHeader(" Farm name ,  City,  State  ,  Crop ,  Status ,  Available , Price ,  UOM,  Ship charge, Notes");  
+     grid.setInitWidths("90,80,50,150,60,70,60,70,60,110");
+     grid.setSkin("dhx_web");
+     grid.init();
+	 grid.load("/retailcropadddata");  	
+	 grid.attachHeader("#text_filter,#text_filter,#text_filter,#text_filter,#text_filter,#text_filter");  
+	 grid.setColSorting("str,str,str,str,str,str");	 
+	 grid.setColTypes("ro,ro,ro,ro,ro,ro,price,ro,ed,txt");// ed-editable, ro-read only price-money , ch-checkbox, 
+													  // txt-text editor ra-radio button, coro-select box, img, dhxcalendar 
+													  //  subrow (ajax)	 
+	// data processor definition
+	dp = new dataProcessor("/retailcropaddgridaction");
+	//dp.setTransactionMode("POST", true);
+	//set mode as send-all-by-post;
+	//dp.setUpdateMode("on");
+	dp.init(grid);
+		// in grid validations
+	//	dp.setVerificator(0, not_empty);
+	//	dp.setVerificator(1, not_empty);
+	//	dp.setVerificator(2, not_empty);
+
+	
+	// handle XML errors	
+	function myErrorHandler(type,name,p){
+		alert('Error. The record was not updated. Click OK to view the error.')
+		//	window.location = "/cropview"
+	}
+	
+
+	// in grid validation for required string
+	function not_empty(value) {
+	    return value != "";
+	}
+	// in grid validation for required integer
+	function greater_0(value) {
+	    return value > 0;
+	}
+	
+ 
+	// branch to rails for edit record
+	function addCrop() {
+	// edit selected crop
+	var selId = grid.getSelectedId()
+	if (selId < 1)
+		{
+		 alert("No record was selected for full edit");	
+		}
+	else {
+	    window.location = "retailorderdetails/"+selId+"/additem";
+		}
+	}
+	
+
+ 	
+ </script>
+
+<br>
+<%= link_to 'Back', :controller => :retailorders, :action => :edit, :id => session[:s_retailorder_id] %>
+
+<br>
+<button type="button" value="New", onclick="addCrop()">Add to Order</button>
+
+<br><br>
+ 	
+
+
+ 

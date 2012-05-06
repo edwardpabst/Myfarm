@@ -1,0 +1,39 @@
+<h1>Listing retailorderdetails</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Retailcrop</th>
+    <th>Cropplan</th>
+    <th>Detail uom</th>
+    <th>Detail price</th>
+    <th>Detail qty</th>
+    <th>Detail ext amount</th>
+    <th>Detail shipcharge</th>
+    <th>Detail status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @retailorderdetails.each do |retailorderdetail| %>
+  <tr>
+    <td><%= retailorderdetail.user_id %></td>
+    <td><%= retailorderdetail.retailcrop_id %></td>
+    <td><%= retailorderdetail.cropplan_id %></td>
+    <td><%= retailorderdetail.detail_uom %></td>
+    <td><%= retailorderdetail.detail_price %></td>
+    <td><%= retailorderdetail.detail_qty %></td>
+    <td><%= retailorderdetail.detail_ext_amount %></td>
+    <td><%= retailorderdetail.detail_shipcharge %></td>
+    <td><%= retailorderdetail.detail_status %></td>
+    <td><%= link_to 'Show', retailorderdetail %></td>
+    <td><%= link_to 'Edit', edit_retailorderdetail_path(retailorderdetail) %></td>
+    <td><%= link_to 'Destroy', retailorderdetail, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Retailorderdetail', new_retailorderdetail_path %>

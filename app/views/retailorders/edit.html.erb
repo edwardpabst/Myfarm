@@ -1,0 +1,25 @@
+<script type="text/javascript"> 
+
+function checkOrder() {
+
+	if (document.ro.retailorder_order_status.value != 'New')
+	{	   
+	    document.ro.selectbutton.disabled=true;
+	    document.ro.deletebutton.disabled=true;
+		document.ro.ro_submit.disabled=true;
+	   
+	} 
+}
+</script>
+
+
+
+<h1>Edit Order</h1>
+
+<%= link_to 'Back', '/ordersfrommeview' %>
+
+<%= render 'form' %>
+
+<%= render 'retailorderdetails/index_view' %>
+
+<%= link_to 'Back', '/ordersfrommeview' %>
