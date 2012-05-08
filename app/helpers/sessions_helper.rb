@@ -99,6 +99,7 @@ module SessionsHelper
   def set_current_parms
     session[:s_user_id] = @current_user.id
     session[:s_user_name] = @current_user.name
+    session[:s_user_type] = @current_user.user_type
     if session[:s_is_new_user] == true
       session[:s_user_email] = @current_user.email
     else
@@ -257,6 +258,13 @@ module SessionsHelper
    
    def get_farms
     @farms = Farm.where('user_id' => @current_user.id).all
+   end
+   
+   def get_farms_all
+    @farms =  Farm.find_by_sql("Select farms.id, (farmname || ' ' || partycity || ' ' || partystate) as farmfull
+                           from farms
+                           join parties on farms.party_id = parties.id
+                           order by farmname")
    end
    
    def get_cropplanfield_info

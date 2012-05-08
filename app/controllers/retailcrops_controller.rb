@@ -18,12 +18,116 @@ class RetailcropsController < ApplicationController
         join farms on rc.farm_id = farms.id
         join parties p1 on farms.party_id = p1.id 
         left join cropplans cp on rc.cropplan_id = cp.id
-        where rc.user_id = #{@current_user.id } ")
+        where rc.user_id = #{@current_user.id } 
+        order by cropplanfull")
 
       end
       
+          def index_dbaction
+        		#called for all db actions
+        		sales_price = params["c6"]
+        		ship_charge	 = params["c8"]
+        		sales_notes	= params["c9"]
 
 
+        		@mode = params["!nativeeditor_status"]
+
+        		@id = params["gr_id"]
+        		case @mode
+        			when "inserted"
+        				@crop = Crop.new
+
+        				if @crop.save
+
+        				else
+                  flash[:error] = @crop.errors 
+                  render 'index_view'				  
+        				end
+
+        				@tid = @crop.id
+        			when "deleted"
+        				@crop=Retailcrop.find(@id)
+        				@crop.destroy
+
+        				@tid = @id
+        			when "updated"
+        				@crop = Retailcrop.find(@id)
+        				@crop.sales_price = sales_price
+        				@crop.ship_charge = ship_charge
+        				@crop.sales_notes = sales_notes
+
+        				if @crop.save
+
+        				else
+          				flash[:error] = @crop.errors 
+                  render 'index_view' 				  
+        				end
+
+        				@tid = @id
+        		end 
+        	end
+
+      #-------- Standard ROR scaffold --------------------------------------------
+      def indexall_view
+
+
+      end
+
+      def indexall_data
+        get_current_user
+       
+         @retailcrops = Retailcrop.find_by_sql("Select rc.*, farmname, partycity as farm_city, partystate as farm_state,
+                    cropplanfull
+        from retailcrops rc
+        join farms on rc.farm_id = farms.id
+        join parties p1 on farms.party_id = p1.id 
+        left join cropplans cp on rc.cropplan_id = cp.id
+        where rc.status = 'active'
+        order by farmname, cropplanfull ")
+
+      end
+      
+          def indexall_dbaction
+        		#called for all db actions
+ 
+
+
+        		@mode = params["!nativeeditor_status"]
+
+        		@id = params["gr_id"]
+        		case @mode
+        			when "inserted"
+        				@crop = Crop.new
+
+        				if @crop.save
+
+        				else
+                  flash[:error] = @crop.errors 
+                  render 'index_view'				  
+        				end
+
+        				@tid = @crop.id
+        			when "deleted"
+        				@crop=Retailcrop.find(@id)
+        				@crop.destroy
+
+        				@tid = @id
+        			when "updated"
+        				@crop = Retailcrop.find(@id)
+
+
+        				if @crop.save
+
+        				else
+          				flash[:error] = @crop.errors 
+                  render 'index_view' 				  
+        				end
+
+        				@tid = @id
+        		end 
+        	end
+
+      #-------- Standard ROR scaffold --------------------------------------------
       def index
         get_current_user
         @retailcrops = Retailcrop.where('user_id' => @current_user.id).all
@@ -36,59 +140,7 @@ class RetailcropsController < ApplicationController
         end
       end
 
-      def index_dbaction
-    		#called for all db actions
-    		sales_price = params["c6"]
-    		ship_charge	 = params["c8"]
-    		sales_notes	= params["c9"]
- 
 
-    		@mode = params["!nativeeditor_status"]
-    		
-    		@id = params["gr_id"]
-    		case @mode
-    			when "inserted"
-    				@crop = Crop.new
-
-    				if @crop.save
-
-    				else
-              flash[:error] = @crop.errors 
-              render 'index_view'				  
-    				end
-
-    				@tid = @crop.id
-    			when "deleted"
-    				@crop=Retailcrop.find(@id)
-    				@crop.destroy
-
-    				@tid = @id
-    			when "updated"
-    				@crop = Retailcrop.find(@id)
-    				@crop.sales_price = sales_price
-    				@crop.ship_charge = ship_charge
-    				@crop.sales_notes = sales_notes
-
-    				if @crop.save
-
-    				else
-      				flash[:error] = @crop.errors 
-              render 'index_view' 				  
-    				end
-
-    				@tid = @id
-    		end 
-    	end
-
-  #-------- Standard ROR scaffold --------------------------------------------
-  def index
-    @retailcrops = Retailcrop.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @retailcrops }
-    end
-  end
 
   # GET /retailcrops/1
   # GET /retailcrops/1.xml
@@ -115,6 +167,12 @@ class RetailcropsController < ApplicationController
   # GET /retailcrops/1/edit
   def edit
     @retailcrop = Retailcrop.find(params[:id])
+  end
+  
+  def view
+    @retailcrop = Retailcrop.find(params[:id])
+    @cropplan = Cropplan.find(@retailcrop.cropplan_id)
+    @farm = Farm.find(@retailcrop.farm_id)
   end
 
   # POST /retailcrops

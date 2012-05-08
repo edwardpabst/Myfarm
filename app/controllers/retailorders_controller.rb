@@ -4,12 +4,74 @@ class RetailordersController < ApplicationController
   
     before_filter :authenticate
 
-      def ordersfromme_view
+          def ordersfromme_view
+
+
+          end
+
+          def ordersfromme_data
+            get_current_user
+
+             @retailorders = Retailorder.find_by_sql("Select ro.*, farmname, p1.partyphone as farm_phone, 
+                        p2.partyname as customername, p2.partycity as customercity, p2.partystate as customerstate,
+                        p2.partyphone as bill_phone
+            from retailorders ro
+            join farms on ro.farm_id = farms.id
+            join parties p1 on farms.party_id = p1.id 
+            join parties p2 on ro.order_user_id = p2.system_user_id 
+            where ro.order_user_id = #{@current_user.id } ")
+
+          end
+
+
+          def ordersfromme_dbaction
+        		#called for all db actions
+
+
+
+        		@mode = params["!nativeeditor_status"]
+
+        		@id = params["gr_id"]
+        		case @mode
+        			when "inserted"
+        				@retailorder = Retailorder.new
+
+        				if @retailorder.save
+
+        				else
+                  flash[:error] = @retailorder.errors 
+                  render 'index_view'				  
+        				end
+
+        				@tid = @retailorder.id
+        			when "deleted"
+        				@retailorder=Retailorder.find(@id)
+        				@retailorder.destroy
+
+        				@tid = @id
+        			when "updated"
+        				@retailorder = Retailorder.find(@id)
+
+
+        				if @retailorder.save
+
+        				else
+          				flash[:error] = @retailorder.errors 
+                  render 'index_view' 				  
+        				end
+
+        				@tid = @id
+        		end 
+        	end
+
+    #-------------------------------------------------------------------------------------------------------   	
+
+      def orderstome_view
 
 
       end
 
-      def ordersfromme_data
+      def orderstome_data
         get_current_user
        
          @retailorders = Retailorder.find_by_sql("Select ro.*, farmname, p1.partyphone as farm_phone, 
@@ -19,12 +81,12 @@ class RetailordersController < ApplicationController
         join farms on ro.farm_id = farms.id
         join parties p1 on farms.party_id = p1.id 
         join parties p2 on ro.order_user_id = p2.system_user_id 
-        where ro.order_user_id = #{@current_user.id } ")
+        where ro.source_user_id = #{@current_user.id } ")
 
       end
       
 
-      def ordersfromme_dbaction
+      def orderstome_dbaction
     		#called for all db actions
  
  
@@ -64,6 +126,7 @@ class RetailordersController < ApplicationController
     		end 
     	end
     	
+#-------------------------------------------------------------------------------------------------------   	
     	def retailcropadd_view
 
 
@@ -80,6 +143,7 @@ class RetailordersController < ApplicationController
         join parties p1 on farms.party_id = p1.id 
         left join cropplans cp on rc.cropplan_id = cp.id
         where rc.user_id = #{@retailorder.source_user_id } 
+        and rc.farm_id = #{session[:s_farm_id]}
         and rc.status = 'active' ")
 
       end
@@ -184,7 +248,10 @@ class RetailordersController < ApplicationController
   def edit
     session[:s_retailorder_id] = params[:id]
     @retailorder = update_order_amount(params[:id])
-    @onload = 'checkOrder()'
+    session[:s_farm_id] = @retailorder.farm_id
+    if session[:s_user_type] == 'crop customer' 
+      @onload = 'checkOrder()'
+    end 
   end
 
   # POST /retailorders

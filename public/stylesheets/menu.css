@@ -36,27 +36,27 @@
 	color: #6495ED;
 }
 
-#menu1, #menu2, #menu3, #menu4, #menu5
+#menu1, #menu2, #menu3, #menu4, #menu5, #menu6
 {
     position: absolute;
     top: 0px;
     
 
 }
-#menu1 a:hover, #menu2 a:hover, #menu3 a:hover, #menu4 a:hover, #menu5 a:hover
+#menu1 a:hover, #menu2 a:hover, #menu3 a:hover, #menu4 a:hover, #menu5 a:hover, #menu6 a:hover
 {
      color: white;
 }
-#submenu1, #submenu2, #submenu3, #submenu4, #submenu5
+#submenu1, #submenu2, #submenu3, #submenu4, #submenu5, #submenu6
 {
     background-color: whitesmoke;
     border: 1px solid #a3a3a3;
 	font-size: 11px;
-	opacity: .9;
+	opacity: 1;
     z-index: 1000;
 }
  
-#submenu1 a, #submenu2 a, #submenu3 a, #submenu4 a, #submenu5 a
+#submenu1 a, #submenu2 a, #submenu3 a, #submenu4 a, #submenu5 a, #submenu6 a
 {
     border-top: 1px solid #fdd3df;
     display: block;
@@ -65,7 +65,7 @@
     padding: 5px 15px 5px 5px;
 }
  
-#submenu1 a:hover, #submenu2 a:hover, #submenu3 a:hover, #submenu4 a:hover, #submenu5 a:hover
+#submenu1 a:hover, #submenu2 a:hover, #submenu3 a:hover, #submenu4 a:hover, #submenu5 a:hover, #submenu6 a:hover
 {
     color: orange;
 }
@@ -117,7 +117,11 @@
 {
     left: 0px;
 }
-#submenu1, #submenu2, #submenu3, #submenu4, #submenu5 
+#menu6
+{
+    left: 0px;
+}
+#submenu1, #submenu2, #submenu3, #submenu4, #submenu5 , #submenu6
 {
     position: absolute;
     top: 0px;
@@ -142,15 +146,19 @@
 {
     left: 0px;
 }
+#submenu6
+{
+    left: 0px;
+}
 
  
 
-#menu1, #menu2, #menu3, #menu4, #menu5
+#menu1, #menu2, #menu3, #menu4, #menu5, #menu6
 {
     top: 100px;
 }
 
-#submenu1, #submenu2, #submenu3, #submenu4, #submenu5
+#submenu1, #submenu2, #submenu3, #submenu4, #submenu5, #submenu6
 {
     top: 127px;
 }
@@ -171,11 +179,15 @@
 }
 #menu4
 	{
-	left: 540px;
+	left: 520px;
 }
 #menu5
 	{
 	left: 660px;
+}
+#menu6
+	{
+	left: 800px;
 }
 #submenu1
 {
@@ -191,19 +203,23 @@
 }
 #submenu4
 {
-    left: 540px;
+    left: 520px;
 }
 #submenu5
 {
     left: 660px;
 }
+#submenu6
+{
+    left: 800px;
+}
 
  
-#menu1, #menu2, #menu3, #menu4, #menu5
+#menu1, #menu2, #menu3, #menu4, #menu5, #menu6
 {
     visibility: visible;
 }
-#submenu1, #submenu2, #submenu3, #submenu4, #submenu5
+#submenu1, #submenu2, #submenu3, #submenu4, #submenu5, #submenu6
 {
     visibility: hidden;
 }

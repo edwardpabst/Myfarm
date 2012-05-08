@@ -17,14 +17,14 @@
 			</div>
 		</td>
 	</tr>
-    <% get_farms %>
+    <% get_farms_all %>
 	<tr>
 		<td class="label">
 			<label class=" label" for="shipment">Farm*<abbr title="required"> </abbr>  </label> 
 		</td>
 		<td>
 		 		
-			<%= collection_select("retailorder", "farm_id", @farms, "id", "farmname", options = {:prompt => " "}) %>  
+			<%= collection_select("retailorder", "farm_id", @farms, "id", "farmfull", options = {:prompt => " "}) %>  
 
 	 	</td>
 		<td class="label">

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120505175805) do
+ActiveRecord::Schema.define(:version => 20120508182654) do
 
   create_table "capitalrecoveries", :force => true do |t|
     t.integer  "recovery_year"
@@ -860,6 +860,7 @@ ActiveRecord::Schema.define(:version => 20120505175805) do
     t.string   "security_answer"
     t.integer  "party_id"
     t.string   "stripe_customer_id"
+    t.string   "user_type"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

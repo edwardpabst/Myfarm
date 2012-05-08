@@ -24,7 +24,7 @@ Define your Retail crops. The crops define here will be visible in the retail or
 	<br>
  <li class="string input optional stringish">
 	<% get_farms %>
- 	<label class=" label" for="cropname">Farm*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label> 			
+ 	<label class=" label" for="cropname">Farm*<abbr title="required"> </abbr> </label> 			
 	<%= collection_select("retailcrop", "farm_id", @farms, "id", "farmname", options = {:prompt => " "}) %>
 	</li> 
     
@@ -34,32 +34,33 @@ Define your Retail crops. The crops define here will be visible in the retail or
  
 <li class="string input optional stringish">	
    <% get_cropplans_by_year %>
-	<label class=" label" for="cropplans">Crop plan*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+	<label class=" label" for="cropplans">Crop plan*<abbr title="required"> </abbr>  </label>		
 	<%= collection_select("retailcrop", "cropplan_id", @cropplans, "id", "cropplanfull", options = {:prompt => " "}) %></li> 
     
 	<li class="string input optional stringish">
-	<label class=" label" for="retailcrops">Date available*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label> 
-	<%= form.text_field :available_date  %>&nbsp;  &nbsp;&nbsp;  &nbsp;
+	<label class=" label" for="retailcrops">Date available*<abbr title="required"> </abbr> </label> 
+   
+	<%= form.text_field :available_date  %>
 	</li>
 	
 	
 	 <li class="string input optional stringish"> 
 		<% get_types_by_name("retailcrop_status") %>
-		<label class=" label" for="retailcrop_status">Status<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+		<label class=" label" for="retailcrop_status">Status<abbr title="required"> </abbr> </label>		
 		<%= collection_select("retailcrop", "status", @types, "type_value_string", "type_value_string", options = {:prompt => " "} ) %></li>
 		
 	 <li class="string input optional stringish"> 
 		<% get_types_by_name("retailcrop_uom") %>
-		<label class=" label" for="retailcrop_uom">Sales UOM<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
+		<label class=" label" for="retailcrop_uom">Sales UOM<abbr title="required"> </abbr>  </label>		
 		<%= collection_select("retailcrop", "sales_uom", @types, "type_value_string", "type_value_string", options = {:prompt => " "} ) %></li>
 		
 		<li class="string input optional stringish">
 		<label class=" label" for="retailcrops">Sales price*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label> 
-		<%= form.text_field :sales_price  %>&nbsp;  &nbsp;&nbsp;  &nbsp;
+		<%= form.text_field :sales_price  %> 
 		</li> 
 		<li class="string input optional stringish">
 		<label class=" label" for="retailcrops">Shipping charge*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label> 
-		<%= form.text_field :ship_charge  %>&nbsp;  &nbsp;&nbsp;  &nbsp;
+		<%= form.text_field :ship_charge  %> 
 		</li> 
 		<%= form.input :sales_notes, :as => :text, :label => "Sales notes",  :required => false  %> 
 	
@@ -69,9 +70,9 @@ Define your Retail crops. The crops define here will be visible in the retail or
 	</div>	
  	    <%= form.input :shipday1, :label => "Sun" %>
 	    <%= form.input :shipday2, :label => "Mon" %>
-	    <%= form.input :shipday3, :label => "Tue" %>
+	    <%= form.input :shipday3, :label => "Tues" %>
 	    <%= form.input :shipday4, :label => "Wed" %>
-	    <%= form.input :shipday5, :label => "Thu" %>
+	    <%= form.input :shipday5, :label => "Thurs" %>
 	    <%= form.input :shipday6, :label => "Fri" %>
 	    <%= form.input :shipday7, :label => "Sat" %>
 	
@@ -80,9 +81,9 @@ Define your Retail crops. The crops define here will be visible in the retail or
 	</div>
 	    <%= form.input :pickupday1, :label => "Sun" %>
 	    <%= form.input :pickupday2, :label => "Mon" %>
-	    <%= form.input :pickupday3, :label => "Tue" %>
+	    <%= form.input :pickupday3, :label => "Tues" %>
 	    <%= form.input :pickupday4, :label => "Wed" %>
-	    <%= form.input :pickupday5, :label => "Thu" %>
+	    <%= form.input :pickupday5, :label => "Thurs" %>
 	    <%= form.input :pickupday6, :label => "Fri" %>
 	    <%= form.input :pickupday7, :label => "Sat" %>
 

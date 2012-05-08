@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   attr_accessor :password, :password_confirmation
   
   attr_accessible :name, :email, :password, :password_confirmation, :security_question, 
-                  :security_answer,:party_id, :created_at, :stripe_customer_id
+                  :security_answer,:party_id, :created_at, :stripe_customer_id, :user_type
   
   has_many :microposts, :dependent => :destroy
   
@@ -49,6 +49,7 @@ class User < ActiveRecord::Base
 #                      :length   => { :within => 6..40 })
   validates(:security_question, :presence => true)
   validates(:security_answer, :presence => true)
+  validates(:user_type, :presence => true)
                        
   before_save :encrypt_password
   

@@ -297,7 +297,11 @@ Myfarm::Application.routes.draw do
   match '/retailcropview', :to => 'retailcrops#index_view'
   match '/retailcropdata', :to => 'retailcrops#index_data'
   match '/retailcropgridaction', :to => 'retailcrops#index_dbaction'
-  
+  match '/retailcropallview', :to => 'retailcrops#indexall_view'
+  match '/retailcropalldata', :to => 'retailcrops#indexall_data'
+  match '/retailcropallgridaction', :to => 'retailcrops#indexall_dbaction'
+  match '/retailcrops/:id/view', :to => 'retailcrops#view'
+
   match '/retailcropaddview', :to => 'retailorders#retailcropadd_view'
   match '/retailcropadddata', :to => 'retailorders#retailcropadd_data'
   match '/retailcropaddgridaction', :to => 'retailorders#retailcropadd_dbaction'
@@ -316,6 +320,7 @@ Myfarm::Application.routes.draw do
   match '/retailorderdetaildata', :to => 'retailorderdetails#index_data'
   match '/retailorderdetailgridaction', :to => 'retailorderdetails#index_dbaction'
   match 'retailorderdetails/:id/additem', :to => 'retailorderdetails#additem'
+  match 'retailorderdetails/:id/changeitem', :to => 'retailorderdetails#changeitem'
   
   #Reports
    match '/farmjobreportrequestor', :to => 'farmjobs#farmjob_report_requestor'

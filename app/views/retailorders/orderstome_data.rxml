@@ -1,0 +1,18 @@
+xml.instruct! :xml, :version=>"1.0" 
+xml.tag!("rows") do
+	@retailorders.each do |retailorder|
+		xml.tag!("row",{ "id" => retailorder.id }) do
+			xml.tag!("cell", retailorder.farmname)
+			xml.tag!("cell", retailorder.customername)
+			xml.tag!("cell", retailorder.customercity)
+			xml.tag!("cell", retailorder.customerstate)
+			xml.tag!("cell", retailorder.bill_phone)
+			xml.tag!("cell", retailorder.order_date)
+			xml.tag!("cell", retailorder.need_by_date)
+			xml.tag!("cell", retailorder.order_status)
+			xml.tag!("cell", retailorder.order_total)
+			xml.tag!("cell", retailorder.payment_method)
+ 
+		end
+	end
+end

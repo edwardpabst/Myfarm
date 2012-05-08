@@ -1,9 +1,10 @@
 <br> 
-<h1><p>Manage Retail crops</p></h1>
+<h1><p>Manage Retail Crops</p></h1>
 
 <button type="button" value="New", onclick="newCrop()">Add Crop</button>
 <button type="button" value="New", onclick="editCrop()">Edit Crop</button>
 <input type="button" value="Delete"  class="button" onclick="removeRow()">
+<br><br>
 <br><br>
 <!-- Div for capture of grid output -->
  <div id="retailcrop_grid" style="width:95%; height:500px;">
@@ -16,14 +17,14 @@
 	// data grid definition
      var grid = new dhtmlXGridObject("retailcrop_grid");
      grid.setImagePath("/images/");
-     grid.setHeader(" Farm name ,  City,  State  ,  Crop ,  Status ,  Available , Price* ,  UOM,  Ship charge*, Notes*");  
+     grid.setHeader(" Farm name ,  City,  State  ,  Crop ,  Status ,  Available , Price ,  UOM,  Ship charge, Notes");  
      grid.setInitWidths("90,80,60,120,60,70,70,70,70,110");
      grid.setSkin("dhx_web");
      grid.init();
 	 grid.load("/retailcropdata");  	
 	 grid.attachHeader("#text_filter,#text_filter,#text_filter,#text_filter,#text_filter,#text_filter");  
 	 grid.setColSorting("str,str,str,str,str,str");	 
-	 grid.setColTypes("ro,ro,ro,ro,ro,ro,price,ro,ed,txt");// ed-editable, ro-read only price-money , ch-checkbox, 
+	 grid.setColTypes("ro,ro,ro,ro,ro,ro,price,ro,ro,txt");// ed-editable, ro-read only price-money , ch-checkbox, 
 													  // txt-text editor ra-radio button, coro-select box, img, dhxcalendar 
 													  //  subrow (ajax)	 
 	// data processor definition
@@ -111,8 +112,9 @@
 
 <button type="button" value="New", onclick="newCrop()">Add Crop</button>
 <button type="button" value="New", onclick="editCrop()">Edit Crop</button>
-<input type="button" value="Delete" class="button" onclick="removeRow()">
+<input type="button" value="Delete"  class="button" onclick="removeRow()">
 <br><br>
+
  	
  <!--  button controls for in grid addition and bulk update
 <input type="button" value="Add" onclick="grid.addRow(grid.uid(),'new user')">
