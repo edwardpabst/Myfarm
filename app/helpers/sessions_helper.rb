@@ -197,6 +197,24 @@ module SessionsHelper
    @types = Type.where('typename' => name, 'user_id' => @current_user.id).order('type_value_string').all
   end
   
+  def get_customer_order_status
+    get_current_user
+    @types =  Type.find_by_sql("Select *  
+     from types 
+     where types.user_id = #{@current_user.id } 
+     and types.typename = 'order_status'
+     and type_value_string in ('New', 'submitted')")
+  end
+  
+  def get_farmer_order_status
+    get_current_user
+    @types =  Type.find_by_sql("Select *  
+     from types 
+     where types.user_id = #{@current_user.id } 
+     and types.typename = 'order_status'
+     and type_value_string not in ('New', 'submitted')")
+  end
+  
   def get_invoice_status
     @types =  Type.find_by_sql("Select *  
      from types 

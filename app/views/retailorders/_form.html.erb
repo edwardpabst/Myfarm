@@ -170,7 +170,12 @@
 	</tr>
 	<tr>
 		<td>
-			<% get_types_by_name("order_status") %>
+			<% if session[:s_user_type] == 'crop customer'%>
+				<% get_customer_order_status %>
+			<% else %>
+				<% get_farmer_order_status %>
+			<% end %>
+
 			<label class=" label" for="order_status">Order status<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>
 		</td>
 		<td>
