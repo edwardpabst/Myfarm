@@ -45,6 +45,8 @@ function initHome() {
 		hide('purchaseorders'); 
 		hide('suppliesinventory'); 		
 		hide('reports');
+		hide('cropdirectory');
+		hide('retailorder');
 		hide('socialnetwork');
 		hide('weather'); 
 		hide('accountmanagement');
@@ -196,7 +198,31 @@ function initHome() {
 					  <a href="#" onclick="showContent('reports')">	 	 
 				       	&nbsp;&nbsp;Reports
 					  </a>	
+					 </li>
+					
+					 <li >
+
+				       	&nbsp; 
+
 					 </li>					
+					 <li >
+
+				       	&nbsp;<u>Retail</u>
+
+					 </li>
+
+					 <li  id="active">
+					  <a href="#" onclick="showContent('cropdirectory')">	 	 
+				       	&nbsp;&nbsp;Crop Directory
+					  </a>	
+					 </li>	
+					
+					
+					 <li  id="active">
+					  <a href="#" onclick="showContent('retailorder')">	 	 
+				       	&nbsp;&nbsp;Retail Orders
+					  </a>	
+					 </li>				
 					
 					 <li >
 
@@ -210,7 +236,7 @@ function initHome() {
 					 </li>
 					 <li  id="active">
 					  <a href="#" onclick="showContent('socialnetwork')"> 	 
-				       	&nbsp;&nbsp;Farmers Network
+				       	&nbsp;&nbsp;Farmers Social Network
 					  </a>	
 					 </li>
 					 <li >
@@ -230,7 +256,7 @@ function initHome() {
 					 </li>
 					 <li >
 					  <a href="#" onclick="showContent('documentation')"> 	 
-				       	&nbsp;&nbsp;Documentation
+				       	&nbsp;&nbsp;Instructions
 					  </a>
 					 </li>
 					 <li >
@@ -805,6 +831,50 @@ function initHome() {
 				</p>			 	  			 
 			</div>
 			
+			<div id="cropdirectory" class="hidden">
+				<p id="tutorial_stage">
+				 	Crop Directory
+				</p>
+				<p id="tutorial_point">	
+					The retail component of the system supports the local farmer and consumer relationship. Farmers can 
+					<br>post their fresh produce to the “Crop Directory” which becomes visible to all “Crop Customers”. 
+					<br>Customer can order the produce on line and have the order accepted by the farmer.  
+					<br>The various logistics are supported by notification in the Crop directory of either ‘ship days’ or 
+					<br>‘pickup days’ as defined by the farm.
+					<br>
+					<br><u>The crop directory supports:</u>  
+					<br>- availability dating 
+					<br>- pricing by different units of measure 
+					<br>- shipping charges where applicable  
+					<br>- Notes can be posted for further information dissemination about the particular crop offering.  
+					<br>- A crop will remain in the directory while it’s status is ‘active’.
+										  			
+				</p>			 	  			 
+			</div>
+			
+			<div id="retailorder" class="hidden">
+				<p id="tutorial_stage">
+				 	Retail Orders
+				</p>
+				<p id="tutorial_point">	
+					Retail orders allow the community to interact with the farmers to order fresh produce.
+				<br>Orders are created by the customer. They can work on orders that are in status ‘new’. 
+				<br>To make them visible to the farmer the status is changed to ‘submitted’. When the farmer accepts the 
+				<br>order the status is changed to ‘accepted’.  The farmer fulfills the order.  
+				<br>
+				<br>	<u>Retail functions for the farmer</u>
+				<br>	- Post crops to Crop directory
+				<br>	- Manage order inbox
+
+				<br>
+				<br>	<u>Retail functions for the customer</u>
+				<br>	- View Crop Directory
+				<br>	- Create and Manage orders
+
+										  			
+				</p>			 	  			 
+			</div>
+			
 			
 			
 			<div id="socialnetwork" class="hidden">
@@ -812,7 +882,7 @@ function initHome() {
 				 	Farmers Network
 				</p>
 				<p id="tutorial_point">
-				The iFarmService social network allows all registered users (farmers) to exchange thoughts, ideas,
+				The iFarmService social network allows all registered users (farmers) to exchange thoughts, photos, ideas,
 				<br> inspiration and business information with others.  Each farmer can post any information they wish and 
 				<br>it becomes visible to other farmers. A farmer can then select specific farmers to join their community 
 				<br>which will weave a continuous idea and information flow for your personal community.
