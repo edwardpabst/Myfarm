@@ -3,7 +3,7 @@ class UserMailer < ActionMailer::Base
   
   def registration_confirmation(user)
     @user = user
-     attachments["seedling.jpg"] = File.read("www.ifarmservice.com/public/images/seedling.jpg") 
+    attachments["seedling.jpg"] = File.read("/public/images/seedling.jpg") 
     mail(:to => "#{user.name} <#{user.email}>", :subject => "You have been Registered on iFarmService")
 
   end
