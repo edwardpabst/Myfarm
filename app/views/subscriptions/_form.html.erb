@@ -29,7 +29,7 @@ $(document).ready(function() {
         // disable the submit button to prevent repeated clicks
 	
        $('input[type=submit]').attr('disabled', true);
-        var chargeAmount = 19900; //amount you want to charge, in cents. 1000 = $10.00, 2000 = $20.00 ...
+        var chargeAmount = 9900; //amount you want to charge, in cents. 1000 = $10.00, 2000 = $20.00 ...
         // createToken returns immediately - the supplied callback submits the form if there are no errors
         Stripe.createToken({
 	        number: $('#card_number').val(),
@@ -72,7 +72,7 @@ if (window.location.protocol === 'file:') {
 	<tr>
 		<td colspan="3">
 			<div id="form_header">			 	 
-		Your card will be charged $199.00 for a one year subscription. If you don't cancel the subscription your card will be charged each year on this date. To cancel your subscription, in the future, go to 'my Settings'. 			 
+		Your card will be charged $99.00 for a one year subscription. If you don't cancel the subscription your card will be charged each year on this date. To cancel your subscription, in the future, go to 'my Settings'. 			 
 			</div>
 		</td>
 	</tr>
