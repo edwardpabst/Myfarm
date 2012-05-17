@@ -118,7 +118,7 @@ class SubscriptionsController < ApplicationController
         
       # charge the Customer instead of the card
         charge = Stripe::Charge.create(
-          :amount => 19900, # amount in cents, again
+          :amount => 9900, # amount in cents, again
           :currency => "usd",
           :customer => customer_id,
           :description => "subscription charge for user - #{@user.name} id - #{@user.id}"
