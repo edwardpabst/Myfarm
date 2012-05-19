@@ -448,6 +448,19 @@ font-size: 90%;
 	padding-left:3px;
 }
 
+#contact_stage{
+	font-size:120%;
+	font-style:bold;
+    color: #A7C6D6;
+	background-color:white;
+	padding:5px;
+	text-align:center;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10pz;
+ 
+}
+
 .footer{
 	float:bottom;	
 

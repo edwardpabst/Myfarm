@@ -1,0 +1,39 @@
+
+
+<%= form_for @message, :url => contact_path do |form| %>
+  <fieldset class="fields">
+	<p id="contact_stage">
+	 	Send us an email with your questions and comments.
+	</p>
+	
+
+    <div class="field">
+      <%= form.label :name, 'Name :' %>
+      <%= form.text_field :name , :value => "iFarmService Customer Support" %>
+    </div>
+    
+    <div class="field">
+      <%= form.label :email, 'Email :' %>
+      <%= form.text_field :email, :value => "customer.support@ifarmservice.com"  %>
+    </div>
+
+    <div class="field">
+      <%= form.label :from, 'From :' %>
+	  <%= form.text_field :from, :value => @current_user.email  %>
+    </div>
+
+    <div class="field">
+      <%= form.label :subject, 'Subject' %>
+      <%= form.text_field :subject %>
+    </div>
+    
+    <div class="field">
+      <%= form.label :body , ' ' %>
+      <%= form.text_area :body %>
+    </div>
+  </fieldset>
+  
+  <fieldset class="actions">
+    <%= form.submit "Send", :class => 'button' %>
+  </fieldset>
+<% end %>
