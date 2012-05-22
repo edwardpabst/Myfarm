@@ -8,7 +8,8 @@ function loadFake() {
 
 <%= semantic_form_for @farm, :html => {:name => "fm", :multipart => true } do |f| %>
 <%= render "shared/error_messages", :object => f.object%>
-<% if !@farm.logo.url.blank?   %>
+ 
+<% if !@farm.logo_file_name.blank?   %>
 	<%= image_tag @farm.logo.url(:medium) %><br> 
 <% end %>
   <%= f.inputs do %>

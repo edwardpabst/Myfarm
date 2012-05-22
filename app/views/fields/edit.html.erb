@@ -1,5 +1,39 @@
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>   
+<script type="text/javascript"> 
 
+function showContent(topic) {
+	
+	var item = document.getElementById(topic);
+
+	if (item.className == 'hidden')	
+	 {
+		unhide(topic);
+		} 
+	else 	
+	  {
+			hide(topic);
+			}
+
+
+	
+}
+
+function hide(divID) {
+	 
+var item = document.getElementById(divID);
+item.className='hidden';
+item.style.display='none'
+}
+
+function unhide(divID) {
+ 
+var item = document.getElementById(divID);
+item.className='unhidden';
+item.style.display='block'
+
+}
+
+</script>
  
 <h1>Editing field</h1>
  
@@ -10,6 +44,10 @@
 </div>
 <%= render 'fieldmap' %>
 <%= render 'form' %>
+
+<%= link_to 'Back', :action => "index_view" %>
+<br>
+<%= render 'cropplanfields/crop_index_view' %> 
 
 
 <br>

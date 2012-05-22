@@ -1,6 +1,11 @@
+  <a href="#" onclick="showContent('fieldmap')">	 	 
+   	 <b>Hide/Unhide Map</b>
+  </a>
+<div id="fieldmap" class="unhidden">
 <table class="fieldmap">
   <tr>
 	<td>
+
 		<%= gmaps({
    
 		    "markers"     => { "data" =>  @json },
@@ -8,10 +13,11 @@
 			"polygons"    => { "data" => @json_polygon }
 			})
 		    %>
+		
 	</td>
   </tr>
 </table>
- 
+</div> 
 
  
 

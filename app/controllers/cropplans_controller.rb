@@ -67,6 +67,7 @@ class CropplansController < ApplicationController
   def edit
     @cropplan = Cropplan.find(params[:id])
      session[:s_cropplan_id] = @cropplan.id
+     session[:s_cropplan_transaction] = 'cropplan'
   end
 
   # POST /cropplans

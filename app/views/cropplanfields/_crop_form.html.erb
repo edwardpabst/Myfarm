@@ -3,11 +3,25 @@
 
 <%= render "shared/error_messages", :object => f.object%>
 
-    <% get_cropplanfield_info %> 
-	<% @cpf.each do |c| %>
-		<% @cropplanfull = c.cropplanfull %>
-		<% @avg_yield_acre = c.avg_yield_acre %>
-		<% @crop_inventory_uom = c.crop_inventory_uom %>
+	<% if @cptransaction == 'edit' %>
+		    <% get_cropplanfield_info %> 
+			<% @cpf.each do |c| %>
+				<% @cropplanfull = c.cropplanfull %>
+				<% @avg_yield_acre = c.avg_yield_acre %>
+				<% @crop_inventory_uom = c.crop_inventory_uom %>
+			 
+			<% end %>
+	<% elsif @cptransaction == 'new' %>
+				<% @cropplanfull = "" %>
+				<% @avg_yield_acre = 0 %>
+				<% @crop_inventory_uom = "" %>	
+				 
+	<% end %>
+	
+	<% get_fieldcropplan_info %> 
+	<% @fcp.each do |c| %>
+		<% @fieldname = c.fieldname%>
+		<%  @number_acres = c.number_acres %>
 	<% end %>
 	
  <table class="twocolumn">
@@ -20,10 +34,10 @@
 		<td width="25%">
 		</td>
 		<td  width="25%">
-				<label class=" label" for="fields">Crop plan<abbr title="required"> </abbr>	</label>	
+				<label class=" label" for="fields">Field<abbr title="required"> </abbr>	</label>	
 		</td>
 		<td  width="25%">
-			<div id='datadisplay'> <%= @cropplanfull %>	</div>	
+			<div id='datadisplay'> <%= @fieldname %>	</div>	
 		</td>
 		<td  width="25%">
 		</td>
@@ -32,15 +46,29 @@
 		<td width="25%">			
 		</td>
 		<td  width="25%">
-			<label class=" label" for="fields">Field*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>	
+			<label class=" label" for="fields">Crop plan*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>	
 		</td>
 		<td  width="25%">
-			<% get_fields_by_farm_full() %>
-			<%= collection_select("cropplanfield", "field_id", @fields, "id", "fieldnamefull", options = {:prompt => " "}) %>		
+			<% get_cropplans_by_year %>
+			<%= collection_select("cropplanfield", "cropplan_id", @cropplans, "id", "cropplanfull", options = {:prompt => " "}) %>		
 		</td>
 		<td  width="25%">			
 		</td>
 	</tr>
+	<% if @cptransaction == 'edit' %> 
+		<tr>
+			<td width="25%">
+			</td>
+			<td  width="25%">
+					<label class=" label" for="fields">Field acres<abbr title="required"> </abbr>	</label>	
+			</td>
+			<td  width="25%">
+				<div id='datadisplay'> <%= @number_acres %>	</div>	
+			</td>
+			<td  width="25%">
+			</td>
+		</tr>
+	<% end %>
 
  	<tr>
 		<td width="25%">			
@@ -54,7 +82,7 @@
 		<td  width="25%">			
 		</td>
 	</tr>
- 
+<% if @cptransaction == 'edit' %> 
 	<tr>
 		<td width="25%">
 		</td>
@@ -67,7 +95,7 @@
 		<td  width="25%">
 		</td>
 	</tr>
- 
+<% end %> 
    
 	<tr>
 		<td width="25%">
@@ -81,7 +109,7 @@
 		<td  width="25%">
 		</td>
 	</tr>
-	
+<% if @cptransaction == 'edit' %> 	
 	<tr>
 		<td width="25%">
 		</td>
@@ -94,7 +122,7 @@
 		<td  width="25%">
 		</td>
 	</tr>
-
+<% end %> 
 	<tr>
 		<td width="25%">
 		</td>

@@ -590,7 +590,8 @@ padding:2px 2px 2px 2px;
 #homepages0 {
 	padding-left:10px;
 	vertical-align: center;
-	font-size: 55%;
+	text-align: left;
+	font-size: 90%;
 	color: black;
 	background-color:white;
 	display:block;

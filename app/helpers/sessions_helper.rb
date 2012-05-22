@@ -296,6 +296,14 @@ module SessionsHelper
      and cp.id = #{session[:s_cropplan_id]}")
    end
    
+   def get_fieldcropplan_info
+     get_current_user
+      @fcp = Field.find_by_sql("Select fieldname, number_acres
+     from fields
+     where user_id = #{@current_user.id } 
+     and fields.id = #{session[:s_field_id]}")
+   end
+   
     def get_contracts()
 
     @contracts = Contract.find_by_sql("Select contracts.id,  partyname || ' ' || cropplanfull  as contractfull   

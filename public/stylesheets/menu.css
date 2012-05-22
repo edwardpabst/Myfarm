@@ -1,7 +1,7 @@
 
 .menu {
  	
-	background-color: #F6F9ED;
+	background-color: white;  /*--------   #F6F9ED----------*/
  
 }
 
@@ -10,8 +10,8 @@
 {
 	font-size:100%;
     color: black;
-	background-color:whitesmoke;
-	border: solid 1px lightgray;
+	background-color:white;  /*--------   hitesmoke----------*/
+	border: solid 1px white;  /*--------   lightgray----------*/
 	padding:7px;
 	
 	 
@@ -100,26 +100,38 @@
 #menu1
 {
      left: 0px;
+	border: solid 1px lightgray;  
+	padding: 5px;
 }
 #menu2
 {
     left: 0px;
+	border: solid 1px lightgray;  
+	padding: 5px;
 }
 #menu3
 {
      left: 0px;
+	border: solid 1px lightgray;  
+	padding: 5px;
 }
 #menu4
 {
     left: 0px;
+	border: solid 1px lightgray;  
+	padding: 5px;
 }
 #menu5
 {
     left: 0px;
+	border: solid 1px lightgray;  
+	padding: 5px;
 }
 #menu6
 {
     left: 0px;
+	border: solid 1px lightgray;  
+	padding: 5px;
 }
 #submenu1, #submenu2, #submenu3, #submenu4, #submenu5 , #submenu6
 {
@@ -183,7 +195,7 @@
 }
 #menu5
 	{
-	left: 660px;
+	left: 690px;
 }
 #menu6
 	{
@@ -207,7 +219,7 @@
 }
 #submenu5
 {
-    left: 660px;
+    left: 690px;
 }
 #submenu6
 {

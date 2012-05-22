@@ -165,6 +165,13 @@ Myfarm::Application.routes.draw do
   match '/cropplanfieldview', :to => 'cropplanfields#index_view'
   match '/cropplanfielddata', :to => 'cropplanfields#index_data'
   match '/cropplanfieldgridaction', :to => 'cropplanfields#index_dbaction'
+  
+  match '/fieldcropplanview', :to => 'cropplanfields#crop_index_view'
+  match '/fieldcropplandata', :to => 'cropplanfields#crop_index_data'
+  match '/fieldcropplangridaction', :to => 'cropplanfields#crop_index_dbaction'
+  
+  match '/new_field_crop', :to => 'cropplanfields#new_crop'
+  match '/cropplanfields/:id/edit_crop', :to => 'cropplanfields#edit_crop'
 
   #Farms
   match '/farmview', :to => 'farms#index_view'
