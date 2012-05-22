@@ -327,6 +327,7 @@ font-size: 90%;
   padding-left: 10px;
   text-align: left;
   font-style: italic;
+  font-weight:bold;
   border: solid 1px lightgray;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
@@ -354,7 +355,7 @@ font-size: 90%;
 	
 	width: 99%;
 	font-size:90%;
-	font-weight:normal;
+	font-weight:bold;
 	font-style: normal;
     color: white;
 	background-color:#36648B;  /*--------   lemonchiffon #FEFFF1 slategray----------*/
