@@ -212,7 +212,7 @@ function loadFake() {
 
 		 	</td>
 			<td>
-		 		<div class="disabled">
+		 		<div id='datadisplay'>
 				    <% if @equipment.depreciation_year.nil? %>			
 						0
 					<% else %>
@@ -249,7 +249,7 @@ function loadFake() {
 			 <%= f.label :capital_recovery_year, "  Capital recovery/year" %>
 		 	</td>
 			<td>
-		 		<div class="disabled">
+		 		<div id='datadisplay'>
 			    <% if @equipment.capital_recovery_year.nil? %>			
 					0
 				<% else %>
@@ -261,7 +261,7 @@ function loadFake() {
 				<%= f.label :capital_recovery_factor, "Capital recovery factor" %>
 			</td>
 			<td>
-				<div class="disabled">
+				<div id='datadisplay'>
 				    <% if @equipment.capital_recovery_factor.nil? %>			
 						0
 					<% else %>
@@ -284,7 +284,7 @@ function loadFake() {
 			 <%= f.label :cost_unit, "Ownership cost/year" %>
 		 	</td>
 			<td>
-		 		<div class="disabled">
+		 		<div id='datadisplay'>
 				<%= number_to_currency(@equipment.cost_unit, :precision => 2)  %>
 			  </div>
 		    </td>
@@ -344,7 +344,7 @@ function loadFake() {
 				<td>
 				<% if @transaction != 'new' %>
 					<% hours_to_service %>
-					<div class="disabled">
+					<div id='datadisplay'>
 			 			<%= @to_service_hours %> 
 					</div>
 				<% end %>

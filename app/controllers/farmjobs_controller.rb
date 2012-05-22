@@ -15,7 +15,7 @@ class FarmjobsController < ApplicationController
 
         get_current_user
 
-        @farmjobs = Farmjob.find_by_sql("Select farmjobs.id, fieldname, cropplanfull, plan_year, 
+        @farmjobs = Farmjob.find_by_sql("Select farmjobs.id, workorder, fieldname, cropplanfull, plan_year, 
         taskdescription, job_status, start_date, stop_date, area_size, total_cost 
         from farmjobs  
         join cropplans on farmjobs.cropplan_id = cropplans.id
@@ -313,6 +313,7 @@ class FarmjobsController < ApplicationController
     #get dependant info
     @farmjob = Farmjob.new(params[:farmjob])
     @farmjob.user_id = session[:s_user_id]
+    @farmjob.workorder = @farmjob.user_id.to_s + @farmjob.id.to_s
     if !params[:farmjob][:cropplan_id].nil? and !params[:farmjob][:cropplan_id].blank?
       @cropplan = Cropplan.find_by_id(params[:farmjob][:cropplan_id])
     end

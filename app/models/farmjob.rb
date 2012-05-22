@@ -698,7 +698,7 @@ class Farmjob < ActiveRecord::Base
          
          def self.get_complete_job_data(id)
 
-            @farmjob = Farmjob.find_by_sql("Select taskdescription, farmname, fieldname, cropplanfull,
+            @farmjob = Farmjob.find_by_sql("Select workorder, taskdescription, farmname, fieldname, cropplanfull,
                                         job_status, area_size, total_hours, start_date, notes
                                      from farmjobs fjs
                                      join fields fds on fjs.field_id = fds.id

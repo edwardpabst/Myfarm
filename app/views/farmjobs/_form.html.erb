@@ -276,22 +276,22 @@ function checkStatus() {
 					</tr>
 					<tr>	 
 						<td>
-						  <div class="costdisplay">
+						  <div id='datadisplay'>
 							<%= number_to_currency(@farmjob.total_cost, :precision => 2)  %>
 						  </div>
 						</td>
 						<td>
-						  <div class="costdisplay">
+						  <div id='datadisplay'>
 							<%= number_to_currency(@farmjob.supply_cost, :precision => 2)  %>
 						  </div>
 						</td>
 						<td>
-						  <div class="costdisplay">
+						  <div id='datadisplay'>
 							<%= number_to_currency(@farmjob.labor_cost, :precision => 2)  %>
 						  </div>
 						</td>
 						<td>
-						  <div class="costdisplay">
+						  <div id='datadisplay'>
 							<%= number_to_currency(@farmjob.equipment_cost, :precision => 2)  %>
 						  </div>
 						</td>

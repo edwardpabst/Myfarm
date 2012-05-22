@@ -100,7 +100,7 @@
 				<%= f.label :order_amount, "Order $" %> 
 			</td>
 			<td>
-				<div class="disabled">
+				<div id='datadisplay'>
 				<%= number_to_currency(@po.order_amount, :precision => 2)  %>
 			  </div>
 			</td>

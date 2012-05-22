@@ -40,7 +40,10 @@ class JobsheetreportPdf < Prawn::Document
       
       draw_text "Job Sheet", size: 12, style: :bold,    
                               :at => [230, 720]
-      
+      draw_text  "( Job No. - ", size: 9, style: :bold, 
+                              :at => [10, 720]
+      draw_text  " #{@farmjob_complete.workorder} )", size: 9, style: :bold,  
+                              :at => [54, 720]
       #line 1
       draw_text  "Job Date ", size: 9, style: :bold, 
                               :at => [10, 690] 
