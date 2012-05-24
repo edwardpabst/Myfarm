@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120508182654) do
+ActiveRecord::Schema.define(:version => 20120524021455) do
 
   create_table "capitalrecoveries", :force => true do |t|
     t.integer  "recovery_year"
@@ -787,18 +787,18 @@ ActiveRecord::Schema.define(:version => 20120508182654) do
     t.string   "distribution_uom"
     t.decimal  "conversion_factor"
     t.decimal  "supply_charge_uom"
-    t.decimal  "nitrogen_content",    :precision => 9, :scale => 2
-    t.decimal  "phosphorous_content", :precision => 9, :scale => 2
-    t.decimal  "potassium_content",   :precision => 9, :scale => 2
-    t.decimal  "calcium_content",     :precision => 9, :scale => 2
-    t.decimal  "manganese_content",   :precision => 9, :scale => 2
-    t.decimal  "magnesium_content",   :precision => 9, :scale => 2
+    t.decimal  "nitrogen_content"
+    t.decimal  "phosphorous_content"
+    t.decimal  "potassium_content"
+    t.decimal  "calcium_content"
+    t.decimal  "manganese_content"
+    t.decimal  "magnesium_content"
     t.string   "chemical_type"
     t.string   "active_ingredient"
-    t.decimal  "chemical_rate_acre",  :precision => 9, :scale => 2
+    t.decimal  "chemical_rate_acre"
     t.string   "chemical_uom"
     t.string   "carrier_uom"
-    t.decimal  "restricted_hours",    :precision => 9, :scale => 2
+    t.decimal  "restricted_hours"
   end
 
   add_index "supplies", ["supplyname"], :name => "index_supplies_on_supplyname"
