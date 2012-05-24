@@ -313,7 +313,7 @@ class FarmjobsController < ApplicationController
     #get dependant info
     @farmjob = Farmjob.new(params[:farmjob])
     @farmjob.user_id = session[:s_user_id]
-    @farmjob.workorder = @farmjob.user_id.to_s + @farmjob.id.to_s
+    
     if !params[:farmjob][:cropplan_id].nil? and !params[:farmjob][:cropplan_id].blank?
       @cropplan = Cropplan.find_by_id(params[:farmjob][:cropplan_id])
     end
@@ -374,6 +374,11 @@ class FarmjobsController < ApplicationController
           if @farmjob.save 
         
             @save_id = @farmjob.id
+            
+            #build job number
+            @farmjob = Farmjob.find(@farmjob.id)
+            @farmjob.workorder = @farmjob.user_id.to_s + @farmjob.id.to_s
+            @farmjob.save
 
             #write calendar event for the job
             post_event
