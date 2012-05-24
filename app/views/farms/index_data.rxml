@@ -4,7 +4,7 @@ xml.tag!("rows") do
 		xml.tag!("row",{ "id" => index.id }) do
 			xml.tag!("cell", index.farmname)
 			xml.tag!("cell", index.total_acres)
-			xml.tag!("cell", index.land_expense_year)
+ 
 			 
 
 		end

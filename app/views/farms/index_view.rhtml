@@ -11,7 +11,7 @@
 <br> <br> 
 
 <!-- Div for capture of grid output -->
- <div id="index_grid" style="width:550px; height:200px;">
+ <div id="index_grid" style="width:500px; height:300px;">
 
  </div>
 
@@ -21,14 +21,14 @@
 	// data grid definition
      var indexgrid = new dhtmlXGridObject("index_grid");
      indexgrid.setImagePath("/images/");
-     indexgrid.setHeader("Farm name, Total acres, Land expense/year");  
-     indexgrid.setInitWidths("200,200, 150");
+     indexgrid.setHeader("Farm name*, Total acres*");  
+     indexgrid.setInitWidths("250,250");
      indexgrid.setSkin("dhx_web");
      indexgrid.init();
 	 indexgrid.load("/farmdata");  	
 	 indexgrid.attachHeader("#text_filter");  
 	 indexgrid.setColSorting("str");	 
-	 indexgrid.setColTypes("ed,ed,ed"); // ed-editable, ro-read only price-money , ch-checkbox, 
+	 indexgrid.setColTypes("ed,ed"); // ed-editable, ro-read only price-money , ch-checkbox, 
 											// txt-text editor ra-radio button, coro-select box, img, dhxcalendar 
 											//  subrow (ajax)	 
 	// data processor definition

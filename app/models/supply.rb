@@ -11,9 +11,9 @@ class Supply < ActiveRecord::Base
   has_many :fieldtasks, :through => :fieldtasksupplies
  
   	      
-  validates_presence_of :supplyname, :item_number, :supply_type, :supply_uom, :supply_cost_uom
-  validates :supply_cost_uom, :numericality => true 
-  validates :supply_charge_uom, :numericality => true 
+  validates_presence_of :supplyname, :item_number, :supply_type, :supply_uom, :supply_cost_uom, :supply_charge_uom 
+  validates :supply_cost_uom  
+  validates :supply_charge_uom  
  
   validates :rate_acre, :numericality => true 
   validates :conversion_factor, :numericality => true
