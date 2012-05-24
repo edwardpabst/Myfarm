@@ -13,7 +13,7 @@ class Supply < ActiveRecord::Base
   	      
   validates_presence_of :supplyname, :item_number, :supply_type, :supply_uom, :supply_cost_uom, :supply_charge_uom 
  
-  validates :supply_cost_uom => Decimal 
+  validates :supply_cost_uom => true
  
   validates :rate_acre, :numericality => true 
   validates :conversion_factor, :numericality => true
