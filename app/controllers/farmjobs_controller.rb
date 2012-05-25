@@ -493,7 +493,7 @@ class FarmjobsController < ApplicationController
         
             else
          
-        
+              @transaction = 'edit'
               format.html { render :action => "edit" }
               format.xml  { render :xml => @farmjob.errors, :status => :unprocessable_entity }
             end 
@@ -520,7 +520,8 @@ class FarmjobsController < ApplicationController
     
           format.html { redirect_to("/farmjobview", :notice => 'farm job was successfully deleted.') }
           format.xml  { head :ok }
-        else          
+        else   
+           @transaction = 'edit'       
           format.html { render :action => "edit" }
         end
    

@@ -146,6 +146,7 @@ class SuppliesController < ApplicationController
   # DELETE /supplies/1
   # DELETE /supplies/1.xml
   def destroy
+    
     @supply = Supply.find(params[:id])
     begin
       @supply.destroy 
