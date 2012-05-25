@@ -6,7 +6,7 @@ class Po < ActiveRecord::Base
                     :notes, :po_type, :order_amount
 
 
-    has_many :podetails, :dependent => :destroy
+    has_many :podetails, :dependent => :restrict
 
 
     validates_presence_of  :ponumber, :orderdate, :duedate, :po_status, :supplier_id,  :po_type  

@@ -143,11 +143,22 @@ class ContractsController < ApplicationController
   # DELETE /contracts/1.xml
   def destroy
     @contract = Contract.find(params[:id])
-    @contract.destroy
-
+    begin
+      @contract.destroy 
+      rescue ActiveRecord::DeleteRestrictionError => e
+      @contract.errors.add(:base, e)
+    end 
     respond_to do |format|
-      format.html { redirect_to(contracts_url) }
-      format.xml  { head :ok }
+
+        if e.nil?
+    
+          format.html { redirect_to("/contractview", :notice => 'Contract was successfully deleted.') }
+          format.xml  { head :ok }
+        else          
+          format.html { render :action => "edit" }
+        end
+   
+    
     end
   end
 end

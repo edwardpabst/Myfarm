@@ -4,9 +4,9 @@ class Fieldtask < ActiveRecord::Base
     belongs_to :Farmjob
     
      validates_presence_of :taskdescription, :task_type
-     has_many :fieldtasksupplies
+     has_many :farmjobs, :dependent => :restrict
+     has_many :fieldtasksupplies, :dependent => :destroy
      has_many :supplies, :through => :fieldtasksupplies
-     has_many :farmjobs
      default_scope :order => 'fieldtasks.task_type'
      
      def self.get_supplies_by_fieldtask_id(fieldtask_id)

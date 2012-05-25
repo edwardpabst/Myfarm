@@ -3,8 +3,12 @@ class Cropplan < ActiveRecord::Base
   #acts_as_reportable
   attr_accessible :crop_id, :plan_year, :plan_status, :cropplanfull 
   
-  has_many :crops
-  has_many :farmjobs
+  has_many :farmjobs, :dependent => :restrict
+  has_many :scaletickets, :dependent => :restrict
+  has_many :inventorylots, :dependent => :restrict
+  has_many :retailcrops, :dependent => :restrict
+  has_many :cropplanfields, :dependent => :destroy
+
  
  
   	     validates_presence_of :crop_id, :plan_year, :plan_status

@@ -4,7 +4,10 @@ class Storage < ActiveRecord::Base
                   :capacity_uom, :yearly_cost, :is_supply_default
   
 
-  has_many :inventorylots
+  has_many :inventorylots, :dependent => :restrict
+  has_many :scaletickets, :dependent => :restrict
+  has_many :podetails, :dependent => :restrict
+  has_many :supplyinventories, :dependent => :restrict
 
  
   	      

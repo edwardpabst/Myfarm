@@ -24,6 +24,10 @@ function checkShipment() {
  
 <h1>Manage Shipment</h1>
 <%= link_to 'Back', "/shipmentview" %>
+<br> 
+
+<%= button_to "Delete","/shipments/#{@shipment.id}/destroy" , :method=>:delete, :class=>:button_destroy, :confirm => 'Are you sure?' %>
+
 
 <%= render 'form' %>
 

@@ -38,6 +38,11 @@ item.style.display='block'
 <h1>Editing field</h1>
  
 <%= link_to 'Back', :action => "index_view" %>
+<br> 
+
+<%= button_to "Delete","/fields/#{@field.id}/destroy" , :method=>:delete, :class=>:button_destroy, :confirm => 'Are you sure?' %>
+
+
 
 <div class="button_center">
 	<%= button_to 'Map the field', :controller => "fieldmappings", :action =>  "fieldmapping", :class =>"button"%>

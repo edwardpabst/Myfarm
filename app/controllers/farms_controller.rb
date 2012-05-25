@@ -137,11 +137,22 @@ class FarmsController < ApplicationController
   # DELETE /farms/1.xml
   def destroy
     @farm = Farm.find(params[:id])
-    @farm.destroy
-
+    begin
+      @farm.destroy 
+      rescue ActiveRecord::DeleteRestrictionError => e
+      @farm.errors.add(:base, e)
+    end 
     respond_to do |format|
-      format.html { redirect_to(farms_url) }
-      format.xml  { head :ok }
+
+        if e.nil?
+    
+          format.html { redirect_to("/farmview", :notice => 'farm was successfully deleted.') }
+          format.xml  { head :ok }
+        else          
+          format.html { render :action => "edit" }
+        end
+   
+    
     end
   end
 end

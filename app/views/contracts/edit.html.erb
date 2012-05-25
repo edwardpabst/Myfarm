@@ -1,6 +1,10 @@
  
 <h1>Edit Sales Contract</h1>
  <%= link_to 'Back', "/contractview" %>
+<br> 
+
+<%= button_to "Delete","/contracts/#{@contract.id}/destroy" , :method=>:delete, :class=>:button_destroy, :confirm => 'Are you sure?' %>
+
 <%= render 'form' %>
 
 <br>

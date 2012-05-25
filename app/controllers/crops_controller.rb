@@ -157,11 +157,22 @@ class CropsController < ApplicationController
   # DELETE /crops/1.xml
   def destroy
     @crop = Crop.find(params[:id])
-    @crop.destroy
-
+    begin
+      @crop.destroy 
+      rescue ActiveRecord::DeleteRestrictionError => e
+      @crop.errors.add(:base, e)
+    end 
     respond_to do |format|
-      format.html { redirect_to(crops_url) }
-      format.xml  { head :ok }
+
+        if e.nil?
+    
+          format.html { redirect_to("/cropview", :notice => 'crop was successfully deleted.') }
+          format.xml  { head :ok }
+        else          
+          format.html { render :action => "edit" }
+        end
+   
+    
     end
   end
   

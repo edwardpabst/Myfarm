@@ -5,7 +5,8 @@ class Retailorder < ActiveRecord::Base
           :ship_address2, :ship_city,   :ship_state, :ship_postalcode, :order_status, :order_total, :payment_method,
           :payment_id, :farm_id, :customername
      
-     has_many :retailorderdetails
+     has_many :retailorderdetails, :dependent => :restrict
+     
      validates_presence_of  :source_user_id, :order_user_id, :farm_id, :order_date, :bill_address1, :bill_city, 
                             :bill_state, :bill_postalcode, :bill_phone, :order_status
                             

@@ -38,8 +38,13 @@ class SuppliesController < ApplicationController
 
     			when "deleted"
     				@supply = Supply.find(@id)
-    				@supply.destroy
-
+    				
+    			if	@supply.destroy
+  				else
+    				flash[:error] = @supply.errors 
+            render 'index_view' 				  
+  				end
+  				
     				@tid = @id
     			when "updated"
     				@supply = Supply.find(@id)
@@ -124,6 +129,8 @@ class SuppliesController < ApplicationController
   # PUT /supplies/1.xml
   def update
     @supply = Supply.find(params[:id])
+    
+
 
     respond_to do |format|
       if @supply.update_attributes(params[:supply])
@@ -140,11 +147,22 @@ class SuppliesController < ApplicationController
   # DELETE /supplies/1.xml
   def destroy
     @supply = Supply.find(params[:id])
-    @supply.destroy
-
+    begin
+      @supply.destroy 
+      rescue ActiveRecord::DeleteRestrictionError => e
+      @supply.errors.add(:base, e)
+     end 
     respond_to do |format|
-      format.html { redirect_to(supplies_url) }
-      format.xml  { head :ok }
+
+        if e.nil?
+         # @supply.destroy    
+          format.html { redirect_to("/supplyview", :notice => 'Supply was successfully deleted.') }
+          format.xml  { head :ok }
+        else          
+          format.html { render :action => "edit" }
+        end
+   
+    
     end
   end
   

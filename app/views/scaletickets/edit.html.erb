@@ -1,6 +1,11 @@
  
 <h1>Edit Scale ticket</h1>
 <%= link_to 'Back', "/scaleticketview" %>
+<br> 
+
+<%= button_to "Delete","/scaletickets/#{@scaleticket.id}/destroy" , :method=>:delete, :class=>:button_destroy, :confirm => 'Are you sure?' %>
+
+
 <%= render 'form_update' %>
 
 <br>

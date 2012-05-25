@@ -17,6 +17,10 @@ function checkOrder() {
 <h1>Edit Order</h1>
 
 <%= link_to 'Back', '/ordersfrommeview' %>
+<br> 
+
+<%= button_to "Delete","/retailorders/#{@retailorder.id}/destroy" , :method=>:delete, :class=>:button_destroy, :confirm => 'Are you sure?' %>
+
 
 <%= render 'form' %>
 

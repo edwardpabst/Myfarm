@@ -146,6 +146,22 @@ Myfarm::Application.routes.draw do
   match '/fieldtasksupplies', :to => 'fieldtasks#fieldtask_supplies'
   match '/addcomment', :to => 'pages#addcomment'
  
+# delete routes
+  match '/contracts/:id/destroy', :to => 'contracts#destroy'
+  match '/supplies/:id/destroy', :to => 'supplies#destroy'
+  match '/crops/:id/destroy', :to => 'crops#destroy'
+  match '/cropplans/:id/destroy', :to => 'cropplans#destroy'
+  match '/equipment/:id/destroy', :to => 'equipment#destroy'
+  match '/farms/:id/destroy', :to => 'farms#destroy'
+  match '/farmjobs/:id/destroy', :to => 'farmjobs#destroy'
+  match '/fields/:id/destroy', :to => 'fields#destroy'
+  match '/fieldtasks/:id/destroy', :to => 'fieldtasks#destroy'
+  match '/parties/:id/destroy', :to => 'parties#destroy'
+  match '/pos/:id/destroy', :to => 'pos#destroy'
+  match '/retailorders/:id/destroy', :to => 'retailorders#destroy'
+  match '/scaletickets/:id/destroy', :to => 'scaletickets#destroy'
+  match '/shipments/:id/destroy', :to => 'shipments#destroy'
+  match '/storages/:id/destroy', :to => 'storages#destroy'
 
   
   #routes for dthmlxgrid processing

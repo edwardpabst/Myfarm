@@ -255,6 +255,32 @@ class ScaleticketsController < ApplicationController
     end
   end
   
+  # DELETE /scaletickets/1
+  # DELETE /scaletickets/1.xml
+  def destroy
+    @scaleticket = Scaleticket.find(params[:id])
+    begin
+      @scaleticket.destroy 
+      rescue ActiveRecord::DeleteRestrictionError => e
+      @scaleticket.errors.add(:base, e)
+    end 
+    respond_to do |format|
+
+        if e.nil?
+
+          format.html { redirect_to("/scaleticketview", :notice => 'scale ticket was successfully deleted.') }
+          format.xml  { head :ok }
+        else  
+          @cropplan = Cropplan.find(@scaleticket.cropplan_id)
+          @storage = Storage.find(@scaleticket.storage_id)
+          @transaction = "edit"        
+          format.html { render :action => "edit" }
+        end
+
+
+    end
+  end
+  
   def update_crop_inventory
     
     #---- update inventory record for scaleticket -------------------
@@ -325,17 +351,7 @@ class ScaleticketsController < ApplicationController
     
   end
 
-  # DELETE /scaletickets/1
-  # DELETE /scaletickets/1.xml
-  def destroy
-    @scaleticket = Scaleticket.find(params[:id])
-    @scaleticket.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(scaletickets_url) }
-      format.xml  { head :ok }
-    end
-  end
   def scaleticket_requestor 
 
 

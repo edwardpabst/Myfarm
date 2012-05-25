@@ -11,8 +11,14 @@ class Party < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :country
-  has_many :partyroles
-  has_many :partytypes, :through => :partyroles 
+  has_many :farmjoblabors, :dependent => :restrict
+  has_many :contracts, :dependent => :restrict
+  has_many :shipments, :foreign_key => :customer_id, :dependent => :restrict
+  has_many :pos, :foreign_key => :supplier_id,:dependent => :restrict
+  has_many :scaletickets, :dependent => :restrict
+  has_many :farms, :dependent => :restrict
+  has_many :partyroles, :dependent => :destroy
+  has_many :partytypes, :through => :partyroles, :dependent => :restrict 
   validates_presence_of  :partyphone, :partyemail 
   validates :rate_hour, :numericality => true
   validates :charge_hour, :numericality => true

@@ -1,6 +1,11 @@
  
 <h1>Edit Farm </h1>
 <%= link_to 'Back', '/farmview' %>
+<br> 
+
+<%= button_to "Delete","/farms/#{@farm.id}/destroy" , :method=>:delete, :class=>:button_destroy, :confirm => 'Are you sure?' %>
+
+
 <%= render 'form' %>
 
 <%= render 'farmexpenses/index_view' %> 

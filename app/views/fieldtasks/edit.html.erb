@@ -1,7 +1,11 @@
  
 <h1>Edit Field Task</h1>
 <%= link_to 'Back', "/fieldtaskview" %>
-<br>
+<br> 
+
+<%= button_to "Delete","/fieldtasks/#{@fieldtask.id}/destroy" , :method=>:delete, :class=>:button_destroy, :confirm => 'Are you sure?' %>
+
+
 <%= render 'form' %>
 <div class="formtastic">
 	<%= render 'fieldtasksupplies/index_view' %> 

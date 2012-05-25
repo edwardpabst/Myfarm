@@ -509,15 +509,22 @@ class FarmjobsController < ApplicationController
   # DELETE /farmjobs/1.xml
   def destroy
     @farmjob = Farmjob.find(params[:id])
-    @farmjob.destroy
-    
-    @event = Event.find_by_farmjob_id(params[:id])
-    if !@event.nil?
-      @event.destroy
-    end
+    begin
+      @farmjob.destroy 
+      rescue ActiveRecord::DeleteRestrictionError => e
+      @farmjob.errors.add(:base, e)
+    end 
     respond_to do |format|
-      format.html { redirect_to("/farmjobview") }
-      format.xml  { head :ok }
+
+        if e.nil?
+    
+          format.html { redirect_to("/farmjobview", :notice => 'farm job was successfully deleted.') }
+          format.xml  { head :ok }
+        else          
+          format.html { render :action => "edit" }
+        end
+   
+    
     end
   end
   

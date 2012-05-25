@@ -209,12 +209,24 @@ class PosController < ApplicationController
      # DELETE /shipments/1.xml
      def destroy
        @po = Po.find(params[:id])
-       @po.destroy
-
+       begin
+         @po.destroy 
+         rescue ActiveRecord::DeleteRestrictionError => e
+         @po.errors.add(:base, e)
+       end 
        respond_to do |format|
-         format.html { redirect_to(pos_url) }
-         format.xml  { head :ok }
+
+           if e.nil?
+
+             format.html { redirect_to("/poview", :notice => 'purchase order was successfully deleted.') }
+             format.xml  { head :ok }
+           else          
+             format.html { render :action => "edit" }
+           end
+
+
        end
-     end
+    end
+    
    end
    

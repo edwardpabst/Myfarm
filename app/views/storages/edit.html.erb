@@ -1,7 +1,11 @@
  
 <h1>Editing storage</h1>
 <%= link_to 'Back', "/storageview" %>
-<br />
+<br> 
+
+<%= button_to "Delete","/storages/#{@storage.id}/destroy" , :method=>:delete, :class=>:button_destroy, :confirm => 'Are you sure?' %>
+
+
 <%= render 'form' %>
 
 <br />

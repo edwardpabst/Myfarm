@@ -285,11 +285,22 @@ class FieldsController < ApplicationController
   # DELETE /fields/1.xml
   def destroy
     @field = Field.find(params[:id])
-    @field.destroy
-
+    begin
+      @field.destroy 
+      rescue ActiveRecord::DeleteRestrictionError => e
+      @field.errors.add(:base, e)
+    end 
     respond_to do |format|
-      format.html { redirect_to(fields_url) }
-      format.xml  { head :ok }
+
+        if e.nil?
+    
+          format.html { redirect_to("/fieldview", :notice => 'field was successfully deleted.') }
+          format.xml  { head :ok }
+        else          
+          format.html { render :action => "edit" }
+        end
+   
+    
     end
   end
 end

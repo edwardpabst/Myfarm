@@ -270,11 +270,22 @@ class EquipmentController < ApplicationController
   # DELETE /equipment/1.xml
   def destroy
     @equipment = Equipment.find(params[:id])
-    @equipment.destroy
-
+    begin
+      @equipment.destroy 
+      rescue ActiveRecord::DeleteRestrictionError => e
+      @equipment.errors.add(:base, e)
+    end 
     respond_to do |format|
-      format.html { redirect_to(equipment_index_url) }
-      format.xml  { head :ok }
+
+        if e.nil?
+    
+          format.html { redirect_to("/equipmentview", :notice => 'equipment was successfully deleted.') }
+          format.xml  { head :ok }
+        else          
+          format.html { render :action => "edit" }
+        end
+   
+    
     end
   end
   

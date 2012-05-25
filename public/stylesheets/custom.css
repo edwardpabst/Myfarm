@@ -83,6 +83,9 @@ section h1 {
 .hidden { visibility: hidden; }
 .unhidden { visibility: visible; }
 
+#right_align {
+	float:right;
+}
 
 
 .center{
@@ -368,6 +371,16 @@ font-size: 90%;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10pz;
+}
+#form_delete{
+	
+	width: 99%;
+	font-size:90%;
+	font-weight:normal;
+	font-style: normal;
+	background-color:white;  /*--------   lemonchiffon #FEFFF1 slategray----------*/
+	text-align:right;
+
 }
 
 #tutorial_stage{
@@ -930,6 +943,26 @@ select  {
 .button:hover{
 	background-color:lightsteelblue;
 	border: solid 1px orange;
+}
+
+.button_destroy {
+   
+	font-family: Arial, Sans-Serif;
+    font-size: 90%;
+    padding: 2px;
+    border: solid 1px orange;
+    width: 90px;
+    background-color: #EDF2F7;
+    text-align: center;
+	margin:5px;
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+.button_destroy:hover{
+	background-color:lightsteelblue;
+	border: solid 2px red;
 }
 
 .button:onmousedown{

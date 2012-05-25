@@ -12,6 +12,10 @@ if (document.sh.shipment_contract_id.value != ' ') {
  
 <h1>Edit Purchase Order</h1>
 <%= link_to 'Back', "/poview" %>
+<br> 
+
+<%= button_to "Delete","/pos/#{@po.id}/destroy" , :method=>:delete, :class=>:button_destroy, :confirm => 'Are you sure?' %>
+
 
 <%= render 'form' %>
 

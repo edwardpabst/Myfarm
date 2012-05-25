@@ -8,10 +8,10 @@ class Shipment < ActiveRecord::Base
                   :shipping_charge, :commission_amount, :broker_id, :ship_amount, :ship_status, :farm_id
   
 
-  has_many :cropplans
+  has_many :cropplans 
   has_many :parties
-  has_many :shipmentdetails , :dependent => :destroy
-  has_many :invoices, :dependent => :destroy
+  has_many :shipmentdetails , :dependent => :restrict
+  has_many :invoices, :dependent => :restrict
    
  
   	      

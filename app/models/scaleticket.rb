@@ -6,9 +6,9 @@ class Scaleticket < ActiveRecord::Base
                   :inventory_uom, :inventory_update, :grade
   
 
-  has_many :cropplans
-  has_many :storages
+  has_many :cropplans 
   has_many :parties
+  has_many :inventorytickets, :dependent => :restrict
   before_save :default_values 
  
    validates :gross_weight, :numericality => true

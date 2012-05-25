@@ -2,6 +2,9 @@
  
 <h1>Editing crop plan</h1>
 <%= link_to 'Back', "/cropplanview" %>
+<br> 
+
+<%= button_to "Delete","/cropplans/#{@cropplan.id}/destroy" , :method=>:delete, :class=>:button_destroy, :confirm => 'Are you sure?' %>
 
 <%= render 'form' %>
 

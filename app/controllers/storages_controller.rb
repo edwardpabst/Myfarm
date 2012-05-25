@@ -139,11 +139,22 @@ class StoragesController < ApplicationController
   # DELETE /storages/1.xml
   def destroy
     @storage = Storage.find(params[:id])
-    @storage.destroy
-
+    begin
+      @storage.destroy 
+      rescue ActiveRecord::DeleteRestrictionError => e
+      @storage.errors.add(:base, e)
+    end 
     respond_to do |format|
-      format.html { redirect_to(storages_url) }
-      format.xml  { head :ok }
+
+        if e.nil?
+
+          format.html { redirect_to("/storageview", :notice => 'storage unit was successfully deleted.') }
+          format.xml  { head :ok }
+        else          
+          format.html { render :action => "edit" }
+        end
+
+
     end
   end
 end

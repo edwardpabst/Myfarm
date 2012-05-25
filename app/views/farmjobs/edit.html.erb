@@ -26,7 +26,11 @@ function checkFarmjob() {
 <% end %>
 <br>
 <%= link_to 'Back', session[:return_to] %>
-<br>
+<br> 
+
+<%= button_to "Delete","/farms/#{@farm.id}/destroy" , :method=>:delete, :class=>:button_destroy, :confirm => 'Are you sure?' %>
+
+
 <%= render 'form' %>
 
 

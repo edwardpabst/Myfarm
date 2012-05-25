@@ -11,9 +11,9 @@ class Farmjob < ActiveRecord::Base
   belongs_to :Cropplan
   belongs_to :Field
   
-  has_many :farmjobsupplies, :dependent => :destroy
-  has_many :farmjoblabors, :dependent => :destroy
-  has_many :farmjobequipments, :dependent => :destroy
+  has_many :farmjobsupplies, :dependent => :restrict
+  has_many :farmjoblabors, :dependent => :restrict
+  has_many :farmjobequipments, :dependent => :restrict
   has_many :events, :dependent => :destroy
   
   has_many :supplies, :through => :farmjobsupplies 

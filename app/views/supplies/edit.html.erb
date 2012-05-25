@@ -1,8 +1,16 @@
  
 <h1>Editing supply</h1>
  
+ 
 <%= link_to 'Back', "/supplyview" %>
-<br />
+<br> 
+ 
+<%= button_to "Delete","/supplies/#{@supply.id}/destroy" , :method=>:delete, :class=>:button_destroy, :confirm => 'Are you sure?' %>
+ 
+ 
+
+ 			 
+ 
 
 <%= render 'form' %>
 

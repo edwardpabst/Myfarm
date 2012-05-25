@@ -16,8 +16,9 @@ class Field < ActiveRecord::Base
   validates :fixed_amount_acre, :numericality => true
   
   belongs_to :country
-  has_many :farmjobs
-  has_many :fieldmappings
+  has_many :farmjobs, :dependent => :restrict
+  has_many :fieldmappings, :dependent => :destroy
+  has_many :scaletickets, :foreign_key => :field_id_1, :dependent => :restrict
   
   has_attached_file :soilreport
   

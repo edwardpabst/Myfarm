@@ -22,7 +22,8 @@ class Equipment < ActiveRecord::Base
   validates :housing_cost, :numericality => true  
   validates :usage_qty_hour, :numericality => true 
   
-  has_many :farmjobequipments
+  has_many :farmjobequipments, :dependent => :restrict
+  has_many :equipmentactivities, :dependent => :restrict
   
   has_attached_file :photo, :styles => { :large=> "700x700>", :medium => "260x300>", :thumb => "120x120>" }
  

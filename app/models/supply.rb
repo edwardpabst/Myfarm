@@ -7,7 +7,8 @@ class Supply < ActiveRecord::Base
                   :manganese_content, :magnesium_content,  :chemical_type,  :active_ingredient, 
                   :chemical_rate_acre, :chemical_uom , :carrier_uom,  :restricted_hours
   belongs_to :Farmjob
-  has_many :fieldtasksupplies, :dependent => :destroy
+  has_many :fieldtasksupplies, :dependent => :restrict
+  has_many :farmjobsupplies, :dependent => :restrict
   has_many :fieldtasks, :through => :fieldtasksupplies
  
   	      

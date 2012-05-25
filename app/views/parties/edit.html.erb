@@ -2,6 +2,11 @@
 <h1>Edit party info</h1>
  
 <%= link_to 'Back', "/partyview" %>
+<br> 
+
+<%= button_to "Delete","/parties/#{@party.id}/destroy" , :method=>:delete, :class=>:button_destroy, :confirm => 'Are you sure?' %>
+
+
 <%= render 'form' %>
 
 <br>

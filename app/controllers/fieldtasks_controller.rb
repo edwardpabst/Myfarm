@@ -155,11 +155,22 @@ class FieldtasksController < ApplicationController
   # DELETE /fieldtasks/1.xml
   def destroy
     @fieldtask = Fieldtask.find(params[:id])
-    @fieldtask.destroy
-
+    begin
+      @fieldtask.destroy 
+      rescue ActiveRecord::DeleteRestrictionError => e
+      @fieldtask.errors.add(:base, e)
+    end 
     respond_to do |format|
-      format.html { redirect_to(fieldtasks_url) }
-      format.xml  { head :ok }
+
+        if e.nil?
+    
+          format.html { redirect_to("/fieldtaskview", :notice => 'fieldtask was successfully deleted.') }
+          format.xml  { head :ok }
+        else          
+          format.html { render :action => "edit" }
+        end
+   
+    
     end
   end
 end

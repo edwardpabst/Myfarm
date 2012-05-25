@@ -2,6 +2,11 @@
 <h1>Editing equipment</h1>
  
 <%= link_to 'Back', "/equipmentview" %>
+<br> 
+
+<%= button_to "Delete","/equipment/#{@equipment.id}/destroy" , :method=>:delete, :class=>:button_destroy, :confirm => 'Are you sure?' %>
+
+
 <%= render 'form' %>
 <%= render 'dependant_form' %>
 

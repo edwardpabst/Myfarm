@@ -2,7 +2,8 @@ class Farm < ActiveRecord::Base
   #acts_as_reportable
   attr_accessible :farmname, :total_acres , :land_expense_year, :party_id,
                   :logo_file_name, :logo_content_type, :logo_file_size, :logo_updated_at, :logo
-  has_many :farmexpenses, :dependent => :destroy
+  has_many :farmexpenses, :dependent => :restrict
+  has_many :fields, :dependent => :restrict
    
    validates :total_acres, :numericality => true 
    #validates :land_expense_year, :numericality => true 

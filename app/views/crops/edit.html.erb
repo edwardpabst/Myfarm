@@ -2,6 +2,10 @@
 <h1>Editing crop</h1>
 <%= link_to 'Back', :action => "index_view" %>
 
+<br> 
+
+<%= button_to "Delete","/crops/#{@crop.id}/destroy" , :method=>:delete, :class=>:button_destroy, :confirm => 'Are you sure?' %>
+
 <%= render 'form' %>
 
 
