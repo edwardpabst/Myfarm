@@ -33,8 +33,10 @@ class Capitalrecovery < ActiveRecord::Base
     @capitalrecovery = Capitalrecovery.find_by_sql("Select * from capitalrecoveries 
                                         where recovery_year = #{years}
                                         and interest_rate = #{rate}") 
+    recovery_factor = 0
     @capitalrecovery.each do |cr|
-      return cr.recovery_factor
+       recovery_factor = cr.recovery_factor
     end
+    return recovery_factor
   end
 end

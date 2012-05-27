@@ -62,7 +62,7 @@ class UsersController < ApplicationController
           if @user.save
             UserMailer.registration_confirmation(@user).deliver
             sign_in @user
-            flash[:success] = "Welcome to the iFarmService app. Please take a moment to complete your profile info before we begin to define your farm."
+            flash[:notice] = "Welcome to the iFarmService app. Please take a moment to complete your profile info before we begin to define your farm. Only field with * are required."
  
             if @has_coupon == true                          
               set_subscription       

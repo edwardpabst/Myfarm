@@ -10,9 +10,9 @@
 	<%= form.input :partyfirstname, :label => "First name",  :required =>  false %> 
 	<%= form.input :partylastname, :label => "Last name",  :required =>  false  %> 
 	<%= form.input :partyname, :label => "Full name",  :required => false,  :hint => "created from first and last names if left blank"  %> 
-	<%= form.input :partyemail, :label => "Email",  :required => false , :input_html => {  :value => @user_email }    %>  
+	<%= form.input :partyemail, :label => "Email*",  :required => false , :input_html => {  :value => @user_email }    %>  
 	<%= form.input :partyphone, :label => "Contact phone",  :required => false    %>  
-	<%= form.input :partyjobtitle, :label => "Primary role",  :required => false, :hint => "Primary job/responsibility of an employee"    %> 
+	<%= form.input :partyjobtitle, :label => "Primary role",  :required => false, :hint => "Primary function/responsibility of the party"    %> 
 
 	&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -21,14 +21,14 @@
   
 	<%= form.input :partyaddress1, :label => "Address",  :required => false    %>  
 	<%= form.input :partyaddress2, :label => "Address +",  :required => false    %>  
-	<%= form.input :partycity, :label => "City",  :required => true    %> 
-	<%= form.input :partystate, :label => "State",  :required => true    %>  
-	<%= form.input :partypostalcode, :label => "Postal Code",  :required => false    %>
-	<%= form.input :country,  :as => :select,   :label => "Country",  :required => true%>
+	<%= form.input :partycity, :label => "City*",  :required => true    %> 
+	<%= form.input :partystate, :label => "State*",  :required => true    %>  
+	<%= form.input :partypostalcode, :label => "Postal Code*",  :required => false    %>
+	<%= form.input :country,  :as => :select,   :label => "Country*",  :required => true%>
 	
 	<%= form.input :partyweatherpostalcode, :label => "Postal Code for weather",  :required => false, :hint => "Defined for main system user only. Used in all weather links."    %>
 
-	<%= form.input :partytypes,  :as => :select,   :label => "Parties roles",  :required => true, :hint => "Roles determine someones availability to specific functions on the farm. A customer is the target of a shipment. A laborer can be added to a farm job as labor, a Supplier is defined for a purchase order, etc. One person can have multiple roles."  %>
+	<%= form.input :partytypes,  :as => :select,   :label => "Parties role(s)*",  :required => true, :hint => "Roles determine someones availability to specific functions on the farm. A customer is the target of a shipment. A laborer can be added to a farm job as labor, a Supplier is defined for a purchase order, etc. One person can have multiple roles."  %>
 	<%= form.input :rate_hour, :as => :string, :label => "Rate per hour",  :required => false ,  :hint => "Amount paid for an employee role."  %>
 	<%= form.input :charge_hour, :as => :string, :label => "Charge per hour",  :required => false , :hint => "Used by Farm Management users to invoice labor amount."  %>
 <br>
