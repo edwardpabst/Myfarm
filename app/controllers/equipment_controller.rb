@@ -232,6 +232,7 @@ class EquipmentController < ApplicationController
     end
 
     calc_capitalrecovery
+    
     respond_to do |format|
       if @equipment.save
         format.html { redirect_to(:controller => :equipment, :action => :edit, :id => @equipment.id, 	:notice => 'Equipment was successfully created.') }

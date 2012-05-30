@@ -95,8 +95,8 @@ document.st.scaleticket_pack_qty.value = ((document.st.scaleticket_net_weight.va
 		 
 		</td>
 		<td>
-			<div class="disabled">
-				<%= f.text_field :weight_conversion, :disabled => true %>
+			<div id='datadisplay_medium'>
+				<%= @scaleticket.weight_conversion %>
 			</div>
 		</td>
 	</tr>
@@ -107,8 +107,8 @@ document.st.scaleticket_pack_qty.value = ((document.st.scaleticket_net_weight.va
 				<%= f.label :inventory_uom, "Inventory UOM*" %> 
 		</td>
 		<td>
-			<div class="disabled">
-				<%= f.text_field :inventory_uom, :disabled => true %>
+			<div id='datadisplay_medium'>
+					<%= @scaleticket.inventory_uom %>
 			</div>
 		</td>
  
@@ -168,9 +168,9 @@ document.st.scaleticket_pack_qty.value = ((document.st.scaleticket_net_weight.va
 			<%= f.label :ticket_id, "Ticket ID" %>
 		</td>
 		<td colspan="3">
- 
+ 			
 				<%= f.text_field :ticket_id %>
- 
+ 			 
 		</td>
 	</tr>
 

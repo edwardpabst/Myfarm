@@ -372,6 +372,23 @@ font-size: 90%;
 	-webkit-border-radius: 10px;
 	border-radius: 10pz;
 }
+
+#form_header_short{
+	
+	width: 98%;
+	font-size:90%;
+	font-weight:bold;
+	font-style: normal;
+    color: white;
+	background-color:#36648B;  /*--------   lemonchiffon #FEFFF1 slategray----------*/
+	border: solid 1px darkgray;
+	padding-left:3px;
+	padding-right:3px;
+	padding-top:8px;
+	padding-bottom:8px;
+	text-align:center;
+
+}
 #form_delete{
 	
 	width: 99%;
@@ -725,6 +742,21 @@ padding:2px 2px 2px 2px;
 	border: solid 1px #85b1de;
 	background-color: floralwhite ;
 	width:90%;
+	text-align: left;
+
+}
+
+
+#datadisplay_medium {
+ 
+	font-size:100%;
+	color: navy;
+	padding-left: 8px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	border: solid 1px #85b1de;
+	background-color: floralwhite ;
+	width:70%;
 	text-align: left;
 
 }
@@ -1168,6 +1200,12 @@ a.signup_button {
 
 	margin-left:auto;
 	margin-right:auto;
+}
+
+
+.centertext{
+
+	text-align:center;
 }
 
 

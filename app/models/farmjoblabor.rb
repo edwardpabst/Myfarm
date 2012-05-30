@@ -13,7 +13,7 @@ class Farmjoblabor < ActiveRecord::Base
              from farmjobs  
              join fields on farmjobs.field_id = fields.id
              join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
-             join cropplans on farmjobs.cropplan_id = cropplans.id
+             left join cropplans on farmjobs.cropplan_id = cropplans.id and plan_year = '#{year}'
              join farmjoblabors on farmjobs.id = farmjoblabors.farmjob_id
              join parties on farmjoblabors.party_id = parties.id
              where farmjobs.user_id = #{user_id}
@@ -21,7 +21,7 @@ class Farmjoblabor < ActiveRecord::Base
              and start_date >= '#{start_date}'  
              and start_date <= '#{stop_date}' 
              and task_stage = '#{task_stage}'
-             and plan_year = '#{year}'         
+                      
              group by partyname, partyjobtitle"            
 
           return Farmjobsupply.find_by_sql("#{sql_statement}")
@@ -36,14 +36,13 @@ class Farmjoblabor < ActiveRecord::Base
              from farmjobs  
              join fields on farmjobs.field_id = fields.id
              join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
-             join cropplans on farmjobs.cropplan_id = cropplans.id
+             left join cropplans on farmjobs.cropplan_id = cropplans.id  and plan_year = '#{year}'
              join farmjoblabors on farmjobs.id = farmjoblabors.farmjob_id
              join parties on farmjoblabors.party_id = parties.id
              where farmjobs.user_id = #{user_id}
              and fields.farm_id = #{farm_id}
              and start_date >= '#{start_date}'  
-             and start_date <= '#{stop_date}' 
-             and plan_year = '#{year}'
+             and start_date <= '#{stop_date}'             
              "            
 
           return Farmjobsupply.find_by_sql("#{sql_statement}")

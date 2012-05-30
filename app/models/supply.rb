@@ -168,7 +168,7 @@ class Supply < ActiveRecord::Base
            from supplies su
            join farmjobsupplies fjs on su.id = fjs.supply_id
            join farmjobs fj on fjs.farmjob_id = fj.id
-           join cropplans cp on fj.cropplan_id = cp.id
+           left join cropplans cp on fj.cropplan_id = cp.id
            left join fields on fj.field_id = fields.id
            where su.user_id = #{user_id } ")
           

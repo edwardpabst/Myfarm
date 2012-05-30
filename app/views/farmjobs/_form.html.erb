@@ -50,11 +50,11 @@ function checkStatus() {
 			
 			</td>
 			<td  width="25%">
-		    <% get_fields_by_farm %>
+		    <% get_fields_by_farm_full %>
 			<label class=" label" for="fields">Field*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
 			</td>
 			<td>
-			<%= collection_select("farmjob", "field_id", @fields, "id", "fieldname", options = {:prompt => " "}) %>	
+			<%= collection_select("farmjob", "field_id", @fields, "id", "fieldnamefull", options = {:prompt => " "}) %>	
 
 			</td>
 		</tr>	
@@ -67,7 +67,25 @@ function checkStatus() {
 			<%= collection_select("farmjob", "cropplan_id", @cropplans, "id", "cropplanfull", options = {:prompt => " "}) %>	
  
 		   	</td>
+		  <% if @transaction == 'edit'%>
 		    <td>
+			<%= f.label :workorder, "Job number" %>  
+		 	</td>
+			<td>
+			<%= f.text_field :workorder %> 
+		    </td>
+		  <% end %>
+
+		</tr>
+		
+		<tr>
+ 			<td  colspan='2'> 
+				<div class="hintbase">
+					&nbsp;&nbsp;
+					If you enter a crop plan the job cost will be allocated to the crop plan.
+				</div>
+			</td>
+			<td>
 			<%= f.label :eventname, "Event Name" %>  
 		 	</td>
 			<td>
@@ -75,7 +93,7 @@ function checkStatus() {
 
 		  </td>
 
-		</tr> 
+		</tr>
 		<tr>
 			<td>
 			<% get_types_by_name("job_status") %>
@@ -145,6 +163,17 @@ function checkStatus() {
 
 			
 	 	 </tr>
+	
+	  <% if @transaction == 'edit'%>
+		<tr>
+ 			<td  colspan='4'> 
+				<div class="hintbase">
+					&nbsp;&nbsp;
+					JOB CONDITIONS SECTION. Recorded when job is performed.
+				</div>
+			</td>
+
+		</tr>
  		 <tr>
 				<td>
 					<%= f.label :growth_stage, "Growth stage" %>  
@@ -227,6 +256,8 @@ function checkStatus() {
 
 		</tr>
 		
+		<% end %>
+		
 		
 		<tr>
 			<td>
@@ -257,6 +288,8 @@ function checkStatus() {
 
 
 		</tr>
+		
+		<% if @transaction == 'edit'%>
 		<tr>
 			<td colspan="4">
 				<table>
@@ -308,6 +341,7 @@ function checkStatus() {
 				</div>
 			</td>
 		</tr>
+		<% end %>
 
 			 
  </table>

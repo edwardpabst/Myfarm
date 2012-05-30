@@ -18,8 +18,8 @@ class FarmjobsController < ApplicationController
         @farmjobs = Farmjob.find_by_sql("Select farmjobs.id, workorder, fieldname, cropplanfull, plan_year, 
         taskdescription, job_status, start_date, stop_date, area_size, total_cost 
         from farmjobs  
-        join cropplans on farmjobs.cropplan_id = cropplans.id
-        join crops on cropplans.crop_id = crops.id  
+        left join cropplans on farmjobs.cropplan_id = cropplans.id
+        left join crops on cropplans.crop_id = crops.id  
         join fields on farmjobs.field_id = fields.id 
         join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
         where farmjobs.user_id = #{@current_user.id } 
@@ -358,7 +358,7 @@ class FarmjobsController < ApplicationController
     # @farmjob.stop_time = params[:stop_time][:"time(i)"]
     
     #validate the cropplan and field are defined
-    if !params[:farmjob][:cropplan_id].nil? and !params[:farmjob][:cropplan_id].blank?  and !params[:farmjob][:field_id].blank? and !params[:farmjob][:field_id].blank?
+    if !params[:farmjob][:cropplan_id].nil? and !params[:farmjob][:cropplan_id].blank?  and !params[:farmjob][:field_id].nil? and !params[:farmjob][:field_id].blank?
     
       is_plan_ok = Cropplanfield.validate_cropplanfield(params[:farmjob][:cropplan_id], params[:farmjob][:field_id])
       if is_plan_ok == false
@@ -442,12 +442,15 @@ class FarmjobsController < ApplicationController
      params[:farmjob][:eventname] = @fieldtask.taskdescription
     end 
     
-    params[:farmjob][:crop_id] = @cropplan.crop_id   
+     
     
      #validate the cropplan and field are defined 
-    is_plan_ok = Cropplanfield.validate_cropplanfield(params[:farmjob][:cropplan_id], params[:farmjob][:field_id])
-    if  is_plan_ok == false
-      flash[:error] = 'The crop plan/field combination are not defined. To correct define them in set-cropplan'
+    if !params[:farmjob][:cropplan_id].nil? and !params[:farmjob][:cropplan_id].blank?
+      params[:farmjob][:crop_id] = @cropplan.crop_id 
+      is_plan_ok = Cropplanfield.validate_cropplanfield(params[:farmjob][:cropplan_id], params[:farmjob][:field_id])
+      if  is_plan_ok == false
+        flash[:error] = 'The crop plan/field combination are not defined. To correct define them in set-cropplan'
+      end
     end
     
     respond_to do |format|
@@ -625,10 +628,17 @@ class FarmjobsController < ApplicationController
   
   def post_event()
     @field = Field.select("fieldname").find(@farmjob.field_id)
-    @cropplan = Cropplan.select("cropplanfull").find(@farmjob.cropplan_id)
+    
     @event = Event.new 
+    if !@farmjob.cropplan_id.nil?
+      @cropplan = Cropplan.select("cropplanfull").find(@farmjob.cropplan_id)
+      @event.name = @farmjob.eventname.to_s + "/" + @field.fieldname.to_s + "/" + @cropplan.cropplanfull.to_s
+    else
+       @event.name = @farmjob.eventname.to_s + "/" + @field.fieldname.to_s + "/" + "FIELD JOB"
+    end
+    
     @event.user_id = @farmjob.user_id
-    @event.name = @farmjob.eventname.to_s + "/" + @field.fieldname.to_s + "/" + @cropplan.cropplanfull.to_s
+
     @event.notes = @farmjob.notes
     @event.start_at = @farmjob.start_date   #+  @farmjob.start_time
     @event.end_at = @farmjob.stop_date    #+ @farmjob.stop_time

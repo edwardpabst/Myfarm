@@ -21,8 +21,8 @@ class Farmjob < ActiveRecord::Base
   has_many :parties, :through => :farmjoblabors
   belongs_to :User
  
-  	     validates_presence_of :fieldtask_id, :field_id, :cropplan_id,  :job_status, :area_size, :start_date
-  before_validation :set_date_time  
+  validates_presence_of :fieldtask_id, :field_id, :job_status, :area_size, :start_date
+  #before_validation :set_date_time  
   
   #validates :price, :format => { :with => /^\d+??(?:\.\d{0,2})?$/ }, :numericality => {:greater_than => 0, :less_than => 10}
    validates :area_size, :format => { :with => /^\d+??(?:\.\d{0,2})?/ }, :numericality => {:greater_than => 0, :less_than => 5000}
@@ -134,8 +134,8 @@ class Farmjob < ActiveRecord::Base
            
            @farmjobs = Farmjob.find_by_sql("Select fieldname, sum(supply_cost) ,, sum(labor_cost), sum(equipment_cost), sum(total_cost)
            from farmjobs  
-           join cropplans on farmjobs.cropplan_id = cropplans.id
-           join crops on cropplans.crop_id = crops.id  
+           left join cropplans on farmjobs.cropplan_id = cropplans.id
+           left join crops on cropplans.crop_id = crops.id  
            join fields on farmjobs.field_id = fields.id 
            join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
            where farmjobs.user_id = #{session[:s_user_id]  } 
@@ -162,8 +162,8 @@ class Farmjob < ActiveRecord::Base
            
            @farmjobs = Farmjob.find_by_sql("Select sum(supply_cost) ,, sum(labor_cost), sum(equipment_cost), sum(total_cost)
            from farmjobs  
-           join cropplans on farmjobs.cropplan_id = cropplans.id
-           join crops on cropplans.crop_id = crops.id  
+           left join cropplans on farmjobs.cropplan_id = cropplans.id
+           left join crops on cropplans.crop_id = crops.id  
            join fields on farmjobs.field_id = fields.id 
            join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
            where farmjobs.user_id = #{session[:s_user_id]  }")
@@ -175,8 +175,8 @@ class Farmjob < ActiveRecord::Base
            sql_statement = "Select taskdescription, fieldname, cropplanfull, area_size, start_date, job_status,
              total_hours,  total_cost, supply_cost, labor_cost, equipment_cost
             from farmjobs  
-            join cropplans on farmjobs.cropplan_id = cropplans.id
-            join crops on cropplans.crop_id = crops.id  
+            left join cropplans on farmjobs.cropplan_id = cropplans.id
+            left join crops on cropplans.crop_id = crops.id  
             join fields on farmjobs.field_id = fields.id 
             join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
             where farmjobs.user_id = #{user_id}
@@ -285,8 +285,8 @@ class Farmjob < ActiveRecord::Base
 
            @farmjobs = Farmjob.find_by_sql("Select client_id, sum(supply_billing) , sum(labor_billing), sum(equipment_billing), sum(total_billing)
            from farmjobs  
-           join cropplans on farmjobs.cropplan_id = cropplans.id
-           join crops on cropplans.crop_id = crops.id  
+           left join cropplans on farmjobs.cropplan_id = cropplans.id
+           left join crops on cropplans.crop_id = crops.id  
            join fields on farmjobs.field_id = fields.id
            join parties on fields.client_id = parties.id  
            join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
@@ -300,8 +300,8 @@ class Farmjob < ActiveRecord::Base
 
            @farmjobs = Farmjob.find_by_sql("Select farmname, sum(supply_billing) , sum(labor_billing), sum(equipment_billing), sum(total_billing)
            from farmjobs  
-           join cropplans on farmjobs.cropplan_id = cropplans.id
-           join crops on cropplans.crop_id = crops.id  
+           left join cropplans on farmjobs.cropplan_id = cropplans.id
+           left join crops on cropplans.crop_id = crops.id  
            join fields on farmjobs.field_id = fields.id
            join parties on fields.client_id = parties.id 
            join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
@@ -314,8 +314,8 @@ class Farmjob < ActiveRecord::Base
 
                    @farmjobs = Farmjob.find_by_sql("Select fieldname, sum(supply_billing) , sum(labor_billing, sum(equipment_billing), sum(total_billing)
                    from farmjobs  
-                   join cropplans on farmjobs.cropplan_id = cropplans.id
-                   join crops on cropplans.crop_id = crops.id  
+                   left join cropplans on farmjobs.cropplan_id = cropplans.id
+                   left join crops on cropplans.crop_id = crops.id  
                    join fields on farmjobs.field_id = fields.id
                    join parties on fields.client_id = parties.id  
                    join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
@@ -344,8 +344,8 @@ class Farmjob < ActiveRecord::Base
 
                    @farmjobs = Farmjob.find_by_sql("Select sum(supply_billing) , sum(labor_billing), sum(equipment_billing), sum(total_billing)
                    from farmjobs  
-                   join cropplans on farmjobs.cropplan_id = cropplans.id
-                   join crops on cropplans.crop_id = crops.id  
+                   left join cropplans on farmjobs.cropplan_id = cropplans.id
+                   left join crops on cropplans.crop_id = crops.id  
                    join fields on farmjobs.field_id = fields.id 
                    join parties on fields.client_id = parties.id 
                    left join parties on fields.client_id = parties.id 
@@ -359,8 +359,8 @@ class Farmjob < ActiveRecord::Base
                    sql_statement = "Select partyname, farmname, taskdescription, fieldname, cropplanfull, area_size, start_date, job_status,
                      total_hours,  total_billing, supply_billing, labor_billing, equipment_billing
                     from farmjobs  
-                    join cropplans on farmjobs.cropplan_id = cropplans.id
-                    join crops on cropplans.crop_id = crops.id  
+                    left join cropplans on farmjobs.cropplan_id = cropplans.id
+                    left join crops on cropplans.crop_id = crops.id  
                     join fields on farmjobs.field_id = fields.id 
                     join parties on fields.client_id = parties.id 
                     join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
@@ -501,13 +501,13 @@ class Farmjob < ActiveRecord::Base
               from farmjobs  
               join fields on farmjobs.field_id = fields.id
               join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
-              join cropplans on farmjobs.cropplan_id = cropplans.id
+              left join cropplans on farmjobs.cropplan_id = cropplans.id and plan_year = '#{year}'
               where farmjobs.user_id = #{user_id}
               and fields.farm_id = #{farm_id}
               and start_date >= '#{start_date}'  
               and start_date <= '#{stop_date}' 
               and task_stage = '#{task_stage}'
-              and plan_year = '#{year}'
+              
           
               group by taskdescription"            
  
@@ -525,13 +525,12 @@ class Farmjob < ActiveRecord::Base
               from farmjobs 
               join fields on farmjobs.field_id = fields.id 
               join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
-              join cropplans on farmjobs.cropplan_id = cropplans.id
+              left join cropplans on farmjobs.cropplan_id = cropplans.id  and plan_year = '#{year}'
               where farmjobs.user_id = #{user_id}
               and fields.farm_id = #{farm_id}
               and start_date >= '#{start_date}'  
               and start_date <= '#{stop_date}' 
               and task_stage = '#{task_stage}'
-              and plan_year = '#{year}'
               "            
 
            return Farmjob.find_by_sql("#{sql_statement}")
@@ -575,12 +574,11 @@ class Farmjob < ActiveRecord::Base
               from farmjobs 
               join fields on farmjobs.field_id = fields.id 
               join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
-              join cropplans on farmjobs.cropplan_id = cropplans.id
+              left join cropplans on farmjobs.cropplan_id = cropplans.id and plan_year = '#{year}'
               where farmjobs.user_id = #{user_id}
               and fields.farm_id = #{farm_id}
               and start_date >= '#{start_date}'  
               and start_date <= '#{stop_date}' 
-              and plan_year = '#{year}'
               "            
 
          
@@ -702,7 +700,7 @@ class Farmjob < ActiveRecord::Base
                                         job_status, area_size, total_hours, start_date, notes
                                      from farmjobs fjs
                                      join fields fds on fjs.field_id = fds.id
-                                     join cropplans cps on fjs.cropplan_id = cps.id
+                                     left join cropplans cps on fjs.cropplan_id = cps.id
                                      join fieldtasks fts on fjs.fieldtask_id = fts.id
                                      
                                      where fjs.id =  #{id}")

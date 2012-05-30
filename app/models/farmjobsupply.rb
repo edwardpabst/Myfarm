@@ -62,7 +62,7 @@ class Farmjobsupply < ActiveRecord::Base
               from farmjobs  
               join fields on farmjobs.field_id = fields.id
               join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
-              join cropplans on farmjobs.cropplan_id = cropplans.id
+              left join cropplans on farmjobs.cropplan_id = cropplans.id and plan_year = '#{year}'   
               join farmjobsupplies on farmjobs.id = farmjobsupplies.farmjob_id
               join supplies on farmjobsupplies.supply_id = supplies.id
               where farmjobs.user_id = #{user_id}
@@ -70,7 +70,7 @@ class Farmjobsupply < ActiveRecord::Base
               and start_date >= '#{start_date}'  
               and start_date <= '#{stop_date}' 
               and task_stage = '#{task_stage}'
-              and plan_year = '#{year}'         
+                    
               group by supplyname, usage_uom"            
  
            return Farmjobsupply.find_by_sql("#{sql_statement}")
@@ -84,14 +84,13 @@ class Farmjobsupply < ActiveRecord::Base
                              sum(((supply_cost_uom / conversion_factor) / applied_area) * actual_qty)  as cost_per_acre
               from farmjobs 
               join fields on farmjobs.field_id = fields.id 
-              join cropplans on farmjobs.cropplan_id = cropplans.id
+              left join cropplans on farmjobs.cropplan_id = cropplans.id and plan_year = '#{year}'
               join farmjobsupplies on farmjobs.id = farmjobsupplies.farmjob_id
               join supplies on farmjobsupplies.supply_id = supplies.id
               where farmjobs.user_id = #{user_id}
               and fields.farm_id = #{farm_id}
               and start_date >= '#{start_date}'  
-              and start_date <= '#{stop_date}' 
-              and plan_year = '#{year}'
+              and start_date <= '#{stop_date}'               
               "            
 
            return Farmjobsupply.find_by_sql("#{sql_statement}")

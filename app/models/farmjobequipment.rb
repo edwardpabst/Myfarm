@@ -13,7 +13,7 @@ attr_accessible :farmjob_id, :equipment_id, :user_id,  :qty_required, :qty_actua
            from farmjobs  
            join fields on farmjobs.field_id = fields.id
            join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
-           join cropplans on farmjobs.cropplan_id = cropplans.id
+           left join cropplans on farmjobs.cropplan_id = cropplans.id and plan_year = '#{year}'  
            join farmjobequipments on farmjobs.id = farmjobequipments.farmjob_id
            join equipment on farmjobequipments.equipment_id = equipment.id
            where farmjobs.user_id = #{user_id}
@@ -21,7 +21,7 @@ attr_accessible :farmjob_id, :equipment_id, :user_id,  :qty_required, :qty_actua
            and start_date >= '#{start_date}'  
            and start_date <= '#{stop_date}' 
            and task_stage = '#{task_stage}'
-           and plan_year = '#{year}'         
+                  
            group by description, make, model, year"            
 
         return Farmjobequipment.find_by_sql("#{sql_statement}")
@@ -37,14 +37,13 @@ attr_accessible :farmjob_id, :equipment_id, :user_id,  :qty_required, :qty_actua
          from farmjobs  
          join fields on farmjobs.field_id = fields.id
          join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
-         join cropplans on farmjobs.cropplan_id = cropplans.id
+         left join cropplans on farmjobs.cropplan_id = cropplans.id  and plan_year = '#{year}'   
          join farmjobequipments on farmjobs.id = farmjobequipments.farmjob_id
          join equipment on farmjobequipments.equipment_id = equipment.id
          where farmjobs.user_id = #{user_id}
          and fields.farm_id = #{farm_id}
          and start_date >= '#{start_date}'  
-         and start_date <= '#{stop_date}' 
-         and plan_year = '#{year}'         
+         and start_date <= '#{stop_date}'               
          "            
 
         return Farmjobequipment.find_by_sql("#{sql_statement}")

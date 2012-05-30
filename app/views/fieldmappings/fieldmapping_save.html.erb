@@ -2126,22 +2126,26 @@ p {
    padding-left:2px;
 }
 #presenter {
-	float:left;
-    width: 30%;
+    position: absolute;
+    top: 330px;  
+    left: 700px; 
+    width: 320px;
     height: 460px;
     border: 1px solid #ccc;
 }
 
 #map_canvas {
-	float:left;
-    width: 60%;
-    height: 500px;
+    position: absolute;
+    top: 330px;  
+    left: 280px; 
+    width: 420px;
+    height: 480px;
 
     background-color: #ffffff;
 }
 
 .largetextarea {
-
+	float: left;
 	text-align: left;
 	padding:6px;
 	width: 310px;
@@ -2157,7 +2161,10 @@ p {
 
 }
 #polygonstuff {
+    /*  position: absolute;
 
+    background-color: #ff0000;*/ 
+    
     color: #ffffff;
     visibility: hidden;
 }
@@ -2402,15 +2409,6 @@ input  {
 	border: solid 1px #85b1de;
 }
 
-.select_large  {
-  font-size:12px;
-	width: 180px;
-	padding: 2px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border: solid 1px #85b1de;
-}
-
 .selectsmall  {
   font-size:12px;
 	width: 50px;
@@ -2432,171 +2430,189 @@ input  {
 
 
 </style>
-<div id="form_header"> 
-<table>
-	<tr>
-		<td  width='100%' align='center'>
-			<div class='centertext'>
-			    <h1>Field Mapping</h1>
-			    <%= link_to 'Back', :controller => "fields", :action => "edit", :id => session[:s_field_id] %>
-			</div>
-		</td>
-	</tr>
-</table>
-<table>
-	<tr>
-		<td width=15%>
-			        <form id="tools"  action="./" method="post" onsubmit="return false">
-			        <select id="toolchoice" name="toolchoice" class="select" onchange="toolID=parseInt(this.options[this.selectedIndex].value);setTool();">
+ 
 
-			 		<option  value="1">Polyline</option>
-			        <option  selected="selected" value="2">Polygon</option>
-			<!--
-			        <option value="3">Rectangle</option>
-			        <option value="4">Circle</option>
-			        <option value="5">Marker</option>
-			        <option value="6">Directions</option>
-			-->
-			        </select>
 
-			        </form>
-		</td>
-		<td width=15%>
-			<form id="codes"  action="./" method="post" onsubmit="return false">
-	        <select id="codechoice" name="codechoice"  class="select" style="border:1px solid #000000;" onchange="codeID=parseInt(this.options[this.selectedIndex].value);setCode();">
+<div id="header">
+    <div id="title">
+        <h1>Field Mapping</h1>  
+	<%= link_to 'Back', :controller => "fields", :action => "edit", :id => session[:s_field_id] %>
+    </div>
 
-	        <option value="1">KML</option>
-			<option  selected="selected" value="2">Javascript</option>
+ 
+
+    <div class="choice">
+        <form id="tools"  action="./" method="post" onsubmit="return false">
+        <select id="toolchoice" name="toolchoice" class="select" onchange="toolID=parseInt(this.options[this.selectedIndex].value);setTool();">
+        
+ 		<option  value="1">Polyline</option>
+        <option  selected="selected" value="2">Polygon</option>
+<!--
+        <option value="3">Rectangle</option>
+        <option value="4">Circle</option>
+        <option value="5">Marker</option>
+        <option value="6">Directions</option>
+-->
+        </select>
+
+        </form>
+    </div>
+
+
+    <div class="choice">
+        <form id="codes"  action="./" method="post" onsubmit="return false">
+        <select id="codechoice" name="codechoice"  class="select" style="border:1px solid #000000;" onchange="codeID=parseInt(this.options[this.selectedIndex].value);setCode();">
+	    
+        <option value="1">KML</option>
+		<option  selected="selected" value="2">Javascript</option>
+        </select>
+
+        </form>
+    </div>
+
+
+    <div id="middlerow">
+        <form  action="#">
+	        <select id="over" class="select">
+	        <option>LngLat mousemove</option>
+	        <option selected="selected">LatLng mousemove</option>
 	        </select>
+			 &nbsp;&nbsp; 
+	        <input type="button" class="button_small" onclick="mapcenter();" value="Mapcenter"/>
+	       
+	        <input type="text"  id="centerofmap" />
+	        <label id="label_reverse">Zoom:</label>
+			<input id="myzoom" name="myzoom" class="input_extrasmall" disabled="true" value="16">
+	
+	<!--        <select id="myzoom" name="myzoom" class="selectsmall" disabled="true">
+		        <option value="1">1</option>
+		        <option value="2">2</option>
+		        <option value="3">3</option>
+		        <option value="4">4</option>
+		        <option value="5">5</option>
+		        <option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option selected="selected" value="15">15</option>
+				<option value="16">16</option>
+				<option value="17">17</option>
+				<option value="18">18</option>
+				<option value="19">19</option>
+				<option value="20">20</option>  -->
 
-	        </form>
-	   </td>
-		<td width=25%>
-			<form  action="#">
-		        <select id="over" class="select_large">
-		        <option>LngLat mousemove</option>
-		        <option selected="selected">LatLng mousemove</option>
-		        </select>
+	        </select>
+        </form>
+    </div>
 
-		     </form>
-		</td>
-		
-		
-		<td width=30%>
-			<form  action="#">
-				<input type="button" class="button_small" onclick="mapcenter();" value="Mapcenter"/>
-
-	        	<input type="text"  id="centerofmap" />
-			 </form>
-		</td>
-		<td width=15%>
-			   <form  action="#">
-			        <label id="label_reverse">Zoom:</label>
-					<input id="myzoom" name="myzoom" class="input_extrasmall" disabled="true" value="16">
-
-			<!--        <select id="myzoom" name="myzoom" class="selectsmall" disabled="true">
-				        <option value="1">1</option>
-				        <option value="2">2</option>
-				        <option value="3">3</option>
-				        <option value="4">4</option>
-				        <option value="5">5</option>
-				        <option value="6">6</option>
-						<option value="7">7</option>
-						<option value="8">8</option>
-						<option value="9">9</option>
-						<option value="10">10</option>
-						<option value="11">11</option>
-						<option value="12">12</option>
-						<option value="13">13</option>
-						<option value="14">14</option>
-						<option selected="selected" value="15">15</option>
-						<option value="16">16</option>
-						<option value="17">17</option>
-						<option value="18">18</option>
-						<option value="19">19</option>
-						<option value="20">20</option>  -->
-
-			        </select>
-		        </form>
-		</td>
-	</tr>
-</table>
 </div>
-<table>
-	<tr>
-		<td width=15%>
-			<input type="button"  class="button" onclick="nextshape();" value="Next shape"/>
-		</td>
-		<td width=15%>
-			<input type="button"  class="button" onclick="clearMap();" value="Clear Map"/>
-		</td>
-		<td width=15%>
-			<%= form_for @fieldmapping, :html => { :name => "formcoordinates"} do |f| %>
-			 	<input type="hidden"  class="inputlong" name="newcoordinates1" id="newcoordinates1" /> 
-				<input type="hidden"  class="input" name="newcoordinates2" id="newcoordinates2" /> 
-				<input type="hidden"  class="input" name="newcoordinates3" id="newcoordinates3" /> 
-				<input type="hidden"  class="input" name="newcoordinates4" id="newcoordinates4" /> 
-				<input type="hidden"  class="input" name="newcoordinates5" id="newcoordinates5" /> 
-				<input type="hidden"  class="input" name="newcoordinates6" id="newcoordinates6" /> 
-			 &nbsp; 
-					<%= f.submit " Capture Boundaries ", :class => "button", :id => "fdsubmit" %>
-			<% end %>
-			
-		</td>
-		<td width=55%>
-			 <form  action="#" onsubmit="showAddress(this.address.value); return false">
-			    &nbsp; &nbsp; &nbsp;   Field location -
-			 <input type="text"  class="inputlong" name="address" disabled="true" value="<%= @fieldmapping.location %>" />
-			 &nbsp;
-			<!--
-			 <input type="submit" class="button" value="Search" />
-			-->
-			 &nbsp; &nbsp; &nbsp;
-			 </form>
-		</td>
-	</tr>
 
-</table>
+
+<div id="buttonrow">
+
+    <div class="topbutton"> &nbsp;
+        <input type="button"  class="button" onclick="nextshape();" value="Next shape"/>
+    </div>
+    <div class="topbutton"> &nbsp;
+        <input type="button"  class="button" onclick="clearMap();" value="Clear Map"/>
+    </div>
+	<div class="topbutton">
+		
+	<%= form_for @fieldmapping, :html => { :name => "formcoordinates"} do |f| %>
+	 	<input type="hidden"  class="inputlong" name="newcoordinates1" id="newcoordinates1" /> 
+		<input type="hidden"  class="input" name="newcoordinates2" id="newcoordinates2" /> 
+		<input type="hidden"  class="input" name="newcoordinates3" id="newcoordinates3" /> 
+		<input type="hidden"  class="input" name="newcoordinates4" id="newcoordinates4" /> 
+		<input type="hidden"  class="input" name="newcoordinates5" id="newcoordinates5" /> 
+		<input type="hidden"  class="input" name="newcoordinates6" id="newcoordinates6" /> 
+	 &nbsp; 
+			<%= f.submit " Capture Boundaries ", :class => "button", :id => "fdsubmit" %>
+	<% end %>
+	
+</div>
+<div id="buttonrow">	  
+	 <form  action="#" onsubmit="showAddress(this.address.value); return false">
+	    &nbsp; &nbsp; &nbsp;   Field location -
+	 <input type="text"  class="inputlong" name="address" disabled="true" value="<%= @fieldmapping.location %>" />
+	 &nbsp;
+	<!--
+	 <input type="submit" class="button" value="Search" />
+	-->
+	 &nbsp; &nbsp; &nbsp;
+	 </form>
+	
+</div>
+<!--
+    <div class="topbutton">
+        <input type="button"  class="button" onclick="deleteLastPoint();" value="Delete Last Point"/>
+    </div>
+
+    <div class="topbutton">
+        <input type="button"  class="button" onclick="styleoptions();" value="Style Options"/>
+
+    </div>
+    <div class="topbutton">
+        <input type="button"  class="button" onclick="editlines();" value="Edit lines" id="EditButton"/>
+    </div>
+    <div class="topbutton">
+        <input type="button"  class="button" onclick='docudetails();document.getElementById("toppers").style.visibility = "visible";' value="KML input"/>
+    </div>
+    <div class="topbutton">
+        <input type="button"  class="button" onclick="showKML();" value="Show KML"/>
+
+    </div>
+
+    <div class="topbutton">
+        <input style="width:100px"  class="button" type="button" onclick="copyTextarea();" value="Select/copy text"/>
+    </div>
+-->
  
-<table>
-	<tr>
-		<td width=100%>
- 			<div id="map_canvas"></div>
-			<div id="polygonstuff">
 
-			    <div>
-			        <a style="padding-left:5px; color: #ffffff;" href="javascript:holecreator()">Hole</a>
-			    </div>
-			    <div id="stepdiv" style="padding-left:5px">
-			        Step 0
-			    </div>
-			    <div>
-			        <input id="multipleholes" type="button" onclick="nexthole();" value="Next hole"/>
+</div>
 
-			    </div>
-			</div>
-
-			<div id="presenter">
-			    <form style="margin-bottom:5px" action="#">
-			    &nbsp;&nbsp;&nbsp;Live code presentation in textarea (below):
-			    <input type="checkbox" name="showcodemode" id="presentcode" value="yes" onclick="showCodeintextarea();" checked="checked"/>
-			<textarea class="largetextarea" id="coords1" cols="62" rows="24">
-			Click on the map. The coordinate code for the shape you create will be presented here. 
-
-			You may shift from Polyline to Polygon and vice/versa at any time when you draw. 
-
-			When finished with a shape, click 'Next shape' and draw another shape. 
-
-			Once you have the desired boundaries defined then click 'Capture boundaries' and they will be added
-			to your field definition.
-			</textarea>
-			    </form>
-			</div>
-		</td>
-	</tr>
-
-</table> 
  
+ 
+<div id="map_canvas"></div>
+
+ 
+<div id="polygonstuff">
+ 
+    <div>
+        <a style="padding-left:5px; color: #ffffff;" href="javascript:holecreator()">Hole</a>
+    </div>
+    <div id="stepdiv" style="padding-left:5px">
+        Step 0
+    </div>
+    <div>
+        <input id="multipleholes" type="button" onclick="nexthole();" value="Next hole"/>
+
+    </div>
+</div>
+ 
+
+<div id="presenter">
+    <form style="margin-bottom:5px" action="#">
+    &nbsp;&nbsp;&nbsp;Live code presentation in textarea (below):
+    <input type="checkbox" name="showcodemode" id="presentcode" value="yes" onclick="showCodeintextarea();" checked="checked"/>
+<textarea class="largetextarea" id="coords1" cols="62" rows="24">
+Click on the map. The coordinate code for the shape you create will be presented here. 
+
+You may shift from Polyline to Polygon and vice/versa at any time when you draw. 
+
+When finished with a shape, click 'Next shape' and draw another shape. 
+ 
+Once you have the desired boundaries defined then click 'Capture boundaries' and they will be added
+to your field definition.
+</textarea>
+    </form>
+</div>
+
+
 
 
 <div id="polylineoptions">
