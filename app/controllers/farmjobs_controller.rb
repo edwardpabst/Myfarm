@@ -23,7 +23,7 @@ class FarmjobsController < ApplicationController
         join fields on farmjobs.field_id = fields.id 
         join fieldtasks on farmjobs.fieldtask_id = fieldtasks.id 
         where farmjobs.user_id = #{@current_user.id } 
-        order by start_date")
+        order by start_date DESC")
 
         #logger.debug "FARMJOBLABOR #{@farmjoblabors.size}" 
         #logger.debug "SESSION_JOBS_ID #{session[:s_farmjob_id]}"
@@ -416,6 +416,8 @@ class FarmjobsController < ApplicationController
      #params[:farmjob].delete(:"start_time(i)")
      #params[:farmjob][:stop_time] = (Time.parse(params[:farmjob][:"stop_time(5i)"]))
      #params[:farmjob].delete(:"stop_time(i)")
+     
+     
     @farmjob = Farmjob.find(params[:id])
     if !params[:farmjob][:cropplan_id].nil? and !params[:farmjob][:cropplan_id].blank?
       @cropplan = Cropplan.find_by_id(params[:farmjob][:cropplan_id])
@@ -430,6 +432,8 @@ class FarmjobsController < ApplicationController
         @farmjob.notes = @fieldtask.task_notes
     end
     
+   
+    
     @is_first_time = false
      #logger.debug "FARMJOB INVENTORY STEP 1 **** #{params[:farmjob][:job_status]}, #{@farmjob.job_status}"
     if params[:farmjob][:job_status] == "Job complete" and @farmjob.job_status != "Job complete"
@@ -442,10 +446,12 @@ class FarmjobsController < ApplicationController
      params[:farmjob][:eventname] = @fieldtask.taskdescription
     end 
     
-     
+  
     
      #validate the cropplan and field are defined 
+    is_plan_ok = true
     if !params[:farmjob][:cropplan_id].nil? and !params[:farmjob][:cropplan_id].blank?
+    
       params[:farmjob][:crop_id] = @cropplan.crop_id 
       is_plan_ok = Cropplanfield.validate_cropplanfield(params[:farmjob][:cropplan_id], params[:farmjob][:field_id])
       if  is_plan_ok == false
@@ -453,8 +459,10 @@ class FarmjobsController < ApplicationController
       end
     end
     
+   
     respond_to do |format|
         if is_plan_ok == true
+           
           if @farmjob.update_attributes(params[:farmjob])  
         
              # build job cost 
@@ -468,8 +476,13 @@ class FarmjobsController < ApplicationController
         
               #update event calendar
               @event = Event.find_by_farmjob_id(@farmjob.id)
+              if @cropplan.nil?
+                cropplanfull = "Field Job"
+              else
+                cropplanfull = @cropplan.cropplanfull
+              end
               if !@event.nil?
-                @event.name = @farmjob.eventname + "/" + @field.fieldname + "/" + @cropplan.cropplanfull
+                @event.name = @farmjob.workorder + "/" + @farmjob.eventname + "/" + @field.fieldname + "/" + cropplanfull
                 @event.notes = @farmjob.notes
                 @event.start_at = @farmjob.start_date 
                 @event.end_at = @farmjob.stop_date 
@@ -632,9 +645,9 @@ class FarmjobsController < ApplicationController
     @event = Event.new 
     if !@farmjob.cropplan_id.nil?
       @cropplan = Cropplan.select("cropplanfull").find(@farmjob.cropplan_id)
-      @event.name = @farmjob.eventname.to_s + "/" + @field.fieldname.to_s + "/" + @cropplan.cropplanfull.to_s
+      @event.name = @farmjob.workorder + "/" + @farmjob.eventname.to_s + "/" + @field.fieldname.to_s + "/" + @cropplan.cropplanfull.to_s
     else
-       @event.name = @farmjob.eventname.to_s + "/" + @field.fieldname.to_s + "/" + "FIELD JOB"
+       @event.name = @farmjob.workorder + "/" + @farmjob.eventname.to_s + "/" + @field.fieldname.to_s + "/" + "FIELD JOB"
     end
     
     @event.user_id = @farmjob.user_id

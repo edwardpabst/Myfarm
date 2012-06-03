@@ -138,85 +138,93 @@ class ScaleticketreportPdf < Prawn::Document
   
   def cropplan_scaleticket_items(id, cropplanfull, field_id)
     move_down 5
-    rowcount = 0
-    table scaleticket_item_rows(id, cropplanfull, field_id), :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0,  :size => 8, :text_color => "346842" } do  
+    @scaleticket_data = Cropplan.cropplan_scaleticket_items(@user_id, id, field_id,  @start_date, @stop_date)
+    if !@scaleticket_data.nil?   
+      rowcount = 0
+      table scaleticket_item_rows(id, cropplanfull, field_id), :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0,  :size => 8, :text_color => "346842" } do  
       
-      columns(0).width = 50
-      columns(1).width = 50
-      columns(2..3).width = 50
-      columns(4).width = 50
-      columns(5..8).width = 50
-      columns(9..10).width = 45
-      columns(0..3).align = :left
-      columns(4..10).align = :right
+        columns(0).width = 50
+        columns(1).width = 50
+        columns(2..3).width = 50
+        columns(4).width = 50
+        columns(5..8).width = 50
+        columns(9..10).width = 45
+        columns(0..3).align = :left
+        columns(4..10).align = :right
       
-      self.header = true
-      rowcount += 1
+        self.header = true
+        rowcount += 1
+      end
     end
    
   end
   
   def scaleticket_item_rows(id, cropplanfull, field_id)
 
-    Cropplan.cropplan_scaleticket_items(@user_id, id, field_id,  @start_date, @stop_date).map do |item|
+   @scaleticket_data.map do |item|
       ["", item.number_acres, item.ticket_id, item.tran_date.to_date, precision0(item.gross_weight), precision0(item.tare_weight), precision0(item.net_weight),  item.inventory_uom, precision(item.moisture_pct), precision0(item.qty_wet), precision0(item.qty_dry)]
     end
   end
   
   def cropplan_scaleticket_field_summary(id, cropplanfull, field_id)
 
-    rowcount = 0
-    table scaleticket_field_summary(id, cropplanfull, field_id), :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
-      row(0).font_style = :bold
-      column(0..1)..font_style = :bold
-      #row(rowcount).font_size = 10
-      columns(0).width = 50
-      columns(1).width = 50
-      columns(2..3).width = 50
-      columns(4).width = 50
-      columns(5..8).width = 50
-      columns(9..10).width = 45
-      columns(0..3).align = :left
-      columns(4..10).align = :right
+    @scaleticket_data = Cropplan.cropplan_scaleticket_field_summary(@user_id, id,   @start_date, @stop_date, field_id)
+    if !@scaleticket_data.nil? 
+      rowcount = 0
+      table scaleticket_field_summary(id, cropplanfull, field_id), :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
+        row(0).font_style = :bold
+        column(0..1)..font_style = :bold
+        #row(rowcount).font_size = 10
+        columns(0).width = 50
+        columns(1).width = 50
+        columns(2..3).width = 50
+        columns(4).width = 50
+        columns(5..8).width = 50
+        columns(9..10).width = 45
+        columns(0..3).align = :left
+        columns(4..10).align = :right
       
-      self.header = true
-      rowcount += 1
+        self.header = true
+        rowcount += 1
+      end
     end
     
   end
   
   def scaleticket_field_summary(id, cropplanfull, field_id)
- 
-    Cropplan.cropplan_scaleticket_field_summary(@user_id, id,   @start_date, @stop_date, field_id).map do |item|
+      @scaleticket_data.map do |item|
       ["Field total",  "",  "", "", precision0(item.gross_weight), precision0(item.tare_weight), precision0(item.net_weight),  "", "", precision0(item.qty_wet), precision0(item.qty_dry)]
     end
     
   end
   
   def cropplan_scaleticket_cropplan_summary(id, cropplanfull)
-    rowcount = 0
-    table scaleticket_cropplan_summary(id, cropplanfull), :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
-      row(0).font_style = :bold
-      column(1)..font_style = :bold
-      #row(rowcount).font_size = 10
-      columns(0).width = 50
-      columns(1).width = 50
-      columns(2..3).width = 50
-      columns(4).width = 50
-      columns(5..8).width = 50
-      columns(9..10).width = 45
-      columns(0..3).align = :left
-      columns(4..10).align = :right
+    @scaleticket_data =  Cropplan.cropplan_scaleticket_cropplan_summary(@user_id, id,   @start_date, @stop_date)
+    if !@scaleticket_data.nil?
+      rowcount = 0
+      table scaleticket_cropplan_summary(id, cropplanfull), :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
+        row(0).font_style = :bold
+        column(1)..font_style = :bold
+        #row(rowcount).font_size = 10
+        columns(0).width = 50
+        columns(1).width = 50
+        columns(2..3).width = 50
+        columns(4).width = 50
+        columns(5..8).width = 50
+        columns(9..10).width = 45
+        columns(0..3).align = :left
+        columns(4..10).align = :right
       
-      self.header = true
-      rowcount += 1
+        self.header = true
+        rowcount += 1
+      end
     end
     
   end
   
   def scaleticket_cropplan_summary(id, cropplanfull)
  
-    Cropplan.cropplan_scaleticket_cropplan_summary(@user_id, id,   @start_date, @stop_date).map do |item|
+   @scaleticket_data.map do |item|
    [ "Crop total",  "",  "", "", precision0(item.gross_weight), precision0(item.tare_weight), precision0(item.net_weight),  "", "", precision0(item.qty_wet), precision0(item.qty_dry)]
     end
     

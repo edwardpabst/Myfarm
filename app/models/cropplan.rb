@@ -70,7 +70,12 @@ class Cropplan < ActiveRecord::Base
            sql_statement = build_where_clause(sql_statement, cropplan_id, field_id,  start_date, stop_date)
            sql_statement += " group by cropplanfull, avg_yield_acre, fieldname, number_acres"
            
-           return @cropyields = Cropplan.find_by_sql(sql_statement) 
+           if @cropyields.nil? || @cropyields.empty?
+             return nil 
+           else
+             return @cropyields = Cropplan.find_by_sql(sql_statement) 
+           end
+           
          end
          
          def self.cropplan_yield_item_summary(user_id, id, start_date, stop_date)
@@ -90,7 +95,14 @@ class Cropplan < ActiveRecord::Base
           
            sql_statement = build_where_clause(sql_statement, "", "",  start_date, stop_date)
            sql_statement += " group by cropplanfull, avg_yield_acre"
-           return @cropyields = Cropplan.find_by_sql(sql_statement) 
+           
+           @cropyields = Cropplan.find_by_sql(sql_statement) 
+           if @cropyields.nil? || @cropyields.empty?
+             return nil 
+           else
+             return @cropyields = Cropplan.find_by_sql(sql_statement) 
+           end
+  
          end
          
          def self.build_where_clause(sql_statement, cropplan_id, field_id,  start_date, stop_date)
@@ -130,7 +142,14 @@ class Cropplan < ActiveRecord::Base
            sql_statement = build_where_clause(sql_statement, cropplan_id, field_id,  start_date, stop_date)
            sql_statement += " order by tran_date"
            
-           return @cropscaletickets = Cropplan.find_by_sql(sql_statement) 
+         
+           @cropscaletickets = Cropplan.find_by_sql(sql_statement) 
+           if @cropscaletickets.nil? || @cropscaletickets.empty?
+             return nil 
+           else
+             return @cropscaletickets = Cropplan.find_by_sql(sql_statement) 
+           end 
+           
          end
          
          def self.cropplan_scaleticket_field_summary(user_id, id, start_date, stop_date, field_id)
@@ -149,7 +168,12 @@ class Cropplan < ActiveRecord::Base
           
            sql_statement = build_where_clause(sql_statement, id, field_id,  start_date, stop_date)
            sql_statement += " group by cropplanfull, fieldname"
-           return @cropfields = Cropplan.find_by_sql(sql_statement) 
+           @cropscaletickets = Cropplan.find_by_sql(sql_statement) 
+           if @cropscaletickets.nil? || @cropscaletickets.empty?
+             return nil 
+           else
+             return @cropscaletickets = Cropplan.find_by_sql(sql_statement) 
+           end 
          end
          
          def self.cropplan_scaleticket_cropplan_summary(user_id, id, start_date, stop_date)
@@ -168,7 +192,12 @@ class Cropplan < ActiveRecord::Base
           
            sql_statement = build_where_clause(sql_statement, id, "",  start_date, stop_date)
            sql_statement += " group by cropplanfull"
-           return @cropcropplans = Cropplan.find_by_sql(sql_statement) 
+           @cropscaletickets = Cropplan.find_by_sql(sql_statement) 
+           if @cropscaletickets.nil? || @cropscaletickets.empty?
+             return nil 
+           else
+             return @cropscaletickets = Cropplan.find_by_sql(sql_statement) 
+           end
          end
          
 end

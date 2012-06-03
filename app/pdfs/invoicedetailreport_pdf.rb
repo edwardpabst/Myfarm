@@ -77,55 +77,60 @@ class InvoicedetailreportPdf < Prawn::Document
   
   def customer_invoice_items(id, partyname)
     move_down 5
-    rowcount = 0
-    table invoice_item_rows(id, partyname), :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0,  :size => 7, :text_color => "346842" } do  
-      columns(0).width = 100
-      columns(1).width = 70
-      columns(2).width = 70
-      columns(3..8).width = 50
-      columns(0..3).align = :left
-      columns(4..6).align = :right
-      columns(7..8).align = :left
+    @invoice_item =  Invoice.invoice_detail_items(@user_id, id, @invoice_status,  @start_date, @stop_date)
+    if !@invoice_item.nil?
+      rowcount = 0
+      table invoice_item_rows(id, partyname), :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0,  :size => 7, :text_color => "346842" } do  
+        columns(0).width = 100
+        columns(1).width = 70
+        columns(2).width = 70
+        columns(3..8).width = 50
+        columns(0..3).align = :left
+        columns(4..6).align = :right
+        columns(7..8).align = :left
      
       
-      self.header = true
-      rowcount += 1
+        self.header = true
+        rowcount += 1
+      end
     end
     
   end
   
   def invoice_item_rows(id, partyname)
 
-    Invoice.invoice_detail_items(@user_id, id, @invoice_status,  @start_date, @stop_date).map do |item|
+   @invoice_item.map do |item|
       [item.partyname, item.invoice_number, item.invoice_date, item.invoice_status, cost(item.ship_amount), cost(item.ship_charge), cost(item.total_amount), item.invoice_terms, item.payment_reference]
     end
   end
   
   def customer_invoice_item_summary(id, partyname)
     move_down 5
-
-    rowcount = 0
-    table invoice_item_summary(id, partyname), :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0, :size => 7, :text_color => "346842" } do  
-      row(0).font_style = :bold
-      column(0..1)..font_style = :bold
-      #row(rowcount).font_size = 10
-      columns(0).width = 100
-      columns(1).width = 70
-      columns(2).width = 70
-      columns(3..8).width = 50
-      columns(0..3).align = :left
-      columns(4..6).align = :right
-      columns(7..8).align = :left
+    @invoice_item_summary = Invoice.invoice_detail_item_summary(@user_id, id,  @invoice_status,  @start_date, @stop_date)
+    if !@invoice_item_summary.nil?
+      rowcount = 0
+      table invoice_item_summary(id, partyname), :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0, :size => 7, :text_color => "346842" } do  
+        row(0).font_style = :bold
+        column(0..1)..font_style = :bold
+        #row(rowcount).font_size = 10
+        columns(0).width = 100
+        columns(1).width = 70
+        columns(2).width = 70
+        columns(3..8).width = 50
+        columns(0..3).align = :left
+        columns(4..6).align = :right
+        columns(7..8).align = :left
       
-      self.header = true
-      rowcount += 1
+        self.header = true
+        rowcount += 1
+      end
     end
     
   end
   
   def invoice_item_summary(id, partyname)
  
-    Invoice.invoice_detail_item_summary(@user_id, id,  @invoice_status,  @start_date, @stop_date).map do |item|
+    @invoice_item_summary.map do |item|
       ["Customer total", " ", " ", " ", cost(item.ship_amount), cost(item.ship_charge), cost(item.total_amount), " ", " "]
      
     end

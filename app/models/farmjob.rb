@@ -602,43 +602,65 @@ class Farmjob < ActiveRecord::Base
          end
          
          def self.profitability_cash_overhead(user_id, view, farm_id, year, start_date, stop_date, task_stage)
-          return Farmexpense.find_by_sql("Select expense_name,  (expense_amount/total_acres) as expense_amount_acre 
+          return 
+          @overhead = Farmexpense.find_by_sql("Select expense_name,  (expense_amount/total_acres) as expense_amount_acre 
                                    from farmexpenses
                                    join farms on farmexpenses.farm_id = farms.id 
                                    where expense_type = 'cash overhead'
                                    and expense_year = '#{year}'
                                    and farm_id = #{farm_id}
                                    and farmexpenses.user_id =  #{user_id}")
+            if @overhead.nil? || @overhead.empty?
+              return nil
+            else
+              return @overhead
+            end
          end
          
          def self.profitability_cash_overhead_summary(user_id, view, farm_id, year, start_date, stop_date, task_stage)
-          return Farmexpense.find_by_sql("Select sum(expense_amount/total_acres) as expense_amount_acre 
+          @overhead = Farmexpense.find_by_sql("Select sum(expense_amount/total_acres) as expense_amount_acre 
                                    from farmexpenses
                                    join farms on farmexpenses.farm_id = farms.id 
                                    where expense_type = 'cash overhead'
                                    and expense_year = '#{year}'
                                    and farm_id = #{farm_id}
                                    and farmexpenses.user_id =  #{user_id}")
+         if @overhead.nil? || @overhead.empty?
+           return nil
+         else
+           return @overhead
+         end
          end
          
          def self.profitability_non_cash_overhead(user_id, view, farm_id, year, start_date, stop_date, task_stage)
-          return Farmexpense.find_by_sql("Select expense_name,  (expense_amount/total_acres) as expense_amount_acre 
+          @overhead = Farmexpense.find_by_sql("Select expense_name,  (expense_amount/total_acres) as expense_amount_acre 
                                    from farmexpenses
                                    join farms on farmexpenses.farm_id = farms.id 
                                    where expense_type = 'non cash overhead'
                                    and expense_year = '#{year}'
                                    and farm_id = #{farm_id}
                                    and farmexpenses.user_id =  #{user_id}")
+          
+          if @overhead.nil? || @overhead.empty?
+            return nil
+          else
+            return @overhead
+          end
          end
          
          def self.profitability_non_cash_overhead_summary(user_id, view, farm_id, year, start_date, stop_date, task_stage)
-          return Farmexpense.find_by_sql("Select sum(expense_amount/total_acres) as expense_amount_acre 
+          @overhead = Farmexpense.find_by_sql("Select sum(expense_amount/total_acres) as expense_amount_acre 
                                    from farmexpenses
                                    join farms on farmexpenses.farm_id = farms.id 
                                    where expense_type = 'non cash overhead'
                                    and expense_year = '#{year}'
                                    and farm_id = #{farm_id}
                                    and farmexpenses.user_id =  #{user_id}")
+          if @overhead.nil? || @overhead.empty?
+            return nil
+          else
+            return @overhead
+          end
          end
          
 

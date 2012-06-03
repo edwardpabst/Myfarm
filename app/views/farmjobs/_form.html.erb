@@ -64,7 +64,7 @@ function checkStatus() {
 			<label class=" label" for="cropplans">Crop plan*<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
 			</td>
 			<td>
-			<%= collection_select("farmjob", "cropplan_id", @cropplans, "id", "cropplanfull", options = {:prompt => " "}) %>	
+			<%= collection_select("farmjob", "cropplan_id", @cropplans, "id", "cropplanfull", options = {:prompt => " ",  :include_blank => ' '}) %>	
  
 		   	</td>
 		  <% if @transaction == 'edit'%>

@@ -169,6 +169,10 @@ class PartiesController < ApplicationController
   def update
     @party = Party.find(params[:id])
     @setweather = false
+    
+    if params[:party][:partyname].blank?
+     params[:party][:partyname] = params[:party][:partyfirstname] + " " + params[:party][:partylastname]
+    end
     #logger.debug "WEATHER PARTY *** #{@party.inspect}" 
     if @party.partyweatherpostalcode != params{:partyweatherpostalcode}
     if !params{:partyweatherpostalcode}.nil?

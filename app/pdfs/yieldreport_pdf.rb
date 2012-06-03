@@ -13,6 +13,7 @@ class YieldreportPdf < Prawn::Document
     else
       @cropplanfull = ""
     end
+    
      if !@field_id.nil? and !@field_id.blank?
        @field = Field.find(@field_id)
        @fieldname = @field.fieldname
@@ -90,53 +91,61 @@ class YieldreportPdf < Prawn::Document
   def cropplan_yield_items(id, cropplanfull)
     move_down 5
     rowcount = 0
-    table yield_item_rows(id, cropplanfull), :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0,  :size => 8, :text_color => "346842" } do  
+    
+    @cropplan_yield = Cropplan.cropplan_yield_items(@user_id, id, @field_id,  @start_date, @stop_date)
+    if !@cropplan_yield.nil?
+      table yield_item_rows(id, cropplanfull),   :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0,  :size => 8, :text_color => "346842" } do  
 
-       columns(0).width = 120
-       columns(1).width = 80
-       columns(2).width = 40
-       columns(3..7).width = 60
-       columns(0..2).align = :left
-       columns(3..7).align = :right
+         columns(0).width = 120
+         columns(1).width = 80
+         columns(2).width = 40
+         columns(3..7).width = 60
+         columns(0..2).align = :left
+         columns(3..7).align = :right
      
       
-      self.header = true
-      rowcount += 1
+        self.header = true
+        rowcount += 1
+      end
     end
     
   end
   
   def yield_item_rows(id, cropplanfull)
+#Cropplan.cropplan_yield_items(@user_id, id, @field_id,  @start_date, @stop_date)
+        @cropplan_yield.map do |item|
+          ["", item.fieldname, item.number_acres, item.avg_yield_acre, precision(item.harvest_yield_acre), precision(item.percent_diff), cost(item.revenue_acre), cost(item.total_revenue)]
+        end
+ 
 
-    Cropplan.cropplan_yield_items(@user_id, id, @field_id,  @start_date, @stop_date).map do |item|
-      ["", item.fieldname, item.number_acres, item.avg_yield_acre, precision(item.harvest_yield_acre), precision(item.percent_diff), cost(item.revenue_acre), cost(item.total_revenue)]
-    end
   end
   
   def cropplan_yield_item_summary(id, cropplanfull)
     move_down 5
 
-    rowcount = 0
-    table yield_item_summary(id, cropplanfull), :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
-      row(0).font_style = :bold
-      column(0..1)..font_style = :bold
-      #row(rowcount).font_size = 10
-      columns(0).width = 120
-      columns(1).width = 80
-      columns(2).width = 40
-      columns(3..7).width = 60
-      columns(0..2).align = :left
-      columns(3..7).align = :right
+    @cropplan_yield_summary = Cropplan.cropplan_yield_item_summary(@user_id, id,   @start_date, @stop_date)
+    if !@cropplan_yield_summary.nil?
+      rowcount = 0
+      table yield_item_summary(id, cropplanfull), :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
+        row(0).font_style = :bold
+        column(0..1)..font_style = :bold
+        #row(rowcount).font_size = 10
+        columns(0).width = 120
+        columns(1).width = 80
+        columns(2).width = 40
+        columns(3..7).width = 60
+        columns(0..2).align = :left
+        columns(3..7).align = :right
       
-      self.header = true
-      rowcount += 1
+        self.header = true
+        rowcount += 1
+      end
     end
-    
   end
   
   def yield_item_summary(id, cropplanfull)
  
-    Cropplan.cropplan_yield_item_summary(@user_id, id,   @start_date, @stop_date).map do |item|
+    @cropplan_yield_summary.map do |item|
       ["Total", "",  "", item.avg_yield_acre, precision(item.harvest_yield_acre), precision(item.percent_diff), cost(item.revenue_acre), cost(item.total_revenue)]
     end
   end

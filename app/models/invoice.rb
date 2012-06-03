@@ -136,7 +136,13 @@ class Invoice < ActiveRecord::Base
                         sql_statement = build_where_clause_detail(sql_statement, id, invoice_status,  start_date, stop_date)
                      
 
-                        return @invoices = Invoice.find_by_sql(sql_statement) 
+                        @invoices = Invoice.find_by_sql(sql_statement)
+                        if @invoices.nil? or @invoices.empty?
+                          return nil
+                        else
+                          return @invoices
+                        end
+                         
                       end
 
                       def self.invoice_detail_item_summary(user_id, id, invoice_status, start_date, stop_date)
@@ -151,7 +157,12 @@ class Invoice < ActiveRecord::Base
                         sql_statement = build_where_clause_detail(sql_statement, id, invoice_status,  start_date, stop_date)
 
                         sql_statement += " group by parties.id, partyname"
-                        return @invoices = Invoice.find_by_sql(sql_statement) 
+                        @invoices = Invoice.find_by_sql(sql_statement)
+                        if @invoices.nil? or @invoices.empty?
+                          return nil
+                        else
+                          return @invoices
+                        end 
                       end
                       
                       def self.invoice_total_item_summary(user_id, id,  invoice_status, start_date, stop_date)
@@ -175,7 +186,7 @@ class Invoice < ActiveRecord::Base
                          end
 
                         if !invoice_status.nil? and !invoice_status.blank?
-                          statusselect =  " and invoice_status = #{invoice_status}"
+                          status_select =  " and invoice_status = '#{invoice_status}'"
                           sql_statement += status_select
                         end
 

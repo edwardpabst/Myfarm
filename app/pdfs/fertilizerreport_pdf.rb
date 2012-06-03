@@ -35,7 +35,7 @@ class FertilizerreportPdf < Prawn::Document
      
        else
 
-         @supplylist = supply.get_supply_for_fertilizer(@user_id, @job_status, @start_date, @stop_date)
+         @supplylist = Supply.get_supply_for_fertilizer(@user_id, @job_status, @start_date, @stop_date)
          
          @supplylist.each do |t|
            text "  Fertilizer - #{t.supplyname}", size: 8, style: :bold, :align => :left 

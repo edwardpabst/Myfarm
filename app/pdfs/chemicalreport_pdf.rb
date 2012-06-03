@@ -36,7 +36,7 @@ class ChemicalreportPdf < Prawn::Document
      
        else
 
-         @supplylist = supply.get_supply_for_chemical(@user_id, @job_status, @start_date, @stop_date)
+         @supplylist = Supply.get_supply_for_chemical(@user_id, @job_status, @start_date, @stop_date)
          
          @supplylist.each do |t|
            text "  Chemical - (#{t.supplyname}) Active ingredient - (#{t.active_ingredient}) Formulation - (#{t.formulation}) Restricted hours - (#{t.restricted_hours}) ", 

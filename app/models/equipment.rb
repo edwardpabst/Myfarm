@@ -41,7 +41,13 @@ class Equipment < ActiveRecord::Base
          sql_statement += " and category = '#{category}' "
        end 
        
-    return Equipment.find_by_sql("#{sql_statement}")
+       @depreciation = Equipment.find_by_sql("#{sql_statement}")
+       if @depreciation.nil? || @depreciation.empty?
+         return nil
+       else
+         return @depreciation
+       end
+     
 
   end
   
@@ -57,8 +63,14 @@ class Equipment < ActiveRecord::Base
        if !category.nil? and !category.blank?
          sql_statement += " and category = '#{category}' "
        end 
-       
-    return Equipment.find_by_sql("#{sql_statement}")
+
+    @depreciation = Equipment.find_by_sql("#{sql_statement}")
+    if @depreciation.nil? || @depreciation.empty?
+      return nil
+    else
+      return @depreciation
+    end
+    
   end
 end
  
