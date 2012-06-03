@@ -75,7 +75,7 @@ item.className='unhidden';
     
  
 	
-    <%= f.input :supply_cost_uom , :label => "Purchase cost",  :required => true %>
+    <%= f.input :supply_cost_uom , :as => :number, :label => "Purchase cost",  :required => true %>
     <%= f.input :supply_charge_uom , :label => "Supply charge",  :required => false %>
  <li class="string input optional stringish"> 
 	<% get_types_by_name("distribution_uom") %>

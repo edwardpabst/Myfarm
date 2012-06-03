@@ -16,7 +16,7 @@ class PartiesController < ApplicationController
       def index_data
 
         get_current_user
-        @parties = Party.where('user_id' => @current_user.id).all
+        @parties = Party.where('user_id' => @current_user.id).order('partyname').all
 
         #logger.debug "FARMJOBLABOR #{@farmjoblabors.size}" 
         #logger.debug "SESSION_JOBS_ID #{session[:s_farmjob_id]}"
