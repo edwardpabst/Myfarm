@@ -54,7 +54,7 @@ Define your Crops. Crop definition establishes what you will be growing. It also
 		
 		  
 	
-	<%= form.input :avg_weight_uom, :as => :number, :label => "Weight conversion",  :required => true, :input_html => { :onchange => "setUom()"  }    %> 
+	<%= form.input :avg_weight_uom, :as => :string, :label => "Weight conversion",  :required => true, :input_html => { :onchange => "setUom()"  }    %> 
 
 	<%= text_field_tag 'cuom', nil, :class => "inputlabel", :disabled => true %>
 	/ <%= text_field_tag 'conv', nil, :class => "inputlabel", :disabled => true %> = 
@@ -63,7 +63,7 @@ Define your Crops. Crop definition establishes what you will be growing. It also
 	<div class="hintbase"> Scaletickets generally use weight as the harvest UOM. This is converted to the inventory UOM by which crops are sold by.
  	</div>
 	</li>	
-	<%= form.input :avg_moisture_percent,  :as => :number, :label => "Avg moisture content (%)",  :required => false    %>
+	<%= form.input :avg_moisture_percent, :as => :string, :label => "Avg moisture content (%)",  :required => false    %>
 	
 
     
@@ -71,7 +71,7 @@ Define your Crops. Crop definition establishes what you will be growing. It also
 	
 	<%= form.input :price_per_uom, :as => :string, :label => "Price/Inventory UOM",  :required => true    %> 
 	
-	<%= form.input :avg_yield_acre,  :as => :number, :label => "Avg yield per acre",  :required => true    %>
+	<%= form.input :avg_yield_acre, :as => :string, :label => "Avg yield per acre",  :required => true    %>
 	
 		<% get_parties_by_type("Supplier") %>
 	 <li class="string input optional stringish"> 
@@ -95,7 +95,7 @@ Define your Crops. Crop definition establishes what you will be growing. It also
 	<% get_types_by_name("seed_rate_land") %>
 	<label class=" label" for="seed_rate_land">Land measure<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
 	<%= collection_select("crop", "seed_rate_land", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %></li>
-	<%= form.input :seed_rate,  :as => :number, :label => "Seed rate",  :required => false    %> 
+	<%= form.input :seed_rate, :as => :string, :label => "Seed rate",  :required => false    %> 
 	<%= form.input :plant_depth, :label => "Planting depth",  :required => false    %> 
   <% end %>
 

@@ -16,7 +16,7 @@ function loadFake() {
 <br /><br>
    <%= f.input :farmname, :label => "Farm name"%>
  
-   <%= f.input :total_acres, :label => "Total acres"  %>
+   <%= f.input :total_acres, :as => :string, :label => "Total acres"  %>
 
 <br>
    <% get_parties_by_type('Billing source') %>

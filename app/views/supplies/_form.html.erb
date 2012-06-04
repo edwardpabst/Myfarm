@@ -75,7 +75,7 @@ item.className='unhidden';
     
     <%= f.input :supply_cost_uom , :as => :string, :label => "Purchase cost",  :required => false %>
  
-    <%= f.input :supply_charge_uom , :label => "Supply charge",  :required => false %>
+    <%= f.input :supply_charge_uom, :as => :string , :label => "Supply charge",  :required => false %>
  <li class="string input optional stringish"> 
 	<% get_types_by_name("distribution_uom") %>
 	<label class=" label" for="distribution_uom">Distribution UOM<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
@@ -86,7 +86,7 @@ item.className='unhidden';
 	</li>	
   
  
-	<%= f.input :conversion_factor , :label => "Conversion factor",  :required => true , :input_html => { :onchange => "setUom()"  } %>
+	<%= f.input :conversion_factor, :as => :string , :label => "Conversion factor",  :required => true , :input_html => { :onchange => "setUom()"  } %>
 
 	<%= text_field_tag 'puom', nil, :class => "inputlabel", :disabled => true %>
 	/ <%= text_field_tag 'conv', nil, :class => "inputlabel", :disabled => true %> = 
@@ -96,7 +96,7 @@ item.className='unhidden';
  	</div>
 	</li>
 
-    <%= f.input :rate_acre , :label => "Usage rate per acre",  :required => false, :hint => "Based on Distribution UOM." %>
+    <%= f.input :rate_acre, :as => :string , :label => "Usage rate per acre",  :required => false, :hint => "Based on Distribution UOM." %>
 
     <%= f.input :manufacturer , :label => "Manufacturer",  :required => false %>
 
@@ -127,14 +127,14 @@ item.className='unhidden';
 	
 	<%= f.input :active_ingredient , :label => "Active ingredient",  :required => false %>
 	<%= f.input :formulation , :label => "Formulation",  :required => false %>
- 	<%= f.input :restricted_hours , :label => "Restricted hours",  :required => false %>
+ 	<%= f.input :restricted_hours, :as => :string , :label => "Restricted hours",  :required => false %>
     
     
  <li class="string input optional stringish"> 
 	<% get_types_by_name("supply_carrier") %>
 	<label class=" label" for="carrier">Carrier<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
 	<%= collection_select("supply", "carrier", @types, "type_value_string", "type_value_string", options = {:prompt => " ", :include_blank => ' '}) %></li>	
-<%= f.input :carrier_rate_acre , :label => "Carrier rate per acre",  :required => false %>
+<%= f.input :carrier_rate_acre, :as => :string , :label => "Carrier rate per acre",  :required => false %>
 <li class="string input optional stringish"> 
 	<% get_types_by_name("carrier_uom") %>
 	<label class=" label" for="carrier">Carrier UOM<abbr title="required"> </abbr> &nbsp;  &nbsp;</label>		
