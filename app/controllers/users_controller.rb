@@ -11,7 +11,7 @@ class UsersController < ApplicationController
      @users = User.find_by_sql("Select users.id, name, email, partycity, partystate   
      from users 
      left join parties on users.party_id = parties.id
-     order by created_at").paginate(:page => params[:page], :per_page => 14)
+     order by users.created_at").paginate(:page => params[:page], :per_page => 14)
   end
   
   def show
