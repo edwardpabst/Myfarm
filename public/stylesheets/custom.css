@@ -746,6 +746,20 @@ padding:2px 2px 2px 2px;
 
 }
 
+.datadisplay {
+ 
+	font-size:100%;
+	color: navy;
+	padding-left: 8px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	border: solid 1px #85b1de;
+	background-color: floralwhite ;
+	width:90%;
+	text-align: left;
+
+}
+
 
 #datadisplay_medium {
  
@@ -873,7 +887,7 @@ input  {
     font-size: 100%;
     padding: 1px;
     border: solid 1px #F5F5F5;
-    width: 100px;
+    width: 80px;
     background-color: gray;
 
 	

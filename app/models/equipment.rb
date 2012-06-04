@@ -33,7 +33,7 @@ class Equipment < ActiveRecord::Base
   def self.depreciation_items(user_id, category)
     
 
-      sql_statement = "Select (year || '-' ||description || ' ' || make || ' ' || model) as equipmentname, equipment.*
+      sql_statement = "Select (model_year || '-' || description || ' ' || make || ' ' || model) as equipmentname, equipment.*
        from equipment
        where equipment.user_id = #{user_id} "            
 

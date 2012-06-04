@@ -95,7 +95,7 @@ class DepreciationreportPdf < Prawn::Document
   def depreciation_item_summary(category)
     move_down 5
     @depreciation = Equipment.depreciation_item_summary(@user_id, category)
-    if @depreciation.nil?
+    if !@depreciation.nil?
       rowcount = 0
       table depreciation_item_summary_rows(category), :row_colors => ["FFFFFF", "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
         row(0).font_style = :bold

@@ -2,16 +2,24 @@
 
 function setUom() {
 	 
+	document.su.pcost.value = document.su.supply_supply_cost_uom.value;
 	document.su.puom.value = document.su.supply_supply_uom.value;
 	document.su.duom.value = document.su.supply_distribution_uom.value;
 	document.su.conv.value = document.su.supply_conversion_factor.value;
+	document.su.dcost.value = ((document.su.supply_supply_cost_uom.value -0) /
+	(document.su.supply_conversion_factor.value -0)).toFixed(2);
+
 }
 
 function checkType() {
 	 
+	document.su.pcost.value = document.su.supply_supply_cost_uom.value;
    	document.su.puom.value = document.su.supply_supply_uom.value;
 	document.su.duom.value = document.su.supply_distribution_uom.value;
 	document.su.conv.value = document.su.supply_conversion_factor.value;
+	document.su.dcost.value = ((document.su.supply_supply_cost_uom.value -0) /
+	(document.su.supply_conversion_factor.value -0)).toFixed(2);
+
 	
 	if (document.su.supply_supply_type.value != 'fertilizer')
 	{
@@ -87,10 +95,12 @@ item.className='unhidden';
   
  
 	<%= f.input :conversion_factor, :as => :string , :label => "Conversion factor",  :required => true , :input_html => { :onchange => "setUom()"  } %>
-
+	<%= text_field_tag 'pcost', nil, :class => "inputlabel", :disabled => true %>
 	<%= text_field_tag 'puom', nil, :class => "inputlabel", :disabled => true %>
 	/ <%= text_field_tag 'conv', nil, :class => "inputlabel", :disabled => true %> = 
-	<%= text_field_tag 'duom', nil, :class => "inputlabel", :disabled => true %>
+	<%= text_field_tag 'dcost', nil, :class => "inputlabel", :disabled => true %>
+	<%= text_field_tag 'duom', nil, :class => "inputlabel", :disabled => true %> 
+
  	<li class="string input optional stringish">
 	<div class="hintbase"> Also used to develop supply cost in farm jobs.(Purchase cost / conversion factor = distribution cost). 
  	</div>
