@@ -335,12 +335,10 @@ class FarmjobsController < ApplicationController
     
     #fill event with task description if blank
    
-    if  params[:farmjob][:eventname].blank? || params[:farmjob][:eventname].nil? 
-      if @farmjob.notes.blank?
+    if  params[:farmjob][:eventname].blank? || params[:farmjob][:eventname].nil?     
          if !@fieldtask.nil?
            @farmjob.eventname = @fieldtask.taskdescription
          end
-      end
     end
     # set crop in farmjob from crop plan
     if !@cropplan.nil?

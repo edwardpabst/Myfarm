@@ -151,6 +151,8 @@ jQuery(document).ready(function($) {
 						<% if session[:s_user_type] != 'crop customer' %>
 							<%=render 'pages/vertical_menu'%>
 						<% end %>
+					<% else %>
+						<%=render 'pages/vertical_topics'%>
 					<% end %>
 				 <% else %>
 					   <% if session[:s_user_type] != 'crop customer' %>
