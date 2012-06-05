@@ -918,34 +918,36 @@ class ProfitabilityreportPdf < Prawn::Document
 
      move_down 20
      text "Cash Ovehead", size: 8, style: :bold, :align => :left
-     rowcount = 0
+     @overhead = Farmjob.profitability_cash_overhead(user_id, view, farm_id, year, start_date, stop_date, task_stage)
+     if !@overhead.nil?
+       rowcount = 0
 
-     table profitability_cash_overhead_rows2(user_id, view, farm_id, year, start_date, stop_date, task_stage), :row_colors => [ "FFFFFF"], :cell_style => {:border_width => 0, :size => 7, :text_color => "346842" } do  
-       row(0).font_style = :bold
+       table profitability_cash_overhead_rows2(user_id, view, farm_id, year, start_date, stop_date, task_stage), :row_colors => [ "FFFFFF"], :cell_style => {:border_width => 0, :size => 7, :text_color => "346842" } do  
+         row(0).font_style = :bold
 
-       #row(0).height = 0
-       columns(0).font_style = :bold
-       columns(4).font_style = :bold
-       columns(0).width = 130
-       columns(1).width = 80
-       columns(2).width = 80
-       columns(3..4).width = 100
-       columns(0).align = :left
-       columns(1).align = :right
-       columns(2).align = :left
-       columns(3..4).align = :right
+         #row(0).height = 0
+         columns(0).font_style = :bold
+         columns(4).font_style = :bold
+         columns(0).width = 130
+         columns(1).width = 80
+         columns(2).width = 80
+         columns(3..4).width = 100
+         columns(0).align = :left
+         columns(1).align = :right
+         columns(2).align = :left
+         columns(3..4).align = :right
 
 
-       self.header = false
-       rowcount += 1
-     end
-
+         self.header = false
+         rowcount += 1
+       end
+    end
      profitability_cash_overhead_summary2(user_id, view, farm_id, year, start_date, stop_date, task_stage)
 
    end
    def profitability_cash_overhead_rows2(user_id, view, farm_id, year, start_date, stop_date, task_stage)
 
-        Farmjob.profitability_cash_overhead(user_id, view, farm_id, year, start_date, stop_date, task_stage).map do |item|
+        @overhead.map do |item|
           [ item.expense_name,'','','', cost(item.expense_amount_acre)]
         end      
 
@@ -953,35 +955,35 @@ class ProfitabilityreportPdf < Prawn::Document
    end
 
    def profitability_cash_overhead_summary2(user_id, view, farm_id, year, start_date, stop_date, task_stage)
-
-
+    @overhead = Farmjob.profitability_cash_overhead_summary(user_id, view, farm_id, year, start_date, stop_date, task_stage)
+     if !@overhead.nil?
      rowcount = 0
 
-     table profitability_cash_overhead_summary_rows2(user_id, view, farm_id, year, start_date, stop_date, task_stage), :row_colors => [ "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
-       row(0).font_style = :bold
+         table profitability_cash_overhead_summary_rows2(user_id, view, farm_id, year, start_date, stop_date, task_stage), :row_colors => [ "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
+           row(0).font_style = :bold
 
-       #row(0).height = 0
-       columns(0).font_style = :bold
-       columns(4).font_style = :bold
-       columns(0).width = 130
-       columns(1).width = 80
-       columns(2).width = 80
-       columns(3..4).width = 100
-       columns(0).align = :left
-       columns(1).align = :right
-       columns(2).align = :left
-       columns(3..4).align = :right
+           #row(0).height = 0
+           columns(0).font_style = :bold
+           columns(4).font_style = :bold
+           columns(0).width = 130
+           columns(1).width = 80
+           columns(2).width = 80
+           columns(3..4).width = 100
+           columns(0).align = :left
+           columns(1).align = :right
+           columns(2).align = :left
+           columns(3..4).align = :right
 
 
-       self.header = false
-       rowcount += 1
-     end
-
+           self.header = false
+           rowcount += 1
+         end
+      end
 
    end
    def profitability_cash_overhead_summary_rows2(user_id, view, farm_id, year, start_date, stop_date, task_stage)
 
-        Farmjob.profitability_cash_overhead_summary(user_id, view, farm_id, year, start_date, stop_date, task_stage).map do |item|
+        @overhead.map do |item|
           [ 'Total Cash Overhead','','','', cost(item.expense_amount_acre)]
            
         end      
@@ -993,69 +995,72 @@ class ProfitabilityreportPdf < Prawn::Document
 
       move_down 20
       text "Non Cash Ovehead", size: 8, style: :bold, :align => :left
-     rowcount = 0
+      @overhead = Farmjob.profitability_non_cash_overhead(user_id, view, farm_id, year, start_date, stop_date, task_stage)
+      if !@overhead.nil?
+         rowcount = 0
 
-     table profitability_non_cash_overhead_rows2(user_id, view, farm_id, year, start_date, stop_date, task_stage), :row_colors => [ "FFFFFF"], :cell_style => {:border_width => 0, :size => 7, :text_color => "346842" } do  
-       row(0).font_style = :bold
+         table profitability_non_cash_overhead_rows2(user_id, view, farm_id, year, start_date, stop_date, task_stage), :row_colors => [ "FFFFFF"], :cell_style => {:border_width => 0, :size => 7, :text_color => "346842" } do  
+           row(0).font_style = :bold
 
-       #row(0).height = 0
-       columns(0).font_style = :bold
-       columns(4).font_style = :bold
-       columns(0).width = 130
-       columns(1).width = 80
-       columns(2).width = 80
-       columns(3..4).width = 100
-       columns(0).align = :left
-       columns(1).align = :right
-       columns(2).align = :left
-       columns(3..4).align = :right
+           #row(0).height = 0
+           columns(0).font_style = :bold
+           columns(4).font_style = :bold
+           columns(0).width = 130
+           columns(1).width = 80
+           columns(2).width = 80
+           columns(3..4).width = 100
+           columns(0).align = :left
+           columns(1).align = :right
+           columns(2).align = :left
+           columns(3..4).align = :right
 
 
-       self.header = false
-       rowcount += 1
-     end
-
+           self.header = false
+           rowcount += 1
+         end
+      end
+      
      profitability_non_cash_overhead_summary2(user_id, view, farm_id, year, start_date, stop_date, task_stage)
 
    end
    def profitability_non_cash_overhead_rows2(user_id, view, farm_id, year, start_date, stop_date, task_stage)
 
-        Farmjob.profitability_non_cash_overhead(user_id, view, farm_id, year, start_date, stop_date, task_stage).map do |item|
+        @overhead.map do |item|
           [ item.expense_name,'','','', cost(item.expense_amount_acre)]
         end      
 
 
    end
    def profitability_non_cash_overhead_summary2(user_id, view, farm_id, year, start_date, stop_date, task_stage)
+     @overhead = Farmjob.profitability_non_cash_overhead_summary(user_id, view, farm_id, year, start_date, stop_date, task_stage)
+      if !@overhead.nil?
+         rowcount = 0
+
+         table profitability_non_cash_overhead_summary_rows2(user_id, view, farm_id, year, start_date, stop_date, task_stage ), :row_colors => [ "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
+           row(0).font_style = :bold
+
+           #row(0).height = 0
+           columns(0).font_style = :bold
+           columns(4).font_style = :bold
+           columns(0).width = 130
+           columns(1).width = 80
+           columns(2).width = 80
+           columns(3..4).width = 100
+           columns(0).align = :left
+           columns(1).align = :right
+           columns(2).align = :left
+           columns(3..4).align = :right
 
 
-     rowcount = 0
-
-     table profitability_non_cash_overhead_summary_rows2(user_id, view, farm_id, year, start_date, stop_date, task_stage ), :row_colors => [ "FFFFFF"], :cell_style => {:border_width => 0, :size => 8, :text_color => "346842" } do  
-       row(0).font_style = :bold
-
-       #row(0).height = 0
-       columns(0).font_style = :bold
-       columns(4).font_style = :bold
-       columns(0).width = 130
-       columns(1).width = 80
-       columns(2).width = 80
-       columns(3..4).width = 100
-       columns(0).align = :left
-       columns(1).align = :right
-       columns(2).align = :left
-       columns(3..4).align = :right
-
-
-       self.header = false
-       rowcount += 1
-     end
-
+           self.header = false
+           rowcount += 1
+         end
+      end
 
    end
    def profitability_non_cash_overhead_summary_rows2(user_id, view, farm_id, year, start_date, stop_date, task_stage )
 
-        Farmjob.profitability_non_cash_overhead_summary(user_id, view, farm_id, year, start_date, stop_date, task_stage).map do |item|
+        @overhead.map do |item|
           [ 'Total Non Cash Overhead','','','', cost(item.expense_amount_acre)]
          
         end      
