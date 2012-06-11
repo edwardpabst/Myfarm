@@ -1,8 +1,9 @@
 class Field < ActiveRecord::Base
   #acts_as_reportable
   acts_as_gmappable :lat => 'latitude', :lng => 'longitude', :check_process => false,
+                    :process_geocoding => true, :validation => true,
                     :address => "location", :normalized_address => "location",
-                    :msg => "Sorry, not even Google could figure out where that is" 
+                    :msg => "Sorry, not even Google could figure out where that is"  
   
   attr_accessible :fieldname, :farmname, :location, :country_id, :number_acres, :holding_status, 
   :owner_id, :client_id, :area_mapped, :area_legal, :area_tillable, :current_state, 

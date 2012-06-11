@@ -86,6 +86,13 @@
 			<%= collection_select("field", "holding_status", @types, "type_value_string", "type_value_string", options = {:prompt => " "}) %> 
 		</td>
 	</tr>
+	<tr>
+		<td colspan="2">
+			<div class="hintbase">
+			 Enter 0 if you plan to use mapping tool to load acreage.
+			</div>
+		</td>
+	</tr>
 
 
 	<tr>
@@ -167,10 +174,9 @@
 			 <%= f.label :area_mapped, "Mapped/acres" %> 
 		</td>
 		<td  >
-			
-		   <%= f.text_field :area_mapped %>	
-		    
-		    
+			<div id='datadisplay'>	
+			   <%= @field.area_mapped %>	
+			</div>   		    
 		</td>
 		<td  >
 			 <%= f.label :area_tillable, "Tillable/acres" %> 

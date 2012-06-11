@@ -4,6 +4,11 @@ class Fieldmapping < ActiveRecord::Base
   
   belongs_to :field
 
+  def self.get_fieldmapping_by_field(field)
+    return Fieldmapping.find_by_sql("Select * from fieldmappings 
+    where fieldmappings.field_id = #{field} 
+    order by fieldmappings.id")
+  end
 
   def self.setnewmapping(user_id,field_id,coor1,coor2,coor3,coor4,coor5,coor6)
     #clear previous mapping
@@ -22,6 +27,7 @@ class Fieldmapping < ActiveRecord::Base
       c4 = []
       c5 = []
       c6 = []
+      coordinate = []
       
       c1 = coor1.split(',')
       c2 = coor2.split(',')
@@ -42,13 +48,16 @@ class Fieldmapping < ActiveRecord::Base
               @fieldmapping.field_id = field_id
               @fieldmapping.user_id = user_id
               @fieldmapping.shape_id = 1
-              @fieldmapping.shape_description = ''
+              @fieldmapping.shape_description = '' 
+              i.slice!(0)  
               @fieldmapping.latitude = i
               
               @count = 2
               
             elsif @count == 2
               #set longitude
+              length = i.length
+              i.slice!(length -1)
               @fieldmapping.longitude = i
               @fieldmapping.save
               @count = 1
@@ -69,12 +78,14 @@ class Fieldmapping < ActiveRecord::Base
                   @fieldmapping.user_id = user_id
                   @fieldmapping.shape_id = 2
                   @fieldmapping.shape_description = ''
+                  i.slice!(0)  
                   @fieldmapping.latitude = i
 
                   @count = 2
 
                 elsif @count == 2
                   #set longitude
+                  i.slice!(length -1)
                   @fieldmapping.longitude = i
                   @fieldmapping.save
                   @count = 1
@@ -95,12 +106,14 @@ class Fieldmapping < ActiveRecord::Base
                       @fieldmapping.user_id = user_id
                       @fieldmapping.shape_id = 3
                       @fieldmapping.shape_description = ''
+                      i.slice!(0)  
                       @fieldmapping.latitude = i
 
                       @count = 2
 
                     elsif @count == 2
                       #set longitude
+                      i.slice!(length -1)
                       @fieldmapping.longitude = i
                       @fieldmapping.save
                       @count = 1
@@ -120,12 +133,14 @@ class Fieldmapping < ActiveRecord::Base
                           @fieldmapping.user_id = user_id
                           @fieldmapping.shape_id = 4
                           @fieldmapping.shape_description = ''
+                          i.slice!(0)  
                           @fieldmapping.latitude = i
 
                           @count = 2
 
                         elsif @count == 2
                           #set longitude
+                          i.slice!(length -1)
                           @fieldmapping.longitude = i
                           @fieldmapping.save
                           @count = 1
@@ -145,12 +160,14 @@ class Fieldmapping < ActiveRecord::Base
                               @fieldmapping.user_id = user_id
                               @fieldmapping.shape_id = 5
                               @fieldmapping.shape_description = ''
+                              i.slice!(0)  
                               @fieldmapping.latitude = i
 
                               @count = 2
 
                             elsif @count == 2
                               #set longitude
+                              i.slice!(length -1)
                               @fieldmapping.longitude = i
                               @fieldmapping.save
                               @count = 1
@@ -170,12 +187,14 @@ class Fieldmapping < ActiveRecord::Base
                                   @fieldmapping.user_id = user_id
                                   @fieldmapping.shape_id = 6
                                   @fieldmapping.shape_description = ''
+                                  i.slice!(0)  
                                   @fieldmapping.latitude = i
 
                                   @count = 2
 
                                 elsif @count == 2
                                   #set longitude
+                                  i.slice!(length -1)
                                   @fieldmapping.longitude = i
                                   @fieldmapping.save
                                   @count = 1

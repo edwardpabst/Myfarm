@@ -261,6 +261,12 @@ class FieldsController < ApplicationController
     if @field.fixed_amount_acre.nil?
       @field.fixed_amount_acre = 0
     end
+    
+    # if mapping tool calculates area, use it
+    if !params[:newarea_acres].nil?
+      @field.area_mapped = params[:newarea_acres]
+      @field.number_acres = params[:newarea_acres]
+    end
 
     respond_to do |format|
       if @field.update_attributes(params[:field])

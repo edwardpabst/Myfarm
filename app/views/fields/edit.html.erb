@@ -43,10 +43,10 @@ item.style.display='block'
 <%= button_to "Delete","/fields/#{@field.id}/destroy" , :method=>:delete, :class=>:button_destroy, :confirm => 'Are you sure?' %>
 
 
-
 <div class="button_center">
-	<%= button_to 'Map the field', :controller => "fieldmappings", :action =>  "fieldmapping", :class =>"button"%>
+	<%= button_to 'Map field / Calculate area', :controller => "fieldmappings", :action =>  "fieldmapping_area", :class=>"buttonlarge"%>
 </div>
+
 <%= render 'fieldmap' %>
 <%= render 'form' %>
 

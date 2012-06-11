@@ -5,15 +5,15 @@
 <table class="fieldmap">
   <tr>
 	<td>
-
+		<div id="map_area">
 		<%= gmaps({
    
 		    "markers"     => { "data" =>  @json },
-			"map_options" => {  "zoom" => 15, "type" => "SATELLITE", "center_longitude" => 180, "auto_adjust" => true, "auto_zoom" => false },
+			"map_options" => {  "zoom" => 16, "type" => "SATELLITE", "center_longitude" => 180, "auto_adjust" => true, "auto_zoom" => false },
 			"polygons"    => { "data" => @json_polygon }
 			})
 		    %>
-		
+		</div>
 	</td>
   </tr>
 </table>

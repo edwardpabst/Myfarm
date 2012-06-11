@@ -9,6 +9,29 @@ class FieldmappingsController < ApplicationController
       format.xml  { render :xml => @fieldmappings }
     end
   end
+  
+  def fieldmapping_area
+   
+    @fieldmapping = Field.find(session[:s_field_id])
+    @fieldmappings =  Fieldmapping.get_fieldmapping_by_field(session[:s_field_id])
+    if !@fieldmappings.nil? and !@fieldmappings.empty?
+      @newcoordinates1 = ""
+      @fieldmappings.each do  |fm|
+        @newcoordinates1 += (fm.latitude.to_s  + ',')
+        fm.longitude.slice!(0)
+        @newcoordinates1 += (fm.longitude.to_s + ',') 
+      end  
+      logger.debug "FIELD MAPPINGS NEW COORDINATE 1 #{@newcoordinates1}"  
+      length = @newcoordinates1.length
+      @newcoordinates1.slice!(length -1)
+       logger.debug "FIELD MAPPINGS NEW COORDINATE 2 #{@newcoordinates1}" 
+    end
+    respond_to do |format|
+      format.html # fieldmapping.html.erb
+      format.xml  { render :xml => @fieldmappings }
+    end
+  end
+  
   def index
     @fieldmappings = Fieldmapping.all
 

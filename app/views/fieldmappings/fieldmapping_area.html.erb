@@ -1,0 +1,444 @@
+
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3.6&sensor=false&libraries=geometry"></script>
+<script type="text/javascript">
+var pointsArray = [];
+var map;
+var oldshape = 'no';
+
+// Create a meausure object to store our markers, MVCArrays, lines and polygons
+var measure = {
+    mvcLine: new google.maps.MVCArray(),
+    mvcPolygon: new google.maps.MVCArray(),
+    mvcMarkers: new google.maps.MVCArray(),
+    line: null,
+    polygon: null
+};
+
+// When the document is ready, create the map and handle clicks on it
+jQuery(document).ready(function() {
+
+   map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 16,
+        center: new google.maps.LatLng(<%= @fieldmapping.latitude %>, <%= @fieldmapping.longitude %>),
+        mapTypeId: google.maps.MapTypeId.SATELLITE,
+        draggableCursor: "crosshair" // Make the map cursor a crosshair so the user thinks they should click something
+    });
+
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(<%= @fieldmapping.latitude %>, <%= @fieldmapping.longitude %>); 
+    var myOptions = {
+        zoom: 16,
+        center: latlng,
+        draggableCursor: 'crosshair',
+        draggingCursor: 'pointer',
+        scaleControl: true,
+        mapTypeControl: true,
+        mapTypeControlOptions:{style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+        mapTypeId: google.maps.MapTypeId.SATELLITE,
+        streetViewControl: false};
+    map = new google.maps.Map(document.getElementById("map"),myOptions);
+
+    google.maps.event.addListener(map, "click", function(evt) {
+        // When the map is clicked, pass the LatLng obect to the measureAdd function
+        measureAdd(evt.latLng);
+    });
+
+	// if map already exists then load it
+	initCoordinates()
+
+});
+
+function initCoordinates() {
+	//  if map coorinates exit than load them
+		var coor = [];
+		var clat = 0.0;
+		var clng = 0.0;
+		
+
+
+		if (document.formcoordinates.newcoordinates1.value != '') {
+			oldshape = 'yes'
+			coor = document.formcoordinates.newcoordinates1.value.split(',');
+			var count = 1;
+			var ll = '';
+			for(var i=0; i < coor.length; i++){
+
+				if (count == 1) {
+				 	var myLat = parseFloat(coor[i]);
+					count = 2;	
+
+					}
+				else if (count == 2) {
+				 	var myLng = parseFloat(coor[i]);
+					count = 1;
+			 
+					var myLatLng = new google.maps.LatLng(myLat, myLng)
+
+					measureAdd(myLatLng);
+			 
+				}
+
+
+		 	}
+			oldshape = 'no';
+			// Create the line (google.maps.Polyline)
+            measure.line = new google.maps.Polyline({
+                map: map,
+                clickable: false,
+                strokeColor: "#FF0000",
+                strokeOpacity: 1,
+                strokeWeight: 3,
+                path:measure. mvcLine
+            });
+		};
+		
+		// If there is more than two vertexes for a polygon
+        if (measure.mvcPolygon.getLength() > 2 ) {
+
+            // If the polygon hasn't been created yet
+            if (!measure.polygon) {
+
+                // Create the polygon (google.maps.Polygon)
+                measure.polygon = new google.maps.Polygon({
+                    clickable: false,
+                    map: map,
+                    fillOpacity: 0.25,
+                    strokeOpacity: 0,
+                    paths: measure.mvcPolygon
+                });
+
+            }
+
+        }
+
+		if (measure.mvcLine.getLength() > 1) {
+	        measureCalc();
+	    }
+}
+
+function measureAdd(latLng) {
+ 
+
+    // Add a draggable marker to the map where the user clicked
+    var marker = new google.maps.Marker({
+        map: map,
+        position: latLng,
+        draggable: true,
+        raiseOnDrag: false,
+        title: "Drag me to change shape",
+        icon: new google.maps.MarkerImage("/images/red_add.png", new google.maps.Size(9, 9), new google.maps.Point(0, 0), new google.maps.Point(5, 5))
+    });
+
+ 
+    // Add this LatLng to our line and polygon MVCArrays
+    // Objects added to these MVCArrays automatically update the line and polygon shapes on the map
+    measure.mvcLine.push(latLng);
+    measure.mvcPolygon.push(latLng);
+	// Load coordinate array for export
+	maintainCoordinates();
+
+    // Push this marker to an MVCArray
+    // This way later we can loop through the array and remove them when measuring is done
+    measure.mvcMarkers.push(marker);
+
+ 
+
+    // Get the index position of the LatLng we just pushed into the MVCArray
+    // We'll need this later to update the MVCArray if the user moves the measure vertexes
+    var latLngIndex = measure.mvcLine.getLength() - 1;
+
+    // When the user mouses over the measure vertex markers, change shape and color to make it obvious they can be moved
+    google.maps.event.addListener(marker, "mouseover", function() {
+        marker.setIcon(new google.maps.MarkerImage("/images/red_add.png", new google.maps.Size(15, 15), new google.maps.Point(0, 0), new google.maps.Point(8, 8)));
+    });
+
+    // Change back to the default marker when the user mouses out
+    google.maps.event.addListener(marker, "mouseout", function() {
+        marker.setIcon(new google.maps.MarkerImage("/images/red_add.png", new google.maps.Size(9, 9), new google.maps.Point(0, 0), new google.maps.Point(5, 5)));
+    });
+
+    // When the measure vertex markers are dragged, update the geometry of the line and polygon by resetting the
+    //     LatLng at this position
+    google.maps.event.addListener(marker, "drag", function(evt) {
+        measure.mvcLine.setAt(latLngIndex, evt.latLng);
+        measure.mvcPolygon.setAt(latLngIndex, evt.latLng);
+    });
+
+    // When dragging has ended and there is more than one vertex, measure length, area.
+    google.maps.event.addListener(marker, "dragend", function() {
+        if (measure.mvcLine.getLength() > 1) {
+            measureCalc();
+	        maintainCoordinates();
+
+        }
+    });
+
+ 
+
+    // If there is more than one vertex on the line
+    if (measure.mvcLine.getLength() > 1 && oldshape != 'yes') {
+	 
+        // If the line hasn't been created yet
+        if (!measure.line) {
+
+            // Create the line (google.maps.Polyline)
+            measure.line = new google.maps.Polyline({
+                map: map,
+                clickable: false,
+                strokeColor: "#FF0000",
+                strokeOpacity: 1,
+                strokeWeight: 3,
+                path:measure. mvcLine
+            });
+
+        }
+
+        // If there is more than two vertexes for a polygon
+  
+        if (measure.mvcPolygon.getLength() > 2 && oldshape != 'yes') {
+
+            // If the polygon hasn't been created yet
+            if (!measure.polygon) {
+    
+                // Create the polygon (google.maps.Polygon)
+                measure.polygon = new google.maps.Polygon({
+                    clickable: false,
+                    map: map,
+                    fillOpacity: 0.25,
+                    strokeOpacity: 0,
+                    paths: measure.mvcPolygon
+                });
+
+            }
+
+        }
+
+    }
+
+ 
+	
+    // If there's more than one vertex, measure length, area.
+    if (measure.mvcLine.getLength() > 1 && oldshape != 'yes') {
+        measureCalc();
+    }
+ 
+}
+
+function measureCalc() {
+
+    // Use the Google Maps geometry library to measure the length of the line
+    var length = google.maps.geometry.spherical.computeLength(measure.line.getPath());
+	// convert metric to feet
+	var length_feet = length * 3.2808399
+    jQuery("#span-length").text(length.toFixed(2))
+    jQuery("#span-length_feet").text(length_feet.toFixed(2))
+
+
+
+    // If we have a polygon (>2 vertexes in the mvcPolygon MVCArray)
+    if (measure.mvcPolygon.getLength() > 2) {
+        // Use the Google Maps geometry library to measure the area of the polygon
+        var area = google.maps.geometry.spherical.computeArea(measure.polygon.getPath());
+
+		// convert metric to acres
+		var area_acres = area * 0.000247105381
+		
+        jQuery("#span-area").text(area.toFixed(2));
+        jQuery("#span-area_acres").text(area_acres.toFixed(2));
+
+	
+
+    }
+
+	// load area for export
+	document.formcoordinates.newlength_meters.value = length.toFixed(2);
+	document.formcoordinates.newlength_feet.value = length_feet.toFixed(2);
+	document.formcoordinates.newarea_meters.value = area.toFixed(2);
+	document.formcoordinates.newarea_acres.value = area_acres.toFixed(2);
+
+
+}
+
+function measureReset() {
+
+    // If we have a polygon or a line, remove them from the map and set null
+    if (measure.polygon) {
+        measure.polygon.setMap(null);
+        measure.polygon = null;
+    }
+    if (measure.line) {
+        measure.line.setMap(null);
+        measure.line = null
+    }
+
+    // Empty the mvcLine and mvcPolygon MVCArrays
+    measure.mvcLine.clear();
+    measure.mvcPolygon.clear();
+
+    // Loop through the markers MVCArray and remove each from the map, then empty it
+    measure.mvcMarkers.forEach(function(elem, index) {
+        elem.setMap(null);
+    });
+    measure.mvcMarkers.clear();
+
+     jQuery("#span-length,#span-area,#span-length_feet, #span-area_acres").text(0);
+
+	document.formcoordinates.newlength_meters.value = '';
+	document.formcoordinates.newlength_feet.value = '';
+	document.formcoordinates.newarea_meters.value = '';
+	document.formcoordinates.newarea_acres.value = '';
+	document.formcoordinates.newcoordinates1.value = '';
+	pointsArray = [];
+}
+
+
+function maintainCoordinates() {
+	
+	document.formcoordinates.newcoordinates1.value = '';
+	
+    for(var i=0; i < measure.mvcPolygon.length; i++){
+	 	document.formcoordinates.newcoordinates1.value += measure.mvcPolygon.getAt(i) + ',';
+ 	}
+	
+}
+
+</script>
+
+<style type="text/css">
+#measurements {
+	float:left;
+    width: 30%;
+    height: 550px;
+    border: 1px solid #ccc;
+ 
+}
+
+#map{
+	float:left;
+    width: 65%;
+    height: 550px;
+
+    background-color: #ffffff;
+}
+
+#mapping_area{
+
+	width: 99%;
+	font-size:120%;
+	font-weight:bold;
+	font-style: normal;
+    color: white;
+	background-color:#36648B;  /*--------   lemonchiffon #FEFFF1 slategray----------*/
+	border: solid 1px darkgray;
+	padding-left:4px;
+	padding-right:4px;
+	padding-top:8px;
+	padding-bottom:8px;
+	text-align:center;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10pz;
+}
+
+#mapping_area a{
+color:yellow;
+font-size:80%;
+}
+#mapping_area a:hover;{
+color:orange;
+ont-size:90%;
+}
+
+
+#span-length  {
+  font-size:110%;
+  color:blue;
+  font-style:bold;
+}
+#span-length_feet  {
+  font-size:110%;
+  color:blue;
+  font-style:bold;
+}
+#span-area  {
+  font-size:110%;
+  color:blue;
+  font-style:bold;
+}
+#span-area_acres  {
+  font-size:110%;
+  color:blue;
+  font-style:bold;
+}
+
+#red_line {
+  font-size:110%;
+  color:red;
+}
+
+#gray_area {
+  font-size:110%;
+  color:gray;
+}
+
+#measure {
+  font-size:110%;
+  color:green;
+}
+
+
+#measure_header {
+  font-size:110%;
+  color:black;
+}
+
+</style>
+
+<div id="mapping_area"> 
+ 
+			     Field Mapping Area Calculation 
+			<br>
+			    <%= link_to 'Back', :controller => "fields", :action => "edit", :id => session[:s_field_id] %>
+ 
+</div>
+<br> 
+<div class="google-maps" id="map" style=" border: 1px solid #CCC;"></div>
+
+<div id='measurements'>
+    <p><span id="gray_area">
+		You can clear existing boundaries by clicking on the 'reset measure' link. To define new boundaries just click on the required measurement point. After you click the 3rd point a polygon will be displayed. You can continue to expand the shape by clicking new points or stretch it by dragging on existing points. As you go we calculate boundary length and area within the defined shape.
+	</span></p>
+	<br><br>
+			    <span id="measure_header">Length </span><span id="red_line">(red line)</span>: 
+	<br>		&nbsp;<span id="span-length">0</span><span id="measure"> meters   </span>
+	<br>		&nbsp;<span id="span-length_feet">0</span> <span id="measure">feet </span>
+	<br><br>	<span id="measure_header">   Area</span><span id="gray_area"> (grey area): </span>
+	<br>	    &nbsp;<span id="span-area">0</span> <span id="measure">mt²</span> 
+	<br>	    &nbsp; <span id="span-area_acres">0</span> <span id="measure">acres  </span>
+		
+	<br><br>	<span id="measure_header"><a href="javascript:measureReset();">Reset Measure</a></span>
+	
+
+	<%= form_for @fieldmapping, :html => { :name => "formcoordinates"} do |f| %>
+	 	<input type="hidden"  class="inputlong" name="newcoordinates1" id="newcoordinates1" value=<%= @newcoordinates1%> /> 
+		<input type="hidden"  class="inputlong" name="newcoordinates2" id="newcoordinates2" /> 
+		<input type="hidden"  class="inputlong" name="newcoordinates3" id="newcoordinates3" /> 
+		<input type="hidden"  class="inputlong" name="newcoordinates4" id="newcoordinates4" /> 
+		<input type="hidden"  class="inputlong" name="newcoordinates5" id="newcoordinates5" /> 
+		<input type="hidden"  class="inputlong" name="newcoordinates6" id="newcoordinates6" /> 
+		<input type="hidden"  class="input" name="newlength_meters" id="newlength_meters" /> 
+		<input type="hidden"  class="input" name="newlength_feet" id="newlength_feet" />
+		<input type="hidden"  class="input" name="newarea_meters" id="newarea_meters" />
+		<input type="hidden"  class="input" name="newarea_acres" id="newarea_acres" />
+
+	 &nbsp; 
+	<br><br> <%= f.submit " Capture coordinates ", :class => "buttonlarge", :id => "fdsubmit" %>
+	<% end %>
+</div>
+<br>
+<div id="spread">
+	&nbsp;
+</div>			
+
+

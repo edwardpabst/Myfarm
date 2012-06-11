@@ -199,6 +199,7 @@ Myfarm::Application.routes.draw do
   match '/fieldgridaction', :to => 'fields#dbaction'
   #Field mapping
   match '/fieldmapping', :to => 'fieldmappings#fieldmapping'
+   match '/fieldmapping_area', :to => 'fieldmappings#fieldmapping_area'
   #Fieldtasks
   match '/fieldtaskview', :to => 'fieldtasks#index_view'
   match '/fieldtaskdata', :to => 'fieldtasks#index_data'

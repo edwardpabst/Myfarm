@@ -697,6 +697,13 @@ padding:2px 2px 2px 2px;
 	margin-right:auto;
 }
 
+#measurements {
+ 	font-size:90%;
+	padding:5px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
 
 #signup_message{
  
@@ -745,6 +752,11 @@ padding:2px 2px 2px 2px;
 	text-align:center;
 }
 
+#map_area {
+ 
+
+}
+
 
 
 
@@ -789,6 +801,13 @@ padding:2px 2px 2px 2px;
 	width:70%;
 	text-align: left;
 
+}
+
+
+
+#spread{
+
+	height:550px;
 }
 
 
@@ -1071,9 +1090,9 @@ select  {
 
 	font-family: Arial, Sans-Serif;
     font-size: 90%;
-    padding: 4px;
+    padding: 1px;
     border: solid 1px #85b1de;
-    width: 210px;
+    width: 200px;
     background-color: #EDF2F7;
 	margin-left:auto;
 	margin-right:auto;

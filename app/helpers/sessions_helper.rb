@@ -432,7 +432,8 @@ module SessionsHelper
      where fields.user_id = #{@current_user.id } 
      order by farmname")
    end
-    
+   
+
     def get_fieldtasks_by_type()
       @fieldtasks = Fieldtask.get_fieldtasks_by_type(@current_user.id)
     end
